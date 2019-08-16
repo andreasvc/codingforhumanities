@@ -37,7 +37,7 @@
  \tableofcontents
 \end{frame}
 
-\section{Introduction}
+\section{Administrative matters}
 
 \frame{\tableofcontents[currentsection]}
 
@@ -55,8 +55,20 @@
 		\item The Python programming language
 		\item Text analysis
 		\item Exploratory data analysis
+		\item Fixing errors in programs
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Materials}
+	\begin{itemize}
+		\item Notebooks with exercises
+		\item Textbook: Think Python
+		\item Videos with mini-lectures
+	\end{itemize}
+
+	Advice: practice practice practice!
+\end{frame}
+
 
 \begin{frame}{Goals for today}
 	\begin{itemize}
@@ -74,15 +86,16 @@
 		\item Amplification
 		\item Reproducibility
 	\end{itemize}
+\end{frame}
 
-	\pause
+\begin{frame}
 	Computers need to be told what to do:
 
 	\begin{itemize}
 	\item Either user tools designed for a particular job
 		\begin{itemize}
-			\item but: limited to the functionality that already there
-			\item cannot easily repeat a sequence of actions thousands of times
+			\item but: limited to the functionality that's already there
+			\item cannot easily repeat a sequence of actions many times
 		\end{itemize}
 
 	\item \dots or create your own programs
@@ -92,6 +105,11 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}
+    \includegraphics[width=\textwidth]{fig/nothingisimpossible}
+\end{frame}
+
 
 \begin{frame}{Why Python}
 	\begin{itemize}
@@ -103,6 +121,34 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/pythongrowth.png}
+
+    Source: \url{https://stackoverflow.blog/2017/09/06/incredible-growth-python/}
+
+    The Economist (2018): ``Python is becoming the world’s most popular coding language''
+    \href{https://www.economist.com/graphic-detail/2018/07/26/python-is-becoming-the-worlds-most-popular-coding-language}{(source)}
+
+\end{frame}
+
+\begin{frame}[fragile]
+A simple Python program:
+\begin{lstlisting}[language=python]
+print('hello, world!')
+\end{lstlisting}
+\pause
+
+\vspace{1em}
+The same program in the Java programming language:
+\begin{lstlisting}[language=java]
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World");
+    }
+}
+\end{lstlisting}
+\end{frame}
 
 \begin{frame}{Example DH projects}
 	Student projects from a DH course by Yael Netzer (Israel):
@@ -119,9 +165,11 @@
 
 \begin{frame}{Gender in Game of Thrones}\centering
 	\includegraphics[width=0.9\textwidth]{fig/got}
+
+    Words spoken for each gender across seasons
 \end{frame}
 
-\begin{frame}{Workflow}
+\begin{frame}{Research workflow}
 	\begin{enumerate}
 		\item Formulate research question
 		\item Collect data
@@ -131,14 +179,21 @@
 	\end{enumerate}
 
 	\pause
-	\dots programming is useful for steps 2--4
+	\dots programming helps with steps 2--4
 \end{frame}
 
+\begin{frame}{Notebooks}
+    \begin{itemize}
+    \item Notebook: combines text, code, and results
+    \item Graphical interface in browser
+    \end{itemize}
 
+    [demo of Jupyter notebook]
+\end{frame}
 
 \begin{frame}{Summary}
 	\begin{itemize}
-		\item 
+		\item Learn to program for fun and profit!
 	\end{itemize}
 \end{frame}
 
