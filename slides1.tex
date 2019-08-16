@@ -1,32 +1,6 @@
 \documentclass{beamer}
-\usepackage{inconsolata,fancyvrb,listings}
-
-\newcommand{\ccft}[3]{
-\usebeamercolor{#1}
-\definecolor{#2}{named}{fg}
-\definecolor{#3}{named}{bg}
-}
-
-\ccft{block title}{myblock title fg}{myblock title bg}
-\ccft{block body}{myblock body fg}{myblock body bg}
-\ccft{block title alerted}{myblock title alerted fg}{myblock title alerted bg}
-\ccft{palette secondary}{palette secondary fg}{palette secondary bg}
-
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{OliveGreen}{rgb}{0.3,0.5,0.43}
-\lstset{basicstyle=\small\ttfamily,
-        keywordstyle=\bfseries\color{OliveGreen},
-        identifierstyle=\color{blue},
-        stringstyle=\color{mauve},
-        frame=false, % single,
-        showspaces=false,
-        showstringspaces=false,
-}
-
-\title{Programming: what is it good for?}
-\author{Andreas van Cranenburgh}
-\date{Coding for Humanities, week 1}
-
+\input{preamble}
+\title{Coding for Humanities, week 1}
 \begin{document}
 
 \begin{frame}
@@ -37,88 +11,130 @@
  \tableofcontents
 \end{frame}
 
-\section{Administrative matters}
 
+\section{Course guidelines}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}{Administrative matters}
-	\begin{itemize}
-		\item 7 lectures \& labs
-		\item 2 graded assignments \\
-			(100\% of final grade)
-	\end{itemize}
-\end{frame}
-
 \begin{frame}{Learning goals}
-	After completing this course you will know the basics of \dots
-	\begin{itemize}
-		\item The Python programming language
-		\item Text analysis
-		\item Exploratory data analysis
-		\item Fixing errors in programs
-	\end{itemize}
+   After completing this course you will know the basics of \dots
+   \begin{itemize}
+       \item The Python programming language
+       \item Text analysis
+       \item Exploratory data analysis
+       \item Fixing errors in programs
+   \end{itemize}
 \end{frame}
 
-\begin{frame}{Materials}
-	\begin{itemize}
-		\item Notebooks with exercises
-		\item Textbook: Think Python
-		\item Videos with mini-lectures
-	\end{itemize}
+\begin{frame}{Goals for today}
+    \begin{itemize}
+        \item Why programming
+        \item Using Python as a calculator
+        \item Variables, numbers, and text
+        \item Translate a formula into a Python program
+    \end{itemize}
+\end{frame}
 
+\begin{frame}{Administrative matters}
+    \begin{itemize}
+        \item 7 lectures \& labs
+        \item 2 graded assignments \\
+            (100\% of final grade)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Course materials}
+    \begin{itemize}
+        \item Lab: Notebooks from the course Python for the Humanities
+        \item Preparation for lab: Video lectures from the course Hacking the Humanities
+		\item Textbook: Think Python
+        \item Lectures with our material
+    \end{itemize}
+
+	\pause\vspace{1em}
 	Advice: practice practice practice!
 \end{frame}
 
 
-\begin{frame}{Goals for today}
-	\begin{itemize}
-		\item Why programming
-		\item Using Python as a calculator
-		\item Variables, numbers, and text
-	\end{itemize}
-\end{frame}
 
 \section{Why programming}
-\begin{frame}
-	Why use computers in research?
-	\begin{itemize}
-		\item Automation
-		\item Amplification
-		\item Reproducibility
-	\end{itemize}
-\end{frame}
+\frame{\tableofcontents[currentsection]}
+
 
 \begin{frame}
-	Computers need to be told what to do:
+    Why use computers in research?
+    \begin{itemize}
+        \item Automation
+        \item Amplification
+        \item Reproducibility
+    \end{itemize}
 
-	\begin{itemize}
-	\item Either user tools designed for a particular job
-		\begin{itemize}
-			\item but: limited to the functionality that's already there
-			\item cannot easily repeat a sequence of actions many times
-		\end{itemize}
+    \pause
+    Computers need to be told what to do:
 
-	\item \dots or create your own programs
-		\begin{itemize}
-			\item Higher investment to get started
-			\item \dots but opens up lots of opportunities
-		\end{itemize}
-	\end{itemize}
+    \begin{itemize}
+    \item Either user tools designed for a particular job
+        \begin{itemize}
+            \item but: limited to existing functionality
+            \item cannot easily repeat a sequence of actions
+        \end{itemize}
+
+    \item \dots or create your own programs
+        \begin{itemize}
+            \item Higher investment to get started
+            \item \dots but opens up lots of opportunities
+        \end{itemize}
+    \end{itemize}
 \end{frame}
+
+
+\begin{frame}{Research workflow}
+    \begin{enumerate}
+        \item Formulate research question
+        \item Collect data
+        \item Pre-process data
+        \item Analyze data
+        \item Draw conclusions
+    \end{enumerate}
+
+    \pause
+    \dots programming is useful for steps 2--4
+\end{frame}
+
+\begin{frame}{Example DH projects}
+    Student projects from a DH course by Yael Netzer (Israel):
+    \begin{itemize}
+        \item How many black actors/directors/producers are in movies?
+        \item Which terror attacks are reported in the NY times?
+        \item Sentiment analysis of GoodReads reviews vs NY times reviews
+        \item Game of Thrones character analysis
+        \item Eurovision song festival voting by country
+    \end{itemize}
+
+    See \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
+\end{frame}
+
+\begin{frame}{Gender in Game of Thrones}\centering
+    \includegraphics[width=0.9\textwidth]{fig/got}
+
+	Words spoken for each gender across seasons
+\end{frame}
+
 
 \begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}
-    \includegraphics[width=\textwidth]{fig/nothingisimpossible}
+   \includegraphics[width=\textwidth]{fig/nothingisimpossible}
 \end{frame}
+
+
 
 
 \begin{frame}{Why Python}
-	\begin{itemize}
-		\item Open Source
-		\item Easy and intuitive language
-		\item Code that is understandable as plain English
-		\item Suitable for many tasks
-		\item Ease of development more important than fast programs
-	\end{itemize}
+    \begin{itemize}
+        \item Open Source
+        \item Easy and intuitive language
+        \item Code that is understandable as plain English
+        \item Suitable for many tasks
+        \item Ease of development more important than fast programs
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -129,16 +145,10 @@
 
     The Economist (2018): ``Python is becoming the world’s most popular coding language''
     \href{https://www.economist.com/graphic-detail/2018/07/26/python-is-becoming-the-worlds-most-popular-coding-language}{(source)}
-
 \end{frame}
 
 \begin{frame}[fragile]
 A simple Python program:
-\begin{lstlisting}[language=python]
-print('hello, world!')
-\end{lstlisting}
-\pause
-
 \vspace{1em}
 The same program in the Java programming language:
 \begin{lstlisting}[language=java]
@@ -150,51 +160,265 @@ public class HelloWorld {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Example DH projects}
-	Student projects from a DH course by Yael Netzer (Israel):
-	\begin{itemize}
-		\item How many black actors/directors/producers are in movies?
-		\item Which terror attacks are reported in the NY times?
-		\item Sentiment analysis of GoodReads reviews vs NY times reviews
-		\item Game of Thrones character analysis
-		\item Eurovision song festival voting by country
-	\end{itemize}
-
-	See \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
-\end{frame}
-
-\begin{frame}{Gender in Game of Thrones}\centering
-	\includegraphics[width=0.9\textwidth]{fig/got}
-
-    Words spoken for each gender across seasons
-\end{frame}
-
-\begin{frame}{Research workflow}
-	\begin{enumerate}
-		\item Formulate research question
-		\item Collect data
-		\item Pre-process data
-		\item Analyze data
-		\item Draw conclusions
-	\end{enumerate}
-
-	\pause
-	\dots programming helps with steps 2--4
-\end{frame}
 
 \begin{frame}{Notebooks}
-    \begin{itemize}
+\begin{itemize}
     \item Notebook: combines text, code, and results
     \item Graphical interface in browser
-    \end{itemize}
+\end{itemize}
 
-    [demo of Jupyter notebook]
+[demo of Jupyter notebook]
+\end{frame}
+
+
+\section{Python basics}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}[fragile]{Using Python as a calculator}
+Operators:
+    \begin{description}
+        \item[Addition] 1 + 2
+        \item[Subtraction] 2 - 1
+        \item[Multiplication] 2 * 3
+        \item[Division] 6 / 2
+        \item[Exponentation] 3 ** 2
+        \item[Parentheses] (1 + 2) * 3
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Using Python as a calculator}
+One or more operators can be used to form an \structure{expression}
+\begin{lstlisting}[language=python]
+>>> 1 + 2 * 3
+7
+>>> (1 + 2) * 3
+9
+\end{lstlisting}
+
+\pause
+Note: just as in mathematics, multiplication/division takes precedence over
+    addition/subtraction. Parentheses can be used to specify a different order.
+\end{frame}
+
+\begin{frame}[fragile]{Numeric data types}
+    \begin{description}
+        \item[Integer] whole numbers: 1, 2, 3, \dots -1, -2, -3
+        \item[Floating point numbers]: 2.5, 1.3333, \dots
+    \end{description}
+
+\pause
+\begin{lstlisting}[language=python]
+>>> 5 / 2
+2.5
+>>> type(5 / 2)
+<class 'float'>
+>>> type(6 / 2)
+<class 'int'>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Variables}
+    \begin{definition}
+        A \structure{variable} stores the result of an expression
+        so that it can be re-used.
+    \end{definition}
+
+A variable is created/updated using `=':
+
+\begin{definition}
+\structure{Assignment}: \texttt{name = expression}
+
+The name consists of one or more letters or underscores (case-sensitive).
+\end{definition}
+
+\begin{lstlisting}[language=python]
+>>> a = 5 / 2
+>>> a
+2.5
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Using variables}
+Now, can use variable in expressions in place of a number:
+
+\begin{lstlisting}
+>>> a + 0.5
+3.0
+\end{lstlisting}
+
+\pause
+A program is executed line-by-line, and variables can be overwritten:
+\begin{lstlisting}[language=python]
+>>> a = 2
+>>> a
+2
+>>> a = 3
+>>> a
+3
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Updating variables}
+A common operation is to increase the value of a variable:
+\begin{lstlisting}
+>>> a = 2
+>>> a = a + 1
+3
+\end{lstlisting}
+
+\pause
+There is a shorthand for this operation:
+\begin{lstlisting}[language=python]
+>>> a = 2
+>>> a += 1
+3
+\end{lstlisting}
+
+Also -=, *=, etc.
+\end{frame}
+
+
+\begin{frame}[fragile]{A practical example}
+    Suppose I read War \& Peace in a year,
+    what is my reading speed (words per minute)?
+    \begin{itemize}
+        \item Number of words in War \& Peace: 564,277
+        \item Time spent reading per day: 1 hour
+    \end{itemize}
+    How to calculate average words per minute?
+    \pause
+
+\begin{lstlisting}[language=python]
+>>> words_per_day = 564277 / 365
+>>> words_per_min = words_per_day / 60
+>>> words_per_min
+25.766073059360732
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Text}
+Values can also be text instead of numbers:
+\begin{lstlisting}[language=python]
+>>> name = 'John'
+>>> movie = '2001: A Space Odyssey'
+\end{lstlisting}
+
+\pause
+    \begin{definition}
+        A \structure{string}, short for string of characters,
+        is a type of value that contains text.
+    \end{definition}
+\end{frame}
+
+\begin{frame}[fragile]{Operations on strings}
+\begin{lstlisting}
+>>> first = 'John'
+>>> last = 'Doe'
+\end{lstlisting}
+\begin{description}
+    \item[first + last] \texttt{'JohnDoe'}
+    \item[first - last] TypeError
+    \item[first * last] TypeError
+    \item[first / last] TypeError
+\end{description}
+
+\begin{itemize}
+\item + can be used to concatenate two strings
+\item The other operations require numbers, not text
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Mixing strings and numbers}
+\begin{lstlisting}
+>>> first = 'John'
+>>> num = 3
+\end{lstlisting}
+\begin{description}
+    \item[first + num] TypeError
+    \item[first - num] TypeError
+    \item[first * num] 'JohnJohnJohn'
+    \item[first / num] TypeError
+\end{description}
+
+\begin{itemize}
+\item * can be used to repeat a string several times
+\item For the other operations, Python refuses to mix up types
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Converting numbers to text and back}
+\begin{lstlisting}
+>>> number = 42
+>>> text = str(number)
+>>> text
+'42'
+
+>>> int(text)
+42
+\end{lstlisting}
+
+    int(text) is an example of using a function:
+
+    'text' is given as argument to the function 'int';
+    a number is returned as a result.
+\end{frame}
+
+
+\begin{frame}[fragile]{Converting numbers to text and back}
+\begin{lstlisting}
+>>> name = 'John'
+>>> number = 7
+>>> name + ' has ' + str(number) + ' cousins'
+'John has 7 cousins'
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Summary}
-	\begin{itemize}
-		\item Learn to program for fun and profit!
-	\end{itemize}
+    \begin{itemize}
+        \item Values:
+            \begin{description}
+                \item[Numbers:] int, float
+                \item[Text:] str
+            \end{description}
+        \item Expressions: 1 + 2 * 3 - (4 + 5)
+        \item Variables: a = 2
+        \item Conversions: str(2), int('2')
+    \end{itemize}
 \end{frame}
+
+\begin{frame}{Example: computing readability}
+    Flesch reading ease: a formula to estimate the difficulty of a text
+
+    \[
+        score = 206.835 - 1.015 ( \frac{\textrm{total words}}{\textrm{total sentences}} )
+            - 84.6 ( \frac{\textrm{total syllables}}{\textrm{total words}} )
+    \]
+
+    Result: a readability score ranging from 0 (very hard) to 100 (very easy).
+
+    \vspace{1em}
+    Flesch R (1948). A new readability yardstick. Journal of Applied Psychology. 32 (3): 221–233.
+
+    \pause
+    Notes:
+    \begin{itemize}
+        \item Multiplication is implicit in this notation
+        \item This is a long formula, it can be useful to compute
+            it in several steps % the material in parentheses
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{lstlisting}
+>>> total_words = 500
+>>> total_sentences = 25
+>>> total_syllables = 1423
+>>> words_per_sentence = total_words / total_sentences
+>>> syllable_per_word = total_syllables / total_words
+>>> score = 206.835 - 1.015 * words_per_sentence - 84.6 * syllable_per_word
+\end{lstlisting}
+\end{frame}
+
 
 \end{document}

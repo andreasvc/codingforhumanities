@@ -1,0 +1,160 @@
+\documentclass{beamer}
+\input{preamble}
+\title{Coding for Humanities, week 3}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\begin{frame}
+ \tableofcontents
+\end{frame}
+
+\frame{\tableofcontents[currentsection]}
+\section{Conditional statements: do you really want to do that?}
+\begin{frame}{Simple conditions}
+    A conditional expression is
+    an expression that is True or False
+    \begin{description}
+        \item[a == b] are the values equal?
+        \item[a != b] inequality
+        \item[a $<$ b] test whether a is smaller than b
+        \item[a $>$ b]
+        \item[elem in seq] does element occur in the sequence?
+    \end{description}
+
+    NB: == tests equality, \\
+        = is an assignment statement!
+\end{frame}
+
+\begin{frame}[fragile]{The if-statement}
+\begin{lstlisting}
+if books > 5:
+    print('you are an avid reader')
+\end{lstlisting}
+
+\begin{itemize}
+    \item The code under an if-statement is only executed
+        if the condition is True.
+    \item The indentation determines which code is covered
+        by the condition
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Optional extensions of the if-statement}
+\begin{lstlisting}
+if books > 5:
+    print('you are an avid reader')
+else:
+    print('you should read more')
+\end{lstlisting}
+
+\begin{itemize}
+    \item The code under 'else' is executed if the condition does NOT match.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Optional extensions of the if-statement}
+\begin{lstlisting}
+if books > 5:
+    print('you are an avid reader')
+elif books > 15:
+    print('you should get out more')
+else:
+    print('you should read more')
+\end{lstlisting}
+
+\begin{itemize}
+    \item Can add multiple extra conditions with 'elif' (else if)
+    \item The conditions are tested from top to bottom;
+            when one of them matches, the rest are ignored.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Complex conditions}
+    Can create complex conditions from other conditions:
+    
+    \begin{description}
+        \item[cond1 and cond2]
+        \item[cond1 or cond2]
+        \item[not cond]
+    \end{description}
+
+\end{frame}
+
+\begin{frame}[fragile]{Truthy and Falsy things}
+\begin{itemize}
+\item The number zero and empty sequences are treated as False.
+\item Nonzero numbers and nonempty sequences are treated as True
+\end{itemize}
+
+These are equivalent:
+\begin{lstlisting}
+if len(books) != 0:
+    print('yes')    
+if len(books):
+    print('yes')    
+if books:
+    print('yes')    
+\end{lstlisting}
+
+\end{frame}
+
+
+\frame{\tableofcontents[currentsection]}
+\section{Loops: play it again, Sam!}
+\begin{frame}[fragile]{Repeating statements: loops}
+\begin{lstlisting}
+books = ['a', 'b', 'c']
+for book in books:
+    print(book)
+\end{lstlisting}
+Result:
+\begin{lstlisting}
+a
+b
+c
+\end{lstlisting}
+
+\begin{itemize}
+\item The statements under the for-loop are repeated
+    for every element in the sequence.
+\item At every iteration, 'book' contains an element of 'books'
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Looping over sequences}
+For loops can be used for anything with multiple items:
+\begin{lstlisting}
+for letter in 'word':
+    print(letter)
+for number in [0, 1, 2]:
+    print(number)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Looping over dictionaries}
+Looping over a dictionary returns only the keys:
+\begin{lstlisting}
+data = {'a': 0, 'b': 1}
+for key in data:
+    print(key)
+    print(data[key])
+\end{lstlisting}
+
+\pause
+Often want both the key and the value:
+\begin{lstlisting}
+for key, value in data.items():
+    print(key)
+    print(value)
+\end{lstlisting}
+\end{frame}
+
+
+\end{document}

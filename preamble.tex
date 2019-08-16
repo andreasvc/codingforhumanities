@@ -1,0 +1,70 @@
+\usepackage{inconsolata,fancyvrb,listings}
+
+% \newcommand{\ccft}[3]{
+% \usebeamercolor{#1}
+% \definecolor{#2}{named}{fg}
+% \definecolor{#3}{named}{bg}
+% }
+% 
+% \ccft{block title}{myblock title fg}{myblock title bg}
+% \ccft{block body}{myblock body fg}{myblock body bg}
+% \ccft{block title alerted}{myblock title alerted fg}{myblock title alerted bg}
+% \ccft{palette secondary}{palette secondary fg}{palette secondary bg}
+% 
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{OliveGreen}{rgb}{0.3,0.5,0.43}
+
+
+\beamertemplatenavigationsymbolsempty%
+\definecolor{mycolor}{rgb}{0.51,0.0,0.0}  % Bordeaux red
+\colorlet{bgcolor}{white}
+\colorlet{fgcolor}{black}
+
+\usepackage[absolute,overlay]{textpos}
+\newenvironment{reference}{%
+\begin{textblock*}{\textwidth} (13mm,88mm)
+\centering\footnotesize\bgroup\color{gray!40!black}}{\egroup\end{textblock*}}
+
+\beamertemplatesolidbackgroundcolor{bgcolor}
+\setbeamercolor{background canvas}{bg=bgcolor}
+\setbeamercolor{normal text}{bg=bgcolor,fg=fgcolor}
+\setbeamercolor{structure}{fg=mycolor}
+\setbeamercolor{alerted text}{fg=mycolor}
+\setbeamercolor{frametitle}{fg=green!30!black}
+\setbeamercolor{block body alerted}{bg=normal text.bg!90!black}
+\setbeamercolor{block body}{bg=normal text.bg!90!black}
+\setbeamercolor{block body example}{bg=normal text.bg!90!black}
+\setbeamercolor{block title alerted}{use={normal text,alerted text},
+                fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+\setbeamercolor{block title}{fg=white,bg=darkgray}
+\setbeamercolor{block title example}{use={normal text,example text},
+                fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!black}
+\setbeamercolor{fine separation line}{}
+\setbeamercolor{item projected}{fg=gray}
+\setbeamercolor{separation line}{}
+\setbeamercolor{title}{fg=fgcolor}
+\setbeamercolor{titlelike}{fg=fgcolor}
+%\setbeamercolor{section in toc}{fg=black}
+%\setbeamercolor{section in toc shaded}{fg=black}
+\setbeamertemplate{section in toc}{%
+  {\color{red}\inserttocsectionnumber.}~\inserttocsection}
+\setbeamertemplate{section in toc shaded}{%
+  {\color{red}\inserttocsectionnumber.}~{\color{darkgray!70!gray}\inserttocsection}}
+
+\setbeamercolor{section in toc}{fg=black}
+\setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+\setbeamerfont{section number projected}{family=\sffamily,size=\normalsize}
+\setbeamercolor{section number projected}{bg=white,fg=black}
+
+
+\lstset{language=python,
+		basicstyle=\small\ttfamily,
+        keywordstyle=\bfseries\color{OliveGreen},
+        identifierstyle=\color{blue},
+        stringstyle=\color{mauve},
+        frame=false, % single,
+        showspaces=false,
+        showstringspaces=false,
+}
+
+\author{Andreas van Cranenburgh}
