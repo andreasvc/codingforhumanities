@@ -1,36 +1,34 @@
-\usepackage{inconsolata,fancyvrb,listings}
-
-% \newcommand{\ccft}[3]{
-% \usebeamercolor{#1}
-% \definecolor{#2}{named}{fg}
-% \definecolor{#3}{named}{bg}
-% }
-% 
-% \ccft{block title}{myblock title fg}{myblock title bg}
-% \ccft{block body}{myblock body fg}{myblock body bg}
-% \ccft{block title alerted}{myblock title alerted fg}{myblock title alerted bg}
-% \ccft{palette secondary}{palette secondary fg}{palette secondary bg}
-% 
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\definecolor{OliveGreen}{rgb}{0.3,0.5,0.43}
-
+\usepackage{etex}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usetheme{default}
+\usepackage{fancyvrb,listings}
+\usepackage{tgadventor,inconsolata,graphicx,url,multirow,booktabs,array,tikz,etoolbox}
+\usetikzlibrary{matrix,shapes,arrows,calc,positioning,decorations.markings}
 
 \beamertemplatenavigationsymbolsempty%
-\definecolor{mycolor}{rgb}{0.51,0.0,0.0}  % Bordeaux red
+
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{OliveGreen}{rgb}{0.3,0.5,0.43}
 \colorlet{bgcolor}{white}
 \colorlet{fgcolor}{black}
 
 \usepackage[absolute,overlay]{textpos}
+% 4:3 version
+% \newenvironment{reference}{%
+% \begin{textblock*}{\textwidth} (13mm,88mm)
+% \centering\footnotesize\bgroup\color{gray!40!black}}{\egroup\end{textblock*}}
+% 16:9 version
 \newenvironment{reference}{%
-\begin{textblock*}{\textwidth} (13mm,88mm)
-\centering\footnotesize\bgroup\color{gray!40!black}}{\egroup\end{textblock*}}
+\begin{textblock*}{\textwidth} (13mm,82mm)
+\footnotesize\bgroup\color{gray!40!black}}{\egroup\end{textblock*}}
 
 \beamertemplatesolidbackgroundcolor{bgcolor}
 \setbeamercolor{background canvas}{bg=bgcolor}
 \setbeamercolor{normal text}{bg=bgcolor,fg=fgcolor}
-\setbeamercolor{structure}{fg=mycolor}
-\setbeamercolor{alerted text}{fg=mycolor}
+\setbeamercolor{structure}{fg=red}
 \setbeamercolor{frametitle}{fg=green!30!black}
+\setbeamercolor{alerted text}{fg=red}
 \setbeamercolor{block body alerted}{bg=normal text.bg!90!black}
 \setbeamercolor{block body}{bg=normal text.bg!90!black}
 \setbeamercolor{block body example}{bg=normal text.bg!90!black}
@@ -44,18 +42,16 @@
 \setbeamercolor{separation line}{}
 \setbeamercolor{title}{fg=fgcolor}
 \setbeamercolor{titlelike}{fg=fgcolor}
-%\setbeamercolor{section in toc}{fg=black}
-%\setbeamercolor{section in toc shaded}{fg=black}
 \setbeamertemplate{section in toc}{%
-  {\color{red}\inserttocsectionnumber.}~\inserttocsection}
+	{\color{red}\inserttocsectionnumber.}~\inserttocsection}
 \setbeamertemplate{section in toc shaded}{%
-  {\color{red}\inserttocsectionnumber.}~{\color{darkgray!70!gray}\inserttocsection}}
-
-\setbeamercolor{section in toc}{fg=black}
-\setbeamercolor{section in toc shaded}{use=structure,fg=structure.fg}
+	{\color{red}\inserttocsectionnumber.}~{\color{lightgray}\inserttocsection}}
+\setbeamertemplate{section in toc}{fg=black}
+\setbeamertemplate{section in toc shaded}{use=structure,fg=gray}
 \setbeamerfont{section number projected}{family=\sffamily,size=\normalsize}
 \setbeamercolor{section number projected}{bg=white,fg=black}
 
+\patchcmd{\beamer@sectionintoc}{\vfill}{\vskip0.5em}{}{}
 
 \lstset{language=python,
 		basicstyle=\small\ttfamily,

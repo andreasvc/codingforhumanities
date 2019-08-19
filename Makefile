@@ -8,6 +8,6 @@ all: $(OBJ)
 clean:
 	rubber --clean slides?.tex
 
-%.pdf: %.tex
+%.pdf: %.tex preamble.sty
 	rubber --pdf $<
 
