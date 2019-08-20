@@ -12,53 +12,33 @@
 \end{frame}
 
 
-\section{Course guidelines}
-\frame{\tableofcontents[currentsection]}
-
-\begin{frame}{Learning goals}
-   After completing this course you will know the basics of \dots
-   \begin{itemize}
-       \item The Python programming language
-       \item Text analysis
-       \item Exploratory data analysis
-       \item Fixing errors in programs
-   \end{itemize}
-\end{frame}
-
 \begin{frame}{Goals for today}
-    \begin{itemize}
+    \begin{enumerate}
         \item Why programming
-        \item Using Python as a calculator
-        \item Variables, numbers, and text
-        \item Translate a formula into a Python program
-    \end{itemize}
+            \begin{itemize}
+                \item Example Digital Humanities project
+            \end{itemize}
+        \item Programming fundamentals:
+            \begin{itemize}
+                \item Numbers, text, and variables
+                \item Translate a formula into a Python program
+            \end{itemize}
+        \item Course overview
+    \end{enumerate}
 \end{frame}
-
-\begin{frame}{Administrative matters}
-    \begin{itemize}
-        \item 7 lectures \& labs
-        \item 2 graded assignments \\
-            (100\% of final grade)
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Course materials}
-    \begin{itemize}
-        \item Lab: Notebooks from the course Python for the Humanities
-        \item Preparation for lab: Video lectures from the course Hacking the Humanities
-		\item Textbook: Think Python
-        \item Lectures with our material
-    \end{itemize}
-
-	\pause\vspace{1em}
-	Advice: practice practice practice!
-\end{frame}
-
 
 
 \section{Why programming}
 \frame{\tableofcontents[currentsection]}
-
+\begin{frame}{Programming: informal understanding}
+    \begin{reference}
+        Pine (2009). Learn to program. \url{https://pine.fm/LearnToProgram}
+    \end{reference}
+    \begin{definition}
+        ``\structure{Programming} is telling your computer
+        how to do something'' (Pine 2009, xii)
+    \end{definition}
+\end{frame}
 
 \begin{frame}
     Why use computers in research?
@@ -86,7 +66,6 @@
     \end{itemize}
 \end{frame}
 
-
 \begin{frame}{Research workflow}
     \begin{enumerate}
         \item Formulate research question
@@ -99,6 +78,22 @@
     \pause
     \dots programming is useful for steps 2--4
 \end{frame}
+
+\begin{frame}{Requirements for being a good programmer}
+    \begin{itemize}
+        \item Anyone can learn how to program
+        \item Programming is a challenging activity:
+            \begin{itemize}
+                \item Meticulous analytic thinking
+                \item Mental model of your program
+                \item Paying attention to detail
+            \end{itemize}
+        \item Not everyone has the talent to become
+            a \structure{good} programmer
+    \end{itemize}
+\end{frame}
+
+
 
 \begin{frame}{Example DH projects}
 \begin{reference}
@@ -117,28 +112,35 @@
 \begin{frame}{Gender in Game of Thrones}\centering
     \includegraphics[width=0.9\textwidth]{fig/got}
 
-	Words spoken for each gender across seasons
+    Words spoken for each gender across seasons
 \end{frame}
 
 
-\begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}
+\begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}\centering
 	\begin{reference}
 		\url{https://www.youtube.com/watch?v=ZXsQAXx_ao0}
 	\end{reference}
-   \includegraphics[width=\textwidth]{fig/nothingisimpossible}
+   \includegraphics[width=0.6\textwidth]{fig/nothingisimpossible}
 \end{frame}
 
 
 
 
 \begin{frame}{Why Python}
+    %\begin{definition}
+    %   Python is a  ...
+    %\end{definition}
     \begin{itemize}
-        \item Open Source
-        \item Easy and intuitive language
-        \item Code that is understandable as plain English
-        \item Suitable for many tasks
-        \item Ease of development more important than fast programs
+        \item Easy and intuitive language:
+            \begin{itemize}
+                \item Code that is understandable as plain English
+                \item Ease of development more important than fast programs
+            \end{itemize}
+        \item Suitable for many tasks:\\
+            Many useful libraries (especially data science)
     \end{itemize}
+
+    (Named after the TV show Monty Python)
 \end{frame}
 
 \begin{frame}
@@ -177,7 +179,8 @@ public class HelloWorld {
 \end{frame}
 
 
-\section{Python basics}
+
+\section{Programming fundamentals}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}[fragile]{Using Python as a calculator}
@@ -209,7 +212,7 @@ Note: just as in mathematics, multiplication/division takes precedence over
 \begin{frame}[fragile]{Numeric data types}
     \begin{description}
         \item[Integer] whole numbers: 1, 2, 3, \dots -1, -2, -3
-        \item[Floating point numbers]: 2.5, 1.3333, \dots
+        \item[Floating point] numbers: 2.5, 1.3333, \dots
     \end{description}
 
 \pause
@@ -452,5 +455,86 @@ syllable_per_word = total_syllables / total_words
 score = 206.835 - 1.015 * words_per_sent - 84.6 * syllable_per_word
 \end{lstlisting}
 \end{frame}
+
+
+
+\section{Course overview}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Learning goals}
+    \begin{itemize}
+       \item 7 lectures \& labs
+       \item 2 graded assignments \\
+           (100\% of final grade)
+    \end{itemize}
+    After completing this course you will know the basics of \dots
+    \begin{itemize}
+       \item The Python programming language
+       \item Text analysis
+       \item Exploratory data analysis
+       \item Fixing errors in programs
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Course materials}
+    \begin{itemize}
+        \item Lab: Notebooks from the course Python for the Humanities
+        \item Preparation for lab: Video lectures from the course Hacking the Humanities
+        \item Textbook: Think Python
+        \item Lectures with our material
+    \end{itemize}
+
+    \pause\vspace{1em}
+    Advice: practice practice practice!
+\end{frame}
+
+\begin{frame}{Course summary}
+    \begin{itemize}
+        \item \structure{Programming} is the creative and challenging process
+            of writing a program
+        \item A program is a sequence of unambiguous executable
+            instructions to perform a task
+        \item The code of a program is in some programming language
+        \item Python is a high-level programming language
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Some advice}
+    \begin{itemize}
+        \item This course gives a lot of (new) information
+        \item Information is provided in a \structure{cumulative} way:
+            each new piece of inormation builts on previous information
+        \item Watch tutorials, read, and practice
+        \item \structure{Ask questions} as soon as you think you are lost!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Code of conduct}
+    \begin{itemize}
+        \item Read the course manual (syllabus); available on Nestor
+        \item On Nestor, under Course Documents, each week has:
+            \begin{itemize}
+                \item Lecture slides
+                \item Lab exercises, discussion, and assignments
+            \end{itemize}
+        \item Grades will be on Nestor under My Gradebook
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Code of conduct}
+    \begin{itemize}
+        \item \structure{Don't email} us on course content,
+            programming issues, grading, etc.!
+        \item For questions and remarks, address us face to face in class
+            or make an appointment:
+            \begin{itemize}
+                \item Van Cranenburgh: office hours, room H1311, 411
+                \item Bosveld: office hours, room H1311, 430
+                \item Meijerhof; after lab hours, or make appointment
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
 
 \end{document}
