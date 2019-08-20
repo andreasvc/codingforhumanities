@@ -7,25 +7,11 @@
  \titlepage
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Plan for today}
  \tableofcontents
 \end{frame}
 
 
-\begin{frame}{Goals for today}
-    \begin{enumerate}
-        \item Why programming
-            \begin{itemize}
-                \item Example Digital Humanities project
-            \end{itemize}
-        \item Programming fundamentals:
-            \begin{itemize}
-                \item Numbers, text, and variables
-                \item Translate a formula into a Python program
-            \end{itemize}
-        \item Course overview
-    \end{enumerate}
-\end{frame}
 
 
 \section{Why programming}
@@ -42,6 +28,8 @@
 
 \begin{frame}
     Why use computers in research?
+	\pause
+
     \begin{itemize}
         \item Automation
         \item Amplification
@@ -95,6 +83,7 @@
 
 
 
+\subsection{Example DH projects}
 \begin{frame}{Example DH projects}
 \begin{reference}
 \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
@@ -110,7 +99,7 @@
 \end{frame}
 
 \begin{frame}{Gender in Game of Thrones}\centering
-    \includegraphics[width=0.9\textwidth]{fig/got}
+    \includegraphics[width=0.6\textwidth]{fig/got}
 
     Words spoken for each gender across seasons
 \end{frame}
@@ -144,43 +133,60 @@
 \end{frame}
 
 \begin{frame}
-	\begin{reference}
-		\href{https://www.economist.com/graphic-detail/2018/07/26/python-is-becoming-the-worlds-most-popular-coding-language}{
-			The Economist (2018): ``Python is becoming the world’s most popular coding language''}
-	\end{reference}
+	% \begin{reference}
+	% 	\href{https://www.economist.com/graphic-detail/2018/07/26/python-is-becoming-the-worlds-most-popular-coding-language}{
+	% 		The Economist (2018): ``Python is becoming the world's most popular coding language''}
+	% \end{reference}
 
     \centering
-    \includegraphics[width=0.8\textwidth]{fig/pythongrowth.png}
+    \includegraphics[height=0.9\textheight]{fig/pythongrowth.png}
 
     Source: \url{https://stackoverflow.blog/2017/09/06/incredible-growth-python/}
 \end{frame}
 
 \begin{frame}[fragile]
 A simple Python program:
+\begin{lstlisting}[language=python]
+print('Hello, World!")
+\end{lstlisting}
+
+\pause
 \vspace{1em}
 The same program in the Java programming language:
+
 \begin{lstlisting}[language=java]
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Hello, World");
+        System.out.println("Hello, World!");
     }
 }
 \end{lstlisting}
 \end{frame}
 
 
-\begin{frame}{Notebooks}
-\begin{itemize}
-    \item Notebook: combines text, code, and results
-    \item Graphical interface in browser
-\end{itemize}
-
-[demo of Jupyter notebook]
+\begin{frame}
+	\begin{columns}
+		\column{0.5\linewidth}
+			Traditional method:
+			\begin{enumerate}
+				\item edit file
+				\item run
+				\item repeat
+			\end{enumerate}
+		\column{0.5\linewidth}
+			Notebooks
+			\begin{itemize}
+				\item Notebook: combines text, code, and results
+				\item Graphical interface in browser
+			\end{itemize}
+			[demo of Jupyter notebook]
+	\end{columns}
 \end{frame}
 
 
 
 \section{Programming fundamentals}
+\subsection{Numbers, text, and variables}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}[fragile]{Using Python as a calculator}
@@ -396,6 +402,7 @@ Values can also be text instead of numbers:
     \end{itemize}
 \end{frame}
 
+gsubsection{Translate a formula into a Python program}
 \begin{frame}{Example: computing readability}
 	\begin{reference}
     Flesch, R (1948). A new readability yardstick.
