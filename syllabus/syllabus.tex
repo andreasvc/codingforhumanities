@@ -1,10 +1,22 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage{hyperref,kpfonts,inconsolata,microtype,booktabs,enumitem,longtable}
+\usepackage{hyperref,kpfonts,inconsolata,microtype,booktabs,enumitem,longtable,graphicx}
 \hypersetup{colorlinks=true,urlcolor=blue}
+\makeatletter\renewcommand\section{\@startsection {section}{1}{\z@}%
+		    {-3.5ex \@plus -1ex \@minus -.2ex}%
+		    {2.3ex \@plus.2ex}%
+		    {\normalfont\large\scshape}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+		{-3.25ex\@plus -1ex \@minus -.2ex}%
+		{1.5ex \@plus .2ex}%
+		{\normalfont\scshape}}
+\renewcommand\thesection{\arabic{section} / }
+\makeatother
 \parindent 0pt
 \parskip 7pt
 
-\title{\textsc{Syllabus}\\Coding for Humanities}
+\title{
+    \includegraphics{rug}\\
+    \textsc{Syllabus:} Coding for Humanities}
 \author{Andreas van Cranenburgh, Leonie M. Bosveld-de Smet}
 \date{2019/2020}
 
@@ -15,35 +27,35 @@
 
 
 \begin{tabular}{l p{0.75\textwidth} }
-	Title:      & Coding for Humanities \\
-	Code:       & LHU002M05 \\
-	Programme:  & Master Communication and Information Studies (CIS) \\
-	Tracks:     & Digital Humanities, Computer Communication \\
-	Period:     & Semester 1a \\
-	Type:       & Hands-on Lectures and Practical Sessions \\
-	Teachers:   & Andreas van Cranenburgh, \\
-				& Leonie M. Bosveld-de Smet \\
-	Credits:    & 5 ECTS \\
-	Lectures:	& Monday 16:00-18:00, H1315.0036 \\
-	Labs:		& Group 1: Thursday 15:00-18:00, MM1; \\
-				& Group 2: Tuesday 15:00-18:00, MM2 \\
+    Title:      & Coding for Humanities \\
+    Code:       & LHU002M05 \\
+    Programme:  & Master Communication and Information Studies (CIS) \\
+    Tracks:     & Digital Humanities, Computer Communication \\
+    Period:     & Semester 1a \\
+    Type:       & Hands-on Lectures and Practical Sessions \\
+    Teachers:   & Andreas van Cranenburgh, \\
+                & Leonie M. Bosveld-de Smet \\
+    Credits:    & 5 ECTS \\
+    Lectures:   & Monday 16:00-18:00, H1315.0036 \\
+    Labs:       & Group 1: Thursday 15:00-18:00, MM1; \\
+                & Group 2: Tuesday 15:00-18:00, MM2 \\
 \end{tabular}
 
 
 
-\section{Type of course unit, number of ECTS credit points,
-		and admission requirements}
+\section{Type of course unit, number of ects credit points,
+        and admission requirements}
 \begin{enumerate}[label={(\alph*)}]
-	\item Type: mandatory (except for students CIS-Computer Communication
-		starting in February).
-	\item Credit points: 5 ECTS (140 hours).
-	\item Admission requirements: (International) Students admitted to the
-		tracks Digital Humanities (DH) or Computer Communication (CC) of the
-		Master CIS are allowed to follow this course. No knowledge of
-		programming or computer science is assumed. In case the student has
-		already followed programming courses, it is wise to consult the
-		teachers or study advisor to see whether the course is worthwhile to
-		follow.
+    \item Type: mandatory (except for students CIS-Computer Communication
+        starting in February).
+    \item Credit points: 5 ECTS (140 hours).
+    \item Admission requirements: (International) Students admitted to the
+        tracks Digital Humanities (DH) or Computer Communication (CC) of the
+        Master CIS are allowed to follow this course. No knowledge of
+        programming or computer science is assumed. In case the student has
+        already followed programming courses, it is wise to consult the
+        teachers or study advisor to see whether the course is worthwhile to
+        follow.
 \end{enumerate}
 
 \section{Content of the course unit}
@@ -62,61 +74,66 @@ expressions, n-grams, processing data contained in a table.
 
 \section{Position of the course unit in the degree program}
 The course unit is accessible to master students of Communication and
-Information Studies (tracks Digital Humanities (DH) and Computer Communication
-(CC)). The course introduces programming concepts and techniques, and practices
+Information Studies (tracks Digital Humanities and Computer Communication).
+The course introduces programming concepts and techniques, and practices
 programming skills which are necessary or useful for subsequent courses in the
-programmes of DH and CC.
+programmes of Digital Humanities and Computer Communication.
 
 \section{Learning outcomes of the course unit}
 
 Upon successful completion of the course unit, students are able to:
 \begin{enumerate}
-	\item Describe, define, and illustrate basic programming concepts
-		accurately, while making use of the appropriate programming
-		terminology. (Knowledge and Insight)
-	\item Solve small-scale problems involving numeric and textual data, design
-		effective and efficient algorithms for them, and implement these
-		algorithms in Python code. (Application of Knowledge and Insight)
-	\item Read, and understand Python programs, and add concise complementary
-		descriptions and comments in natural language to it, in order to
-		clarify the code, when code is not readable by itself. (Communication)
-	\item Adequately use programming knowledge, insights, and skills obtained
-		(i) to program in other programming languages similar to Python, and
-		(ii) to address similar, but more complex, problems than the ones
-		introduced in this introductory course. (Learning Skills)
+    \item Describe, define, and illustrate basic programming concepts
+        accurately, while making use of the appropriate programming
+        terminology. (Knowledge and Insight)
+    \item Solve small-scale problems involving numeric and textual data,
+        devise an effective and efficient strategy to solve them,
+        and implement the solution in Python code.
+        (Application of Knowledge and Insight)
+    \item Read, and understand Python programs, and add concise complementary
+        descriptions and comments in natural language to it, in order to
+        clarify the code, when code is not readable by itself. (Communication)
+    \item Adequately use programming knowledge, insights, and skills obtained
+        (i) to program in other programming languages similar to Python, and
+        (ii) to address similar, but more complex, problems than the ones
+        introduced in this introductory course. (Learning Skills)
 \end{enumerate}
 
 
 \section{Mode of instruction and learning activities}
-The course is based on the principals of active learning. In weekly lectures,
-new programming concepts and techniques are introduced globally. Self-study is
+The course is based on the principles of active learning. In weekly lectures,
+new programming concepts and techniques are introduced. Self-study is
 required to get a better, deeper, and more nuanced understanding of the newly
 introduced subject material. In the labs, students apply the knowledge obtained
 in simple exercises, discussion, and programming assignments. Students have to
 hand in two substantive and complex assignments, which will be assessed (see
-Weekly Timetable in 10).
+Weekly Timetable in section 10). % ~\ref{sectimetable}).
+
+Computers in the lab have the necessary software installed, but it may be
+easier for you to use your own laptop. If you have one, please bring it to
+class.
 
 \section{Assessment}
 The course does not have a final exam. The final course grade is based on the
 two assignments to hand in in week 4 and week 8. Both assignments have to be
 sufficient (at least 5.5) in order to pass the course. The final score is based
-on the grades for the two assignments, which have each the same weight (50%).
-In case of an insufficient score for either assignment, a resit possibility is
+on the grades for the two assignments, weighted equally (50~\%).
+In case of an insufficient grade for either assignment, a resit possibility is
 offered in week 10. Deadlines for handing in assignments are given in the
-weekly timetable, and in Nestor.
+weekly timetable, and on Nestor.
 
 \section{Cheating and plagiarism}
 Cheating and plagiarism are subject to the provisions set down in the TER
-(Article 8.17 of Part A of the BA TER or Article 4.13 of Part A of the MA TER)
+(Article 8.17 of Part A of the BA TER or Article 4.13 of Part A of the MA TER).
 The Board of Examiners is always informed in cases of suspected cheating or
 plagiarism.
 
 \section{Calculation of student workload}
 \begin{tabular}{ll}
-	Participation lectures/seminars/labs 	& 35 hours \\
-	Literature to be studied 				& about 55 hours \\
-	Assignments about 						& 50 hours \\
-	\emph{Total} 							& about 140 hours (5 ECTS) \\
+    Participation lectures, labs   & 35 hours \\
+    Literature to be studied       & about 55 hours \\
+    Assignments                    & about 50 hours \\
+    \emph{Total}                   & about 140 hours (5 ECTS) \\
 \end{tabular}
 
 \section{Literature}
@@ -125,7 +142,7 @@ Karsdorp, F. and M. van Gompel. \emph{Python Programming for the Humanities}.
 An extended and updated version will be made available on Nestor.
 
 
-Recommended background literature:
+\subsection*{Recommended background literature}
 
 Downey, A. (2015). \emph{Think Python. How to think like a computer scientist}.
 Needham, Massachusetts: Green Tea Press.
@@ -134,81 +151,71 @@ Available online: \url{http://-greenteapress.com/thinkpython2/}
 Zelle, J. M. (2017).
 \emph{Python programming: an introduction to computer science}.
 Portland, Oregon: Franklin, Beedle \& Associates, Inc.
-(not freely downloadable).
+(not freely downloadable; make sure to get the version for Python 3).
+
+Vierthaler (2018). Hacking the Humanities video tutorials.
+\url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
 
 
-\section{Weekly schedule}
+\pagebreak
+\section{Weekly schedule}\label{sectimetable}
+{\raggedright
+\begin{longtable}{p{0.18\linewidth} p{0.5\linewidth} p{0.3\linewidth} }
+Week; date          & (Reading) assignments & Topics \\ \midrule
 
-\begin{longtable}{l l p{0.5\textwidth} p{0.3\textwidth} }
-Week   & Date          & (Reading) assignments & Topics \\ \midrule
+36; Sep 2--9 &
+    Study Downey ch.\ 1, 2 (or Zelle sec.\ 2.1--2.5).
+    Lab: Karsdorp \& van Gompel ch.\ 1 (getting started).
+    & Numbers, Text, Variables
+    \\
 
-36 (1) & Sep 2--9 &
-	Study Downey Chapters 1, 2;
-	Zelle Chapter 2;
-	Karsdorp \& van Gompel
-	Chapter 1 (getting started).
-	See Student Portal for extra exercises
-	and assignments.
-	& Variables and (arithmetic and string)
-	expressions, assignment
-	\\
+37; Sep 9--16     &
+    Study Downey ch.\ 8, 10, 11;
+    Zelle sec.\ 5.1-5.8, sec.\ 11.7;
+    Karsdorp \& van Gompel ch.\ 1
+    (string manipulation, lists,
+    dictionaries).
+    & Strings, Lists, Dictionaries
+    \\
 
-37 (2) & Sep 9--16     &
-	Study Downey Chapters 8, 10, 11;
-	Zelle Chapters 5 (5.1-5.8), 11 (11.7);
-	Karsdorp \& van Gompel Chapter 1
-	(string manipulation, lists,
-	dictionaries).
-	See Student Portal for extra exercises
-	and assignments.
-	& Strings, Lists, Dictionaries
-	\\
+38; Sep 16--23    &
+    Study Downey ch.\ 5;
+    Zelle ch.\ 7, 8;
+    Karsdorp \& van Gompel ch.\ 1 (conditions, loops).
+    & Conditionals and Loops
+    \\
 
-38 (3) & Sep 16--23    &
-	Study Downey Chapter 5;
-	Zelle Chapters 7, 8;
-	Karsdorp \& van Gompel Chapter 1 (conditions, loops).
-	See Student Portal for extra exercises
-	and assignments.
-	& Conditionals and Loops
-	\\
+39; Sep 23--30    &
+    Study Downey ch.\ 3, 6, 14;
+    Zelle ch.\ 5 (5.9), 6;
+    Karsdorp \& van Gompel ch.\ 2.
+    Midterm exam individual assignment to hand in;
+    deadline: Friday, September 27, end
+    of day; resit: Friday, November 8, end
+    of day.
+    & Text Processing: Files, Functions, Text clean-up
+    \\
 
-39 (4) & Sep 23--30    &
-	Study Downey Chapters 3, 6, 14;
-	Zelle Chapters 5 (5.9), 6;
-	Karsdorp \& van Gompel Chapter 2.
-	See Student Portal for extra exercises
-	and assignments (midterm exam
-	individual assignment to hand in;
-	deadline: Friday, September 27, end
-	of day; resit: Friday, November 8, end
-	of day)
-	& Text Processing: Files, Functions, Text clean-up
-	\\
+40; Sep 30--Oct 7 &
+    Karsdorp \& van Gompel ch.\ 3.
+    & Text Analysis
+    \\
 
-40 (5) & Sep 30--Oct 7 &
-	Karsdorp \& van Gompel Chapter 3.
-	See Student Portal for extra exercises and assignments.
-	& Text Analysis
-	\\
+41; Oct 7--14     &
+    Karsdorp \& van Gompel ch.\ 4.
+    & Programming Principles, Data Analysis, Statistics
+    \\
 
-41 (6) & Oct 7--14     &
-	Karsdorp \& van Gompel Chapter 4.
-	See Student Portal for exercises and assignments.
-	& Programming Principles, Data Analysis, Statistics
-	\\
-
-42 (7) & Oct 14--21    &
-	See Student Portal for exercises and
-	assignments (final exam: individual
-	assignment to hand in; deadline:
-	Friday, October 25, en of day; resit:
-	Friday, November 8, end of day)
-	& NLTK, Regular Expressions, Pandas, Course Overview
-	\\
+42; Oct 14--21    &
+    Final exam: individual
+    assignment to hand in; deadline:
+    Friday, October 25, en of day; resit:
+    Friday, November 8, end of day.
+    & NLTK, Regular Expressions, Pandas, Course Overview
+    \\
 
 \end{longtable}
-
+}
 
 \section{Contact}
 
