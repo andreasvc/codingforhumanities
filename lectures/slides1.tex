@@ -105,12 +105,43 @@
 \end{frame}
 
 
-\begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}\centering
-	\begin{reference}
-		\url{https://www.youtube.com/watch?v=ZXsQAXx_ao0}
-	\end{reference}
-   \includegraphics[width=0.6\textwidth]{fig/nothingisimpossible}
+\begin{frame}{Intermezzo: female computer pioneers}
+	\begin{columns}
+		\column{0.3\linewidth}
+		Ada Lovelace %, mathematician
+
+		\vspace{1ex}
+		\includegraphics[width=0.9\linewidth,trim={0 1cm 0 1cm},clip]{fig/ada}
+		
+		Wrote \structure{first computer program}
+
+		\pause
+		\column{0.3\linewidth}
+		Grace Hopper %, admiral, computer scientist
+		
+		\vspace{1ex}
+		\includegraphics[width=0.9\linewidth]{fig/gracehopper}
+
+		Invented machine-independent \structure{programming languages}
+
+		\pause
+		\column{0.3\linewidth}
+		Margaret Hamilton %, computer scientist
+
+		\vspace{1ex}
+		\includegraphics[width=0.9\linewidth]{fig/margarethamilton}
+
+		Lead programmer for \structure{Apollo Moon missions}
+		% anecdote of finding bug
+	\end{columns}
 \end{frame}
+
+% \begin{frame}{``Don't let your dreams be dreams'' (Shia LeBeouf)}\centering
+% 	\begin{reference}
+% 		\url{https://www.youtube.com/watch?v=ZXsQAXx_ao0}
+% 	\end{reference}
+%    \includegraphics[width=0.6\textwidth]{fig/nothingisimpossible}
+% \end{frame}
 
 
 
@@ -294,16 +325,64 @@ Also -=, *=, etc.
 \end{frame}
 
 
-\begin{frame}[fragile]{A practical example}
-    Suppose I read War \& Peace in a year,
+\begin{frame}{A practical example}
+    Suppose I read War \& Peace in a year, \\
     what is my reading speed (words per minute)?
     \begin{itemize}
         \item Number of words in War \& Peace: 564,277
         \item Time spent reading per day: 1 hour
     \end{itemize}
     How to calculate average words per minute?
-    \pause
+\end{frame}
 
+\begin{frame}{Intermezzo: How to solve problems}
+	\begin{columns}
+		\column{0.5\linewidth}
+			The Feynman algorithm:
+			\begin{enumerate}
+				\item Write down the problem.
+				\item Think real hard.
+				\item Write down the solution.
+			\end{enumerate}
+
+			\vspace{1em}
+			due to Richard Feynman, Nobel-prize winning physicist \dots
+		\pause
+		\column{0.5\linewidth}
+			Pólya (1945), How to solve it:
+
+			\begin{enumerate}
+				\item First, you have to understand the problem.
+				\item After understanding, make a plan.
+				\item Carry out the plan.
+				\item Look back on your work. How could it be better?
+			\end{enumerate}
+
+			\begin{block}{Stuck?}
+			If you can't solve a problem,
+			then there is an easier problem you can solve:
+			find it.
+			\end{block}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Programming workflow in practice}
+	\begin{columns}
+		\column{0.3\linewidth}
+			Many iterations of \dots
+			\begin{itemize}
+				\item Fail
+				\item Fix
+			\end{itemize}
+
+		\column{0.7\linewidth}
+			\includegraphics[width=0.45\linewidth]{fig/googling}
+			\includegraphics[width=0.45\linewidth]{fig/stackoverflow}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Solution}
 \begin{lstlisting}[language=python]
 >>> words_per_day = 564277 / 365
 >>> words_per_min = words_per_day / 60
@@ -311,6 +390,7 @@ Also -=, *=, etc.
 25.766073059360732
 \end{lstlisting}
 \end{frame}
+
 
 \begin{frame}[fragile]{Text}
 Values can also be text instead of numbers:
@@ -402,7 +482,7 @@ Values can also be text instead of numbers:
     \end{itemize}
 \end{frame}
 
-gsubsection{Translate a formula into a Python program}
+\subsection{Translate a formula into a Python program}
 \begin{frame}{Example: computing readability}
 	\begin{reference}
     Flesch, R (1948). A new readability yardstick.

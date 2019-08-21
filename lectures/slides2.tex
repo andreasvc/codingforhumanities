@@ -120,7 +120,7 @@
     \begin{itemize}
         \item indexing:                    string[expression]
         \item slicing:                     string[start:end]
-        \item concatenation:               string1> + string2
+        \item concatenation:               string1 + string2
         \item repetition:                  string * expression
         \item getting length:              len(string)
     \end{itemize}
@@ -266,6 +266,9 @@ Example, a phone book:
 456
 >>> coworkers['Bob'] = 124
 \end{lstlisting}
+
+% Explanation of hash tables:
+% https://dev.to/a_sandrina_p/learning-hash-tables-with-drawings-99o
 \end{frame}
 
 \begin{frame}{Properties of dictionaries}
@@ -303,13 +306,15 @@ Even other lists and dictionaries!
 Two ways of organizing a collection of books:
 \begin{lstlisting}
 >>> books = ['Tolstoy - War and Peace', 'Tolstoy - Anna Karenina',
-...     'Dostoevsky - Crime and Punishment', 'Dostoevsky - Brothers Karamazov']
+...     'Dostoevsky - Crime and Punishment',
+...     'Dostoevsky - Brothers Karamazov']
 \end{lstlisting}
 
 \pause
 \begin{lstlisting}
 >>> books = {'Tolstoy': ['War and Peace', 'Anna Karenina'],
-...     'Dostoevsky': ['Crime and Punishment', 'Brothers Karamazov']}
+...     'Dostoevsky': ['Crime and Punishment',
+...         'Brothers Karamazov']}
 >>> books['Tolstoy']
 ...
 \end{lstlisting}
