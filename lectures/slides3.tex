@@ -12,6 +12,26 @@
  \tableofcontents
 \end{frame}
 
+\begin{frame}{Motivation}
+    Until now:
+    \begin{itemize}
+        \item Work with simple values (numbers, text)
+        \item Create complex values (lists, dictionaries)
+        \item Store results in memory (variables)
+    \end{itemize}
+
+    \pause
+    What's missing:
+    \begin{itemize}
+        \item Making decisions
+        \item Repetition
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Making decisions: flow charts}
+    \includegraphics[height=0.8\textheight]{fig/flowchart}
+\end{frame}
+
 \section{Conditional statements: do you really want to do that?}
 \frame{\tableofcontents[currentsection]}
 
@@ -38,12 +58,20 @@ if books > 5:
     print('you are an avid reader')
 \end{lstlisting}
 
-\begin{itemize}
-    \item The code under an if-statement is only executed
-        if the condition is True.
-    \item The indentation determines which code is covered
-        by the condition
-\end{itemize}
+    \begin{itemize}
+        \item The code under an if-statement is only executed
+            if the condition is True.
+        \item The indentation determines which code is covered
+            by the condition
+    \end{itemize}
+
+    \pause
+    \begin{definition}
+        A \structure{code block} is a sequence of indented lines after
+        a statement ending in `:'.
+        The start and end of the block are defined by the indentation of the
+        lines.
+    \end{definition}
 \end{frame}
 
 
@@ -108,12 +136,38 @@ if books:
 
 \end{frame}
 
+\begin{frame}[fragile]{Converting a decision tree into if-statements}
+    \begin{columns}
+        \column{0.5\linewidth}
+            ``Should you stay at a social gathering?''
+
+            \includegraphics[width=0.8\textwidth]{fig/flowchart2}
+
+        \pause
+        \column{0.5\linewidth}
+\begin{lstlisting}
+awkward = False
+free_food = True
+if awkward:
+    if free_food:
+        print('Stay')
+    else:
+        print('Leave')
+else:
+    print('Stay')
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
 
 \begin{frame}{Summary}
     \begin{description}
-        \item[Conditions] An expression that is True or False.
+        \item[Conditions] An expression that is \texttt{True} or \texttt{False}.
 
-                Comparisons, equality tests
+                Comparisons, equality tests: <, >, ==, !=
+
+                Complex conditions: \texttt{and, or, not}
+
         \item[if-statements] Execute statements only if condition is True
     \end{description}
 \end{frame}
@@ -168,6 +222,25 @@ for key, value in data.items():
     print(key)
     print(value)
 \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Looping without a list}
+Can use the \texttt{range} function if we don't have a list:
+\begin{lstlisting}
+for number in range(4)
+    print(number)
+\end{lstlisting}
+
+Result:
+\begin{lstlisting}
+0
+1
+2
+3
+\end{lstlisting}
+
+Repeats 4 times. Last item is 3 because counting starts at 0.
 \end{frame}
 
 \begin{frame}{Summary}

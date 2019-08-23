@@ -88,7 +88,7 @@
 \begin{reference}
 \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
 \end{reference}
-    Student projects from a DH course by Yael Netzer (Israel):
+    Student projects from a DH course by Yael Netzer (Ben Gurion univ\. Israel):
     \begin{itemize}
         \item How many black actors/directors/producers are in movies?
         \item Which terror attacks are reported in the NY times?
@@ -406,41 +406,53 @@ Values can also be text instead of numbers:
     \end{definition}
 \end{frame}
 
-\begin{frame}[fragile]{Operations on strings}
-\begin{lstlisting}[language=python]
->>> first = 'John'
->>> last = 'Doe'
-\end{lstlisting}
-\begin{description}
-    \item[first + last] \texttt{'JohnDoe'}
-    \item[first - last] TypeError
-    \item[first * last] TypeError
-    \item[first / last] TypeError
-\end{description}
+\begin{frame}{Types}
+    We have seen numbers (integer, float) and text (string).
 
-\begin{itemize}
-\item + can be used to concatenate two strings
-\item The other operations require numbers, not text
-\end{itemize}
+    These are examples of types:
+
+    \begin{definition}
+        A \structure{type} is a class of values recognized by the language
+    \end{definition}
+    
+    \pause
+    \begin{itemize}
+        \item In Python, a value always has a type (a variable can be any type).
+        \item The type defines what operations are valid.
+    \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Mixing strings and numbers}
+\begin{frame}[fragile]{Different behavior for types}
+    \begin{columns}
+        \column{0.5\linewidth}
 \begin{lstlisting}[language=python]
->>> first = 'John'
->>> num = 3
+>>> 3 + 3
+6
 \end{lstlisting}
-\begin{description}
-    \item[first + num] TypeError
-    \item[first - num] TypeError
-    \item[first * num] 'JohnJohnJohn'
-    \item[first / num] TypeError
-\end{description}
 
-\begin{itemize}
-\item * can be used to repeat a string several times
-\item For the other operations, Python refuses to mix up types
-\end{itemize}
+These are \structure{numbers}, so we can do arithmetic
+        \column{0.5\linewidth}
+\begin{lstlisting}[language=python]
+>>> '3' + '3'
+'33'
+\end{lstlisting}
+
+These are \structure{strings}, so they are treated as text
+    \end{columns}
 \end{frame}
+
+\begin{frame}[fragile]{Invalid operations for types}
+\begin{lstlisting}[language=python]
+>>> 3 + '3'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+\end{lstlisting}
+    
+    \centering
+    \includegraphics[height=0.5\textheight]{fig/cantdothat}
+\end{frame}
+    
 
 \begin{frame}[fragile]{Converting numbers to text and back}
 \begin{lstlisting}[language=python]
@@ -453,34 +465,44 @@ Values can also be text instead of numbers:
 42
 \end{lstlisting}
 
-    int(text) is an example of using a function:
+    \texttt{int(text)} is an example of using a function:
 
-    'text' is given as argument to the function 'int';
+    \begin{definition}
+        A \structure{function} is a piece of code that given arguments
+        produces an effect or result.
+
+        The notation f(x) means that the function f is \structure{applied}
+        to the value x.
+    \end{definition}
+
+    \pause
+    Here: \texttt{text} is given as argument to the function \texttt{int};
     a number is returned as a result.
 \end{frame}
 
 
-\begin{frame}[fragile]{Converting numbers to text and back}
-\begin{lstlisting}[language=python]
->>> name = 'John'
->>> number = 7
->>> name + ' has ' + str(number) + ' cousins'
-'John has 7 cousins'
-\end{lstlisting}
-\end{frame}
+% \begin{frame}[fragile]{Converting numbers to text and back}
+% \begin{lstlisting}[language=python]
+% >>> name = 'John'
+% >>> number = 7
+% >>> name + ' has ' + str(number) + ' cousins'
+% 'John has 7 cousins'
+% \end{lstlisting}
+% \end{frame}
 
 \begin{frame}{Summary}
     \begin{itemize}
-        \item Values:
+        \item Values and types:
             \begin{description}
                 \item[Numbers:] int, float
                 \item[Text:] str
             \end{description}
         \item Expressions: 1 + 2 * 3 - (4 + 5)
         \item Variables: a = 2
-        \item Conversions: str(2), int('2')
+        \item Functions: str(2), int('2')
     \end{itemize}
 \end{frame}
+
 
 \subsection{Translate a formula into a Python program}
 \begin{frame}{Example: computing readability}
@@ -566,14 +588,14 @@ score = 206.835 - 1.015 * words_per_sent - 84.6 * syllable_per_word
 
 \begin{frame}{Course materials}
     \begin{itemize}
-        \item Lab: Notebooks from the course Python for the Humanities
-        \item Preparation for lab: Video lectures from the course Hacking the Humanities
-        \item Textbook: Think Python
         \item Lectures with our material
+        \item Lab: Notebooks from the course Python for the Humanities
+        \item Preparation for lab:
+            \begin{itemize}
+                \item Video lectures from the course Hacking the Humanities
+                \item Textbook: Think Python
+            \end{itemize}
     \end{itemize}
-
-    \pause\vspace{1em}
-    Advice: practice practice practice!
 \end{frame}
 
 \begin{frame}{Course summary}
@@ -591,7 +613,7 @@ score = 206.835 - 1.015 * words_per_sent - 84.6 * syllable_per_word
     \begin{itemize}
         \item This course gives a lot of (new) information
         \item Information is provided in a \structure{cumulative} way:
-            each new piece of inormation builts on previous information
+            each new piece of information builds on previous information
         \item Watch tutorials, read, and practice
         \item \structure{Ask questions} as soon as you think you are lost!
     \end{itemize}
