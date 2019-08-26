@@ -153,12 +153,46 @@ NB: cannot change characters in a string (must make new string)
 \begin{lstlisting} 
 >>> name = 'Maria'
 >>> name[0] = 'D'
-[...] TypeError
+[...] TypeError: 'str' object does not support item assignment
 \end{lstlisting}
 
-Lists are mutable, strings are immutable
+Lists are mutable, strings are immutable:
+\begin{definition}
+An \structure{immutable} object cannot be changed after it is created.
+\end{definition}
 \end{frame}
 
+\begin{frame}{Why immutable vs mutable?}
+    \begin{description}
+        \item[Immutable]
+            \begin{itemize}
+                \item Easier to reason about
+                \item Constant values sometimes required
+            \end{itemize}
+
+        \item[Mutable]
+            \begin{itemize}
+                \item More efficient with many changes
+                \item More natural
+            \end{itemize}
+    \end{description}
+\end{frame}
+
+\begin{frame}{Objects, methods}
+    In Python, every value is an object:
+
+    \begin{definition}
+        An \structure{object} encapsulates
+        data and code for dealing with that data.
+
+        A function that belongs to and operates on an object
+        is called a \structure{method}.
+    \end{definition}
+    
+    Regular function: \texttt{f(a)}
+
+    Method: \texttt{o.f(a)}
+\end{frame}
 
 \begin{frame}[fragile]{Adding items}
 We can add an item to the end of an existing list:
@@ -254,6 +288,25 @@ Except for two important differences:
 \section{Dictionaries}
 \frame{\tableofcontents[currentsection]}
 
+\begin{frame}
+    \begin{itemize}
+        \item Lists are useful when data has a natural order: \\
+            items are referred by their position
+        \pause
+        \item What if we have lots of data,
+            but we need to find it some other way?
+    \end{itemize}
+
+    \begin{block}{Example}
+    Finding words in a dictionary
+
+    Too many words to consider one-by-one
+
+    However, due to organization (sorted), can find words quickly
+    \end{block}
+\end{frame}
+
+
 \begin{frame}[fragile]{dictionaries}
     \begin{definition}
         A dictionary stores pairs of values (key, value),
@@ -275,8 +328,8 @@ Example, a phone book:
 A dictionary is a mapping of keys to values.
 
     \begin{itemize}
-        \item Keys can be arbitrary numbers or strings.
-            % but cannot get n'th item.
+        \item Looking up a key is fast
+        \item Keys must be immutable (e.g., numbers or strings).
         \item Values can be anything.
         \item Keys are always unique;
             re-using a key will overwrite the previous value.
@@ -322,12 +375,20 @@ The latter has the advantage of easily being able to
 select the works by a particular author.
 \end{frame}
 
-\begin{frame}{Code = Data + Algorithms}
-    Thinking of how to organize your data
-    is an important first step in designing a program
-
-    There is a trade-off:
-    particular choices may make one thing easy and another hard
+\begin{frame}{Algorithms + Data structures = Programs}
+    \begin{columns}
+        \column{0.5\linewidth}
+            \begin{itemize}
+                \item Thinking of how to organize your data is an important
+                    first step in designing a program
+                \item The right organization may make the rest of the design
+                    obvious
+                \item Often a trade-off: particular choices may make one thing
+                    easy and another hard
+            \end{itemize}
+        \column{0.5\linewidth}
+            \includegraphics[height=0.8\textheight]{fig/wirth}
+    \end{columns}
 \end{frame}
 
 
