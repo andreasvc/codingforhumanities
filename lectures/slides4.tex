@@ -1,0 +1,183 @@
+\documentclass[aspectratio=169,usenames,dvipsnames]{beamer}
+\usepackage{preamble}
+\title{Coding for Humanities, week 4}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\begin{frame}{Last week}
+    Conditions
+
+    Loops
+\end{frame}
+
+\begin{frame}{Plan for today}
+ \tableofcontents
+\end{frame}
+
+
+\section{Defining functions}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Motivation}
+    \begin{itemize}
+        \item We've used builtin functions (print, len, sorted);\\
+            now we'll see how to make our own functions
+        \item Why? Modularity; i.e., break down programs into smaller components
+            \begin{itemize}
+                \item Can create larger, more complex programs
+                    from readily understandable building blocks
+                \item Functions encapsulate complexity;
+                    don't need to understand how a function works to use it
+                \item Components are re-usable;
+                    write once, use many times
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Defining functions}
+    Basic syntax:
+\begin{lstlisting}
+def function(param1, param2, ...):
+    # do something with parameters
+\end{lstlisting}
+
+    A function definition has\dots
+    \begin{itemize}
+        \item A name
+        \item A fixed number of parameters (may be zero)
+        \item An indented block of code
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Defining a function does not run it}
+    \begin{itemize}
+        \item Executing a \texttt{def} statement does not run the code!
+        \item The function is stored along with its name
+        \item Function must be called to run it
+    \end{itemize}
+    Example:
+\begin{lstlisting}
+def greeting():
+    print('Hello!')
+
+greeting()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Function arguments}
+    \begin{definition}
+        A \structure{parameter} is a value expected by a function
+
+        An \structure{argument} is a particular value for a parameter
+            when calling a function
+    \end{definition}
+
+    \begin{itemize}
+        \item Can pass data to functions using arguments
+        \item Below, the argument \texttt{'John'} is assigned
+            to the parameter \texttt{name} when the function is called
+        \item Arguments have a specific order
+        \item When calling a function, must use correct number of arguments
+    \end{itemize}
+Example:
+\begin{lstlisting}
+def greeting(name):
+    print('Hello', name)
+
+greeting('John')
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Returning results}
+    \begin{itemize}
+        \item A function does not need to return a result \\
+            In this case, 
+            \begin{itemize}
+                \item the function is used for its \emph{effect};\\
+                    it does something (e.g., print text on screen)
+                \item The value \texttt{None} is implicitly returned
+            \end{itemize}
+        \item Use \texttt{return ...} to give a result back to the caller
+        \item May occur anywhere in the function
+    \end{itemize}
+
+Example:
+\begin{lstlisting}
+def average(values):
+    if len(values) == 0:
+        return None
+    return sum(values) / len(values)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Summary}
+    \begin{itemize}
+        \item Break programs down into functions to make them easier
+            to understand.
+        \item Define a function using \texttt{def} with a name, parameters,
+            and a block of code.
+        \item Defining a function does not run it.
+        \item Arguments in call are matched to parameters in definition.
+        \item Functions may return a result to their caller using return.
+    \end{itemize}
+\end{frame}
+
+
+
+
+\section{Cleaning text}
+\frame{\tableofcontents[currentsection]}
+\begin{frame}{Goal: text $\rightarrow$ words}
+    For basic text analysis,
+
+    want to consider only word frequencies of a text
+
+    \pause
+    Therefore:
+    \begin{enumerate}
+        \item Identify words
+        \item Simplify text, remove non-words
+        \item Count words to get frequencies
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Upper and lower case}
+    \begin{itemize}
+        \item To the computer, these
+            are three completely different words!
+
+            \texttt{'John', 'john', 'JOHN'}
+        \item Often, we don't want to make this distinction when counting
+        \item One solution: case folding
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+text = 'HeLlO WoRlD'
+cleaned = text.lower()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Punctuation}
+    \begin{itemize}
+        \item Similarly, punctuation should be separated from words
+        \item Or should be eliminated completely
+        \item Can use functionality similar to "find \& replace" for this
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+text = "Forsooth, 'tis true!"
+text = text.replace('!', '')
+text = text.replace(',', '')
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Summary}
+\end{frame}
+
+% parsing a simple text file line-by-line, e.g. subtitles?
+\end{document}
