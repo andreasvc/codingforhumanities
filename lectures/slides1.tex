@@ -507,32 +507,36 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 \subsection{Translate a formula into a Python program}
 \begin{frame}{Example: computing readability}
 	\begin{reference}
-    Flesch, R (1948). A new readability yardstick.
-		Journal of Applied Psychology. 32 (3): 221--233.
+    Smith \& Senter (1968). Automated readability index
+    \url{https://apps.dtic.mil/dtic/tr/fulltext/u2/667273.pdf}
 	\end{reference}
+    Automated readability index:
+    A formula to estimate the difficulty of a text
 
-    Flesch reading ease: a formula to estimate the difficulty of a text
-
-    \[
-        score = 206.835 - 1.015 ( \frac{\textsf{total words}}{\textsf{total sentences}} )
-            - 84.6 ( \frac{\textsf{total syllables}}{\textsf{total words}} )
-    \]
-
-    Result: a readability score ranging from 0 (very hard) to 100 (very easy).
+    % \[
+    %      0.50 ( \frac{\textsf{total words}}{\textsf{total sentences}} )
+    %         + 4.71 ( \frac{\textsf{total characters}}{\textsf{total words}} )
+    %         - 21.43
+    % \]
+    %
+    % Result: a grade level
+    \includegraphics[width=0.7\textwidth]{fig/ari}
 
     \pause
     \vspace{1em}
-	NB: multiplication is implicit in this notation: $ x(\dots) = $ x * (\dots)
+    \begin{itemize}
+        \item multiplication is implicit in this notation: $ x(\dots) = $ x * (\dots)
+        \item mistake in paper! s is both sentences and strokes!
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \begin{lstlisting}[language=python]
-total_words = 500
-total_sentences = 25
-total_syllables = 1423
+w = 500
+s = 25
+c = 3200
 
-score = (206.835 - 1.015 * (total_words / total_sentences)
-		- 84.6 * (total_syllables / total_words))
+result = 0.5 * (w / s) + 4.71 * (c / w) - 21.43
 \end{lstlisting}
 \end{frame}
 
@@ -556,12 +560,13 @@ score = (206.835 - 1.015 * (total_words / total_sentences)
 \begin{lstlisting}[language=python]
 total_words = 500
 total_sentences = 25
-total_syllables = 1423
+total_characters = 3200
+
 
 words_per_sent = total_words / total_sentences
-syllable_per_word = total_syllables / total_words
+chars_per_word = total_characters / total_words
 
-score = 206.835 - 1.015 * words_per_sent - 84.6 * syllable_per_word
+result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \end{lstlisting}
 \end{frame}
 
