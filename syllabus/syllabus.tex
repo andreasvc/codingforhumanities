@@ -63,14 +63,14 @@
 The course is meant to be an introduction to programming in view of using
 technology in solving problems in the interdisciplinary fields of Digital
 Humanities (DH) and Computer-Mediated Communication (CMC). The very basics of
-programming are introduced, as well as data structures, manipulations, and
-modules that are useful for DH and CMC. The programming language Python
+programming are introduced, as well as tools and libraries
+that are useful for DH and CMC. The programming language Python
 (version 3) is used for writing programs. Jupyter is used as environment to
-develop and execute Python programs. More specifically, the following topics
-are addressed in the course: variables, values of various types, strings,
-lists, dictionaries, files, assignment, input and output statements,
-conditionals, iteration and looping, functions, modules, libraries, regular
-expressions, n-grams, processing data contained in a table.
+develop and execute Python programs. More specifically, the following basic
+programming topics are addressed in the course: variables, values of various
+types, strings, lists, dictionaries, conditionals, iteration and looping,
+files, and functions. This is followed by practical applications related to
+text analysis and processing of numerical data contained in tables.
 
 \section{Position of the course unit in the degree program}
 The course unit is accessible to master students of Communication and
@@ -83,43 +83,22 @@ programmes of Digital Humanities and Computer Communication.
 
 Upon successful completion of the course unit, students are able to:
 
-% alternatieve versie:
-% \begin{enumerate}
-%     \item Write simple programs to perform basic tasks such as searching and
-%         cleaning text corpora
-%         (Application of Knowledge and Insight).
-%     \item Work with Jupyter Notebooks and other common Python data science
-%         tools to report on simple exploratory experiments: load a tabular
-%         dataset, compute summary statistics, and create plots
-%         (Application of Knowledge and Insight).
-%     \item Understand and solve common errors during programming
-%         (Application of Knowledge and Insight).
-%     \item Read documentation on available software to evaluate its
-%         applicability to a problem
-%         (Learning skills).
-%     \item Collaborate effectively with programmers using proper terminology
-%         (Communication).
-% \end{enumerate}
-
-
-% versie Leonie:
 \begin{enumerate}
-    \item Describe, define, and illustrate basic programming concepts
-        accurately, while making use of the appropriate programming
-        terminology. (Knowledge and Insight)
-    \item Solve small-scale problems involving numeric and textual data,
-        devise an effective and efficient strategy to solve them,
-        and implement the solution in Python code.
-        (Application of Knowledge and Insight)
-    \item Read, and understand Python programs, and add concise complementary
-        descriptions and comments in natural language to it, in order to
-        clarify the code, when code is not readable by itself. (Communication)
-    \item Adequately use programming knowledge, insights, and skills obtained
-        (i) to program in other programming languages similar to Python, and
-        (ii) to address similar, but more complex, problems than the ones
-        introduced in this introductory course. (Learning Skills)
+    \item Write simple programs to perform basic tasks such as searching and
+        cleaning text corpora
+        (Application of Knowledge and Insight).
+    \item Work with Jupyter Notebooks and other common Python data science
+        tools to report on simple exploratory experiments: load a tabular
+        dataset, compute summary statistics, and create plots
+        (Application of Knowledge and Insight).
+    \item Understand and solve common errors during programming
+        (Application of Knowledge and Insight).
+    \item Read documentation on available software to evaluate its
+        applicability to a problem
+        (Learning skills).
+    \item Collaborate effectively with programmers using proper terminology
+        (Communication).
 \end{enumerate}
-
 
 \section{Mode of instruction and learning activities}
 The course is based on the principles of active learning. In weekly lectures,
@@ -159,15 +138,15 @@ plagiarism.
 
 \section{Literature}
 Karsdorp, F. and M. van Gompel. \emph{Python Programming for the Humanities}.
-\url{http://www.karsdorp.io/python-course/})
-An extended and updated version will be made available on Nestor.
+\url{http://www.karsdorp.io/python-course/} \\
+A revised version will be made available on Nestor.
 
 
-\subsection*{Recommended background literature}
+\subsection*{Background literature}
 
 Downey, A. (2015). \emph{Think Python. How to think like a computer scientist}.
 Needham, Massachusetts: Green Tea Press.
-Available online: \url{http://-greenteapress.com/thinkpython2/}
+Available online: \url{http://greenteapress.com/thinkpython2/html/index.html}
 
 Zelle, J. M. (2017).
 \emph{Python programming: an introduction to computer science}.
@@ -182,49 +161,40 @@ Vierthaler (2018). Hacking the Humanities video tutorials.
 \section{Weekly schedule}\label{sectimetable}
 {\raggedright
 \begin{longtable}{p{0.18\linewidth} p{0.5\linewidth} p{0.3\linewidth} }
-Week; date          & (Reading) assignments & Topics \\ \midrule
+Week; date          & Lab, assignment & Topics \\ \midrule
 
 36; Sep 2--9 &
-    Study Downey ch.\ 1, 2 (or Zelle sec.\ 2.1--2.5).
-    Lab: Karsdorp \& van Gompel ch.\ 1 (getting started).
-    & Numbers, Text, Variables
+    Karsdorp \& van Gompel ch.\ 1
+    & Numbers, text, variables
     \\
 
 37; Sep 9--16     &
-    Study Downey ch.\ 8, 10, 11;
-    Zelle sec.\ 5.1-5.8, sec.\ 11.7;
     Karsdorp \& van Gompel ch.\ 1
-    (string manipulation, lists,
-    dictionaries).
-    & Strings, Lists, Dictionaries
+    & Strings, lists, condition, and loops
     \\
 
 38; Sep 16--23    &
-    Study Downey ch.\ 5;
-    Zelle ch.\ 7, 8;
-    Karsdorp \& van Gompel ch.\ 1 (conditions, loops).
-    & Conditionals and Loops
+    Karsdorp \& van Gompel ch.\ 2.
+    & Functions, files, dictionaries, text clean-up
     \\
 
 39; Sep 23--30    &
-    Study Downey ch.\ 3, 6, 14;
-    Zelle ch.\ 5 (5.9), 6;
-    Karsdorp \& van Gompel ch.\ 2.
+    Karsdorp \& van Gompel ch.\ 3.
     Midterm exam individual assignment to hand in;
     deadline: Friday, September 27, end
     of day; resit: Friday, November 8, end
     of day.
-    & Functions, Files, Text clean-up
+    & Text Analysis, visualization
     \\
 
 40; Sep 30--Oct 7 &
-    Karsdorp \& van Gompel ch.\ 3.
-    & Text Analysis, plotting
+    Karsdorp \& van Gompel ch.\ 4.
+    & Profiling, refactoring, debugging 
     \\
 
 41; Oct 7--14     &
-    Karsdorp \& van Gompel ch.\ 4.
-    & Profiling, refactoring, debugging 
+    Pandas notebook
+    & Data analysis and plotting with Pandas
     \\
 
 42; Oct 14--21    &
@@ -232,7 +202,7 @@ Week; date          & (Reading) assignments & Topics \\ \midrule
     assignment to hand in; deadline:
     Friday, October 25, en of day; resit:
     Friday, November 8, end of day.
-    & Data analysis and plotting with Pandas, Course Overview
+    & More data analysis, course overview
     \\
 
 \end{longtable}
