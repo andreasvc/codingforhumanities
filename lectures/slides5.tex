@@ -9,9 +9,9 @@
 \end{frame}
 
 \begin{frame}{Last week}
-    Conditions
+    Working with multiple files
 
-    Loops
+    Text analysis
 \end{frame}
 
 \begin{frame}{Plan for today}
@@ -19,83 +19,44 @@
 \end{frame}
 
 
-\section{Working with files}
+\section{Profiling}
+\frame{\tableofcontents[currentsection]}
+\section{Refactoring}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}{Motivation}
-    To do anything non-trivial,
+\begin{frame}{Refactoring}
+	Insight: can achieve the same end in many different ways
 
-    programs need to work on \structure{arbitrary data}
+	\pause
+	\begin{definition}
+		\structure{Refactoring}: improving code (e.g., readability) \\
+			while keeping the same functionality (i.e., behavior).
+	\end{definition}
 
-    \pause
-    Therefore, need to learn how to \structure{read} data from disk as input,
-
-    and \structure{write} results as output
-
+	\begin{itemize}
+		\item Clear variable names
+		\item Separate steps
+	\end{itemize}
 \end{frame}
 
-
-\begin{frame}{Files and directories}
-    \begin{itemize}
-        \item Data is stored in \structure{files}
-        \item Files are part of \structure{directories} (folders)
-        \item Directories may contain files and other directories
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Paths}
-    \begin{itemize}
-        \item A path describes the location of a file
-        \item In the simplest case, just the filename is enough to
-            refer to a file in the same directory as your program:
-
-            \texttt{example.txt}
-        \item If a file is somewhere else, need to include directories:
-
-            \texttt{corpus/example.txt}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Why directories}
-    % Motivate organization
-    \begin{itemize}
-        \item Directories are useful to organize your files
-        \item Use sensible names
-        \item Separate code, data, results
-    \end{itemize}
-\end{frame}
-
-\section{Working with libraries}
+\section{Debugging}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}[fragile]{Aside: the Python standard library}
-\begin{lstlisting}
-import <module>
-\end{lstlisting}
+\section{Refactoring}
+\begin{frame}{Refactoring}
+	Insight: can achieve the same end in many different ways
 
-    See \url{https://docs.python.org/3/library/index.html}
+	\pause
+	\begin{definition}
+		\structure{Refactoring}: improving code (e.g., readability) \\
+			while keeping the same functionality (i.e., behavior).
+	\end{definition}
+
+	\begin{itemize}
+		\item Clear variable names
+		\item Separate steps
+	\end{itemize}
 \end{frame}
 
-
-
-\begin{frame}[fragile]{Finding files}
-    \begin{itemize}
-        \item The term ``globbing'' means ``matching a set of files with a pattern.''
-        \item The most common patterns are:
-            \begin{itemize}
-                \item \texttt{*} meaning ``match zero or more characters''
-                \item \texttt{?} meaning ``match exactly one character''
-            \end{itemize}
-        \item Python contains the glob library to provide pattern matching functionality
-        \item The glob library contains a function also called glob to match
-            file patterns
-        \item e.g., \texttt{glob.glob('*.txt')} matches all files in the
-            current directory whose names end with .txt.
-        \item Result is a (possibly empty) list of strings.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Summary}
-\end{frame}
 
 \end{document}

@@ -4,11 +4,28 @@
 \begin{document}
 
 \begin{frame}
- \titlepage
+    \titlepage
 \end{frame}
 
 \begin{frame}{Plan for today}
- \tableofcontents
+    \tableofcontents
+\end{frame}
+
+\begin{frame}{Motivation}
+    Until now:
+    \begin{itemize}
+        \item Work with simple values (numbers, text)
+        \item Formulas, arithmetic
+        \item Store results in memory (variables)
+    \end{itemize}
+
+    \pause
+    What's missing:
+    \begin{itemize}
+        \item Create complex values (list)
+        \item Making decisions (if)
+        \item Repetition (for)
+    \end{itemize}
 \end{frame}
 
 \section{Strings}
@@ -173,7 +190,7 @@ An \structure{immutable} object cannot be changed after it is created.
         \item[Mutable]
             \begin{itemize}
                 \item More efficient with many changes
-                \item More natural
+                \item More 'natural'
             \end{itemize}
     \end{description}
 \end{frame}
@@ -267,129 +284,247 @@ assign it to keep the result.
 \end{frame}
 
 \begin{frame}[fragile]{Summary}
-Python strings versus Python lists:
+strings vs lists:
 
-Both Python strings and lists are sequences and behave in very similar ways
+Both strings and lists are sequences and behave in very similar ways
 
-Except for two important differences:
+Two important differences:
 \begin{enumerate}
-\item lists are more general data types than strings
+    \item lists are more general than strings
 
-    Strings always consist of characters
+        Strings always consist of characters
 
-    Lists can consist of any data types / objects
+        Lists can consist of any data types / objects
 
-\item lists are mutable and strings are immutable
+    \item lists are mutable and strings are immutable
 \end{enumerate}
 \end{frame}
 
 
 
-\section{Dictionaries}
+
+
+
+
+\section{Conditional statements: do you really want to do that?}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}
-    \begin{itemize}
-        \item Lists are useful when data has a natural order: \\
-            items are referred by their position
-        \pause
-        \item What if we have lots of data,
-            but we need to find it some other way?
-    \end{itemize}
-
-    \begin{block}{Example}
-    Finding words in a dictionary
-
-    Too many words to consider one-by-one
-
-    However, due to organization (sorted), can find words quickly
-    \end{block}
+\begin{frame}{Making decisions: flow charts}
+    \includegraphics[height=0.8\textheight]{fig/flowchart}
 \end{frame}
 
 
-\begin{frame}[fragile]{dictionaries}
+\begin{frame}{Simple conditions}
     \begin{definition}
-        A dictionary stores pairs of values (key, value),
-        such that we can quickly find a value given a key.
+        A \structure{conditional expression} is
+        an expression that is \texttt{True} or \texttt{False}
     \end{definition}
-Example, a phone book:
-\begin{lstlisting}
->>> coworkers = {'John': 123, 'Mary': 456, 'Alice': 789}
->>> coworkers['Mary']
-456
->>> coworkers['Bob'] = 124
-\end{lstlisting}
+    \begin{description}
+        \item[a == b] are the values equal?
+        \item[a != b] inequality
+        \item[a $<$ b] test whether a is smaller than b
+        \item[a $>$ b]
+        \item[a in b] does element a occur in the sequence/dict b?
+    \end{description}
 
-% Explanation of hash tables:
-% https://dev.to/a_sandrina_p/learning-hash-tables-with-drawings-99o
+    NB: == tests equality, \\
+        = is an assignment statement!
 \end{frame}
 
-\begin{frame}{Properties of dictionaries}
-A dictionary is a mapping of keys to values.
+\begin{frame}[fragile]{The if-statement}
+\begin{lstlisting}
+if books > 5:
+    print('you are an avid reader')
+\end{lstlisting}
 
     \begin{itemize}
-        \item Looking up a key is fast
-        \item Keys must be immutable (e.g., numbers or strings).
-        \item Values can be anything.
-        \item Keys are always unique;
-            re-using a key will overwrite the previous value.
+        \item The code under an if-statement is only executed
+            if the condition is True.
+        \item The indentation determines which code is covered
+            by the condition
     \end{itemize}
+
+    \pause
+    \begin{definition}
+        A \structure{code block} is a sequence of indented lines after
+        a statement ending in `:'.
+        The start and end of the block are defined by the indentation of the
+        lines.
+    \end{definition}
 \end{frame}
 
 
-
-\section{Data organization}
-\frame{\tableofcontents[currentsection]}
-
-\begin{frame}[fragile]{Combining lists and dictionaries}
-Lists and dictionaries can contain any kind of value
-
-Even other lists and dictionaries!
-
+\begin{frame}[fragile]{Optional extensions of the if-statement}
 \begin{lstlisting}
->>> x = [[0, 1], [2, 3]]
->>> x[0]
-[0, 1]
->>> x[0][0]
-[0]
+if books > 5:
+    print('you are an avid reader')
+else:
+    print('you should read more')
+\end{lstlisting}
+
+\begin{itemize}
+    \item The code under 'else' is executed if the condition does NOT match.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Optional extensions of the if-statement}
+\begin{lstlisting}
+if books > 15:
+    print('you should get out more')
+elif books > 5:
+    print('you are an avid reader')
+else:
+    print('you should read more')
+\end{lstlisting}
+
+\begin{itemize}
+    \item Can add multiple extra conditions with 'elif' (else if)
+    \item The conditions are tested from top to bottom;
+            when one of them matches, the rest are ignored.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Complex conditions}
+    Can create complex conditions from other conditions:
+    
+    \begin{description}
+        \item[cond1 and cond2]
+        \item[cond1 or cond2]
+        \item[not cond]
+    \end{description}
+
+    \pause
+    For example:
+\begin{lstlisting}
+if books > 5 and books < 15:
+    ...
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Practical example}
-Two ways of organizing a collection of books:
+\begin{frame}[fragile]{Truthy and Falsy things}
+\begin{itemize}
+\item The number zero and empty sequences are treated as False.
+\item Nonzero numbers and nonempty sequences are treated as True
+\end{itemize}
+
+These are equivalent:
 \begin{lstlisting}
->>> books = ['Tolstoy - War and Peace', 'Tolstoy - Anna Karenina',
-...     'Dostoevsky - Crime and Punishment',
-...     'Dostoevsky - Brothers Karamazov']
+if len(booklist) != 0:
+    print('yes')    
+if len(booklist):
+    print('yes')    
+if booklist:
+    print('yes')    
 \end{lstlisting}
 
-\pause
-\begin{lstlisting}
->>> books = {'Tolstoy': ['War and Peace', 'Anna Karenina'],
-...     'Dostoevsky': ['Crime and Punishment',
-...         'Brothers Karamazov']}
->>> books['Tolstoy']
-...
-\end{lstlisting}
-The latter has the advantage of easily being able to
-select the works by a particular author.
 \end{frame}
 
-\begin{frame}{Algorithms + Data structures = Programs}
+\begin{frame}[fragile]{Converting a decision tree into if-statements}
     \begin{columns}
         \column{0.5\linewidth}
-            \begin{itemize}
-                \item Thinking of how to organize your data is an important
-                    first step in designing a program
-                \item The right organization may make the rest of the design
-                    obvious
-                \item Often a trade-off: particular choices may make one thing
-                    easy and another hard
-            \end{itemize}
+            ``Should you stay at a social gathering?''
+
+            \includegraphics[width=0.8\textwidth]{fig/flowchart2}
+
+        \pause
         \column{0.5\linewidth}
-            \includegraphics[height=0.8\textheight]{fig/wirth}
-    \end{columns}
+\begin{lstlisting}
+awkward = False
+free_food = True
+if awkward:
+    if free_food:
+        print('Stay')
+    else:
+        print('Leave')
+else:
+    print('Stay')
+\end{lstlisting}
+\end{columns}
 \end{frame}
 
 
+\begin{frame}{Summary}
+    \begin{description}
+        \item[Conditions] An expression that is \texttt{True} or \texttt{False}.
+
+                Comparisons, equality tests: <, >, ==, !=
+
+                Complex conditions: \texttt{and, or, not}
+
+        \item[if-statements] Execute statements only if condition is True
+    \end{description}
+\end{frame}
+
+
+\section{Loops: play it again, Sam!}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}[fragile]{Repeating statements: loops}
+\begin{lstlisting}
+booklist = ['a', 'b', 'c']
+for book in booklist:
+    print(book)
+\end{lstlisting}
+Result:
+\begin{lstlisting}
+a
+b
+c
+\end{lstlisting}
+
+\begin{itemize}
+\item The statements under the for-loop are repeated
+    for every element in the sequence.
+\item At every iteration, 'book' is assigned an element of 'booklist'
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Looping over sequences}
+For loops can be used for anything with multiple items (\structure{iterable}):
+\begin{lstlisting}
+for letter in 'word':
+    print(letter)
+for number in [0, 1, 2]:
+    print(number)
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Looping without a list}
+Can use the \texttt{range} function if we don't have a list:
+\begin{lstlisting}
+for number in range(4)
+    print(number)
+\end{lstlisting}
+
+Result:
+\begin{lstlisting}
+0
+1
+2
+3
+\end{lstlisting}
+
+Repeats 4 times. Last item is 3 because counting starts at 0.
+\end{frame}
+
+\begin{frame}{Summary}
+    \begin{description}
+        \item[for-loop] repeat code for each element
+        \item[iterables] strings, lists, range
+        %\item[]
+    \end{description}
+\end{frame}
+
+\begin{frame}{Background reading}
+    \begin{itemize}
+        \item Downey ch.\ 5, 8, 10
+        \item and/or Zelle sec.\ 5.1-5.8
+        \item Watch youtube tutorials of "Hacking the Humanities" episode 6--9:
+            \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
+    \end{itemize}
+\end{frame}
 \end{document}

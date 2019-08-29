@@ -72,13 +72,28 @@
         \item Anyone can learn how to program
         \item Programming is a challenging activity:
             \begin{itemize}
-                \item Meticulous analytic thinking
+                \item Analytic thinking
                 \item Mental model of your program
                 \item Paying attention to detail
             \end{itemize}
         \item Not everyone has the talent to become
             a \structure{good} programmer
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Programming workflow in practice}
+	\begin{columns}
+		\column{0.3\linewidth}
+			Many iterations of \dots
+			\begin{itemize}
+				\item Fail
+				\item Fix
+			\end{itemize}
+
+		\column{0.7\linewidth}
+			\includegraphics[width=0.45\linewidth]{fig/googling}
+			\includegraphics[width=0.45\linewidth]{fig/stackoverflow}
+	\end{columns}
 \end{frame}
 
 
@@ -88,14 +103,24 @@
 \begin{reference}
 \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
 \end{reference}
-    Student projects from a DH course by Yael Netzer (Ben Gurion univ\. Israel):
-    \begin{itemize}
-        \item How many black actors/directors/producers are in movies?
-        \item Which terror attacks are reported in the NY times?
-        \item Sentiment analysis of GoodReads reviews vs NY times reviews
-        \item Game of Thrones character analysis
-        \item Eurovision song festival voting by country
-    \end{itemize}
+    \begin{columns}
+        \column{0.5\linewidth}
+            Student projects from a DH course by Yael Netzer (Ben Gurion univ\. Israel):
+            \begin{itemize}
+                \item Sentiment analysis of GoodReads reviews vs NY times reviews
+                \item Game of Thrones character analysis
+                \item How many black actors, directors,
+                    producers are in movies?
+                %\item Which terror attacks are reported in the NY times?
+                \item Eurovision song festival voting by country
+            \end{itemize}
+        \column{0.5\linewidth}
+            Required skills:
+            \begin{description}
+                \item[Text analysis] Get texts, extract/filter words, count
+                \item[Data science] Get numerical data, explore, plot
+            \end{description}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Gender in Game of Thrones}\centering
@@ -335,53 +360,6 @@ Also -=, *=, etc.
     How to calculate average words per minute?
 \end{frame}
 
-\begin{frame}{Intermezzo: How to solve problems}
-	\begin{columns}
-		\column{0.5\linewidth}
-			The Feynman algorithm:
-			\begin{enumerate}
-				\item Write down the problem.
-				\item Think real hard.
-				\item Write down the solution.
-			\end{enumerate}
-
-			\vspace{1em}
-			due to Richard Feynman, Nobel-prize winning physicist \dots
-		\pause
-		\column{0.5\linewidth}
-			Pólya (1945), How to solve it:
-
-			\begin{enumerate}
-				\item First, you have to understand the problem.
-				\item After understanding, make a plan.
-				\item Carry out the plan.
-				\item Look back on your work. How could it be better?
-			\end{enumerate}
-
-			\begin{block}{Stuck?}
-			If you can't solve a problem,
-			then there is an easier problem you can solve:
-			find it.
-			\end{block}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Programming workflow in practice}
-	\begin{columns}
-		\column{0.3\linewidth}
-			Many iterations of \dots
-			\begin{itemize}
-				\item Fail
-				\item Fix
-			\end{itemize}
-
-		\column{0.7\linewidth}
-			\includegraphics[width=0.45\linewidth]{fig/googling}
-			\includegraphics[width=0.45\linewidth]{fig/stackoverflow}
-	\end{columns}
-\end{frame}
-
-
 \begin{frame}[fragile]{Solution}
 \begin{lstlisting}[language=python]
 >>> words_per_day = 564277 / 365
@@ -538,23 +516,14 @@ c = 3200
 
 result = 0.5 * (w / s) + 4.71 * (c / w) - 21.43
 \end{lstlisting}
+
+\pause But why so cryptic?
+
+\begin{itemize}
+    \item Clear variable names
+    \item Separate steps
+\end{itemize}
 \end{frame}
-
-\begin{frame}{Refactoring}
-	Insight: can achieve the same end in many different ways
-
-	\pause
-	\begin{definition}
-		\structure{Refactoring}: improving code (e.g., readability) \\
-			while keeping the same functionality (i.e., behavior).
-	\end{definition}
-
-	\begin{itemize}
-		\item Clear variable names
-		\item Separate steps
-	\end{itemize}
-\end{frame}
-
 
 \begin{frame}[fragile]{Improved version}
 \begin{lstlisting}[language=python]
@@ -650,5 +619,15 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
     \end{itemize}
 \end{frame}
 
+
+\begin{frame}{Background reading}
+    \begin{itemize}
+        \item Downey ch.\ 1 and 2
+        \item and/or Zelle sec.\ 2.1--2.5
+            (make sure it is the latest edition for Python version 3).
+        \item Watch youtube tutorials of "Hacking the Humanities" episode 1--5:
+            \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
+    \end{itemize}
+\end{frame}
 
 \end{document}
