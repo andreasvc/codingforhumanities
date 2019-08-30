@@ -26,31 +26,31 @@
     \end{definition}
 \end{frame}
 
-\begin{frame}
-    Why use computers in research?
+\begin{frame}{Why use computers in research?}
 	\pause
 
-    \begin{itemize}
-        \item Automation
-        \item Amplification
-        \item Reproducibility
-    \end{itemize}
+    \begin{description}
+        \item[Automation:] avoid boring work
+        \item[Amplification:] analyze more data than humans can handle
+        \item[Reproducibility:] share data \& code along with publications
+    \end{description}
+\end{frame}
 
-    \pause
+\begin{frame}{To program or not to program}
     Computers need to be told what to do:
 
     \begin{itemize}
-    \item Either user tools designed for a particular job
-        \begin{itemize}
-            \item but: limited to existing functionality
-            \item cannot easily repeat a sequence of actions
-        \end{itemize}
+        \item Either user tools designed for a particular job
+            \begin{itemize}
+                \item but: limited to existing functionality
+                \item cannot easily repeat a sequence of actions
+            \end{itemize}
 
-    \item \dots or create your own programs
-        \begin{itemize}
-            \item Higher investment to get started
-            \item \dots but opens up lots of opportunities
-        \end{itemize}
+        \item \dots or create your own programs
+            \begin{itemize}
+                \item Higher investment to get started
+                \item \dots but opens up lots of opportunities
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -107,13 +107,14 @@
         \column{0.5\linewidth}
             Student projects from a DH course by Yael Netzer (Ben Gurion univ\. Israel):
             \begin{itemize}
-                \item Sentiment analysis of GoodReads reviews vs NY times reviews
                 \item Game of Thrones character analysis
+                \item Sentiment analysis of GoodReads reviews vs NY times reviews
                 \item How many black actors, directors,
                     producers are in movies?
-                %\item Which terror attacks are reported in the NY times?
                 \item Eurovision song festival voting by country
+                %\item Which terror attacks are reported in the NY times?
             \end{itemize}
+        \pause
         \column{0.5\linewidth}
             Required skills:
             \begin{description}
@@ -161,6 +162,7 @@
 	\end{columns}
 \end{frame}
 
+\subsection{Why Python}
 \begin{frame}{Why Python}
     %\begin{definition}
     %   Python is a  ...
@@ -250,10 +252,10 @@ Operators:
 \begin{frame}[fragile]{Using Python as a calculator}
 One or more operators can be used to form an \structure{expression}
 \begin{lstlisting}[language=python]
->>> 1 + 2 * 3
-7
->>> (1 + 2) * 3
-9
+In: 1 + 2 * 3
+Out: 7
+In: (1 + 2) * 3
+Out: 9
 \end{lstlisting}
 
 \pause
@@ -269,12 +271,12 @@ Note: just as in mathematics, multiplication/division takes precedence over
 
 \pause
 \begin{lstlisting}[language=python]
->>> 5 / 2
-2.5
->>> type(5 / 2)
-<class 'float'>
->>> type(6 / 2)
-<class 'int'>
+In: 5 / 2
+Out: 2.5
+In: type(5 / 2)
+Out: <class 'float'>
+In: type(6 / 2)
+Out: <class 'int'>
 \end{lstlisting}
 \end{frame}
 
@@ -293,9 +295,9 @@ The name consists of one or more letters or underscores (case-sensitive).
 \end{definition}
 
 \begin{lstlisting}[language=python]
->>> a = 5 / 2
->>> a
-2.5
+In: a = 5 / 2
+In: a
+Out: 2.5
 \end{lstlisting}
 \end{frame}
 
@@ -303,19 +305,19 @@ The name consists of one or more letters or underscores (case-sensitive).
 Now, can use variable in expressions in place of a number:
 
 \begin{lstlisting}[language=python]
->>> a + 0.5
-3.0
+In: a + 0.5
+Out: 3.0
 \end{lstlisting}
 
 \pause
 A program is executed line-by-line, and variables can be overwritten:
 \begin{lstlisting}[language=python]
->>> a = 2
->>> a
-2
->>> a = 3
->>> a
-3
+In: a = 2
+In: a
+Out: 2
+In: a = 3
+In: a
+Out: 3
 \end{lstlisting}
 \end{frame}
 
@@ -323,17 +325,17 @@ A program is executed line-by-line, and variables can be overwritten:
 \begin{frame}[fragile]{Updating variables}
 A common operation is to increase the value of a variable:
 \begin{lstlisting}[language=python]
->>> a = 2
->>> a = a + 1
-3
+In: a = 2
+In: a = a + 1
+Out: 3
 \end{lstlisting}
 
 \pause
 There is a shorthand for this operation:
 \begin{lstlisting}[language=python]
->>> a = 2
->>> a += 1
-3
+In: a = 2
+In: a += 1
+Out: 3
 \end{lstlisting}
 
 Also -=, *=, etc.
@@ -352,10 +354,10 @@ Also -=, *=, etc.
 
 \begin{frame}[fragile]{Solution}
 \begin{lstlisting}[language=python]
->>> words_per_day = 564277 / 365
->>> words_per_min = words_per_day / 60
->>> words_per_min
-25.766073059360732
+In: words_per_day = 564277 / 365
+In: words_per_min = words_per_day / 60
+In: words_per_min
+Out: 25.766073059360732
 \end{lstlisting}
 \end{frame}
 
@@ -363,8 +365,8 @@ Also -=, *=, etc.
 \begin{frame}[fragile]{Text}
 Values can also be text instead of numbers:
 \begin{lstlisting}[language=python]
->>> name = 'John'
->>> movie = '2001: A Space Odyssey'
+name = 'John'
+movie = '2001: A Space Odyssey'
 \end{lstlisting}
 
 \pause
@@ -394,15 +396,15 @@ Values can also be text instead of numbers:
     \begin{columns}
         \column{0.5\linewidth}
 \begin{lstlisting}[language=python]
->>> 3 + 3
-6
+In: 3 + 3
+Out: 6
 \end{lstlisting}
 
 These are \structure{numbers}, so we can do arithmetic
         \column{0.5\linewidth}
 \begin{lstlisting}[language=python]
->>> '3' + '3'
-'33'
+In: '3' + '3'
+Out: '33'
 \end{lstlisting}
 
 These are \structure{strings}, so they are treated as text
@@ -411,7 +413,7 @@ These are \structure{strings}, so they are treated as text
 
 \begin{frame}[fragile]{Invalid operations for types}
 \begin{lstlisting}[language=python]
->>> 3 + '3'
+In: 3 + '3'
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: unsupported operand type(s) for +: 'int' and 'str'
@@ -424,20 +426,20 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
 
 \begin{frame}[fragile]{Converting numbers to text and back}
 \begin{lstlisting}[language=python]
->>> number = 42
->>> text = str(number)
->>> text
-'42'
+In: number = 42
+In: text = str(number)
+In: text
+Out: '42'
 
->>> int(text)
-42
+In: int(text)
+Out: 42
 \end{lstlisting}
 
     \texttt{int(text)} is an example of using a function:
 
     \begin{definition}
-        A \structure{function} is a piece of code that given arguments
-        produces an effect or result.
+        A \structure{function} is a piece of code that
+        produces an effect or result given arguments passed to it.
 
         The notation f(x) means that the function f is \structure{applied}
         to the value x.
@@ -448,15 +450,6 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
     a number is returned as a result.
 \end{frame}
 
-
-% \begin{frame}[fragile]{Converting numbers to text and back}
-% \begin{lstlisting}[language=python]
-% >>> name = 'John'
-% >>> number = 7
-% >>> name + ' has ' + str(number) + ' cousins'
-% 'John has 7 cousins'
-% \end{lstlisting}
-% \end{frame}
 
 \begin{frame}{Summary}
     \begin{itemize}
@@ -498,7 +491,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile]{From formula to code}
 \begin{lstlisting}[language=python]
 w = 500
 s = 25
@@ -509,9 +502,11 @@ result = 0.5 * (w / s) + 4.71 * (c / w) - 21.43
 
 \pause But why so cryptic?
 
+    Good code has \dots
+
 \begin{itemize}
     \item Clear variable names
-    \item Separate steps
+    \item Steps that are easy to follow
 \end{itemize}
 \end{frame}
 
@@ -542,10 +537,10 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
     \end{itemize}
     After completing this course you will know the basics of \dots
     \begin{itemize}
-       \item The Python programming language
-       \item Text analysis
-       \item Exploratory data analysis
-       \item Fixing errors in programs
+        \item Text analysis: cleaning texts, counting words
+        \item Exploratory data analysis: load a tabular dataset, create plots
+        \item Fixing errors in programs
+        \item Reading documentation, collaborating with programmers
     \end{itemize}
 \end{frame}
 
@@ -589,7 +584,7 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
         \item On Nestor, under Course Documents, each week has:
             \begin{itemize}
                 \item Lecture slides
-                \item Lab exercises, discussion, and assignments
+                \item Lab exercises and assignments
             \end{itemize}
         \item Grades will be on Nestor under My Gradebook
     \end{itemize}
