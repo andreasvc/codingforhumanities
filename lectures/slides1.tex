@@ -73,7 +73,7 @@
         \item Programming is a challenging activity:
             \begin{itemize}
                 \item Analytic thinking
-                \item Mental model of your program
+                \item Mental model of computer
                 \item Paying attention to detail
             \end{itemize}
         \item Not everyone has the talent to become
@@ -99,13 +99,14 @@
 
 
 \subsection{Example DH projects}
+\frame{\tableofcontents[currentsubsection]}
 \begin{frame}{Example DH projects}
 \begin{reference}
 \url{https://twitter.com/yaelnetzer/status/1158712777776730113}
 \end{reference}
     \begin{columns}
         \column{0.5\linewidth}
-            Student projects from a DH course by Yael Netzer (Ben Gurion univ\. Israel):
+            Student projects from a DH course by Yael Netzer (Ben Gurion univ.\ Israel):
             \begin{itemize}
                 \item Game of Thrones character analysis
                 \item Sentiment analysis of GoodReads reviews vs NY times reviews
@@ -163,6 +164,7 @@
 \end{frame}
 
 \subsection{Why Python}
+\frame{\tableofcontents[currentsubsection]}
 \begin{frame}{Why Python}
     %\begin{definition}
     %   Python is a  ...
@@ -212,30 +214,9 @@ public class HelloWorld {
 \end{frame}
 
 
-\begin{frame}
-	\begin{columns}
-		\column{0.5\linewidth}
-			Traditional method:
-			\begin{enumerate}
-				\item edit file
-				\item run
-				\item repeat
-			\end{enumerate}
-		\column{0.5\linewidth}
-			Notebooks
-			\begin{itemize}
-				\item Notebook: combines text, code, and results
-				\item Graphical interface in browser
-			\end{itemize}
-			[demo of Jupyter notebook]
-	\end{columns}
-\end{frame}
-
-
-
 \section{Programming fundamentals}
 \subsection{Numbers, text, and variables}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}[fragile]{Using Python as a calculator}
 Operators:
@@ -245,7 +226,7 @@ Operators:
         \item[Multiplication] 2 * 3
         \item[Division] 6 / 2
         \item[Exponentation] 3 ** 2
-        \item[Parentheses] (1 + 2) * 3
+        % \item[Parentheses] (1 + 2) * 3
     \end{description}
 \end{frame}
 
@@ -259,13 +240,17 @@ Out: 9
 \end{lstlisting}
 
 \pause
-Note: just as in mathematics, multiplication/division takes precedence over
-    addition/subtraction. Parentheses can be used to specify a different order.
+Note:
+    \begin{itemize}
+        \item As in mathematics, multiplication/division takes precedence over
+            addition/subtraction (PEMDAS)
+        \item Parentheses can be used to specify a different order.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Numeric data types}
     \begin{description}
-        \item[Integer] whole numbers: 1, 2, 3, \dots -1, -2, -3
+        \item[Integers] (whole numbers): 1, 2, 3, \dots -1, -2, -3
         \item[Floating point] numbers: 2.5, 1.3333, \dots
     \end{description}
 
@@ -286,12 +271,12 @@ Out: <class 'int'>
         so that it can be re-used.
     \end{definition}
 
-A variable is created/updated using `=':
+A variable is created/updated using `='
 
 \begin{definition}
 \structure{Assignment}: \texttt{name = expression}
 
-The name consists of one or more letters or underscores (case-sensitive).
+\texttt{name} consists of one or more letters or underscores (case-sensitive).
 \end{definition}
 
 \begin{lstlisting}[language=python]
@@ -366,7 +351,7 @@ Out: 25.766073059360732
 Values can also be text instead of numbers:
 \begin{lstlisting}[language=python]
 name = 'John'
-movie = '2001: A Space Odyssey'
+movie = "2001: A Space Odyssey"
 \end{lstlisting}
 
 \pause
@@ -382,13 +367,13 @@ movie = '2001: A Space Odyssey'
     These are examples of types:
 
     \begin{definition}
-        A \structure{type} is a class of values recognized by the language
+        A \structure{type} is a class of values recognized by the language.
     \end{definition}
     
     \pause
     \begin{itemize}
         \item In Python, a value always has a type (a variable can be any type).
-        \item The type defines what operations are valid.
+        \item The type determines what operations are valid.
     \end{itemize}
 \end{frame}
 
@@ -438,16 +423,17 @@ Out: 42
     \texttt{int(text)} is an example of using a function:
 
     \begin{definition}
-        A \structure{function} is a piece of code that
-        produces an effect or result given arguments passed to it.
+        A \structure{function} is a piece of code
+        that can be invoked by name.
 
-        The notation f(x) means that the function f is \structure{applied}
-        to the value x.
+        It may take input (arguments).
+        
+        It may produce output (return value) or an effect.
+
+        The notation f(x) means that the function f
+        is \structure{applied} to the value x.
     \end{definition}
 
-    \pause
-    Here: \texttt{text} is given as argument to the function \texttt{int};
-    a number is returned as a result.
 \end{frame}
 
 
@@ -466,6 +452,7 @@ Out: 42
 
 
 \subsection{Translate a formula into a Python program}
+\frame{\tableofcontents[currentsubsection]}
 \begin{frame}{Example: computing readability}
 	\begin{reference}
     Smith \& Senter (1968). Automated readability index
@@ -525,16 +512,39 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \end{frame}
 
 
+\begin{frame}{How to run Python code}
+	\begin{columns}
+		\column{0.5\linewidth}
+			Traditional method:
+			\begin{enumerate}
+				\item edit file
+				\item run
+				\item repeat
+			\end{enumerate}
+		\column{0.5\linewidth}
+			Notebooks
+			\begin{itemize}
+				\item Notebook: combines text, code, and results
+				\item Graphical interface in browser
+			\end{itemize}
+            [\href{http://mybinder.org/v2/gh/binder-examples/requirements/master}{demo of Jupyter notebook}]
+	\end{columns}
+\end{frame}
+
+
 
 \section{Course overview}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}{Learning goals}
+\begin{frame}{Course overview}
     \begin{itemize}
        \item 7 lectures \& labs
        \item 2 graded assignments \\
            (100\% of final grade)
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Learning goals}
     After completing this course you will know the basics of \dots
     \begin{itemize}
         \item Text analysis: cleaning texts, counting words
@@ -545,17 +555,17 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \end{frame}
 
 
-\begin{frame}{Course materials}
-    \begin{itemize}
-        \item Lectures with our material
-        \item Lab: Notebooks from the course Python for the Humanities
-        \item Preparation for lab:
-            \begin{itemize}
-                \item Video lectures from the course Hacking the Humanities
-                \item Textbook: Think Python
-            \end{itemize}
-    \end{itemize}
-\end{frame}
+% \begin{frame}{Course materials}
+%     \begin{itemize}
+%         \item Lectures with our material
+%         \item Lab: Notebooks from the course Python for the Humanities
+%         \item Preparation for lab:
+%             \begin{itemize}
+%                 \item Video lectures from the course Hacking the Humanities
+%                 \item Textbook: Think Python
+%             \end{itemize}
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Course summary}
     \begin{itemize}
@@ -608,10 +618,10 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \begin{frame}{Background reading}
     \begin{itemize}
         \item Downey ch.\ 1 and 2
-        \item and/or Zelle sec.\ 2.1--2.5
+        \item and/or Zelle sec.\ 2.1--2.5 \\
             (make sure it is the latest edition for Python version 3).
         \item Watch youtube tutorials of "Hacking the Humanities" episode 1--5:
-            \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
+            {\small\url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}
 

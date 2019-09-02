@@ -1,9 +1,9 @@
 \usepackage{etex}
-\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp,listings}
 \usepackage[english]{babel}
 \usetheme{default}
-\usepackage{fancyvrb,listings}
 \usepackage{tgadventor,inconsolata,graphicx,url,multirow,booktabs,array,tikz,etoolbox}
 \usetikzlibrary{matrix,shapes,arrows,calc,positioning,decorations.markings}
 
@@ -57,9 +57,12 @@
         keywordstyle=\bfseries\color{OliveGreen},
         identifierstyle=\color{blue},
         stringstyle=\color{mauve},
-        frame=false, % single,
+        frame=false,
         showspaces=false,
         showstringspaces=false,
+		keepspaces=true,
+		columns=fullflexible,  % don't add extra spaces
+		upquote=true,  % use ascii quotes; requires textcomp
 }
 
 \author{Andreas van Cranenburgh}
