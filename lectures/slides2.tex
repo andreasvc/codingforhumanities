@@ -20,11 +20,12 @@
     \end{itemize}
 
     \pause
-    What's missing:
+    Today:
     \begin{itemize}
-        \item Create complex values (list)
-        \item Making decisions (if)
-        \item Repetition (for)
+        \item Indexing and slicing strings/lists
+        \item Create complex values (\texttt{list})
+        \item Making decisions (\texttt{if})
+        \item Repetition (\texttt{for})
     \end{itemize}
 \end{frame}
 
@@ -41,8 +42,8 @@
 
 \begin{frame}[fragile]{Operations on strings}
 \begin{lstlisting}
->>> first = 'John'
->>> last = 'Doe'
+In: first = 'John'
+In: last = 'Doe'
 \end{lstlisting}
 \begin{description}
     \item[first + last] \texttt{'JohnDoe'}
@@ -59,8 +60,8 @@
 
 \begin{frame}[fragile]{Mixing strings and numbers}
 \begin{lstlisting}
->>> first = 'John'
->>> num = 3
+In: first = 'John'
+In: num = 3
 \end{lstlisting}
 \begin{description}
     \item[first + num] TypeError
@@ -75,17 +76,36 @@
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}[fragile]{Indexing}
+\begin{frame}[fragile]{Special characters in strings: `escape sequences'}
 \begin{lstlisting}
->>> name = 'John'
->>> name[0]
-'J'
->>> name[-1]
-'n'
+In: print("John's bike")
+John's bike
+In: print('John\'s bike')  # single quote
+John's bike
+In: print('John\tMary')  # tab
+John    Mary
+In: print('John\nMary')  # new line
+John
+Mary
+In: print('Backslash: \\')
+Backslash: \
+In: print('up\down') # \d is not defined, so backslash is kept
+up\down
+In: print("\U0001F923", "\N{grinning face}") 
+[rolling on the floor laughing and grinning emojis ...]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Indexing: extracting one element}
+\begin{lstlisting}
+In: name = 'John'
+In: name[0]
+Out: 'J'
+In: name[-1]
+Out: 'n'
 \end{lstlisting}
     \begin{itemize}
-        \item a[n] gets the n'th character of a
+        \item \texttt{a[n]} gets the n'th character of a
         \item Counting starts at 0
         \item negative indices start from the end:\\
 			-1 for last character, \\
@@ -93,54 +113,79 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Slicing}
+\begin{frame}[fragile]{Slicing: extracting a range of elements}
 \begin{lstlisting}
->>> name = 'John'
->>> name[1:3]
-'oh'
+In: name = 'John'
+In: name[1:3]
+Out: 'oh'
+In: name[:2]
+Out: 'Jo'
+In: name[1:]
+Out: 'ohn'
 \end{lstlisting}
     \begin{itemize}
-        \item a[n:m] extracts characters n to m
+        \item \texttt{a[n:m]} extracts characters n to m
         \item Counting starts at 0
-        \item Result is up to but not including character m
-    \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Slicing shortcuts}
-\begin{lstlisting}
->>> name = 'John'
->>> name[:2]
-'Jo'
->>> name[1:]
-'ohn'
-\end{lstlisting}
-    \begin{itemize}
+        \item Result is up to but not including character m \\
+                (half-open interval)
         \item if n or m is left out, beginning or end is used
     \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+    \includegraphics[width=0.8\textwidth]{fig/indexing}
+\end{frame}
+
 \begin{frame}[fragile]{Length}
+Get the number of characters in a string:
 \begin{lstlisting}
->>> name = 'John'
->>> len(name)
-4
+In: name = 'John'
+In: len(name)
+Out: 4
 \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Format strings}
+How to combine text and variables in a message?
+\begin{lstlisting}
+In: x = 1
+In: y = 2
+In: z = x +  y
+In: print("The sum of " + str(x) + " and " + str(y) + " is " + str(z) + ".")
+The sum of 1 and 2 is 3.
+In: print("The sum of", x, "and", y, "is", z, ".")
+The sum of 1 and 2 is 3 .
+\end{lstlisting}
+
+\pause
+Better:
+\begin{lstlisting}
+In: print("The sum of {0} and {1} is {2}.".format(x, y, z))
+The sum of 1 and 2 is 3.
+In: print(f"The sum of {x} and {y} is {z}.")
+The sum of 1 and 2 is 3.
+\end{lstlisting}
+
+Simple is better, last method is best.
 \end{frame}
 
 \begin{frame}{Sequences}
     Strings are a kind of \structure{sequence}
     consisting of characters.
 
+    \vspace{1em}
     A sequence contains elements in a particular order
 
-    Several operations are supported:
-    \begin{itemize}
-        \item indexing:                    string[expression]
-        \item slicing:                     string[start:end]
-        \item concatenation:               string1 + string2
-        \item repetition:                  string * expression
-        \item getting length:              len(string)
-    \end{itemize}
+    \vspace{1em}
+    Basic operations on sequences:
+    \begin{description}[concatenation:]
+        \item[getting length:]     \texttt{len(seq)}
+        \item[indexing:]           \texttt{seq[expression]}
+        \item[slicing:]            \texttt{seq[start:end]}
+        \item[concatenation:]      \texttt{seq1 + seq2}
+        \item[repetition:]         \texttt{seq * num}
+    \end{description}
 \end{frame}
 
 
@@ -152,25 +197,25 @@
     Lists are sequences that may contain any kind of value as items
     \end{definition}
 \begin{lstlisting} 
->>> numbers = [0, 1, 2]
->>> names = ['John', 'Mary']
+In: numbers = [0, 1, 2]
+In: names = ['John', 'Mary']
 \end{lstlisting} 
 \end{frame}
 
 \begin{frame}[fragile]{Changing items}
 \begin{lstlisting} 
->>> names = ['John', 'Mary']
->>> names[1] = 'Maria'
->>> names
-['John', 'Maria']
+In: names = ['John', 'Mary']
+In: names[1] = 'Alice'
+In: names
+Out: ['John', 'Alice']
 \end{lstlisting} 
 
 \pause
 NB: cannot change characters in a string (must make new string)
 \begin{lstlisting} 
->>> name = 'Maria'
->>> name[0] = 'D'
-[...] TypeError: 'str' object does not support item assignment
+In: name = 'Maria'
+In: name[0] = 'D'
+TypeError: 'str' object does not support item assignment
 \end{lstlisting}
 
 Lists are mutable, strings are immutable:
@@ -183,8 +228,10 @@ An \structure{immutable} object cannot be changed after it is created.
     \begin{description}
         \item[Immutable]
             \begin{itemize}
-                \item Easier to reason about
-                \item Constant values sometimes required
+                \item Easier to reason about:\\
+                    created once, never modified
+                \item Constant values sometimes required\\
+                    (dictionaries, next lecture)
             \end{itemize}
 
         \item[Mutable]
@@ -205,27 +252,28 @@ An \structure{immutable} object cannot be changed after it is created.
         A function that belongs to and operates on an object
         is called a \structure{method}.
     \end{definition}
-    
-    Regular function: \texttt{f(a)}
-
-    Method: \texttt{o.f(a)}
+   
+    \begin{description}
+        \item[Regular function:] \texttt{func(a, ...)}
+        \item[Method:] \texttt{obj.func(a, ...)}
+    \end{description}
 \end{frame}
 
 \begin{frame}[fragile]{Adding items}
 We can add an item to the end of an existing list:
 \begin{lstlisting} 
->>> names = ['John', 'Mary']
->>> names.append('Alice')
-['John', 'Mary', 'Alice']
+In: names = ['John', 'Mary']
+In: names.append('Alice')
+Out: ['John', 'Mary', 'Alice']
 \end{lstlisting}
 
 \pause
 We can combine two lists into a new list:
 \begin{lstlisting} 
->>> friends = ['John', 'Mary']
->>> enemies = ['Alice', 'Bob']
->>> friends + enemies
-['John', 'Mary', 'Alice', 'Bob']
+In: friends = ['John', 'Mary']
+In: enemies = ['Alice', 'Bob']
+In: friends + enemies
+Out: ['John', 'Mary', 'Alice', 'Bob']
 \end{lstlisting}
 \end{frame}
 
@@ -233,24 +281,34 @@ We can combine two lists into a new list:
 \begin{frame}[fragile]{Removing items}
 We can remove an item anywhere in a list:
 \begin{lstlisting} 
->>> names = ['John', 'Mary']
->>> names.remove('John')
-['Mary']
+In: names = ['John', 'Mary']
+In: names.remove('John')
+Out: ['Mary']
 \end{lstlisting}
 
-    remove(elem) searches for the first occurrence of elem
-    and removes it.
+\texttt{remove(elem)} \structure{searches} for the first occurrence of
+\texttt{elem} and removes it.
 
 \pause
-We can also use slicing to keep a part of a list
+\vspace{1em}
+Can also remove items at particular positions:
 \begin{lstlisting} 
->>> acquaintances = ['John', 'Mary', 'Alice', 'Bob']
->>> friends = acquaintances[:2]
->>> friends
-['John', 'Mary']
+In: acquaintances = ['John', 'Mary', 'Alice', 'Bob', 'Max']
+In: acquaintances.pop(3)  # removes 4th item
+In: acquaintances.pop()   # removes last item
+In: friends = acquaintances[:2]  # new list from slice
+In: friends
+Out: ['John', 'Mary']
 \end{lstlisting}
 
-This is faster if you know where the items are that you want to keep.
+% We can also use slicing to keep a part of a list
+% \begin{lstlisting} 
+% In: acquaintances = ['John', 'Mary', 'Alice', 'Bob']
+% In: friends = acquaintances[:2]
+% In: friends
+% Out: ['John', 'Mary']
+% \end{lstlisting}
+%This is faster if you know where the items are that you want to keep.
 \end{frame}
 
 
@@ -258,46 +316,94 @@ This is faster if you know where the items are that you want to keep.
 We can turn a string into a list of strings
 by splitting on a character:
 \begin{lstlisting} 
->>> quote = "Frankly, my dear, I don't give a damn."
->>> quote.split(",")
-['Frankly', ' my dear', " I don't give a damn."]
+In: quote = "Frankly, my dear, I don't give a damn."
+In: quote.split(",")
+Out: ['Frankly', ' my dear', " I don't give a damn."]
 \end{lstlisting}
 
 \pause
 If we don't give a character, splits on whitespace:
 \begin{lstlisting} 
->>> quote.split()
-['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
+In: quote.split()
+Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
 \end{lstlisting}
 \end{frame}
 
 
 \begin{frame}[fragile]{Sorting}
 \begin{lstlisting} 
->>> letters = ['o', 'c', 'd']
->>> sorted(letters)
-['c', 'd', 'o']
+In: letters = list('ocd')
+In: letters
+Out: ['o', 'c', 'd']
+In: sorted(letters)
+Out: ['c', 'd', 'o']
 \end{lstlisting}
 
 NB: sorted leaves the original list unchanged,
 assign it to keep the result.
 \end{frame}
 
-\begin{frame}[fragile]{Summary}
-strings vs lists:
+\begin{frame}[fragile]{Putting a list of strings back together as one string}
+\begin{lstlisting}
+In: ''.join(sorted(letters))
+'cdo'
+\end{lstlisting}
+Equivalent of:
+\begin{lstlisting}
+In: 'c' + '' + 'd' + '' + 'o'
+\end{lstlisting}
 
-Both strings and lists are sequences and behave in very similar ways
+\texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
+\end{frame}
+
+
+\begin{frame}[fragile]{Nested lists}
+    \begin{columns}
+        \column{0.3\linewidth}
+            \includegraphics[width=0.95\textwidth]{fig/russiandolls}
+
+            {\scriptsize
+            (from \href{https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png}{Wikipedia})}
+        \column{0.7\linewidth}
+            Can put lists inside of lists \dots
+\begin{lstlisting}
+In: ranking = [['John', 1], ['Mary', 3], ['Max', 2]]
+\end{lstlisting}
+
+\pause
+How to access elements:
+\begin{lstlisting}
+In: name_and_rank = ranking[0]
+Out: ['John', 1]
+In: name_and_rank[1]  # extract rank
+Out: 1
+In: ranking[0][1]  # can also get rank directly
+Out: 1
+In: name, rank = name_and_rank
+\end{lstlisting}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Summary: strings vs lists}
+Both strings and lists are sequences:
+    \begin{itemize}
+        \item Items in a fixed order
+        \item Has a length
+        \item Can extract items or slices
+    \end{itemize}
 
 Two important differences:
 \begin{enumerate}
     \item lists are more general than strings
-
-        Strings always consist of characters
-
-        Lists can consist of any data types / objects
-
-    \item lists are mutable and strings are immutable
+        \begin{itemize}
+            \item Strings always consist of characters
+            \item Lists can consist of any data types / objects
+        \end{itemize}
+    \item Lists are mutable and strings are immutable
 \end{enumerate}
+
+    Convert between strings and lists:
+        \texttt{list(), .split(), .join()}
 \end{frame}
 
 
@@ -319,16 +425,26 @@ Two important differences:
         A \structure{conditional expression} is
         an expression that is \texttt{True} or \texttt{False}
     \end{definition}
+    Conditional operators:
     \begin{description}
         \item[a == b] are the values equal?
         \item[a != b] inequality
-        \item[a $<$ b] test whether a is smaller than b
+        \item[a $<$ b] test whether a is strictly smaller than b
         \item[a $>$ b]
-        \item[a in b] does element a occur in the sequence/dict b?
+        \item[a in b] does element a occur in the sequence b?
     \end{description}
 
+\end{frame}
+
+\begin{frame}{Statements vs expressions}
     NB: == tests equality, \\
-        = is an assignment statement!
+           = is an assignment statement!
+
+    \begin{description}
+        \item[Statement:] must occur on a new line. \structure{does} something.
+        \item[Expression:] may occur in many places, e.g., inside another expression.
+            Evaluates to a \structure{value}, usually without changing anything.
+    \end{description}
 \end{frame}
 
 \begin{frame}[fragile]{The if-statement}
@@ -401,12 +517,13 @@ else:
 if books > 5 and books < 15:
     ...
 \end{lstlisting}
+
 \end{frame}
 
 \begin{frame}[fragile]{Truthy and Falsy things}
 \begin{itemize}
-\item The number zero and empty sequences are treated as False.
-\item Nonzero numbers and nonempty sequences are treated as True
+    \item The number zero and empty sequences are treated as \texttt{False}.
+    \item Nonzero numbers and nonempty sequences are treated as \texttt{True}.
 \end{itemize}
 
 These are equivalent:
@@ -419,6 +536,7 @@ if booklist:
     print('yes')    
 \end{lstlisting}
 
+    Simple is better, so last one is preferred
 \end{frame}
 
 \begin{frame}[fragile]{Converting a decision tree into if-statements}
@@ -475,7 +593,7 @@ c
 \end{lstlisting}
 
 \begin{itemize}
-\item The statements under the for-loop are repeated
+\item The statements under the for-loop are repeated \\
     for every element in the sequence.
 \item At every iteration, 'book' is assigned an element of 'booklist'
 \end{itemize}
@@ -496,7 +614,7 @@ for number in [0, 1, 2]:
 \begin{frame}[fragile]{Looping without a list}
 Can use the \texttt{range} function if we don't have a list:
 \begin{lstlisting}
-for number in range(4)
+for number in range(4):
     print(number)
 \end{lstlisting}
 
@@ -518,6 +636,16 @@ Repeats 4 times. Last item is 3 because counting starts at 0.
         %\item[]
     \end{description}
 \end{frame}
+
+\begin{frame}{Summary of today}
+    \begin{description}
+        \item[Strings] text
+        \item[Lists] 
+        \item[Conditions] if-statement
+        \item[Repetition] for-loop
+    \end{description}
+\end{frame}
+
 
 \begin{frame}{Background reading}
     \begin{itemize}
