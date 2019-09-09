@@ -7,6 +7,9 @@
     \titlepage
 \end{frame}
 
+% Notes:
+% - sketch hierarchy on board: list -> sequence -> iterable -> object
+% - mention DRY 
 \begin{frame}{Plan for today}
     \tableofcontents
 \end{frame}
@@ -22,14 +25,15 @@
     \pause
     Today:
     \begin{itemize}
-        \item Indexing and slicing strings/lists
-        \item Create complex values (\texttt{list})
+        % \item Indexing and slicing strings/lists
+        \item Complex values (\texttt{list})
         \item Making decisions (\texttt{if})
         \item Repetition (\texttt{for})
     \end{itemize}
 \end{frame}
 
-\section{Strings}
+\section{Sequence types}
+\subsection{Strings}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}{Strings}
@@ -77,19 +81,19 @@ In: num = 3
 \end{frame}
 
 \begin{frame}[fragile]{Special characters in strings: `escape sequences'}
-\begin{lstlisting}
+\begin{lstlisting}[language=]
 In: print("John's bike")
 John's bike
 In: print('John\'s bike')  # single quote
 John's bike
-In: print('John\tMary')  # tab
+In: print('John\tMary')    # tab
 John    Mary
-In: print('John\nMary')  # new line
+In: print('John\nMary')    # new line
 John
 Mary
 In: print('Backslash: \\')
 Backslash: \
-In: print('up\down') # \d is not defined, so backslash is kept
+In: print('up\down')       # \d is not defined, so backslash is kept
 up\down
 In: print("\U0001F923", "\N{grinning face}") 
 [rolling on the floor laughing and grinning emojis ...]
@@ -97,6 +101,8 @@ In: print("\U0001F923", "\N{grinning face}")
 \end{frame}
 
 \begin{frame}[fragile]{Indexing: extracting one element}
+\begin{columns}
+\column{0.5\linewidth}
 \begin{lstlisting}
 In: name = 'John'
 In: name[0]
@@ -108,9 +114,12 @@ Out: 'n'
         \item \texttt{a[n]} gets the n'th character of a
         \item Counting starts at 0
         \item negative indices start from the end:\\
-			-1 for last character, \\
+            -1 for last character, \\
             -2 second to last, etc.
     \end{itemize}
+\column{0.5\linewidth}
+    \includegraphics[width=0.9\textwidth]{fig/indexing}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Slicing: extracting a range of elements}
@@ -134,7 +143,7 @@ Out: 'ohn'
 
 
 \begin{frame}
-    \includegraphics[width=0.8\textwidth]{fig/indexing}
+    \includegraphics[width=0.8\textwidth]{fig/slices}
 \end{frame}
 
 \begin{frame}[fragile]{Length}
@@ -189,9 +198,7 @@ Simple is better, last method is best.
 \end{frame}
 
 
-\section{Lists}
-\frame{\tableofcontents[currentsection]}
-
+\subsection{Lists}
 \begin{frame}[fragile]{Lists}
     \begin{definition}
     Lists are sequences that may contain any kind of value as items
@@ -200,6 +207,10 @@ Simple is better, last method is best.
 In: numbers = [0, 1, 2]
 In: names = ['John', 'Mary']
 \end{lstlisting} 
+\end{frame}
+
+\begin{frame}[fragile]{List indexing}
+\includegraphics[width=0.9\textwidth]{fig/list}
 \end{frame}
 
 \begin{frame}[fragile]{Changing items}
@@ -314,7 +325,7 @@ Out: ['John', 'Mary']
 
 \begin{frame}[fragile]{The split method}
 We can turn a string into a list of strings
-by splitting on a character:
+by splitting on a `separator':
 \begin{lstlisting} 
 In: quote = "Frankly, my dear, I don't give a damn."
 In: quote.split(",")
@@ -412,7 +423,8 @@ Two important differences:
 
 
 
-\section{Conditional statements: do you really want to do that?}
+\section{Making decisions}
+\subsection{Conditional expressions}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}{Making decisions: flow charts}
@@ -434,6 +446,8 @@ Two important differences:
         \item[a in b] does element a occur in the sequence b?
     \end{description}
 
+    Values and conditions that are \texttt{True} or \texttt{False}
+    are called \structure{Boolean} (George Boole, 1815--1864)
 \end{frame}
 
 \begin{frame}{Statements vs expressions}
@@ -447,6 +461,22 @@ Two important differences:
     \end{description}
 \end{frame}
 
+\begin{frame}[fragile]{Practical application: testing code}
+Conditions can be used to verify that your code works as expected:
+\begin{lstlisting}
+In: x = 2 * 3
+In: print(x == 3 + 3 + 3)
+True
+\end{lstlisting}
+
+\begin{block}{Useful debugging strategy:}
+Sprinkle checks throughout code \\
+to test whether code is doing what it should.
+\end{block}
+\end{frame}
+
+
+\subsection{Conditional execution: if-statement}
 \begin{frame}[fragile]{The if-statement}
 \begin{lstlisting}
 if books > 5:
@@ -462,10 +492,11 @@ if books > 5:
 
     \pause
     \begin{definition}
-        A \structure{code block} is a sequence of indented lines after
+        A \structure{code block} is a sequence of lines after
         a statement ending in `:'.
-        The start and end of the block are defined by the indentation of the
-        lines.
+
+        The start and end of the block are defined by the amount of indentation
+        (i.e., leading spaces) of the lines.
     \end{definition}
 \end{frame}
 
@@ -480,6 +511,7 @@ else:
 
 \begin{itemize}
     \item The code under 'else' is executed if the condition does NOT match.
+    \item Forced choice: necessarily, one of the two options will be executed.
 \end{itemize}
 \end{frame}
 
@@ -505,10 +537,13 @@ else:
 \begin{frame}[fragile]{Complex conditions}
     Can create complex conditions from other conditions:
     
-    \begin{description}
-        \item[cond1 and cond2]
-        \item[cond1 or cond2]
-        \item[not cond]
+    \begin{description}[cond1 and cond2]
+        \item[cond1 \textcolor{blue}{and} cond2]
+            result is True if both are True
+        \item[cond1 \textcolor{blue}{or} cond2]
+            result is True if either or both are True
+        \item[\textcolor{blue}{not} cond]
+            result is True if cond is False, and vice versa
     \end{description}
 
     \pause
@@ -563,20 +598,24 @@ else:
 \end{frame}
 
 
-\begin{frame}{Summary}
-    \begin{description}
+\begin{frame}{Summary: conditions and if}
+    \begin{description}[if-statements]
         \item[Conditions] An expression that is \texttt{True} or \texttt{False}.
-
-                Comparisons, equality tests: <, >, ==, !=
-
-                Complex conditions: \texttt{and, or, not}
-
-        \item[if-statements] Execute statements only if condition is True
+            \begin{description}
+                \item[Comparisons, equality tests:] \texttt{<, >, ==, !=}
+                \item[Complex conditions:]          \texttt{and, or, not}
+            \end{description}
+        \item[if-statements]
+            \begin{itemize}
+                \item Execute statements only if condition is True
+                \item Indentation matters!
+            \end{itemize}
     \end{description}
 \end{frame}
 
 
-\section{Loops: play it again, Sam!}
+\section{Repetition: play it again, Sam!}
+\subsection{The for-loop}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}[fragile]{Repeating statements: loops}
@@ -595,7 +634,8 @@ c
 \begin{itemize}
 \item The statements under the for-loop are repeated \\
     for every element in the sequence.
-\item At every iteration, 'book' is assigned an element of 'booklist'
+\item At every iteration, \textcolor{blue}{\texttt{book}} is assigned
+    an element of \textcolor{blue}{\texttt{booklist}}
 \end{itemize}
 \end{frame}
 
@@ -612,7 +652,8 @@ for number in [0, 1, 2]:
 
 
 \begin{frame}[fragile]{Looping without a list}
-Can use the \texttt{range} function if we don't have a list:
+Can use the \textcolor{OliveGreen}{\texttt{range}} function
+if we don't have a list:
 \begin{lstlisting}
 for number in range(4):
     print(number)
@@ -629,18 +670,130 @@ Result:
 Repeats 4 times. Last item is 3 because counting starts at 0.
 \end{frame}
 
+
 \begin{frame}{Summary}
     \begin{description}
         \item[for-loop] repeat code for each element
         \item[iterables] strings, lists, range
-        %\item[]
     \end{description}
+\end{frame}
+
+\section{Example problems and solutions}
+\subsection{Counting letters}
+\begin{frame}[fragile]{Example}
+How to count the number of 'a's in a string?
+\begin{lstlisting}
+word = 'banana'
+count = 0
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+for letter in word:
+    if letter == 'a':
+        count += 1
+print(count)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Is there a better way?}
+Yes! Look at documentation on strings:
+
+\begin{block}{\texttt{str.count(sub[, start[, end]])}}
+    Return the number of non-overlapping occurrences of substring \emph{sub}
+    in the range \emph{[start, end]}.
+    Optional arguments start and end are interpreted as in slice notation.
+\end{block}
+
+See \url{http://docs.python.org/3/library/stdtypes.html#string-methods}
+
+\pause
+\begin{lstlisting}
+word = 'banana'
+print(word.count('a'))
+\end{lstlisting}
+\end{frame}
+
+\subsection{Reversing text}
+\begin{frame}[fragile]{Examples from Lager exercises}
+7. Define a function \texttt{reverse()} that computes the reversal of a string.
+
+   \vspace{1em}
+   For example, \texttt{reverse("I am testing")} should return the string
+   \texttt{"gnitset ma I"}.
+
+[NB: we will solve the exercises without functions for now]
+
+\begin{lstlisting}
+string = 'I am testing'
+result = ''
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+for letter in string:
+    result = letter + result
+print(result)
+\end{lstlisting}
+
+\pause
+Shorter solution:
+\begin{lstlisting}
+print(string[::-1])
+\end{lstlisting}
+\end{frame}
+
+\subsection{Palindromes}
+\begin{frame}[fragile]
+8. Define a function \texttt{is\_palindrome()} that recognizes palindromes
+   (i.e. words that look the same written backwards).
+
+   \vspace{1em}
+   For example, \texttt{is\_palindrome("radar")} should return \texttt{True}.
+
+\begin{lstlisting}
+string = 'radar'
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+backwards = string[::-1]
+print(backwards == string)
+\end{lstlisting}
+\end{frame}
+ 
+\subsection{Overlapping lists?}
+\begin{frame}[fragile]
+10. Define a function \texttt{overlapping()} that takes two lists and returns
+    \texttt{True} if they have at least one member in common, \texttt{False}
+    otherwise.
+
+    \vspace{1em}
+    You may use [\dots] the \texttt{in} operator, but for the sake of the
+    exercise, you should (also) write it using two nested for-loops.
+\begin{lstlisting}
+list1 = [1, 2, 3]
+list2 = [1, 4, 6]
+overlapping = False
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+for elem1 in list1:
+    for elem2 in list2:
+        if elem1 == elem2:
+            overlapping = True
+print(overlapping)
+\end{lstlisting}
+\pause
+Shorter:
+\begin{lstlisting}
+for elem1 in list1:
+    if elem1 in list2:
+        overlapping = True
+print(overlapping)
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Summary of today}
     \begin{description}
-        \item[Strings] text
-        \item[Lists] 
+        \item[Sequence types] strings and lists
         \item[Conditions] if-statement
         \item[Repetition] for-loop
     \end{description}
@@ -649,10 +802,10 @@ Repeats 4 times. Last item is 3 because counting starts at 0.
 
 \begin{frame}{Background reading}
     \begin{itemize}
-        \item Downey ch.\ 5, 8, 10
-        \item and/or Zelle sec.\ 5.1-5.8
+        \item Downey sec.\ 5.1--5.7, ch.\ 8, 10
+        \item and/or Zelle sec.\ 5.1-5.8, ch.\ 7, 8.
         \item Watch youtube tutorials of "Hacking the Humanities" episode 6--9:
-            \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
+            {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}
 \end{document}
