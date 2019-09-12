@@ -322,25 +322,6 @@ Out: ['John', 'Mary']
 %This is faster if you know where the items are that you want to keep.
 \end{frame}
 
-
-\begin{frame}[fragile]{The split method}
-We can turn a string into a list of strings
-by splitting on a `separator':
-\begin{lstlisting} 
-In: quote = "Frankly, my dear, I don't give a damn."
-In: quote.split(",")
-Out: ['Frankly', ' my dear', " I don't give a damn."]
-\end{lstlisting}
-
-\pause
-If we don't give a character, splits on whitespace:
-\begin{lstlisting} 
-In: quote.split()
-Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
-\end{lstlisting}
-\end{frame}
-
-
 \begin{frame}[fragile]{Sorting}
 \begin{lstlisting} 
 In: letters = list('ocd')
@@ -352,19 +333,6 @@ Out: ['c', 'd', 'o']
 
 NB: sorted leaves the original list unchanged,
 assign it to keep the result.
-\end{frame}
-
-\begin{frame}[fragile]{Putting a list of strings back together as one string}
-\begin{lstlisting}
-In: ''.join(sorted(letters))
-'cdo'
-\end{lstlisting}
-Equivalent of:
-\begin{lstlisting}
-In: 'c' + '' + 'd' + '' + 'o'
-\end{lstlisting}
-
-\texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
 \end{frame}
 
 
@@ -464,7 +432,7 @@ Two important differences:
 \begin{frame}[fragile]{Practical application: testing code}
 Conditions can be used to verify that your code works as expected:
 \begin{lstlisting}
-In: x = 2 * 3
+In: x = 3 * 3
 In: print(x == 3 + 3 + 3)
 True
 \end{lstlisting}
@@ -695,23 +663,6 @@ print(count)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Is there a better way?}
-Yes! Look at documentation on strings:
-
-\begin{block}{\texttt{str.count(sub[, start[, end]])}}
-    Return the number of non-overlapping occurrences of substring \emph{sub}
-    in the range \emph{[start, end]}.
-    Optional arguments start and end are interpreted as in slice notation.
-\end{block}
-
-See \url{http://docs.python.org/3/library/stdtypes.html#string-methods}
-
-\pause
-\begin{lstlisting}
-word = 'banana'
-print(word.count('a'))
-\end{lstlisting}
-\end{frame}
 
 \subsection{Reversing text}
 \begin{frame}[fragile]{Examples from Lager exercises}
@@ -804,7 +755,7 @@ print(overlapping)
     \begin{itemize}
         \item Downey sec.\ 5.1--5.7, ch.\ 8, 10
         \item and/or Zelle sec.\ 5.1-5.8, ch.\ 7, 8.
-        \item Watch youtube tutorials of "Hacking the Humanities" episode 6--9:
+        \item Watch youtube tutorials of "Hacking the Humanities" episode 6--8:
             {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}

@@ -9,7 +9,7 @@
 \end{frame}
 
 \begin{frame}{Last week}
-    Lists
+    Sequences
 
     Conditions
 
@@ -20,14 +20,103 @@
  \tableofcontents
 \end{frame}
 
+\section{Last week's exercises}
+\begin{frame}[fragile]{The Final Quiz}
+What we want you to do is write code that counts the number of word tokens in
+which the letter 'a' is present in a small corpus. You need to do this on the
+basis of a frequency distribution of words that is represented by a list of
+\texttt{[word, frequency]} pairs.
 
-\section{Dictionaries}
+For example, the word \emph{happening} has an \emph{a} and it occurs
+4 times, therefore this word contributes 4 to the total result.
+Assign your value to the variable \texttt{number\_of\_words\_with\_a}.
+
+\begin{lstlisting}
+frequency_distribution = [['Beg', 1], ["Goddard's", 1], ...]
+number_of_words_with_a = 0
+# insert your code here
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{The Final Quiz}
+\begin{lstlisting}
+frequency_distribution = [['Beg', 1], ["Goddard's", 1], ...]
+number_of_words_with_a = 0
+for word_and_frequency in frequency_distribution:
+    if 'a' in word_and_frequency[0]:
+        number_of_words_with_a += word_and_frequency[1]
+\end{lstlisting}
+
+\pause
+Better:
+\begin{lstlisting}
+for word, frequency in frequency_distribution:
+    if 'a' in word:
+        number_of_words_with_a += frequency
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{How to solve problems}
+    \begin{columns}
+        \column{0.5\linewidth}
+            The Feynman algorithm:
+            \begin{enumerate}
+                \item Write down the problem.
+                \item Think real hard.
+                \item Write down the solution.
+            \end{enumerate}
+
+            \vspace{1em}
+            due to Richard Feynman, Nobel-prize winning physicist \dots
+        \column{0.5\linewidth}\centering
+            \includegraphics[width=0.6\textwidth]{fig/feynman}
+
+            \vspace{1em} Richard Feynman (1918--1988)
+    \end{columns}
+\end{frame}
+
+\begin{frame}{How to solve problems}
+    \begin{columns}
+        \column{0.5\linewidth}
+            Pólya (1945), How to solve it:
+
+            \begin{enumerate}
+                \item First, you have to understand the problem.
+                \item After understanding, make a plan.
+                \item Carry out the plan.
+                \item Look back on your work. How could it be better?
+            \end{enumerate}
+
+            \begin{block}{Stuck?}
+            If you can't solve a problem,
+            then there is an easier problem you can solve:
+            find it.
+            \end{block}
+        \column{0.5\linewidth}\centering
+            \includegraphics[width=0.6\textwidth]{fig/howtosolveit}
+
+            \vspace{1em} George P\'olya (1887--1985)
+    \end{columns}
+\end{frame}
+
+
+
+\begin{frame}{The 10 exercises}
+    \centering\Large
+    \url{https://gist.github.com/andreasvc/60ae38960c1d4c1e1941bf8e96bb2d5f}
+\end{frame}
+
+
+
+\section{Data organization}
+\subsection{Dictionaries}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}
     \begin{itemize}
         \item Lists are useful when data has a natural order: \\
-            items are referred by their position
+            get items by their position
         \pause
         \item What if we have lots of data,
             but we need to find it some other way?
@@ -91,27 +180,12 @@ for key, value in data.items():
 \end{frame}
 
 
-\section{Data organization}
-\frame{\tableofcontents[currentsection]}
 
-\begin{frame}[fragile]{Combining lists and dictionaries}
-Lists and dictionaries can contain any kind of value
-
-Even other lists and dictionaries!
-
-\begin{lstlisting}
->>> x = [[0, 1], [2, 3]]
->>> x[0]
-[0, 1]
->>> x[0][0]
-[0]
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Practical example}
+\begin{frame}[fragile]{Lists vs dictionaries: practical example}
 Two ways of organizing a collection of books:
 \begin{lstlisting}
->>> books = ['Tolstoy - War and Peace', 'Tolstoy - Anna Karenina',
+>>> books = ['Tolstoy - War and Peace',
+...     'Tolstoy - Anna Karenina',
 ...     'Dostoevsky - Crime and Punishment',
 ...     'Dostoevsky - Brothers Karamazov']
 \end{lstlisting}
@@ -119,13 +193,11 @@ Two ways of organizing a collection of books:
 \pause
 \begin{lstlisting}
 >>> books = {'Tolstoy': ['War and Peace', 'Anna Karenina'],
-...     'Dostoevsky': ['Crime and Punishment',
-...         'Brothers Karamazov']}
+...     'Dostoevsky': ['Crime and Punishment', 'Brothers Karamazov']}
 >>> books['Tolstoy']
 ...
 \end{lstlisting}
-The latter has the advantage of easily being able to
-select the works by a particular author.
+Can easily select works by a particular author!
 \end{frame}
 
 \begin{frame}{Algorithms + Data structures = Programs}
@@ -152,7 +224,7 @@ select the works by a particular author.
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item We've used builtin functions (print, len, sorted);\\
+        \item We've used builtin functions (\texttt{print, len, sorted});\\
             now we'll see how to make our own functions
         \item Why? Modularity; i.e., break down programs into smaller components
             \begin{itemize}
@@ -167,7 +239,7 @@ select the works by a particular author.
 \end{frame}
 
 \begin{frame}[fragile]{Defining functions}
-    Basic syntax:
+Basic syntax:
 \begin{lstlisting}
 def function(param1, param2, ...):
     # do something with parameters
@@ -176,7 +248,7 @@ def function(param1, param2, ...):
     A function definition has\dots
     \begin{itemize}
         \item A name
-        \item A fixed number of parameters (may be zero)
+        \item Zero or more parameters
         \item An indented block of code
     \end{itemize}
 \end{frame}
@@ -223,14 +295,16 @@ greeting('John')
 \begin{frame}[fragile]{Returning results}
     \begin{itemize}
         \item A function does not need to return a result \\
-            In this case, 
+            In this case,
             \begin{itemize}
                 \item the function is used for its \emph{effect};\\
                     it does something (e.g., print text on screen)
                 \item The value \texttt{None} is implicitly returned
+                        (and usually ignored)
             \end{itemize}
         \item Use \texttt{return ...} to give a result back to the caller
-        \item May occur anywhere in the function
+        \item May occur anywhere in the function,\\
+                immediately stops execution of the function.
     \end{itemize}
 
 Example:
@@ -244,25 +318,29 @@ def average(values):
 
 \begin{frame}{Summary}
     \begin{itemize}
-        \item Break programs down into functions to make them easier
-            to understand.
-        \item Define a function using \texttt{def} with a name, parameters,
+        \item Break programs down into functions \\
+            to make them easier to understand.
+        \item Define a function using \texttt{def} with a name, parameters,\\
             and a block of code.
         \item Defining a function does not run it.
-        \item Arguments in call are matched to parameters in definition.
-        \item Functions may return a result to their caller using return.
+        \item Arguments in a call are matched to parameters in definition.
+        \item Functions may return a result to their caller using \texttt{return}.
     \end{itemize}
 \end{frame}
 
 
 
 
+% Talk about reading files?
+% Talk about counting words?
+
 \section{Cleaning text}
 \frame{\tableofcontents[currentsection]}
+
 \begin{frame}{Goal: text $\rightarrow$ words}
     For basic text analysis,
 
-    want to consider only word frequencies of a text
+    Want to consider only word frequencies of a text
 
     \pause
     Therefore:
@@ -271,6 +349,38 @@ def average(values):
         \item Simplify text, remove non-words
         \item Count words to get frequencies
     \end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]{The split method}
+We can turn a string into a list of strings
+by splitting on a `separator':
+\begin{lstlisting}
+In: quote = "Frankly, my dear, I don't give a damn."
+In: quote.split(",")
+Out: ['Frankly', ' my dear', " I don't give a damn."]
+\end{lstlisting}
+
+\pause
+If we don't give a character, splits on whitespace:
+\begin{lstlisting}
+In: quote.split()
+Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Putting a list of strings back together as one string}
+\begin{lstlisting}
+In: ''.join(sorted(letters))
+'cdo'
+\end{lstlisting}
+Equivalent of:
+\begin{lstlisting}
+In: 'c' + '' + 'd' + '' + 'o'
+\end{lstlisting}
+
+\texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
 \end{frame}
 
 \begin{frame}[fragile]{Upper and lower case}
@@ -303,47 +413,76 @@ text = text.replace(',', '')
 \end{lstlisting}
 \end{frame}
 
-% mention regular expressions
+% explain tricky tokenization cases
+
+
+% \begin{frame}[fragile]{Counting}
+% How to count the number of 'a's in a string?
+% \begin{lstlisting}
+% word = 'banana'
+% count = 0
+% \end{lstlisting}
+% \pause
+% \begin{lstlisting}
+% for letter in word:
+%     if letter == 'a':
+%         count += 1
+% print(count)
+% \end{lstlisting}
+% \end{frame}
+% \begin{frame}[fragile]{Is there a better way?}
+% Yes! Look at documentation on strings:
+%
+% \begin{block}{\texttt{str.count(sub[, start[, end]])}}
+%     Return the number of non-overlapping occurrences of substring \emph{sub}
+%     in the range \emph{[start, end]}.
+%     Optional arguments start and end are interpreted as in slice notation.
+% \end{block}
+%
+% See \url{http://docs.python.org/3/library/stdtypes.html#string-methods}
+%
+% \pause
+% \begin{lstlisting}
+% word = 'banana'
+% print(word.count('a'))
+% \end{lstlisting}
+% \end{frame}
+
+\begin{frame}{More complicated searches and substitutions}
+What if we want to find or replace \dots
+\begin{itemize}
+    % \item Lines without a particular word
+    % \item Lines with word$_1$ {\it or} word$_2$
+    % \item Lines with both word$_1$ {\it and} word$_2$
+    \item Words that start or end with certain letters
+    \item Words that contain (or not) certain letters
+    \item Words with a certain number of letters or substrings
+    \item Words that follow a certain structure
+\end{itemize}
+
+Use regular expressions:\\
+%\url{https://docs.python.org/3/howto/regex.html}
+\url{https://www.programiz.com/python-programming/regex} \\
+\url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
+
+Takes some time to learn, but extremely powerful!
+\end{frame}
 
 \begin{frame}{Summary}
+    \begin{itemize}
+        \item Text is often messy
+        \item Cleaning removes non-words
+        \item Extract and count words
+    \end{itemize}
 \end{frame}
 
 % parsing a simple text file line-by-line, e.g. subtitles?
+% list comprehensions? .strip() 
 
+% \section{Complexity}
+% \frame{\tableofcontents[currentsection]}
 % explain complexity
 
-
-
-\begin{frame}{Intermezzo: How to solve problems}
-	\begin{columns}
-		\column{0.5\linewidth}
-			The Feynman algorithm:
-			\begin{enumerate}
-				\item Write down the problem.
-				\item Think real hard.
-				\item Write down the solution.
-			\end{enumerate}
-
-			\vspace{1em}
-			due to Richard Feynman, Nobel-prize winning physicist \dots
-		\pause
-		\column{0.5\linewidth}
-			Pólya (1945), How to solve it:
-
-			\begin{enumerate}
-				\item First, you have to understand the problem.
-				\item After understanding, make a plan.
-				\item Carry out the plan.
-				\item Look back on your work. How could it be better?
-			\end{enumerate}
-
-			\begin{block}{Stuck?}
-			If you can't solve a problem,
-			then there is an easier problem you can solve:
-			find it.
-			\end{block}
-	\end{columns}
-\end{frame}
 
 
 \begin{frame}{Background reading}
@@ -351,7 +490,7 @@ text = text.replace(',', '')
         \item Downey ch.\ 3, 6, 11, 14
         \item and/or Zelle sec.\ 5.9, ch.\ 6
         \item Watch youtube tutorials of "Hacking the Humanities" episode 10--12:
-            \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}
+            {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}
 \end{document}
