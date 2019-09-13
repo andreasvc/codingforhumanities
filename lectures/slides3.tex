@@ -413,7 +413,56 @@ text = text.replace(',', '')
 \end{lstlisting}
 \end{frame}
 
-% explain tricky tokenization cases
+\begin{frame}{Word forms}
+    Should we count these separately:
+
+    \texttt{walk, walks, walked}
+
+    \begin{itemize}
+    \item Recognizing that these are forms of the same word
+    is called \structure{lemmatization}.
+
+    \item Requires language-specific tools.
+
+    \item Most work does not apply this step for simplicity,
+    and forms may contain useful distinctions.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Tokenization}
+ \begin{itemize}
+  \item task: splitting a string up into \structure{tokens}
+  \item tokens are (1) words, (2) punctuation marks, (3) various other things
+  \item first and most basic step in text analysis,
+        should be done automatically
+  \item various algorithms and tools exist, none is perfect
+  \item Where to split text? Most important cues: whitespace, punctuation
+ \end{itemize}
+ \begin{lstlisting}
+>>> tokenize('"Hark! A vagrant," he said.')
+['"', 'Hark', '!', 'A', 'vagrant', ',', '"', 'he', 'said', '.']
+ \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Tricky cases in tokenization}
+ \begin{itemize}
+  \item is \structure{prime minister} one token or two tokens?
+  \item is \structure{New York} one or two tokens?
+  \item is \structure{I'm} one or two tokens?
+ \end{itemize}
+
+\pause
+More tricky cases:
+\begin{verbatim}
+nineteenth- and twentieth-century writers
+New York-based
+(SAM)-missile launchers
+John's bike
+i.e.  Ph.D. &c.
+;-)  :)))
+https://en.wikipedia.org/wiki/Bicycle
+\end{verbatim}
+\end{frame}
 
 
 % \begin{frame}[fragile]{Counting}
@@ -466,6 +515,31 @@ Use regular expressions:\\
 \url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
 
 Takes some time to learn, but extremely powerful!
+\end{frame}
+
+\begin{frame}{Text encoding}
+	\begin{itemize}
+		\item Text with accented or non-Western characters or emojis \\
+            has an \structure{encoding}
+        \item Encoding must be specified correctly when reading and saving!
+        \item Always use the Unicode character set with UTF-8 encoding! \\
+            (Default for Python and many programs)
+        \item Might be a problem with older datasets or Windows programs.
+	\end{itemize}
+  
+    Example encoding problem:
+
+    \begin{columns}
+    \column{0.5\linewidth}\centering
+         \includegraphics[width=0.5\textwidth]{fig/encodingissue}
+    \column{0.5\linewidth}
+        Should read:\\
+        \texttt{30   Belgi\"e}
+        \vspace{3em}
+    \end{columns}
+
+    \vspace{1em}
+    For more information: \url{https://docs.python.org/3/howto/unicode.html}
 \end{frame}
 
 \begin{frame}{Summary}
