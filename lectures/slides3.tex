@@ -9,10 +9,13 @@
 \end{frame}
 
 \begin{frame}{Last week}
+    \Large
     Sequences
 
+    \vspace{1em}
     Conditions
 
+    \vspace{1em}
     Loops
 \end{frame}
 
@@ -22,7 +25,7 @@
 
 \section{Last week's exercises}
 \begin{frame}[fragile]{The Final Quiz}
-What we want you to do is write code that counts the number of word tokens in
+\dots write code that counts the number of word tokens in
 which the letter 'a' is present in a small corpus. You need to do this on the
 basis of a frequency distribution of words that is represented by a list of
 \texttt{[word, frequency]} pairs.
@@ -109,8 +112,7 @@ for word, frequency in frequency_distribution:
 
 
 
-\section{Data organization}
-\subsection{Dictionaries}
+\section{Dictionaries}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}
@@ -134,7 +136,7 @@ for word, frequency in frequency_distribution:
 
 \begin{frame}[fragile]{dictionaries}
     \begin{definition}
-        A dictionary stores pairs of values (key, value),
+        A dictionary stores (key, value) pairs, \\
         such that we can quickly find a value given a key.
     \end{definition}
 Example, a phone book:
@@ -179,7 +181,26 @@ for key, value in data.items():
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]{Tuples}
+    \begin{itemize}
+        \item Lists are mutable, cannot use as keys in dictionary!
+        \item Tuples are similar to lists but are immutable.
+    \end{itemize}
+Create a tuple with parentheses:
 
+\begin{lstlisting}
+couple = ('John', 'Mary')
+years_married = {('John', 'Mary'): 3, ('Alice', 'Bob'): 5}
+\end{lstlisting}
+
+\pause
+Sometimes parentheses can be left out:
+\begin{lstlisting}
+for husband, wife in years_married:
+    ...
+print(years_married['John', 'Mary'])
+\end{lstlisting}
+\end{frame}
 
 \begin{frame}[fragile]{Lists vs dictionaries: practical example}
 Two ways of organizing a collection of books:
@@ -204,15 +225,15 @@ Can easily select works by a particular author!
     \begin{columns}
         \column{0.5\linewidth}
             \begin{itemize}
-                \item Thinking of how to organize your data is an important
-                    first step in designing a program
+                \item The way you structure your data is the foundation
+                    of your program
                 \item The right organization may make the rest of the design
                     obvious
                 \item Often a trade-off: particular choices may make one thing
                     easy and another hard
             \end{itemize}
         \column{0.5\linewidth}
-            \includegraphics[height=0.8\textheight]{fig/wirth}
+            \includegraphics[height=0.6\textheight]{fig/wirth}
     \end{columns}
 \end{frame}
 
@@ -261,9 +282,11 @@ def function(param1, param2, ...):
     \end{itemize}
     Example:
 \begin{lstlisting}
+# define function
 def greeting():
     print('Hello!')
 
+# call function
 greeting()
 \end{lstlisting}
 \end{frame}
@@ -278,7 +301,7 @@ greeting()
 
     \begin{itemize}
         \item Can pass data to functions using arguments
-        \item Below, the argument \texttt{'John'} is assigned
+        \item Below, the argument \texttt{'John'} is assigned \\
             to the parameter \texttt{name} when the function is called
         \item Arguments have a specific order
         \item When calling a function, must use correct number of arguments
@@ -310,7 +333,7 @@ greeting('John')
 Example:
 \begin{lstlisting}
 def average(values):
-    if len(values) == 0:
+    if not values:
         return None
     return sum(values) / len(values)
 \end{lstlisting}
@@ -332,10 +355,66 @@ def average(values):
 
 
 % Talk about reading files?
-% Talk about counting words?
 
-\section{Cleaning text}
+\section{Text analysis}
 \frame{\tableofcontents[currentsection]}
+
+\begin{frame}{Why count words?}
+    Linguistic Inquiry and Word Count (LIWC, Pennebaker)
+    \begin{itemize}
+        \item Counts words in 80 categories:
+            \begin{itemize}
+            \item linguistic (e.g., first-person singular pronouns, conjunctions),
+            \item psychological (e.g., anger, achievement),
+            \item topical (e.g., leisure, money)
+            \end{itemize}
+        \item Uses word counts to analyze personality or psychological state
+        \item \url{http://secretlifeofpronouns.com/}
+        \item \url{https://www.scientificamerican.com/article/you-are-what-you-say/}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Why count words?}
+    Authorship attribution
+    \begin{itemize}
+        \item Given a work with unknown/disputed authorship,
+        \item Compare its word frequencies with works of possible authors
+        \item Function words leave a remarkably strong stylistic `fingerprint'
+    \end{itemize}
+
+    \pause
+    Examples:
+    \begin{itemize}
+        \item In 2015 the play Double Falsehood was attributed to Shakespeare
+                (instead of John Fletcher)
+            \url{http://www.latimes.com/science/sciencenow/la-sci-sn-shakespeare-play-linguistic-analysis-20150410-story.html}
+
+        \item Patrick Juola, ``The Rowling Case: A Proposed Standard Analytic Protocol for Authorship Questions,'' Digital Scholarship in the Humanities, vol. 30, supp. 1, 2015.
+        \item The unmasking of Elena Ferante
+            \url{https://www.newyorker.com/culture/cultural-comment/the-unmasking-of-elena-ferrante}
+            \\
+            {\small\url{https://www.researchgate.net/publication/320131096_Elena_Ferrante_Unmasked}}
+        % \item \url{https://www.publicbooks.org/authorship-after-ai/}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Why count words?}
+    \begin{reference}
+    \href{http://www.infotext.unisi.it/upload/rybickihoovereder_with_figures.pdf}{Rybicki, J., Eder, M., \& Hoover, D. (2016). Computational stylistics and text analysis}
+    \end{reference}
+    Stylistic analysis
+    \begin{itemize}
+    \item Collaborative authorship of a novel:\\
+        who wrote what?
+    \item Six narrators in Woolf's \emph{The Waves}:\\
+        differentiation of characters by gender and age
+    \item Vocabulary of 366 student essays wrt.\ grades:
+        which words are characteristic of good and bad essays?
+    \item Diachronic analysis of 1000 novels \\
+        (diachronic: change over time)
+    \end{itemize}
+\end{frame}
+
 
 \begin{frame}{Goal: text $\rightarrow$ words}
     For basic text analysis,
@@ -352,83 +431,6 @@ def average(values):
 \end{frame}
 
 
-\begin{frame}[fragile]{The split method}
-We can turn a string into a list of strings
-by splitting on a `separator':
-\begin{lstlisting}
-In: quote = "Frankly, my dear, I don't give a damn."
-In: quote.split(",")
-Out: ['Frankly', ' my dear', " I don't give a damn."]
-\end{lstlisting}
-
-\pause
-If we don't give a character, splits on whitespace:
-\begin{lstlisting}
-In: quote.split()
-Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
-\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{Putting a list of strings back together as one string}
-\begin{lstlisting}
-In: ''.join(sorted(letters))
-'cdo'
-\end{lstlisting}
-Equivalent of:
-\begin{lstlisting}
-In: 'c' + '' + 'd' + '' + 'o'
-\end{lstlisting}
-
-\texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
-\end{frame}
-
-\begin{frame}[fragile]{Upper and lower case}
-    \begin{itemize}
-        \item To the computer, these
-            are three completely different words!
-
-            \texttt{'John', 'john', 'JOHN'}
-        \item Often, we don't want to make this distinction when counting
-        \item One solution: case folding
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-text = 'HeLlO WoRlD'
-cleaned = text.lower()
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Punctuation}
-    \begin{itemize}
-        \item Similarly, punctuation should be separated from words
-        \item Or should be eliminated completely
-        \item Can use functionality similar to "find \& replace" for this
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-text = "Forsooth, 'tis true!"
-text = text.replace('!', '')
-text = text.replace(',', '')
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}{Word forms}
-    Should we count these separately:
-
-    \texttt{walk, walks, walked}
-
-    \begin{itemize}
-    \item Recognizing that these are forms of the same word
-    is called \structure{lemmatization}.
-
-    \item Requires language-specific tools.
-
-    \item Most work does not apply this step for simplicity,
-    and forms may contain useful distinctions.
-    \end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]{Tokenization}
  \begin{itemize}
   \item task: splitting a string up into \structure{tokens}
@@ -444,14 +446,16 @@ text = text.replace(',', '')
  \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Tricky cases in tokenization}
+\begin{frame}[fragile]{Tricky tokenization cases}
+One or two tokens?
  \begin{itemize}
-  \item is \structure{prime minister} one token or two tokens?
-  \item is \structure{New York} one or two tokens?
-  \item is \structure{I'm} one or two tokens?
+  \item \structure{prime minister}
+  \item \structure{New York}
+  \item \structure{I'm}
  \end{itemize}
 
 \pause
+\vspace{1em}
 More tricky cases:
 \begin{verbatim}
 nineteenth- and twentieth-century writers
@@ -460,10 +464,92 @@ New York-based
 John's bike
 i.e.  Ph.D. &c.
 ;-)  :)))
+#yolo#lit#hashtag
 https://en.wikipedia.org/wiki/Bicycle
 \end{verbatim}
 \end{frame}
 
+
+
+
+% \begin{frame}[fragile]{The split method}
+% We can turn a string into a list of strings
+% by splitting on a `separator':
+% \begin{lstlisting}
+% In: quote = "Frankly, my dear, I don't give a damn."
+% In: quote.split(",")
+% Out: ['Frankly', ' my dear', " I don't give a damn."]
+% \end{lstlisting}
+% 
+% \pause
+% If we don't give a character, splits on whitespace:
+% \begin{lstlisting}
+% In: quote.split()
+% Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
+% \end{lstlisting}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Putting a list of strings back together as one string}
+% \begin{lstlisting}
+% In: ''.join(sorted(letters))
+% 'cdo'
+% \end{lstlisting}
+% Equivalent of:
+% \begin{lstlisting}
+% In: 'c' + '' + 'd' + '' + 'o'
+% \end{lstlisting}
+% 
+% \texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
+% \end{frame}
+
+\begin{frame}[fragile]{Upper and lower case}
+    \begin{itemize}
+        \item To the computer, these
+            are three completely different words!
+
+            \texttt{'The', 'the', 'THE'}
+        \item Often, we don't want to make this distinction when counting
+        \item Solution: case folding
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+text = 'HeLlO WoRlD'
+cleaned = text.lower()
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Punctuation}
+    \begin{itemize}
+        \item Similarly, punctuation should be separated from words
+        \item \dots or eliminated completely
+        \item Can use functionality similar to "find \& replace" for this
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+text = "Forsooth, 'tis true!"
+text = text.replace('!', '')
+text = text.replace(',', '')
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Word forms}
+    Should we count these separately:
+
+    \vspace{1em}
+    \texttt{walk, walks, walked}
+
+    \vspace{1em}
+    \begin{itemize}
+    \item Recognizing that these are forms of the same word
+    is called \structure{lemmatization}.
+
+    \item Requires language-specific tools.
+
+    \item Most work does not apply this step for simplicity,\\
+        and forms may contain useful distinctions.
+    \end{itemize}
+\end{frame}
 
 % \begin{frame}[fragile]{Counting}
 % How to count the number of 'a's in a string?
@@ -500,11 +586,8 @@ https://en.wikipedia.org/wiki/Bicycle
 \begin{frame}{More complicated searches and substitutions}
 What if we want to find or replace \dots
 \begin{itemize}
-    % \item Lines without a particular word
-    % \item Lines with word$_1$ {\it or} word$_2$
-    % \item Lines with both word$_1$ {\it and} word$_2$
     \item Words that start or end with certain letters
-    \item Words that contain (or not) certain letters
+    \item Words that (do not) contain certain letters
     \item Words with a certain number of letters or substrings
     \item Words that follow a certain structure
 \end{itemize}
@@ -512,20 +595,37 @@ What if we want to find or replace \dots
 Use regular expressions:\\
 %\url{https://docs.python.org/3/howto/regex.html}
 \url{https://www.programiz.com/python-programming/regex} \\
-\url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
+% \url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
 
+\vspace{1em}
 Takes some time to learn, but extremely powerful!
+\end{frame}
+\begin{frame}[fragile]{Regular expression example}
+\begin{lstlisting}
+def pagenumbers(text, threshold=50):
+    """Strip lines that contain only a number.
+
+    Only applied when a threshold is reached,
+    to avoid removing chapter numbers."""
+    # remove page numbers of the form <23> or |23| in running text;
+    text = re.sub(r'<[0-9]+>|\|[0-9]+\|', '', text)
+    # Remove other page numbers only when on their own line.
+    pagenumber = re.compile(r'\n+[\t ]*-*[\t ]*[0-9]+[\t ]*-*[\t ]*\n+[\f\v]*')
+    if len(pagenumber.findall(text)) >= threshold:
+        return pagenumber.sub('\n', text)
+    return text
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Text encoding}
-	\begin{itemize}
-		\item Text with accented or non-Western characters or emojis \\
+    \begin{itemize}
+        \item Text with accented or non-Western characters or emojis \\
             has an \structure{encoding}
         \item Encoding must be specified correctly when reading and saving!
         \item Always use the Unicode character set with UTF-8 encoding! \\
             (Default for Python and many programs)
         \item Might be a problem with older datasets or Windows programs.
-	\end{itemize}
+    \end{itemize}
   
     Example encoding problem:
 
@@ -552,10 +652,6 @@ Takes some time to learn, but extremely powerful!
 
 % parsing a simple text file line-by-line, e.g. subtitles?
 % list comprehensions? .strip() 
-
-% \section{Complexity}
-% \frame{\tableofcontents[currentsection]}
-% explain complexity
 
 
 
