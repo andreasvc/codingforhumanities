@@ -135,19 +135,19 @@ for word, frequency in frequency_distribution:
         % Vol. 100. No. 3, 363-406
         (\href{http://graphics8.nytimes.com/images/blogs/freakonomics/pdf/DeliberatePractice(PsychologicalReview).pdf}{link}).
     \end{reference}
-    {\centering\Large 
-    deliberate practice}
+    {\centering\Huge\em
+    \structure{deliberate} practice}
 
-    \vspace{1em}
+    \pause\vspace{3em}
     Perseverance is more important than talent!
     % Being good at something is NOT about talent
 
-    \begin{enumerate}
-        \item \structure{Planning}: Identify your weaknesses
-        \item \structure{Dedication}: Practice them
-        \item \structure{Repetition}: Practice more \dots
-        \item \structure{Reflect} / get feedback
-    \end{enumerate}
+    \begin{description}[Dedication:]
+        \item[Planning:] Identify your weaknesses
+        \item[Dedication:] Practice them
+        \item[Repetition:] Practice more \dots
+        \item[Reflect] / get feedback
+    \end{description}
 
 
     %\url{https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice}
@@ -291,16 +291,18 @@ Can easily select works by a particular author!
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item We've used builtin functions (\texttt{print, len, sorted});\\
-            now we'll see how to make our own functions
-        \item Why? Modularity; i.e., break down programs into smaller components
+        \item We've used builtin functions (\texttt{print, len, sorted})
+        \item Let's see how to make our own functions
+        \item Why? Modularity:
+            \pause
+            % ; i.e., break down programs into smaller components
             \begin{itemize}
-                \item Can create larger, more complex programs
-                    from readily understandable building blocks
-                \item Functions encapsulate complexity;
-                    don't need to understand how a function works to use it
-                \item Components are re-usable;
+                \item Create re-usable components:
                     write once, use many times
+                \item Create larger, more complex programs \\
+                    from readily understandable building blocks
+                \item Functions encapsulate complexity; \\
+                    don't need to understand how a function works to use it
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -320,9 +322,10 @@ def function(param1, param2, ...):
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Defining a function does not run it}
+\begin{frame}[fragile]{Defining versus calling a function}
     \begin{itemize}
-        \item Executing a \texttt{def} statement does not run the code!
+        \item Executing a \texttt{\textbf{\textcolor{OliveGreen}{def}}}
+            statement does not run the code!
         \item The function is stored along with its name
         \item Function must be called to run it
     \end{itemize}
@@ -347,8 +350,8 @@ greeting()
 
     \begin{itemize}
         \item Can pass data to functions using arguments
-        \item Below, the argument \texttt{'John'} is assigned \\
-            to the parameter \texttt{name} when the function is called
+        \item Below, the argument \textcolor{mauve}{\texttt{'John'}} is assigned \\
+            to the parameter \textcolor{blue}{\texttt{name}} when the function is called
         \item Arguments have a specific order
         \item When calling a function, must use correct number of arguments
     \end{itemize}
@@ -364,14 +367,15 @@ greeting('John')
 \begin{frame}[fragile]{Returning results}
     \begin{itemize}
         \item A function does not need to return a result \\
-            In this case,
+            In this case:
             \begin{itemize}
-                \item the function is used for its \emph{effect};\\
-                    it does something (e.g., print text on screen)
-                \item The value \texttt{None} is implicitly returned
-                        (and usually ignored)
+                \item The function is used for its \emph{effect};\\
+                    it does something (e.g., print text on screen).
+                \item (The value \texttt{None} is implicitly returned,
+                        and usually ignored).
             \end{itemize}
-        \item Use \texttt{return ...} to give a result back to the caller
+        \item Use \texttt{\textbf{\textcolor{OliveGreen}{return}} ...}
+            to give a result back to the caller.
         \item May occur anywhere in the function,\\
                 immediately stops execution of the function.
     \end{itemize}
@@ -389,11 +393,12 @@ def average(values):
     \begin{itemize}
         \item Break programs down into functions \\
             to make them easier to understand.
-        \item Define a function using \texttt{def} with a name, parameters,\\
-            and a block of code.
+        \item Define a function using \texttt{\textbf{\textcolor{OliveGreen}{def}}}
+            with a name, parameters,\\ and a block of code.
         \item Defining a function does not run it.
         \item Arguments in a call are matched to parameters in definition.
-        \item Functions may return a result to their caller using \texttt{return}.
+        \item Functions may return a result to their caller using
+            \texttt{\textbf{\textcolor{OliveGreen}{return}}}.
     \end{itemize}
 \end{frame}
 
@@ -435,8 +440,6 @@ Moretti (2005) Graphs, maps, and trees}
         \end{definition}
     \begin{itemize}
         \item goal: find patterns, trends
-        \pause
-        \item example: Rybicki et al (2016): computational stylistics and text analysis
     \end{itemize}
 \column{0.5\linewidth}
     \onslide
@@ -447,7 +450,6 @@ Moretti (2005) Graphs, maps, and trees}
 
 \begin{frame}{What kind of patterns and trends?}
 
-	\pause
 	\emph{try the simplest thing that could possibly work}\texttrademark
 
 	\pause
@@ -525,10 +527,10 @@ Moretti (2005) Graphs, maps, and trees}
     \item Six narrators in Woolf's \emph{The Waves}:\\
         differentiation of characters by gender and age
             % Clustering
-    \item Vocabulary of 366 student essays wrt.\ grades:
+    \item Vocabulary of 366 student essays wrt.\ grades:\\
         which words are characteristic of good and bad essays?
             % Keywords
-    \item Diachronic analysis of 1000 novels \\
+    \item Diachronic analysis of 1000 novels\\
         (diachronic: change over time)
             % Network analysis
     \end{itemize}
@@ -536,7 +538,7 @@ Moretti (2005) Graphs, maps, and trees}
 
 
 \subsection{Cleaning and preprocessing text}
-\begin{frame}{Goal: text $\rightarrow$ words}
+\begin{frame}{Goal: text $\rightarrow$ word counts}
     For basic text analysis,
 
     Want to consider only word frequencies of a text
@@ -545,46 +547,78 @@ Moretti (2005) Graphs, maps, and trees}
     Basic approach:
     \begin{enumerate}
         \item Simplify text: lower case, remove punctuation
-        \item Identify words / word boundaries
+        \item Split text into words using whitespace
         \item Count words to get frequencies
     \end{enumerate}
 \end{frame}
 
 
-\begin{frame}[fragile]{Upper and lower case}
-    \begin{itemize}
-        \item To the computer, these
-            are three completely different words!
+% \begin{frame}[fragile]{Upper and lower case}
+%     \begin{itemize}
+%         \item To the computer, these
+%             are three completely different words!
+% 
+%             \texttt{'The', 'the', 'THE'}
+%         \item Often, we don't want to make this distinction when counting
+%         \item Solution: case folding
+%     \end{itemize}
+%     \pause
+% \begin{lstlisting}
+% In: text = 'HeLlO WoRlD'
+% In: cleaned = text.lower()
+% In: cleaned
+% Out: 'hello world'
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Punctuation}
+%     \begin{itemize}
+%         \item Similarly, punctuation should be separated from words
+%         \item \dots or eliminated completely
+%         \item Can use functionality similar to "find \& replace" for this
+%     \end{itemize}
+%     \pause
+% \begin{lstlisting}
+% In: text = "Forsooth, 'tis true!"
+% In: cleaned = text.lower()
+% In: cleaned = cleaned.replace('!', '')
+% In: cleaned = cleaned.replace(',', '')
+% In: cleaned
+% Out: 'forsooth tis true'
+% \end{lstlisting}
+% \end{frame}
+%
+% \begin{frame}[fragile]{The split method}
+% We can turn a string into a list of strings
+% by splitting on a `separator':
+% \begin{lstlisting}
+% In: quote = "Frankly, my dear, I don't give a damn."
+% In: quote.split(",")
+% Out: ['Frankly', ' my dear', " I don't give a damn."]
+% \end{lstlisting}
+% 
+% \pause
+% If we don't give a character, splits on whitespace:
+% \begin{lstlisting}
+% In: quote.split()
+% Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
+% \end{lstlisting}
+% \end{frame}
+% 
+% 
+% \begin{frame}[fragile]{Putting a list of strings back together as one string}
+% \begin{lstlisting}
+% In: ''.join(sorted(letters))
+% 'cdo'
+% \end{lstlisting}
+% Equivalent of:
+% \begin{lstlisting}
+% In: 'c' + '' + 'd' + '' + 'o'
+% \end{lstlisting}
+% 
+% \texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
+% \end{frame}
 
-            \texttt{'The', 'the', 'THE'}
-        \item Often, we don't want to make this distinction when counting
-        \item Solution: case folding
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-In: text = 'HeLlO WoRlD'
-In: cleaned = text.lower()
-In: cleaned
-Out: 'hello world'
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Punctuation}
-    \begin{itemize}
-        \item Similarly, punctuation should be separated from words
-        \item \dots or eliminated completely
-        \item Can use functionality similar to "find \& replace" for this
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-In: text = "Forsooth, 'tis true!"
-In: cleaned = text.lower()
-In: cleaned = cleaned.replace('!', '')
-In: cleaned = cleaned.replace(',', '')
-In: cleaned
-Out: 'forsooth tis true''
-\end{lstlisting}
-\end{frame}
 
 
 \begin{frame}[fragile]{Tokenization}
@@ -625,41 +659,6 @@ https://en.wikipedia.org/wiki/Bicycle
 \end{verbatim}
 \end{frame}
 
-
-
-
-% \begin{frame}[fragile]{The split method}
-% We can turn a string into a list of strings
-% by splitting on a `separator':
-% \begin{lstlisting}
-% In: quote = "Frankly, my dear, I don't give a damn."
-% In: quote.split(",")
-% Out: ['Frankly', ' my dear', " I don't give a damn."]
-% \end{lstlisting}
-% 
-% \pause
-% If we don't give a character, splits on whitespace:
-% \begin{lstlisting}
-% In: quote.split()
-% Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
-% \end{lstlisting}
-% \end{frame}
-% 
-% 
-% \begin{frame}[fragile]{Putting a list of strings back together as one string}
-% \begin{lstlisting}
-% In: ''.join(sorted(letters))
-% 'cdo'
-% \end{lstlisting}
-% Equivalent of:
-% \begin{lstlisting}
-% In: 'c' + '' + 'd' + '' + 'o'
-% \end{lstlisting}
-% 
-% \texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
-% \end{frame}
-
-
 \begin{frame}{Word forms}
     Should we count these separately:
 
@@ -668,7 +667,7 @@ https://en.wikipedia.org/wiki/Bicycle
 
     \vspace{1em}
     \begin{itemize}
-    \item Recognizing that these are forms of the same word
+    \item Recognizing that these are instances of the same word \\
     is called \structure{lemmatization}.
 
     \item Requires language-specific tools.
@@ -681,44 +680,13 @@ https://en.wikipedia.org/wiki/Bicycle
 \begin{frame}{Eliminating classes of words}
     For some applications, want to ignore certain words:
     \begin{itemize}
-        \item Function words / stop words (highly frequent words that do not carry meaning)
+        \item Function words / stop words \\
+            (highly frequent words that do not carry meaning)
         \item Names
     \end{itemize}
 
     But in other applications, these are the most interesting words!
 \end{frame}
-
-% \begin{frame}[fragile]{Counting}
-% How to count the number of 'a's in a string?
-% \begin{lstlisting}
-% word = 'banana'
-% count = 0
-% \end{lstlisting}
-% \pause
-% \begin{lstlisting}
-% for letter in word:
-%     if letter == 'a':
-%         count += 1
-% print(count)
-% \end{lstlisting}
-% \end{frame}
-% \begin{frame}[fragile]{Is there a better way?}
-% Yes! Look at documentation on strings:
-%
-% \begin{block}{\texttt{str.count(sub[, start[, end]])}}
-%     Return the number of non-overlapping occurrences of substring \emph{sub}
-%     in the range \emph{[start, end]}.
-%     Optional arguments start and end are interpreted as in slice notation.
-% \end{block}
-%
-% See \url{http://docs.python.org/3/library/stdtypes.html#string-methods}
-%
-% \pause
-% \begin{lstlisting}
-% word = 'banana'
-% print(word.count('a'))
-% \end{lstlisting}
-% \end{frame}
 
 \begin{frame}{More complicated searches and substitutions}
 What if we want to find or replace \dots
