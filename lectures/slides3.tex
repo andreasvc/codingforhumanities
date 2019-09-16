@@ -60,6 +60,7 @@ for word, frequency in frequency_distribution:
 \end{frame}
 
 
+\subsection{Intermezzo: how to solve problems}
 \begin{frame}{How to solve problems}
     \begin{columns}
         \column{0.5\linewidth}
@@ -71,7 +72,8 @@ for word, frequency in frequency_distribution:
             \end{enumerate}
 
             \vspace{1em}
-            due to Richard Feynman, Nobel-prize winning physicist \dots
+            due to Richard Feynman, \\
+            Nobel-prize winning physicist \dots
         \column{0.5\linewidth}\centering
             \includegraphics[width=0.6\textwidth]{fig/feynman}
 
@@ -85,10 +87,13 @@ for word, frequency in frequency_distribution:
             Pólya (1945), How to solve it:
 
             \begin{enumerate}
-                \item First, you have to understand the problem.
-                \item After understanding, make a plan.
+                \item First, you have to \\
+                    understand the problem.
+                \item After understanding, \\
+                    make a plan.
                 \item Carry out the plan.
-                \item Look back on your work. How could it be better?
+                \item Look back on your work. \\
+                    How could it be better?
             \end{enumerate}
 
             \begin{block}{Stuck?}
@@ -106,10 +111,47 @@ for word, frequency in frequency_distribution:
 
 
 \begin{frame}{The 10 exercises}
-    \centering\Large
+    \begin{enumerate}
+        \item max
+        \item max\_of\_three
+        \item length
+        \item vowel or not?
+        \item robber's language \\
+            (double every consonant and place an occurrence of ``o'' in between)
+        \item sum / multiply
+        \item histogram
+        \item list of words $\rightarrow$ list of lengths
+        \item pangram or not?
+        \item 99 bottles of beer
+    \end{enumerate}
     \url{https://gist.github.com/andreasvc/60ae38960c1d4c1e1941bf8e96bb2d5f}
 \end{frame}
 
+\begin{frame}{How to get better at solving problems?}
+    \begin{reference}
+        How to become great at just about anything. \url{http://freakonomics.com/podcast/peak/}
+
+        Ericsson, et al 1993. The role of deliberate practice [\dots]. Psych.\ Review
+        % Vol. 100. No. 3, 363-406
+        (\href{http://graphics8.nytimes.com/images/blogs/freakonomics/pdf/DeliberatePractice(PsychologicalReview).pdf}{link}).
+    \end{reference}
+    {\centering\Large 
+    deliberate practice}
+
+    \vspace{1em}
+    Perseverance is more important than talent!
+    % Being good at something is NOT about talent
+
+    \begin{enumerate}
+        \item \structure{Planning}: Identify your weaknesses
+        \item \structure{Dedication}: Practice them
+        \item \structure{Repetition}: Practice more \dots
+        \item \structure{Reflect} / get feedback
+    \end{enumerate}
+
+
+    %\url{https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice}
+\end{frame}
 
 
 \section{Dictionaries}
@@ -125,7 +167,7 @@ for word, frequency in frequency_distribution:
     \end{itemize}
 
     \begin{block}{Example}
-    Finding words in a dictionary
+    Finding words in a dictionary:
 
     Too many words to consider one-by-one
 
@@ -147,18 +189,20 @@ Example, a phone book:
 >>> coworkers['Bob'] = 124
 \end{lstlisting}
 
-% Explanation of hash tables:
-% https://dev.to/a_sandrina_p/learning-hash-tables-with-drawings-99o
+\vspace{1em}
+\structure{Aside}: why are dictionaries so fast?\\
+Answer: the `magic' of hash tables!
+\url{https://dev.to/a_sandrina_p/learning-hash-tables-with-drawings-99o}
 \end{frame}
 
 \begin{frame}{Properties of dictionaries}
 A dictionary is a mapping of keys to values.
 
     \begin{itemize}
-        \item Looking up a key is fast
+        \item Looking up a key is fast.
         \item Keys must be immutable (e.g., numbers or strings).
         \item Values can be anything.
-        \item Keys are always unique;
+        \item Keys are always unique; \\
             re-using a key will overwrite the previous value.
     \end{itemize}
 \end{frame}
@@ -196,10 +240,12 @@ years_married = {('John', 'Mary'): 3, ('Alice', 'Bob'): 5}
 \pause
 Sometimes parentheses can be left out:
 \begin{lstlisting}
+print(years_married['John', 'Mary'])
 for husband, wife in years_married:
     ...
-print(years_married['John', 'Mary'])
 \end{lstlisting}
+
+(technically, the comma creates the tuple \dots)
 \end{frame}
 
 \begin{frame}[fragile]{Lists vs dictionaries: practical example}
@@ -356,22 +402,90 @@ def average(values):
 
 % Talk about reading files?
 
-\section{Text analysis}
+\section{Text processing}
+\subsection{Motivation}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}{Why count words?}
-    Linguistic Inquiry and Word Count (LIWC, Pennebaker)
+% \begin{frame}{Why count words?}
+%     Linguistic Inquiry and Word Count (LIWC, Pennebaker)
+%     \begin{itemize}
+%         \item Counts words in 80 categories:
+%             \begin{itemize}
+%             \item linguistic (e.g., first-person singular pronouns, conjunctions),
+%             \item psychological (e.g., anger, achievement),
+%             \item topical (e.g., leisure, money)
+%             \end{itemize}
+%         \item Uses word counts to analyze personality or psychological state
+%         \item \url{http://secretlifeofpronouns.com/}
+%         \item \url{https://www.scientificamerican.com/article/you-are-what-you-say/}
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}{Distant Reading}
+\begin{reference}
+\href{https://www.versobooks.com/books/261-graphs-maps-trees}{
+Moretti (2005) Graphs, maps, and trees}
+
+\end{reference}
+\begin{columns}
+\column{0.5\linewidth}
+        \begin{definition}
+        \structure{Distant reading}:
+        taking a bird's eye view of a corpus using computational tools
+        \end{definition}
     \begin{itemize}
-        \item Counts words in 80 categories:
-            \begin{itemize}
-            \item linguistic (e.g., first-person singular pronouns, conjunctions),
-            \item psychological (e.g., anger, achievement),
-            \item topical (e.g., leisure, money)
-            \end{itemize}
-        \item Uses word counts to analyze personality or psychological state
-        \item \url{http://secretlifeofpronouns.com/}
-        \item \url{https://www.scientificamerican.com/article/you-are-what-you-say/}
+        \item goal: find patterns, trends
+        \pause
+        \item example: Rybicki et al (2016): computational stylistics and text analysis
     \end{itemize}
+\column{0.5\linewidth}
+    \onslide
+    \includegraphics[width=\linewidth]{fig/catbooks.jpg}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}{What kind of patterns and trends?}
+
+	\pause
+	\emph{try the simplest thing that could possibly work}\texttrademark
+
+	\pause
+	\vspace{2em}
+	\centering
+	text $\rightarrow$ word counts
+
+    \pause
+    \vspace{2em}
+    ``All models are wrong, but some are useful'' --- George Box
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Bag-of-Words model}
+	\begin{definition}
+		\structure{Bag-of-Words (BOW)} model:
+		    summarize a collection of texts by their word counts
+	\end{definition}
+    \vspace{1em}
+    
+    \begin{columns}
+    \column{0.6\textwidth}
+	Example:
+	
+	\begin{tabular}{lrrrrr}
+	Author      & \em Shall & \em~I & \em compare & \em thee & \dots \\ \midrule
+	Shakespeare &     1 & 1 &       1 &    1 & \dots \\
+	Me          &     0 & 9 &       0 &    0 & \dots \\
+	\pause
+	??          &     0 & 7 &       0 &    0 & \dots \\
+	\end{tabular}
+	
+	\vspace{1em}
+    (usually, relative frequency is used)
+    \column{0.4\textwidth}\pause
+        \hspace{1em}\includegraphics[width=0.7\textwidth]{fig/vsm.png}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Why count words?}
@@ -389,7 +503,8 @@ def average(values):
                 (instead of John Fletcher)
             \url{http://www.latimes.com/science/sciencenow/la-sci-sn-shakespeare-play-linguistic-analysis-20150410-story.html}
 
-        \item Patrick Juola, ``The Rowling Case: A Proposed Standard Analytic Protocol for Authorship Questions,'' Digital Scholarship in the Humanities, vol. 30, supp. 1, 2015.
+        \item Patrick Juola. 2015. The Rowling Case: A Proposed Standard Analytic Protocol for Authorship Questions. %Digital Scholarship in the Humanities, vol. 30, supp. 1.
+            \url{https://doi.org/10.1093/llc/fqv040}
         \item The unmasking of Elena Ferante
             \url{https://www.newyorker.com/culture/cultural-comment/the-unmasking-of-elena-ferrante}
             \\
@@ -400,41 +515,82 @@ def average(values):
 
 \begin{frame}{Why count words?}
     \begin{reference}
-    \href{http://www.infotext.unisi.it/upload/rybickihoovereder_with_figures.pdf}{Rybicki, J., Eder, M., \& Hoover, D. (2016). Computational stylistics and text analysis}
+        \href{http://www.infotext.unisi.it/upload/rybickihoovereder_with_figures.pdf}{Rybicki, J., Eder, M., \& Hoover, D. (2016). Computational stylistics and text analysis (link)}
     \end{reference}
     Stylistic analysis
     \begin{itemize}
     \item Collaborative authorship of a novel:\\
         who wrote what?
+            % Classification
     \item Six narrators in Woolf's \emph{The Waves}:\\
         differentiation of characters by gender and age
+            % Clustering
     \item Vocabulary of 366 student essays wrt.\ grades:
         which words are characteristic of good and bad essays?
+            % Keywords
     \item Diachronic analysis of 1000 novels \\
         (diachronic: change over time)
+            % Network analysis
     \end{itemize}
 \end{frame}
 
 
+\subsection{Cleaning and preprocessing text}
 \begin{frame}{Goal: text $\rightarrow$ words}
     For basic text analysis,
 
     Want to consider only word frequencies of a text
 
-    \pause
-    Therefore:
+    \vspace{1em}
+    Basic approach:
     \begin{enumerate}
-        \item Identify words
-        \item Simplify text, remove non-words
+        \item Simplify text: lower case, remove punctuation
+        \item Identify words / word boundaries
         \item Count words to get frequencies
     \end{enumerate}
 \end{frame}
 
 
+\begin{frame}[fragile]{Upper and lower case}
+    \begin{itemize}
+        \item To the computer, these
+            are three completely different words!
+
+            \texttt{'The', 'the', 'THE'}
+        \item Often, we don't want to make this distinction when counting
+        \item Solution: case folding
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+In: text = 'HeLlO WoRlD'
+In: cleaned = text.lower()
+In: cleaned
+Out: 'hello world'
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Punctuation}
+    \begin{itemize}
+        \item Similarly, punctuation should be separated from words
+        \item \dots or eliminated completely
+        \item Can use functionality similar to "find \& replace" for this
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+In: text = "Forsooth, 'tis true!"
+In: cleaned = text.lower()
+In: cleaned = cleaned.replace('!', '')
+In: cleaned = cleaned.replace(',', '')
+In: cleaned
+Out: 'forsooth tis true''
+\end{lstlisting}
+\end{frame}
+
+
 \begin{frame}[fragile]{Tokenization}
  \begin{itemize}
-  \item task: splitting a string up into \structure{tokens}
-  \item tokens are (1) words, (2) punctuation marks, (3) various other things
+  \item task: splitting a string up into tokens
+  \item \structure{tokens} are (1) words, (2) punctuation marks, (3) various other things
   \item first and most basic step in text analysis,
         should be done automatically
   \item various algorithms and tools exist, none is perfect
@@ -458,14 +614,14 @@ One or two tokens?
 \vspace{1em}
 More tricky cases:
 \begin{verbatim}
-nineteenth- and twentieth-century writers
-New York-based
-(SAM)-missile launchers
 John's bike
+New York-based
+nineteenth- and twentieth-century writers
+(SAM)-missile launchers
 i.e.  Ph.D. &c.
-;-)  :)))
-#yolo#lit#hashtag
+;-) :))) #yolo#lit#hashtag
 https://en.wikipedia.org/wiki/Bicycle
+8-Cyclopentyl-1,3-dimethylxanthine
 \end{verbatim}
 \end{frame}
 
@@ -503,41 +659,12 @@ https://en.wikipedia.org/wiki/Bicycle
 % \texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
 % \end{frame}
 
-\begin{frame}[fragile]{Upper and lower case}
-    \begin{itemize}
-        \item To the computer, these
-            are three completely different words!
-
-            \texttt{'The', 'the', 'THE'}
-        \item Often, we don't want to make this distinction when counting
-        \item Solution: case folding
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-text = 'HeLlO WoRlD'
-cleaned = text.lower()
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Punctuation}
-    \begin{itemize}
-        \item Similarly, punctuation should be separated from words
-        \item \dots or eliminated completely
-        \item Can use functionality similar to "find \& replace" for this
-    \end{itemize}
-    \pause
-\begin{lstlisting}
-text = "Forsooth, 'tis true!"
-text = text.replace('!', '')
-text = text.replace(',', '')
-\end{lstlisting}
-\end{frame}
 
 \begin{frame}{Word forms}
     Should we count these separately:
 
     \vspace{1em}
-    \texttt{walk, walks, walked}
+    \texttt{walk, walks, walked, walking, \dots}
 
     \vspace{1em}
     \begin{itemize}
@@ -549,6 +676,16 @@ text = text.replace(',', '')
     \item Most work does not apply this step for simplicity,\\
         and forms may contain useful distinctions.
     \end{itemize}
+\end{frame}
+
+\begin{frame}{Eliminating classes of words}
+    For some applications, want to ignore certain words:
+    \begin{itemize}
+        \item Function words / stop words (highly frequent words that do not carry meaning)
+        \item Names
+    \end{itemize}
+
+    But in other applications, these are the most interesting words!
 \end{frame}
 
 % \begin{frame}[fragile]{Counting}
@@ -592,14 +729,15 @@ What if we want to find or replace \dots
     \item Words that follow a certain structure
 \end{itemize}
 
-Use regular expressions:\\
+Learn \structure{regular expressions}:\\
 %\url{https://docs.python.org/3/howto/regex.html}
 \url{https://www.programiz.com/python-programming/regex} \\
 % \url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
 
 \vspace{1em}
-Takes some time to learn, but extremely powerful!
+Takes time to learn, but extremely powerful!
 \end{frame}
+
 \begin{frame}[fragile]{Regular expression example}
 \begin{lstlisting}
 def pagenumbers(text, threshold=50):
@@ -645,15 +783,11 @@ def pagenumbers(text, threshold=50):
 \begin{frame}{Summary}
     \begin{itemize}
         \item Text is often messy
-        \item Cleaning removes non-words
-        \item Extract and count words
+        \item Cleaning: handle punctuation, case, removing words
+        \item Tokenization: split text in list of tokens
+        \item Count words, analyze
     \end{itemize}
 \end{frame}
-
-% parsing a simple text file line-by-line, e.g. subtitles?
-% list comprehensions? .strip() 
-
-
 
 \begin{frame}{Background reading}
     \begin{itemize}
