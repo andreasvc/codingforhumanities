@@ -9,16 +9,110 @@
 \end{frame}
 
 \begin{frame}{Last week}
-    Conditions
+    Dictionaries
 
-    Loops
+    Functions
+
+    Text (pre)processing
 \end{frame}
 
 \begin{frame}{Plan for today}
  \tableofcontents
 \end{frame}
 
+\section{Recap and last week's exercises}
+\frame{\tableofcontents[currentsection]}
+
+\subsection{Week 1: Arithmetic}
+\begin{frame}[fragile]{Values}
+    \begin{description}
+        \item[Special] True, False, None
+        \item[Numbers] -1, 2, 3.5, etc.
+        \item[Strings] 'a', 'hello', "I'm"
+    \end{description}
+\end{frame}
+
+\begin{frame}[fragile]{Variables}
+    \begin{description}
+        \item[Assignment] name = expression
+        \item[Increment] number += 1
+        \item[Expressions] number = 1 + 2 * other\_number + int('42')
+    \end{description}
+\end{frame}
+
+\subsection{Week 2: Sequences, Ifs, Loops}
+\begin{frame}[fragile]{Sequences}
+    \begin{description}
+        \item[Indexing/slicing] seq[0], seq[2:4]
+        \item[Length] len(seq)
+    \end{description}
+\end{frame}
+\begin{frame}[fragile]{Lists}
+    \begin{description}
+        \item[Lists in lists] seq[0][1]
+        \item[Append] seq.append(item)
+    \end{description}
+\end{frame}
+\begin{frame}[fragile]{Ifs}
+    \begin{description}
+        \item[Conditions] a == b, letter == 'a', number == 2
+        \item[If] if condition: ...
+    \end{description}
+\end{frame}
+\begin{frame}[fragile]{Loops}
+    \begin{description}
+        \item[For] for item in iterable: ...
+    \end{description}
+\end{frame}
+
+\subsection{Week 3: Dictionaries and Functions}
+\begin{frame}[fragile]{}
+\end{frame}
+\begin{frame}[fragile]{}
+\end{frame}
+\begin{frame}[fragile]{extract\_dialogue}
+\begin{columns}
+\column{0.5\linewidth}
+Split paragraphs
+\begin{lstlisting}
+with open(filename) as infile:
+    text = infile.read()
+paragraphs = text.split('\n\n')
+\end{lstlisting}
+\pause
+Loop over paragraphs
+\begin{lstlisting}
+result = {}
+for para in paragraphs:
+\end{lstlisting}
+
+\column{0.5\linewidth}
+\pause
+Identify lines with dialogue
+\begin{lstlisting}
+    first_token = para.split()[0]
+    if first_token.endswith('.'):
+\end{lstlisting}
+\pause Split name and line
+\begin{lstlisting}
+        name, line = para.split('.', 1)
+        # remove leading/trailing spaces
+        name = name.strip()
+\end{lstlisting}
+Store
+\begin{lstlisting}
+        if name not in result:
+            result[name] = []
+        result[name].append(line)
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+
+
+% Counter!
 % list comprehensions!
+
 
 \section{Working with files}
 \frame{\tableofcontents[currentsection]}
@@ -38,9 +132,13 @@
 
 \begin{frame}{Files and directories}
     \begin{itemize}
-        \item Data is stored in \structure{files}
+        \item Data is stored in \structure{files} as a sequence of bytes
         \item Files are part of \structure{directories} (folders)
-        \item Directories may contain files and other directories
+        \item Directories may contain files and other directories. Ergo:
+            \begin{itemize}
+                \item The file system is a tree structure.
+                \item The location of a file is a path through this tree.
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -66,7 +164,9 @@
     \end{itemize}
 \end{frame}
 
-\section{Working with libraries}
+
+
+\section{Importing modules from the standard library}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}[fragile]{Aside: the Python standard library}
