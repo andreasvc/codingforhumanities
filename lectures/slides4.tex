@@ -49,8 +49,8 @@
 \end{frame}
 \begin{frame}[fragile]{Lists}
     \begin{description}
-        \item[Lists in lists] seq[0][1]
-        \item[Append] seq.append(item)
+        \item[Lists in lists] the\_list[0][1]
+        \item[Append] the\_list.append(item)
     \end{description}
 \end{frame}
 \begin{frame}[fragile]{Ifs}
@@ -66,9 +66,18 @@
 \end{frame}
 
 \subsection{Week 3: Dictionaries and Functions}
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{Dictionaries}
+    \begin{description}
+        \item[creation] example = {'a': 0, 'b': 1}
+        \item[lookup] example['a']
+    \end{description}
 \end{frame}
-\begin{frame}[fragile]{}
+\begin{frame}[fragile]{Functions}
+    \begin{description}
+        \item[Defining] def name(param1, ...): ...
+        \item[Calling] name(arg1, ...)
+        \item[Return value] return
+    \end{description}
 \end{frame}
 \begin{frame}[fragile]{extract\_dialogue}
 \begin{columns}
@@ -110,7 +119,6 @@ Store
 
 
 
-% Counter!
 % list comprehensions!
 
 
@@ -123,7 +131,7 @@ Store
     programs need to work on \structure{arbitrary data}
 
     \pause
-    Therefore, need to learn how to \structure{read} data from disk as input,
+    Therefore, need to learn how to \structure{read} external data from disk as input,
 
     and \structure{write} results as output
 
@@ -162,22 +170,25 @@ Store
         \item Use sensible names
         \item Separate code, data, results
     \end{itemize}
+
+    Learn to use your system's file manager (Finder, Explorer, etc.)
 \end{frame}
 
 
 
-\section{Importing modules from the standard library}
+\section{Importing modules}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}[fragile]{Aside: the Python standard library}
+\begin{frame}[fragile]{Importing modules}
 \begin{lstlisting}
 import <module>
+from <module> import <function>
 \end{lstlisting}
-
-    See \url{https://docs.python.org/3/library/index.html}
 \end{frame}
 
-
+\begin{frame}[fragile]{The Python standard library}
+    See \url{https://docs.python.org/3/library/index.html}
+\end{frame}
 
 \begin{frame}[fragile]{Finding files}
     \begin{itemize}
@@ -196,7 +207,39 @@ import <module>
     \end{itemize}
 \end{frame}
 
+% Counter
+
+\begin{frame}[fragile]{The data science ecosystem}
+    \begin{description}
+        \item[Spacy] industrial-strength Natural Language Processing (NLP)
+        \item[NLTK] "educational-strength" NLP ...
+        \item[Matplotlib] low-level plots/visualization
+        \item[Seaborn] easier plot interface
+        \item[Pandas] work with tabular data
+        \item[Scikit-learn] Machine learning: classification, clustering
+        \item[gensim] Topic modeling (LDA).
+    \end{description}
+\end{frame}
+
+\begin{frame}{Installing packages}
+    \begin{itemize}
+        \item Most of these are part of Anaconda distribution (already installed!)
+        \item Install conda packages with Anaconda Navigator (Spacy, gensim)
+
+            \url{https://docs.anaconda.com/anaconda/navigator/getting-started/#navigator-managing-packages}
+
+        \item Install other packages with pip (more advanced)
+
+            \url{https://www.puzzlr.org/install-packages-pip-conda-environment/}
+    \end{itemize}
+\end{frame}
+
+
 \begin{frame}{Summary}
+    \begin{itemize}
+        \item Standard library
+        \item Data science ecosystem
+    \end{itemize}
 \end{frame}
 
 \end{document}
