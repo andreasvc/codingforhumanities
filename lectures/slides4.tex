@@ -79,6 +79,9 @@
         \item[Return value] return
     \end{description}
 \end{frame}
+
+% list comprehensions!
+
 \begin{frame}[fragile]{extract\_dialogue}
 \begin{columns}
 \column{0.5\linewidth}
@@ -119,7 +122,6 @@ Store
 
 
 
-% list comprehensions!
 
 
 \section{Working with files}
@@ -131,7 +133,8 @@ Store
     programs need to work on \structure{arbitrary data}
 
     \pause
-    Therefore, need to learn how to \structure{read} external data from disk as input,
+    Therefore, need to learn how to \structure{read} external data
+	from disk as input,
 
     and \structure{write} results as output
 
@@ -159,40 +162,106 @@ Store
             \texttt{example.txt}
         \item If a file is somewhere else, need to include directories:
 
-            \texttt{corpus/example.txt}
+            \texttt{data/example.txt}
+
     \end{itemize}
+    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}.
+        However, this causes problems, use \texttt{/} in Python!
 \end{frame}
 
 \begin{frame}{Why directories}
     % Motivate organization
     \begin{itemize}
         \item Directories are useful to organize your files
-        \item Use sensible names
-        \item Separate code, data, results
+        \item Use short, sensible names
+        \item Don't put everything in one big pile. \\
+            For example: separate code, data, results
     \end{itemize}
-
+    \pause 
     Learn to use your system's file manager (Finder, Explorer, etc.)
+    \begin{itemize}
+        \item Make directories
+        \item Move/rename files
+        \item etc.
+    \end{itemize}
+    
 \end{frame}
 
+\begin{frame}[fragile]{Messy and organized files}
+\begin{columns}
+\column{0.5\linewidth}
+\begin{verbatim}
+Untitled 1.pdf
+Untitled 1(1).pdf
+Untitled 1(2).pdf
+Untitled 1(2)(2)_draft.pdf
+Untitled 1(2)_draftFINAL.pdf
+Untitled 1(2)_FINAL_comments.pdf
+Untitled 1(2)_FINAL_REALLY_FINAL.pdf
+Untitled 1(2)_FINAL_make_it_stop.pdf
+Untitled 1(2)_lAST-mInUtE-ChAnGES.pdf
+\end{verbatim}
+\pause
+\column{0.5\linewidth}
+\begin{verbatim}
+code/ ...
+data/ ...
+research/ ...
+teaching/ ...
+└── codingforhumanities/
+    ├── lectures/
+    │   ├── slides1.pdf
+    │   ├── slides2.pdf
+    │   └── fig/ ...
+    ├── notebooks/
+    │   ├── ...
+    │   └── data/ ...
+    └── syllabus/
+        └── syllabus.pdf
+\end{verbatim}
+\end{columns}
+\end{frame}
 
 
 \section{Importing modules}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}[fragile]{Importing modules}
+To go beyond builtin functionality, use import:
 \begin{lstlisting}
+# import whole module:
 import <module>
+# or import a specific part:
 from <module> import <function>
 \end{lstlisting}
+
+\pause
+\begin{lstlisting}
+In: import math
+In: math.pi
+Out: 3.141592653589793
+In: from math import sqrt
+In: sqrt(16)
+4.0
+\end{lstlisting}
+
+(Matter of preference/convention which you use)
 \end{frame}
 
+\subsection{The Python standard library}
 \begin{frame}[fragile]{The Python standard library}
+	"Batteries included"
+
+	\vspace{1em}
+	Many useful functions
+
+	\vspace{1em}
     See \url{https://docs.python.org/3/library/index.html}
 \end{frame}
 
 \begin{frame}[fragile]{Finding files}
     \begin{itemize}
-        \item The term ``globbing'' means ``matching a set of files with a pattern.''
+        \item The term ``globbing'' means ``matching a set of files with a search pattern.''
         \item The most common patterns are:
             \begin{itemize}
                 \item \texttt{*} meaning ``match zero or more characters''
@@ -201,15 +270,94 @@ from <module> import <function>
         \item Python contains the glob library to provide pattern matching functionality
         \item The glob library contains a function also called glob to match
             file patterns
-        \item e.g., \texttt{glob.glob('*.txt')} matches all files in the
-            current directory whose names end with .txt.
-        \item Result is a (possibly empty) list of strings.
+        %\item e.g., \texttt{glob.glob('*.txt')} matches all files in the
+        %    current directory whose names end with .txt.
     \end{itemize}
+\pause
+Example:
+\begin{lstlisting}
+In: from glob import glob
+In: glob('Chapter*')
+Out: ['Chapter 2 - Basic text processing.ipynb',
+    'Chapter 1 - Getting started.ipynb',
+    'Chapter 3 - Text analysis.ipynb',]
+In: glob('data/*.txt')
+Out: ['austen-emma.txt', 'world-domination.txt', 'evil-plans.txt']
+\end{lstlisting}
 \end{frame}
 
-% Counter
+\begin{frame}[fragile]{Counter}
+\begin{itemize}
+\item A Counter is a specialized dictionary for counting
+\item values are (integer) counts; missing values are 0
+\item Mathematical term: \structure{bag}, \structure{multiset}
+\end{itemize}
 
-\begin{frame}[fragile]{The data science ecosystem}
+\begin{lstlisting}
+>>> from collections import Counter
+>>> cnt = Counter(['the', 'cat', 'is', 'on', 'the', 'mat'])
+>>> cnt
+Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Counter: initialization}
+Several ways to initialize a Counter:\\
+
+\begin{lstlisting}
+>>> cnt = Counter()
+>>> cnt
+Counter()
+>>> cnt = Counter(['red', 'blue', 'red', 'blue', 'red'])
+>>> cnt
+Counter({'red': 3, 'blue': 2})
+>>> cnt = Counter({'red': 3, 'blue': 2})
+>>> cnt
+Counter({'red': 3, 'blue': 2})
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Word frequency counting}
+\begin{lstlisting}
+>>> words = [...]       # Some list of words
+>>> frequency_dict = {}
+\end{lstlisting}\pause
+\begin{lstlisting}
+>>> for word in words:
+        if word not in frequency_dict:
+            frequency_dict[word] = 0
+		frequency_dict[word] += 1
+>>> ...
+\end{lstlisting}
+\pause
+Better:
+\begin{lstlisting}
+>>> from collections import Counter
+>>> frequency_dict = Counter(words)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Counter: more methods}
+\begin{lstlisting}
+In: cnt = Counter(['red','blue','red','blue','red'])
+In: cnt.most_common(1)
+Out: [('red', 3)]
+In: for item, count in cnt.most_common():
+...     print(count, item)
+3 red
+2 blue
+In: cnt.update(['red', 'blue', 'blue'])
+In: cnt
+Out: Counter({'red': 4, 'blue': 4})
+
+\end{lstlisting}
+%>>> Counter('abracadabra').most_common(3)
+%[('a', 5), ('r', 2), ('b', 2)]
+\end{frame}
+
+
+\subsection{The Python data science ecosystem}
+\begin{frame}[fragile]{The Python data science ecosystem}
     \begin{description}
         \item[Spacy] industrial-strength Natural Language Processing (NLP)
         \item[NLTK] "educational-strength" NLP ...
@@ -219,16 +367,22 @@ from <module> import <function>
         \item[Scikit-learn] Machine learning: classification, clustering
         \item[gensim] Topic modeling (LDA).
     \end{description}
+
+	
 \end{frame}
 
 \begin{frame}{Installing packages}
     \begin{itemize}
         \item Most of these are part of Anaconda distribution (already installed!)
-        \item Install conda packages with Anaconda Navigator (Spacy, gensim)
 
-            \url{https://docs.anaconda.com/anaconda/navigator/getting-started/#navigator-managing-packages}
+			(Exceptions: Spacy, gensim)
+        \item Install conda packages with Anaconda Navigator
+			(a kind of curated ``app store'')
 
-        \item Install other packages with pip (more advanced)
+            \url{https://docs.anaconda.com/anaconda/navigator/getting-started/\#navigator-managing-packages}
+
+        \item Install other packages with \texttt{pip}
+			(more advanced, much more packages)
 
             \url{https://www.puzzlr.org/install-packages-pip-conda-environment/}
     \end{itemize}
