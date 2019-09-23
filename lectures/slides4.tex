@@ -9,10 +9,13 @@
 \end{frame}
 
 \begin{frame}{Last week}
+    \large
     Dictionaries
 
+    \vspace{1em}
     Functions
 
+    \vspace{1em}
     Text (pre)processing
 \end{frame}
 
@@ -20,63 +23,81 @@
  \tableofcontents
 \end{frame}
 
-\section{Recap and last week's exercises}
+\section{Exam preparation}
 \frame{\tableofcontents[currentsection]}
 
-\subsection{Week 1: Arithmetic}
-\begin{frame}[fragile]{Values}
+\subsection{Recap week 1--3}
+\begin{frame}[fragile]{Week 1: Values}
     \begin{description}
-        \item[Special] True, False, None
-        \item[Numbers] -1, 2, 3.5, etc.
-        \item[Strings] 'a', 'hello', "I'm"
+        \item[Special] \texttt{True, False, None}
+        \item[Numbers] \texttt{-1, 2, 3.5}, etc.
+        \item[Strings] \texttt{'a', 'hello', "I'm"}
     \end{description}
 \end{frame}
 
-\begin{frame}[fragile]{Variables}
-    \begin{description}
-        \item[Assignment] name = expression
-        \item[Increment] number += 1
-        \item[Expressions] number = 1 + 2 * other\_number + int('42')
+\begin{frame}[fragile]{Week 1: Variables \& arithmetic}
+    \begin{description}[Assignment]
+        \item[Assignment] \texttt{name = expression}
+        \item[Increment] \texttt{number += 1}
+        \item[Expressions] \texttt{number = 1 + 2 * other\_number + int('42')}
     \end{description}
 \end{frame}
 
-\subsection{Week 2: Sequences, Ifs, Loops}
-\begin{frame}[fragile]{Sequences}
-    \begin{description}
-        \item[Indexing/slicing] seq[0], seq[2:4]
-        \item[Length] len(seq)
+\begin{frame}[fragile]{Week 2: Sequences}
+    \begin{description}[Indexing/slicing]
+        \item[Indexing/slicing] \texttt{seq[0], seq[2:4]}
+        \item[Concatenation] \texttt{seq1 + seq2}
+        \item[Length] \texttt{len(seq)}
+    \end{description}
+
+    \pause
+    Lists, strings, tuples
+\end{frame}
+\begin{frame}[fragile]{Week 2: Strings}
+    \begin{description}[Formatting]
+        \item[Splitting] \texttt{tokens = sent.split()}
+        \item[Joining] \texttt{', '.join(seq)}
+        \item[Formatting] \texttt{f'My name is \{last\}, \{first\} \{last\}'}
     \end{description}
 \end{frame}
-\begin{frame}[fragile]{Lists}
-    \begin{description}
-        \item[Lists in lists] the\_list[0][1]
-        \item[Append] the\_list.append(item)
+\begin{frame}[fragile]{Week 2: Lists}
+    \begin{description}[Lists in lists]
+        \item[Creation] \texttt{the\_list = [['a', 0], ['b', 1]]}
+        \item[Lists in lists] \texttt{the\_list[0][1]}
+        \item[Append] \texttt{the\_list.append(item)}
     \end{description}
 \end{frame}
-\begin{frame}[fragile]{Ifs}
-    \begin{description}
-        \item[Conditions] a == b, letter == 'a', number == 2
-        \item[If] if condition: ...
+\begin{frame}[fragile]{Week 2: Ifs}
+    \begin{description}[Conditions]
+        \item[Conditions] \texttt{a == b, letter == 'a', number $<$ 2, item in seq}
+        \item[If]
+            \texttt{if condition: ...}
+
+            \texttt{elif condition: ...}
+
+            \texttt{else: ...}
     \end{description}
 \end{frame}
-\begin{frame}[fragile]{Loops}
-    \begin{description}
-        \item[For] for item in iterable: ...
+\begin{frame}[fragile]{Week 2: Loops}
+    \begin{description}[Iterables]
+        \item[For] \texttt{for item in iterable:}\\
+            \hspace{1em}\texttt{\# do something with item}
+        \pause
+        \item[Iterables] lists, strings, tuples, dictionaries, range()
     \end{description}
 \end{frame}
 
-\subsection{Week 3: Dictionaries and Functions}
-\begin{frame}[fragile]{Dictionaries}
-    \begin{description}
-        \item[creation] example = {'a': 0, 'b': 1}
-        \item[lookup] example['a']
+\begin{frame}[fragile]{Week 3: Dictionaries}
+    \begin{description}[creation]
+        \item[creation] \texttt{example = \{'a': 0, 'b': 1\}}
+        \item[lookup] \texttt{example['a']}
     \end{description}
 \end{frame}
-\begin{frame}[fragile]{Functions}
-    \begin{description}
-        \item[Defining] def name(param1, ...): ...
-        \item[Calling] name(arg1, ...)
-        \item[Return value] return
+\begin{frame}[fragile]{Week 3: Functions}
+    \begin{description}[Return value]
+        \item[Defining] \texttt{def name(param1, ...): ...}
+        \item[Calling] \texttt{name(arg1, ...)}
+        \item[Return value] \texttt{return ...}
     \end{description}
 \end{frame}
 
@@ -95,18 +116,22 @@ Similarities:
 \end{itemize}
 \column{0.5\linewidth}
 \pause Differences:
+\pause
 \begin{itemize}
 	\item No ambiguity, subtext, etc.
-	\item Only commands, no description etc.
-	\item The computer will not guess what you are trying to say.
-	\item The computer gives immediate feedback.
+	\item Only commands, \\
+        no description etc.
+	\item The computer will not guess \\
+        what you are trying to say.
+	\item The computer gives \\
+        immediate feedback.
 \end{itemize}
 \end{columns}
 \end{frame}
 
 % list comprehensions!
 
-\subsection{Exercises}
+\subsection{Solutions to exercises}
 \begin{frame}{Make 3rd sg form}
 The third person singular verb form in English is distinguished by the suffix
 -s, which is added to the stem of the infinitive form: run $\rightarrow$ runs.
@@ -193,7 +218,42 @@ def extract_dialogue(filename):
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}{Problem solving strategies}
+    \begin{description}
+        \item[Bottom up] first work out details, work towards larger program
+            \begin{itemize}
+                \item Break up problem into smallest practical parts
+                \item Solve separately
+                \item \structure{Merge} parts until problem is solved
+            \end{itemize}
+        \item[Top down] start from big picture, \structure{split} into sub-problems and work towards details
+            \begin{itemize}
+                \item more structured
+                \item requires planning
+            \end{itemize}
+    \end{description}
 
+    \vspace{1em}
+    Either way: if stuck, solve an easier problem first
+\end{frame}
+
+\begin{frame}{Types of learning}
+    \begin{description}[Implicit learning]
+        \item[Explicit learning]
+            read slides, textbook, watch lectures.
+        \item[Implicit learning]
+            \begin{itemize}
+                \item learning by doing, try lots of things
+                \item learning from examples (osmosis)
+            \end{itemize}
+    \end{description}
+\end{frame}
+
+\subsection{Q\&A}
+\begin{frame}{Poll}
+    \centering\small
+    \url{https://www.mentimeter.com/s/4270a90143f5bd4274f178069f19cc77/b40ce5d293dd}
+\end{frame}
 
 
 
@@ -305,6 +365,20 @@ teaching/ ...
 \section{Importing modules}
 \frame{\tableofcontents[currentsection]}
 
+\begin{frame}
+    Until now:
+        \begin{itemize}
+            \item Language basics
+            \item Simple problems
+        \end{itemize}
+    \pause
+    From here on:
+        \begin{itemize}
+            \item Using existing code
+            \item Concrete applications
+        \end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]{Importing modules}
 To go beyond builtin functionality, use import:
 \begin{lstlisting}
@@ -407,9 +481,9 @@ counts = {}
 \end{lstlisting}\pause
 \begin{lstlisting}
 for word in words:
-    if word not in counts::
-        counts:[word] = 0
-	counts:[word] += 1
+    if word not in counts:
+        counts[word] = 0
+    counts[word] += 1
 ...
 \end{lstlisting}
 \pause
@@ -442,16 +516,15 @@ Out: Counter({'red': 4, 'blue': 4})
 \subsection{The Python data science ecosystem}
 \begin{frame}[fragile]{The Python data science ecosystem}
     \begin{description}
+        \item[Jupyter] interactive notebooks
         \item[Spacy] industrial-strength Natural Language Processing (NLP)
         \item[NLTK] "educational-strength" NLP ...
-        \item[Matplotlib] low-level plots/visualization
-        \item[Seaborn] easier plot interface
-        \item[Pandas] work with tabular data
+        \item[Matplotlib] general plots/visualization
+        \item[Seaborn] statistical data visualization
+        \item[Pandas] tabular data analysis
         \item[Scikit-learn] Machine learning: classification, clustering
         \item[gensim] Topic modeling (LDA).
     \end{description}
-
-	
 \end{frame}
 
 \begin{frame}{Installing packages}
