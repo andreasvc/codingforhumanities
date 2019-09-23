@@ -80,44 +80,117 @@
     \end{description}
 \end{frame}
 
+\begin{frame}{Learning to program is learning a language}
+\begin{columns}[T]
+\column{0.5\linewidth}
+Similarities:
+\begin{itemize}
+	\item Need to memorize \structure{vocabulary}.
+	\item Follow \structure{grammar} rules
+	\item Practice reading \\
+			and especially \structure{writing}.
+	\item Recognize and use \structure{idioms}.
+	\item Don't be afraid to make mistakes, \\
+		you only improve by trying.
+\end{itemize}
+\column{0.5\linewidth}
+\pause Differences:
+\begin{itemize}
+	\item No ambiguity, subtext, etc.
+	\item Only commands, no description etc.
+	\item The computer will not guess what you are trying to say.
+	\item The computer gives immediate feedback.
+\end{itemize}
+\end{columns}
+\end{frame}
+
 % list comprehensions!
 
-\begin{frame}[fragile]{extract\_dialogue}
-\begin{columns}
-\column{0.5\linewidth}
-Split paragraphs
-\begin{lstlisting}
-with open(filename) as infile:
-    text = infile.read()
-paragraphs = text.split('\n\n')
-\end{lstlisting}
-\pause
-Loop over paragraphs
-\begin{lstlisting}
-result = {}
-for para in paragraphs:
-\end{lstlisting}
+\subsection{Exercises}
+\begin{frame}{Make 3rd sg form}
+The third person singular verb form in English is distinguished by the suffix
+-s, which is added to the stem of the infinitive form: run $\rightarrow$ runs.
+A simple set of rules can be given as follows:
+\begin{enumerate}
+    \item If the verb ends in y, remove it and add ies
+    \item If the verb ends in o, ch, s, sh, x or z, add es
+    \item By default just add s
+\end{enumerate}
+\end{frame}
 
-\column{0.5\linewidth}
-\pause
-Identify lines with dialogue
+\begin{frame}[fragile]{Make 3rd sg form}
 \begin{lstlisting}
-    first_token = para.split()[0]
-    if first_token.endswith('.'):
+def make_3sg_form(verb):
+    if verb.endswith('y'):
+        return verb[:-1] + 'ies'
+    elif verb.endswith(('o', 's', 'x', 'z', 'ch', 'sh')):
+        return verb + 'es'
+    else:
+        return verb + 's'
 \end{lstlisting}
-\pause Split name and line
+\end{frame}
+
+
+\begin{frame}[fragile]{extract\_dialogue}
+\scriptsize
+\begin{verbatim}
+ACT I. Scene I.
+Verona. A public place.
+
+Enter Sampson and Gregory (with swords and bucklers) of the house
+of Capulet.
+
+
+  Samp. Gregory, on my word, we'll not carry coals.
+
+  Greg. No, for then we should be colliers.
+
+  Samp. I mean, an we be in choler, we'll draw.
+[...]
+
+  Greg. 'Tis well thou art not fish; if thou hadst, thou hadst
+    been poor-John. Draw thy tool! Here comes two of the house of
+    Montagues.
+
+           Enter two other Servingmen [Abram and Balthasar].
+
+
+  Samp. My naked weapon is out. Quarrel! I will back thee.
+[...]
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{extract\_dialogue}
+    Approach:
+    \begin{enumerate}
+        \item Split paragraphs
+        \item Loop over paragraphs
+        \item Identify paragraphs with dialogue
+        \item Split name and line
+        \item Store in dictionary
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{extract\_dialogue}
 \begin{lstlisting}
-        name, line = para.split('.', 1)
-        # remove leading/trailing spaces
-        name = name.strip()
+def extract_dialogue(filename):
+    with open(filename) as infile:
+        text = infile.read()
+    paragraphs = text.split('\n\n')
+    result = {}
+    for para in paragraphs:
+        # paragraphs with dialogue start with
+        # a character name and period: 'Samp. ...'
+        first_token = para.split()[0]
+        if first_token.endswith('.'):
+            name, line = para.split('.', 1)
+            # remove leading/trailing spaces
+            name = name.strip()
+            if name not in result:
+                result[name] = []
+            result[name].append(line)
+    return result
 \end{lstlisting}
-Store
-\begin{lstlisting}
-        if name not in result:
-            result[name] = []
-        result[name].append(line)
-\end{lstlisting}
-\end{columns}
 \end{frame}
 
 
@@ -130,13 +203,15 @@ Store
 \begin{frame}{Motivation}
     To do anything non-trivial,
 
-    programs need to work on \structure{arbitrary data}
+    programs need to work with \structure{arbitrary data}
 
     \pause
-    Therefore, need to learn how to \structure{read} external data
-	from disk as input,
+    Therefore, need to learn how to:
 
-    and \structure{write} results as output
+	\begin{itemize}
+		\item \structure{read} external data(sets) from disk as input,
+		\item and \structure{write} results as output
+	\end{itemize}
 
 \end{frame}
 
@@ -156,16 +231,20 @@ Store
 \begin{frame}{Paths}
     \begin{itemize}
         \item A path describes the location of a file
+		\begin{itemize}
         \item In the simplest case, just the filename is enough to
-            refer to a file in the same directory as your program:
+            refer to a file in the same directory as your program/notebook:
 
             \texttt{example.txt}
+
         \item If a file is somewhere else, need to include directories:
 
-            \texttt{data/example.txt}
-
+            \texttt{data/example.txt}\\
+            \texttt{data/novels/19thcentury/austen/emma.txt}
+		\item Use .. to refer to the parent directory
+		\end{itemize}
     \end{itemize}
-    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}.
+    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}. \\
         However, this causes problems, use \texttt{/} in Python!
 \end{frame}
 
@@ -245,7 +324,11 @@ In: sqrt(16)
 4.0
 \end{lstlisting}
 
-(Matter of preference/convention which you use)
+Matter of preference/convention which you use:
+\begin{itemize}
+	\item math.pi: clear that pi comes from math module
+	\item sqrt: less typing \dots
+\end{itemize}
 \end{frame}
 
 \subsection{The Python standard library}
@@ -261,15 +344,15 @@ In: sqrt(16)
 
 \begin{frame}[fragile]{Finding files}
     \begin{itemize}
-        \item The term ``globbing'' means ``matching a set of files with a search pattern.''
-        \item The most common patterns are:
+        \item \structure{globbing}: matching a set of files with a search pattern.
+        \item The most common operators are:
             \begin{itemize}
                 \item \texttt{*} meaning ``match zero or more characters''
                 \item \texttt{?} meaning ``match exactly one character''
             \end{itemize}
-        \item Python contains the glob library to provide pattern matching functionality
-        \item The glob library contains a function also called glob to match
-            file patterns
+        \item The \texttt{glob} module offers pattern matching of files.
+        %\item The glob library contains a function also called \texttt{glob}
+		%	to match file patterns
         %\item e.g., \texttt{glob.glob('*.txt')} matches all files in the
         %    current directory whose names end with .txt.
     \end{itemize}
@@ -373,7 +456,7 @@ Out: Counter({'red': 4, 'blue': 4})
 
 \begin{frame}{Installing packages}
     \begin{itemize}
-        \item Most of these are part of Anaconda distribution (already installed!)
+        \item Most of these are part of Anaconda distribution; already installed!
 
 			(Exceptions: Spacy, gensim)
         \item Install conda packages with Anaconda Navigator \\
