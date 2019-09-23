@@ -294,10 +294,10 @@ Out: ['austen-emma.txt', 'world-domination.txt', 'evil-plans.txt']
 \end{itemize}
 
 \begin{lstlisting}
->>> from collections import Counter
->>> cnt = Counter(['the', 'cat', 'is', 'on', 'the', 'mat'])
->>> cnt
-Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
+In: from collections import Counter
+In: cnt = Counter(['the', 'cat', 'is', 'on', 'the', 'mat'])
+In: cnt
+Out: Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
 \end{lstlisting}
 \end{frame}
 
@@ -305,35 +305,35 @@ Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
 Several ways to initialize a Counter:\\
 
 \begin{lstlisting}
->>> cnt = Counter()
->>> cnt
-Counter()
->>> cnt = Counter(['red', 'blue', 'red', 'blue', 'red'])
->>> cnt
-Counter({'red': 3, 'blue': 2})
->>> cnt = Counter({'red': 3, 'blue': 2})
->>> cnt
-Counter({'red': 3, 'blue': 2})
+In: cnt = Counter()
+In: cnt
+Out: Counter()
+In: cnt = Counter(['red', 'blue', 'red', 'blue', 'red'])
+In: cnt
+Out: Counter({'red': 3, 'blue': 2})
+In: cnt = Counter({'red': 3, 'blue': 2})
+In: cnt
+Out: Counter({'red': 3, 'blue': 2})
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Word frequency counting}
 \begin{lstlisting}
->>> words = [...]       # Some list of words
->>> frequency_dict = {}
+words = [...]       # Some list of words
+counts = {}
 \end{lstlisting}\pause
 \begin{lstlisting}
->>> for word in words:
-        if word not in frequency_dict:
-            frequency_dict[word] = 0
-		frequency_dict[word] += 1
->>> ...
+for word in words:
+    if word not in counts::
+        counts:[word] = 0
+	counts:[word] += 1
+...
 \end{lstlisting}
 \pause
 Better:
 \begin{lstlisting}
->>> from collections import Counter
->>> frequency_dict = Counter(words)
+from collections import Counter
+counts: = Counter(words)
 \end{lstlisting}
 \end{frame}
 
@@ -351,8 +351,8 @@ In: cnt
 Out: Counter({'red': 4, 'blue': 4})
 
 \end{lstlisting}
-%>>> Counter('abracadabra').most_common(3)
-%[('a', 5), ('r', 2), ('b', 2)]
+%In: Counter('abracadabra').most_common(3)
+%Out: [('a', 5), ('r', 2), ('b', 2)]
 \end{frame}
 
 
@@ -376,12 +376,12 @@ Out: Counter({'red': 4, 'blue': 4})
         \item Most of these are part of Anaconda distribution (already installed!)
 
 			(Exceptions: Spacy, gensim)
-        \item Install conda packages with Anaconda Navigator
+        \item Install conda packages with Anaconda Navigator \\
 			(a kind of curated ``app store'')
 
             \url{https://docs.anaconda.com/anaconda/navigator/getting-started/\#navigator-managing-packages}
 
-        \item Install other packages with \texttt{pip}
+        \item Install other packages with \texttt{pip} \\
 			(more advanced, much more packages)
 
             \url{https://www.puzzlr.org/install-packages-pip-conda-environment/}
