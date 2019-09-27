@@ -1,10 +1,10 @@
 \usepackage{etex}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{textcomp,listings,pmboxdraw}
 \usepackage[english]{babel}
 \usetheme{default}
-\usepackage{tgadventor,inconsolata,graphicx,url,multirow,booktabs,array,tikz,etoolbox}
+\usepackage{tgadventor,inconsolata,pmboxdraw}
+\usepackage{textcomp,listings,graphicx,url,multirow,booktabs,array,tikz,etoolbox}
 \usetikzlibrary{matrix,shapes,arrows,calc,positioning,decorations.markings}
 
 \beamertemplatenavigationsymbolsempty%
@@ -49,8 +49,11 @@
 	{\color{red}\inserttocsectionnumber.}~{\color{lightgray}\inserttocsection}}
 \setbeamerfont{section number projected}{family=\sffamily,size=\normalsize}
 \setbeamercolor{section number projected}{bg=white,fg=black}
-
 \patchcmd{\beamer@sectionintoc}{\vfill}{\vskip0.5em}{}{}
+% subsection indented in toc
+%\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=2em\rlap{\hskip-2em}\inserttocsubsection\par}
+% subsection aligned with section in toc
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=1.1em\rlap{\hskip-2em}\inserttocsubsection\par}
 
 \lstset{language=python,
 		basicstyle=\small\ttfamily,
