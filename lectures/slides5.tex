@@ -58,9 +58,17 @@
     \end{definition}
 
     \pause\vspace{1em}
-    ``If debugging is the art of removing bugs from programs,
-    programming must be the art of inserting them''
-    (attributed to Edsger Dijkstra)
+    \begin{columns}
+        \column{0.5\linewidth}
+            ``If debugging is the art of removing bugs from programs,
+            programming must be the art of inserting them''
+            (attributed to Edsger Dijkstra)
+        \column{0.5\linewidth}
+            \includegraphics[height=0.5\textheight]{fig/dijkstra}
+
+            \vspace{1em}
+            Interview: \url{https://youtu.be/mLEOZO1GwVc}
+    \end{columns}
 \end{frame}
 
 
@@ -158,7 +166,7 @@ Typically somewhere in your own code \dots
             Confirm: print values
         \item Does the problem only occur with particular values? \\
             What is special about them?
-        \item For difficult problems, repeat this several times.
+        \item For difficult problems, repeat several times.
     \end{itemize}
 \end{frame}
 
@@ -404,7 +412,7 @@ for word, count in counts.items():
     \centering\large
     \url{https://youtu.be/oP3c1h8v2ZQ?t=20}
         \column{0.5\linewidth}\centering
-        \includegraphics[height=0.6\textheight]{fig/vonnegut}
+        \includegraphics[height=0.5\textheight]{fig/vonnegut}
     \end{columns}
 \end{frame}
 
@@ -432,8 +440,8 @@ for word, count in counts.items():
     \begin{itemize}
         \item Reducing \structure{emotions} to binary sentiment word frequencies \\
             is naive \& crude
-        \item The reduction to basic story shapes appears to be a reflection of
-            noise and artefacts.
+        \item The reduction to basic story shapes appears to be \\
+            a reflection of noise and artefacts.
     \end{itemize}
 
     \pause
@@ -483,7 +491,7 @@ In: with open('AUSTEN, Jane - Sense and Sensibility.txt'):
 \begin{lstlisting}
 In: moby_dick.concordance('monstrous')
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 Ho ' s Story . CHAPTER 55 . Of the Monstrous Pictures of Whales . CHAPTER 56 .
 ong the former , one was of a most monstrous size ... . This came towards us ,
 n of the Psalms_ . " Touching that monstrous bulk of the whale or ork we have r
@@ -496,25 +504,25 @@ ing Scenes . In connexion with the monstrous pictures of whales , I am strongly
 ere to enter upon those still more monstrous stories of them which are to be fo
 ght have been rummaged out of this monstrous cabinet there is no telling . But
 e of Whale-Bones ; for Whales of a monstrous size are oftentimes cast up dead u
-\end{verbatim}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Similar words}
 \begin{lstlisting}
 In: moby_dick.similar("monstrous")
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 mean part maddens doleful gamesome subtly uncommon careful untoward
 exasperate loving passing mouldy christian few true mystifying
 imperial modifies contemptible
-\end{verbatim}
+\end{lstlisting}
 \begin{lstlisting}
 In: austen_sense.similar("monstrous")
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 very heartily so exceedingly remarkably as vast a great amazingly
 extremely good sweet
-\end{verbatim}
+\end{lstlisting}
 
 \structure{Insight}: monstrous is positive for Austen!
 \end{frame}
@@ -523,22 +531,23 @@ extremely good sweet
 \begin{lstlisting}
 In [6]: austen_sense.common_contexts(['monstrous', 'very'])
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 a_pretty am_glad a_lucky is_pretty, be_glad
-\end{verbatim}
+\end{lstlisting}
 
 \pause
-i.e., Sense \& Sensibility contains both "a very pretty" and "a monstrous pretty" etc.
+i.e., Sense \& Sensibility contains both ``a very pretty" \\
+    and ``a monstrous pretty" etc.
 
 \begin{lstlisting}
 In: austen_sense.concordance('monstrous')
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 Displaying 11 of 11 matches:
  `` Now , Palmer , you shall see a monstrous pretty girl . '' He immediately we
 your sister is to marry him . I am monstrous glad of it , for then I shall have
 [...]
-\end{verbatim}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Collocations}
@@ -550,21 +559,21 @@ your sister is to marry him . I am monstrous glad of it , for then I shall have
 \begin{lstlisting}
 In: moby_dick.collocations()
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 Sperm Whale; Moby Dick; White Whale; old man; Right Whale; Captain
 Ahab; sperm whale; New Bedford; Captain Peleg; Mr. Starbuck; Cape
 Horn; cried Ahab; Mrs. Hussey; years ago; chief mate; lower jaw;
 Father Mapple; white whale; ivory leg; cried Stubb
-\end{verbatim}
+\end{lstlisting}
 \begin{lstlisting}
 In: austen_sense.collocations()
 \end{lstlisting}
-\begin{verbatim}
+\begin{lstlisting}[style=plain]
 Mrs. Jennings; Colonel Brandon; Sir John; Lady Middleton; Mrs.
 Dashwood; Miss Dashwood; Mrs. Ferrars; every thing; thousand pounds;
 dare say; Mr. Palmer; Miss Steeles; said Elinor; Mrs. Palmer; Miss
 Steele; every body; Mr. Willoughby; John Dashwood; great deal; Harley Street
-\end{verbatim}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Dispersion plot}
@@ -657,7 +666,7 @@ tf-idf = term frequency / document frequency
         \item Finds good topical words: what is unique about this document?
         \item Only works if you have a large number of documents! \\
             (i.e., large corpus, say 100+ texts)
-        \item Example application: automatically adding ``tags''
+        \item Example application: automatically adding ``tags'' \\
             to social media posts
     \end{itemize}
 \end{frame}
