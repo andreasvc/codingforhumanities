@@ -56,10 +56,15 @@
     \begin{definition}
         \structure{Debugging}: identify and fix errors (`bugs') in programs
     \end{definition}
+
+    \pause\vspace{1em}
+    ``If debugging is the art of removing bugs from programs,
+    programming must be the art of inserting them''
+    (attributed to Edsger Dijkstra)
 \end{frame}
 
 
-\begin{frame}{(De)motivational quotations}
+\begin{frame}
     % On two occasions I have been asked, --- "Pray, Mr. Babbage, if you put
     % into the machine wrong figures, will the right answers come out?" In one
     % case a member of the Upper, and in the other a member of the Lower House
@@ -90,7 +95,6 @@
     % interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
     % 10, p. 28.)
 
-    \pause\vspace{1em}
     Maurice Wilkes discovers debugging in 1949:
 
     ``As soon as we started programming, we found to our surprise that it
@@ -99,18 +103,12 @@
     part of my life from then on was going to be spent in finding mistakes in
     my own programs.''
     
-    \pause\vspace{1em}
-    ``If debugging is the art of removing bugs from programs,
-    programming must be the art of inserting them''
-    (attributed to Edsger Dijkstra)
-
     % \pause\vspace{1em}
     % ``Everyone knows that debugging is twice as hard as writing a program in
     % the first place. So if you're as clever as you can be when you write it,
     % how will you ever debug it?'' (Brian Kernighan)
-
-
 \end{frame}
+
 
 \begin{frame}{Common errors}
     \begin{description}[AttributeError]
@@ -176,13 +174,13 @@ Typically somewhere in your own code \dots
 			while keeping the same functionality (i.e., behavior).
 	\end{definition}
 
-    % FIXME: already mention in previous lectures
+    % FIXME: already mentioned in previous lectures
     % concrete examples, or leave out.
-	\begin{itemize}
-		\item Clear variable names
-		\item Separate steps
-      \item Use idioms
-	\end{itemize}
+    \begin{itemize}
+        \item Clear variable names
+        \item Separate steps/functions
+        \item Use idioms
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Code style}
@@ -302,6 +300,15 @@ def counter2(words):
     \begin{itemize}
         \item Consider expected return on investment
         \item Optimization risks overcomplicating \& over-engineering
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Summary}
+    Improving code involves
+    \begin{itemize}
+        \item Debugging
+        \item Re-factoring, code style
+        \item Optimization, profiling
     \end{itemize}
 \end{frame}
 
@@ -438,9 +445,16 @@ for word, count in counts.items():
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Summary}
+    \begin{itemize}
+        \item Sentiment in text can be measured
+        \item Interesting patterns may emerge; but caveat emptor
+    \end{itemize}
+\end{frame}
 
 
-\section{Keyword analysis} % FIXME better title?
+
+\section{Keyword analysis}
 \subsection{Keywords in context with NLTK}
 
 \begin{frame}[fragile]{NLTK: explore keywords in context}
@@ -457,82 +471,100 @@ for word, count in counts.items():
     \end{itemize}
 Make \texttt{Text} objects:
 \begin{lstlisting}
-In: moby_dick = nltk.Text(open('MELVILLE, Herman - Moby Dick.txt').read().split())
-In: austen_sense = nltk.Text(
-        open('AUSTEN, Jane - Sense and Sensibility.txt').read().split())
+In: import nltk
+In: with open('MELVILLE, Herman - Moby Dick.txt') as inp:
+...     moby_dick = nltk.Text(nltk.word_tokenize(inp.read()))
+In: with open('AUSTEN, Jane - Sense and Sensibility.txt'):
+...     austen_sense = nltk.Text(nltk.word_tokenize(inp.read()))
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Concordance}
 \begin{lstlisting}
 In: moby_dick.concordance('monstrous')
-Displaying 12 of 12 matches:
-own-Ho's Story. CHAPTER 55. Of the Monstrous Pictures of Whales. CHAPTER 56. Of
-mong the former, one was of a most monstrous size.... This came towards us, ope
-ion of the Psalms_. "Touching that monstrous bulk of the whale or ork we have r
-ll over with a heathenish array of monstrous clubs and spears. Some were thickl
-ed as you gazed, and wondered what monstrous cannibal and savage could ever hav
- that has survived the flood; most monstrous and most mountainous! That Himmale
-they might scout at Moby Dick as a monstrous fable, or still worse and more det
-th of Radney.'" CHAPTER 55. Of the Monstrous Pictures of Whales. I shall ere lo
-ling Scenes. In connexion with the monstrous pictures of whales, I am strongly
-ere to enter upon those still more monstrous stories of them which are to be fo
-ght have been rummaged out of this monstrous cabinet there is no telling. But a
-de of Whale-Bones; for Whales of a monstrous size are oftentimes cast up dead u
 \end{lstlisting}
+\begin{verbatim}
+Ho ' s Story . CHAPTER 55 . Of the Monstrous Pictures of Whales . CHAPTER 56 .
+ong the former , one was of a most monstrous size ... . This came towards us ,
+n of the Psalms_ . " Touching that monstrous bulk of the whale or ork we have r
+ll over with a heathenish array of monstrous clubs and spears . Some were thick
+d as you gazed , and wondered what monstrous cannibal and savage could ever hav
+that has survived the flood ; most monstrous and most mountainous ! That Himmal
+they might scout at Moby Dick as a monstrous fable , or still worse and more de
+of Radney. ' " CHAPTER 55 . Of the Monstrous Pictures of Whales . I shall ere l
+ing Scenes . In connexion with the monstrous pictures of whales , I am strongly
+ere to enter upon those still more monstrous stories of them which are to be fo
+ght have been rummaged out of this monstrous cabinet there is no telling . But
+e of Whale-Bones ; for Whales of a monstrous size are oftentimes cast up dead u
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Similar words}
 \begin{lstlisting}
 In: moby_dick.similar("monstrous")
+\end{lstlisting}
+\begin{verbatim}
 mean part maddens doleful gamesome subtly uncommon careful untoward
 exasperate loving passing mouldy christian few true mystifying
 imperial modifies contemptible
+\end{verbatim}
+\begin{lstlisting}
 In: austen_sense.similar("monstrous")
+\end{lstlisting}
+\begin{verbatim}
 very heartily so exceedingly remarkably as vast a great amazingly
 extremely good sweet
-\end{lstlisting}
+\end{verbatim}
 
-Insight: monstrous is positive for Austen!
+\structure{Insight}: monstrous is positive for Austen!
 \end{frame}
 
 \begin{frame}[fragile]{Common contexts}
 \begin{lstlisting}
 In [6]: austen_sense.common_contexts(['monstrous', 'very'])
-a_pretty am_glad a_lucky is_pretty, be_glad
 \end{lstlisting}
+\begin{verbatim}
+a_pretty am_glad a_lucky is_pretty, be_glad
+\end{verbatim}
 
 \pause
 i.e., Sense \& Sensibility contains both "a very pretty" and "a monstrous pretty" etc.
 
 \begin{lstlisting}
 In: austen_sense.concordance('monstrous')
-Displaying 11 of 11 matches:
-ohn. "Now, Palmer, you shall see a monstrous pretty girl." He immediately went
- your sister is to marry him. I am monstrous glad of it, for then I shall have
-[...]
 \end{lstlisting}
+\begin{verbatim}
+Displaying 11 of 11 matches:
+ `` Now , Palmer , you shall see a monstrous pretty girl . '' He immediately we
+your sister is to marry him . I am monstrous glad of it , for then I shall have
+[...]
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Collocations}
 \begin{definition}
-    A collocation is a sequence of words that occur together
-    unusually often. Thus red wine is a collocation, whereas the wine is not.
-    (source: NLTK book)
+	A \structure{collocation} is a sequence of words that occur together
+	unusually often. Thus \emph{red wine} is a collocation,
+	whereas \emph{the wine} is not. (source: NLTK book)
 \end{definition}
 \begin{lstlisting}
 In: moby_dick.collocations()
-Sperm Whale; Moby Dick; White Whale; Sperm Whale's; Sperm Whale,;
-Captain Ahab; Moby Dick.; old man; Right Whale; old man's; Captain
-Peleg; sperm whale; White Whale?"; Moby Dick,; Pequod Meets; cried
-Ahab,; Father Mapple; Cape Horn; would fain; New Bedford
-In: austen_sense.collocations()
-Mrs. Jennings; Lady Middleton; Mrs. Jennings,; Colonel Brandon; Sir
-John; Mrs. Dashwood; every thing; Colonel Brandon,; Mrs. Ferrars; Mrs.
-Jennings's; said she,; Colonel Brandon's; Sir John,; said Elinor,;
-said he,; great deal; Mrs. Dashwood,; John Dashwood; replied Elinor,;
-Mr. Palmer
 \end{lstlisting}
+\begin{verbatim}
+Sperm Whale; Moby Dick; White Whale; old man; Right Whale; Captain
+Ahab; sperm whale; New Bedford; Captain Peleg; Mr. Starbuck; Cape
+Horn; cried Ahab; Mrs. Hussey; years ago; chief mate; lower jaw;
+Father Mapple; white whale; ivory leg; cried Stubb
+\end{verbatim}
+\begin{lstlisting}
+In: austen_sense.collocations()
+\end{lstlisting}
+\begin{verbatim}
+Mrs. Jennings; Colonel Brandon; Sir John; Lady Middleton; Mrs.
+Dashwood; Miss Dashwood; Mrs. Ferrars; every thing; thousand pounds;
+dare say; Mr. Palmer; Miss Steeles; said Elinor; Mrs. Palmer; Miss
+Steele; every body; Mr. Willoughby; John Dashwood; great deal; Harley Street
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Dispersion plot}
@@ -545,13 +577,9 @@ moby_dick.dispersion_plot(['whale', 'ship'])
     \includegraphics[height=0.6\textheight]{fig/dispersion}
 \end{frame}
 
-% move on to scikit-learn for extracting keywords with statistics
+% move on to scikit-learn / pandas for extracting keywords with statistics
 \subsection{Discovering distinctive keywords}
 \begin{frame}{Distinctive words}
-    \begin{reference}
-        \url{http://www.thegrammarlab.com/?nor-portfolio=understanding-keyness} \\
-        \url{https://liferay.de.dariah.eu/tatom/feature_selection.html}
-    \end{reference}
     Finding statistically characteristic words in a text:
 	\begin{itemize}
         \item Identify important topics (content words)
@@ -583,14 +611,17 @@ Out: FreqDist({'to': 4010, 'the': 3847, 'of': 3535, 'and': 3191, 'her': 2135,
 \begin{itemize}
     \item The most frequent words are function words (up to, say, 50 words).
     \item Informative about style and authorship.
+        \url{https://programminghistorian.org/en/lessons/introduction-to-stylometry-with-python}
     \item Mostly pretty similar and uninformative about content.
+    \item Simple solution: throw away frequent ``stop words''
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Keyness: chi-square}
-    Compare two (sets of) texts (identified by \texttt{labels}),\\
-    what are the most distinctive words?
-
+\begin{frame}[fragile]{Chi-square: Most distinctive words in two sets of texts}
+    \begin{reference}
+        \url{http://www.thegrammarlab.com/?nor-portfolio=understanding-keyness} \\
+        \url{https://liferay.de.dariah.eu/tatom/feature_selection.html}
+    \end{reference}
 % issues: uses numpy, pandas, scikit-learn
 \begin{lstlisting}
 import numpy as np
@@ -601,7 +632,7 @@ filenames = ['MELVILLE, Herman - Moby Dick.txt',
 vectorizer = CountVectorizer(input='filename')
 document_term_matrix = vectorizer.fit_transform(filenames)
 vocab = np.array(vectorizer.get_feature_names())
-labels = filenames
+labels = filenames  # use to distinguish the sets
 keyness, pvalues = chi2(document_term_matrix, labels)
 ranking = np.argsort(keyness)[::-1]
 vocab[ranking][0:10]
@@ -616,6 +647,7 @@ Result:
 \begin{reference}\scriptsize
     \url{https://suzil.ai/2019/01/15/extract-keywords-from-text-snippets-using-tfidf-and-sklearn/}
     % issues: uses numpy, pandas, scikit-learn
+    \url{https://programminghistorian.org/en/lessons/analyzing-documents-with-tfidf}
 \end{reference}
 tf-idf = term frequency / document frequency
 
@@ -625,8 +657,20 @@ tf-idf = term frequency / document frequency
         \item Finds good topical words: what is unique about this document?
         \item Only works if you have a large number of documents! \\
             (i.e., large corpus, say 100+ texts)
+        \item Example application: automatically adding ``tags''
+            to social media posts
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Summary}
+    \begin{itemize}
+        \item Searching keywords
+        \item Discovering keywords
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Background reading}
+    See all the links on the slides \dots (clickable)
+\end{frame}
 
 \end{document}
