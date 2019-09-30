@@ -63,8 +63,10 @@
 \begin{frame}[fragile]{Week 2: Lists}
     \begin{description}[Lists in lists]
         \item[Creation] \texttt{the\_list = [['a', 0], ['b', 1]]}
-        \item[Lists in lists] \texttt{the\_list[0][1]}
-        \item[Append] \texttt{the\_list.append(item)}
+        \item[Lists in lists]
+            \texttt{the\_list[0] == ['a', 0]} \\
+            \texttt{the\_list[0][1] == 0}
+        \item[Append] \texttt{the\_list.append(['c', 2])}
     \end{description}
 \end{frame}
 \begin{frame}[fragile]{Week 2: Ifs}
@@ -93,12 +95,32 @@
         \item[lookup] \texttt{example['a']}
     \end{description}
 \end{frame}
+
 \begin{frame}[fragile]{Week 3: Functions}
     \begin{description}[Return value]
         \item[Defining] \texttt{def name(param1, ...): ...}
         \item[Calling] \texttt{name(arg1, ...)}
         \item[Return value] \texttt{return ...}
     \end{description}
+    \pause
+\begin{columns}[T]
+\column{0.5\linewidth}
+\begin{lstlisting}
+def greeting(name):
+    print('Hello', name)
+
+greeting('John')
+\end{lstlisting}
+\column{0.5\linewidth}
+\begin{lstlisting}
+def average(numbers):
+    if not numbers:
+        return None
+    return sum(numbers) / len(numbers)
+
+print(average([7, 8]))
+\end{lstlisting}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Learning to program is learning a language}
@@ -141,6 +163,9 @@ A simple set of rules can be given as follows:
     \item If the verb ends in o, ch, s, sh, x or z, add es
     \item By default just add s
 \end{enumerate}
+
+\vspace{1em}
+Hint: Check out the string method \href{https://docs.python.org/3/library/stdtypes.html\#str.endswith}{.endswith()}.
 \end{frame}
 
 \begin{frame}[fragile]{Make 3rd sg form}
@@ -247,11 +272,18 @@ def extract_dialogue(filename):
                 \item learning from examples (osmosis)
             \end{itemize}
     \end{description}
+
+    \vspace{1em}
+    Implicit learning is crucial for programming!
 \end{frame}
 
 \subsection{Q\&A}
 \begin{frame}{Poll}
-    \centering\small
+    \Large Go to \textbf{www.menti.com} \\
+    and use the code 54 41 67
+
+    \vspace{2em}\small
+    Results:\\
     \url{https://www.mentimeter.com/s/4270a90143f5bd4274f178069f19cc77/b40ce5d293dd}
 \end{frame}
 
@@ -280,32 +312,13 @@ def extract_dialogue(filename):
     \begin{itemize}
         \item Data is stored in \structure{files} as a sequence of bytes
         \item Files are part of \structure{directories} (folders)
-        \item Directories may contain files and other directories. Ergo:
+        \item Directories may contain files and other directories.\\
+            Ergo:
             \begin{itemize}
                 \item The file system is a tree structure.
                 \item The location of a file is a path through this tree.
             \end{itemize}
     \end{itemize}
-\end{frame}
-
-\begin{frame}{Paths}
-    \begin{itemize}
-        \item A path describes the location of a file
-		\begin{itemize}
-        \item In the simplest case, just the filename is enough to
-            refer to a file in the same directory as your program/notebook:
-
-            \texttt{example.txt}
-
-        \item If a file is somewhere else, need to include directories:
-
-            \texttt{data/example.txt}\\
-            \texttt{data/novels/19thcentury/austen/emma.txt}
-		\item Use .. to refer to the parent directory
-		\end{itemize}
-    \end{itemize}
-    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}. \\
-        However, this causes problems, use \texttt{/} in Python!
 \end{frame}
 
 \begin{frame}{Why directories}
@@ -359,6 +372,26 @@ teaching/ ...
         └── syllabus.pdf
 \end{verbatim}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Paths}
+    \begin{itemize}
+        \item A path describes the location of a file
+		\begin{itemize}
+        \item In the simplest case, just the filename is enough to
+            refer to a file in the same directory as your program/notebook:
+
+            \texttt{example.txt}
+
+        \item If a file is somewhere else, need to include directories:
+
+            \texttt{data/example.txt}\\
+            \texttt{data/novels/19thcentury/austen/emma.txt}
+		\item Use .. to refer to the parent directory
+		\end{itemize}
+    \end{itemize}
+    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}. \\
+        However, this causes problems, use \texttt{/} in Python!
 \end{frame}
 
 
