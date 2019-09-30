@@ -40,12 +40,12 @@
 \begin{frame}{The Midterm}
     \begin{itemize}
         \item Solutions on Nestor.
-        \item Common mistakes:
-            \begin{itemize}
-                \item \dots
-                \item \dots
-            \end{itemize}
-        \item Questions?
+        %\item Common mistakes:
+        %    \begin{itemize}
+        %        \item \dots
+        %        \item \dots
+        %    \end{itemize}
+        \item Questions? Tomorrow in lab.
     \end{itemize}
 \end{frame}
 
@@ -63,6 +63,9 @@
             ``If debugging is the art of removing bugs from programs,
             programming must be the art of inserting them''
             (attributed to Edsger Dijkstra)
+
+            % If you want more effective programmers, you will discover that they should not waste their time debugging, they should not introduce the bugs to start with.
+            % (Edsger Dijkstra)
         \column{0.5\linewidth}
             \includegraphics[height=0.5\textheight]{fig/dijkstra}
 
@@ -105,6 +108,7 @@
 
     Maurice Wilkes discovers debugging in 1949:
 
+    \vspace{1em}
     ``As soon as we started programming, we found to our surprise that it
     wasn't as easy to get programs right as we had thought. Debugging had to be
     discovered. I can remember the exact instant when I realized that a large
@@ -174,13 +178,13 @@ Typically somewhere in your own code \dots
 
 \subsection{Good code}
 \begin{frame}{Good code: Refactoring}
-	Insight: can achieve the same end in many different ways
+    Insight: can achieve the same end in many different ways
 
-	\pause
-	\begin{definition}
-		\structure{Refactoring}: improving code (e.g., readability) \\
-			while keeping the same functionality (i.e., behavior).
-	\end{definition}
+    \pause
+    \begin{definition}
+        \structure{Refactoring}: improving code (e.g., readability) \\
+            while keeping the same functionality (i.e., behavior).
+    \end{definition}
 
     % FIXME: already mentioned in previous lectures
     % concrete examples, or leave out.
@@ -191,7 +195,47 @@ Typically somewhere in your own code \dots
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Code style}
+\begin{frame}[fragile]{Example: working code}
+\begin{lstlisting}
+def clean_tweets(filename):
+    with open(filename, encoding='utf8') as infile:
+        text = infile.read()
+        cleaned_text = ''
+        lower_text = text.lower()
+        for character in lower_text:
+            if character not in '!$%^&*()-+={}[]:;"\'|<>,.?/~`':
+                cleaned_text += character
+        cleaned_list = cleaned_text.split()
+        return cleaned_list
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Example: better code}
+\begin{columns}
+\column{0.6\linewidth}
+\begin{lstlisting}
+def remove_punc(text):
+    punctuation = '!$%^&*()-+={}[]:;"\'|<>,.?/~`'
+    return ''.join(character for character in text
+            if character not in punctuation)
+
+def clean_tweets(filename):
+    with open(filename, encoding='utf8') as infile:
+        text = infile.read()
+    cleaned_text = remove_punc(text.lower())
+    tokens = cleaned_text.split()
+    return tokens
+\end{lstlisting}
+\column{0.4\linewidth}
+\begin{itemize}
+\item More efficient punctuation elimination
+\item Seperate function for punctuation
+\item Renamed \texttt{cleaned\_list} to \texttt{tokens}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Code style guides}
     \begin{reference}
         PEP-0008: coding conventions for Python code.
         \url{https://www.python.org/dev/peps/pep-0008/}
@@ -257,11 +301,11 @@ def counter2(words):
     \end{description}
 
     \pause
-	\begin{itemize}
-		\item Avoid doing unnecessary things
-		\item Avoid slow methods
+    \begin{itemize}
+        \item Avoid doing unnecessary things
+        \item Avoid slow methods
         \item Lots of clever things \dots (rabbit hole)
-	\end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Efficiency}
@@ -273,9 +317,9 @@ def counter2(words):
 
 
 \begin{frame}{Profiling}
-	\begin{definition}
-		\structure{Profiling}: identify performance bottlenecks by measuring
-	\end{definition}
+    \begin{definition}
+        \structure{Profiling}: identify performance bottlenecks by measuring
+    \end{definition}
     
     Two important measurements:
     \begin{itemize}
@@ -330,10 +374,10 @@ def counter2(words):
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}{Sentiment analysis}
-	\begin{definition}
+    \begin{definition}
         \structure{Sentiment (polarity) analysis}: 
             is a piece of language positive or negative?
-	\end{definition}
+    \end{definition}
 
     Applications:
     \begin{itemize}
@@ -343,15 +387,15 @@ def counter2(words):
 
     \pause
     How to estimate?
-	\begin{itemize}
-		\item Create sentiment word lists
-		\item Assign each word a score, e.g.: \\
+    \begin{itemize}
+        \item Create sentiment word lists
+        \item Assign each word a score, e.g.: \\
             negative vs positive, 5-point scale, etc.
         \item Positive: good, swell, benevolent, admire, etc. \\
                 Negative: bad, sour, abnormal, hinder, etc.
         \item Combine scores for each word into a total score. \\
                 (simple sum, or train classification model)
-	\end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Challenges}
@@ -383,13 +427,14 @@ def counter2(words):
         % issues: NLTK classifiers, no explanation
     \end{reference}
 \begin{lstlisting}
+import nltk
 from collections import Counter
 with open('data/sentiment/positive.txt') as inp:
     positive_words = set(inp.read().splitlines())
 with open('data/sentiment/negative.txt') as inp:
     negative_words = set(inp.read().splitlines())
 with open('VERNE, Jules - A Journey to the Center of the Earth.txt') as inp:
-    tokens = inp.read().lower().split()
+    tokens = nltk.word_tokenize(inp.read().lower())
 counts = Counter(tokens)
 sentiment = 0
 for word, count in counts.items():
@@ -418,31 +463,42 @@ for word, count in counts.items():
 
 \begin{frame}{Can we operationalize this?}
     \begin{reference}
-        Matthew Jockers (2015) \url{http://www.matthewjockers.net/2015/02/02/syuzhet/}
+        Matthew Jockers (2015) \url{http://www.matthewjockers.net/2015/02/02/syuzhet/} \\
         Reagan et al (2015) \url{https://doi.org/10.1140/epjds/s13688-016-0093-1}
     \end{reference}
     Yes we can!
+    
+    \begin{columns}
+        \column{0.5\linewidth}
+    \includegraphics[width=1\textwidth]{fig/joycearc}
+
+        \column{0.5\linewidth}
     \begin{itemize}
         \item Estimate emotions: count sentiment words
         \item Chop text into chunks of x words, count sentiment in each chunk
         \item Recognize plot shapes: SVD / Fourier transform
     \end{itemize}
+    \end{columns}
     Seems to confirm that all novels have a few basic story shapes!
 \end{frame}
 
-\begin{frame}{But \dots}
+\begin{frame}{But \dots Hold your horses!}
     \begin{reference}
         \url{https://annieswafford.wordpress.com/2015/03/07/continuingsyuzhet/} \\
         \url{https://senderle.github.io/svd-noise/}
     \end{reference}
-    Hold your horses \dots !
 
+    \begin{columns}
+        \column{0.5\linewidth}
+            \includegraphics[width=0.9\linewidth]{fig/joycenoise}
+        \column{0.5\linewidth}
     \begin{itemize}
         \item Reducing \structure{emotions} to binary sentiment word frequencies \\
             is naive \& crude
         \item The reduction to basic story shapes appears to be \\
             a reflection of noise and artefacts.
     \end{itemize}
+    \end{columns}
 
     \pause
     Takeaway:
@@ -552,9 +608,9 @@ your sister is to marry him . I am monstrous glad of it , for then I shall have
 
 \begin{frame}[fragile]{Collocations}
 \begin{definition}
-	A \structure{collocation} is a sequence of words that occur together
-	unusually often. Thus \emph{red wine} is a collocation,
-	whereas \emph{the wine} is not. (source: NLTK book)
+    A \structure{collocation} is a sequence of words that occur together
+    unusually often. Thus \emph{red wine} is a collocation,
+    whereas \emph{the wine} is not. (source: NLTK book)
 \end{definition}
 \begin{lstlisting}
 In: moby_dick.collocations()
@@ -590,11 +646,11 @@ moby_dick.dispersion_plot(['whale', 'ship'])
 \subsection{Discovering distinctive keywords}
 \begin{frame}{Distinctive words}
     Finding statistically characteristic words in a text:
-	\begin{itemize}
+    \begin{itemize}
         \item Identify important topics (content words)
         \item Identify stylistic characteristics (function words)
         \item Contrast two (sets of) texts (keyness)
-	\end{itemize}
+    \end{itemize}
 
     Keyword selection methods:
     \begin{itemize}
@@ -677,6 +733,20 @@ tf-idf = term frequency / document frequency
         \item Discovering keywords
     \end{itemize}
 \end{frame}
+
+% \begin{frame}{Mini-project}
+%     \structure{Proposal}:
+%     \begin{itemize}
+%         \item Mini-project instead of take-home exam.
+%         \item Same deadline, start now, work individually
+%         \item Pick text analysis method (sentiment analysis, keyword analysis)
+%         \item Pick dataset from your field (a few options will be made available)
+%         \item Think of a simple (answerable) research question
+%         \item \structure{Hand in}:
+%             Notebook with code, quantitative results, interpretation,
+%             and discussion.
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Background reading}
     See all the links on the slides \dots (clickable)
