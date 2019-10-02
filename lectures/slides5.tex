@@ -26,6 +26,7 @@
 
 \begin{frame}
     \begin{reference}
+        \scriptsize\vspace{1em}
         \hfill Source: \url{https://oktop.tumblr.com/post/15352780846}
     \end{reference}
     \begin{columns}[b]
@@ -106,15 +107,20 @@
     % interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
     % 10, p. 28.)
 
+    \begin{columns}
+        \column{0.7\linewidth}
     Maurice Wilkes discovers debugging in 1949:
 
     \vspace{1em}
+    \begin{quote}\normalfont
     ``As soon as we started programming, we found to our surprise that it
     wasn't as easy to get programs right as we had thought. Debugging had to be
     discovered. I can remember the exact instant when I realized that a large
     part of my life from then on was going to be spent in finding mistakes in
     my own programs.''
-    
+    \end{quote}
+        \column{0.3\linewidth}
+    \end{columns}
     % \pause\vspace{1em}
     % ``Everyone knows that debugging is twice as hard as writing a program in
     % the first place. So if you're as clever as you can be when you write it,
@@ -210,7 +216,7 @@ def clean_tweets(filename):
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Example: better code}
+\begin{frame}[fragile]{Example: re-factored}
 \begin{columns}
 \column{0.6\linewidth}
 \begin{lstlisting}
@@ -228,9 +234,11 @@ def clean_tweets(filename):
 \end{lstlisting}
 \column{0.4\linewidth}
 \begin{itemize}
+\item Separate function for punctuation
 \item More efficient punctuation elimination
-\item Seperate function for punctuation
-\item Renamed \texttt{cleaned\_list} to \texttt{tokens}
+\item Limit scope of \textcolor{blue}{\texttt{with}}
+\item Renamed \textcolor{blue}{\texttt{cleaned\_list}} \\
+    to \textcolor{blue}{\texttt{tokens}}
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -295,9 +303,9 @@ def counter2(words):
 \begin{frame}{Levels to optimize}
     \begin{description}
         \item[Hardware] get faster machine, more memory, etc.
-        \item[Code] improve `constant' factors (caching, compact representations etc.)
-        \item[Algorithm] e.g., sorting by shuffling will never be fast (algorithmic complexity)
-        \item[Problem] e.g., sorting is harder than searching (computational complexity)
+        \item[Code] improve `constant' factors \\ (caching, compact representations etc.)
+        \item[Algorithm] e.g., sorting by shuffling will never be fast \\ (algorithmic complexity)
+        \item[Problem] e.g., sorting is harder than searching \\ (computational complexity)
     \end{description}
 
     \pause
@@ -327,7 +335,7 @@ def counter2(words):
         \item How long does it take?
     \end{itemize}
 
-    \pause
+    \pause\vspace{1em}
     Consider two scenarios:
     \begin{enumerate}
         \item A 100x speedup of a component responsible for 1\% of total runtime.
@@ -337,10 +345,10 @@ def counter2(words):
 \end{frame}
 
 \begin{frame}{Is it worth the time?}
-    \begin{reference}
+    \begin{reference}\scriptsize\vspace{1em}
         \url{https://www.xkcd.com/1205/}
     \end{reference}
-    \centering\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
+    \hfill\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
 \end{frame}
 
 \begin{frame}{Takeaway}
