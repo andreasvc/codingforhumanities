@@ -437,11 +437,11 @@ def counter2(words):
 \begin{lstlisting}
 import nltk
 from collections import Counter
-with open('data/sentiment/positive.txt') as inp:
+with open('data/sentiment/positive.txt', encoding='utf8') as inp:
     positive_words = set(inp.read().splitlines())
-with open('data/sentiment/negative.txt') as inp:
+with open('data/sentiment/negative.txt', encoding='utf8') as inp:
     negative_words = set(inp.read().splitlines())
-with open('VERNE, Jules - A Journey to the Center of the Earth.txt') as inp:
+with open('VERNE Journey to Center of Earth.txt', encoding='utf8') as inp:
     tokens = nltk.word_tokenize(inp.read().lower())
 counts = Counter(tokens)
 sentiment = 0
@@ -545,9 +545,9 @@ for word, count in counts.items():
 Make \texttt{Text} objects:
 \begin{lstlisting}
 In: import nltk
-In: with open('MELVILLE, Herman - Moby Dick.txt') as inp:
+In: with open('MELVILLE Moby Dick.txt', encoding='utf8') as inp:
 ...     moby_dick = nltk.Text(nltk.word_tokenize(inp.read()))
-In: with open('AUSTEN, Jane - Sense and Sensibility.txt'):
+In: with open('AUSTEN Sense and Sensibility.txt', encoding='utf8') as inp:
 ...     austen_sense = nltk.Text(nltk.word_tokenize(inp.read()))
 \end{lstlisting}
 \end{frame}

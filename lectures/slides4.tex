@@ -224,7 +224,7 @@ of Capulet.
 \begin{frame}[fragile]{extract\_dialogue}
 \begin{lstlisting}
 def extract_dialogue(filename):
-    with open(filename) as infile:
+    with open(filename, encoding='utf8') as infile:
         text = infile.read()
     paragraphs = text.split('\n\n')
     result = {}

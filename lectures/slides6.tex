@@ -745,7 +745,7 @@ data.hist()
 \begin{frame}[fragile]{Counting values: value\_counts()}
 \begin{lstlisting}
 import nltk
-with open('data/arabian_nights/1.txt') as infile:
+with open('data/arabian_nights/1.txt', encoding='utf8') as infile:
     tokens = nltk.word_tokenize(infile.read())
 data = pandas.Series(tokens)
 data.value_counts()
