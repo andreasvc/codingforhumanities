@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169,usenames,dvipsnames]{beamer}
 \usepackage{preamble}
 
 \title{Coding for Humanities}
 \author{Andreas van Cranenburgh}
-\date{Week 6: Tabular data analysis with Pandas}
+\date{Week 6: Exploratory data analysis with Pandas}
 
 \begin{document}
 \maketitle
@@ -28,6 +28,8 @@
 \begin{frame}{Always report requested results!}
     Read the questions carefully. \\
     When results are requested, include them!
+
+    \vspace{1em}
     \begin{itemize}
         \item Suppose that we call function \textcolor{blue}{\texttt{a}}
             as follows: [...]\\
@@ -146,7 +148,7 @@ Lesson:
     \begin{itemize}
         \item Don't just test your code \\
             on the particular given examples.
-        \item Tests are typically not exhaustive
+        \item Tests are typically not exhaustive.
         \item Reflect whether you really solved the problem.
     \end{itemize}
 \end{frame}
@@ -162,8 +164,8 @@ for line in text.splitlines():
     return result
 \end{lstlisting}
 Why does this not work?
-\texttt{return} immediately aborts the function!
 \pause\column{0.5\textwidth}
+\texttt{return} immediately aborts the function!
 \begin{lstlisting}
 result = []
 for line in text.splitlines():
@@ -174,7 +176,7 @@ return result
 \end{frame}
 
 \begin{frame}[fragile]{For loops: inefficiency}
-\begin{columns}
+\begin{columns}[T]
 \column{0.5\textwidth}
 Pay attention to what is part of a for loop!
 \begin{lstlisting}
@@ -184,8 +186,9 @@ for line in text.splitlines():
     result = ''.join(chars)
 return result
 \end{lstlisting}
+\pause
 This repeats the join at every iteration, completely unnecessary!
-\pause\column{0.5\textwidth}
+\column{0.5\textwidth}
 Solution: Take the join out of the for loop:
 \begin{lstlisting}
 chars = []
@@ -206,13 +209,14 @@ result = []
 for line in text.splitlines():
     result += line[0]
 \end{lstlisting}
-Why not? Type mismatch:
+Why not? \pause
+Type mismatch:
     \begin{itemize}
         \item \texttt{result} is a list
         \item \texttt{line[0]} is a string \\
             (of one character).
     \end{itemize}
-\pause\column{0.5\textwidth}
+\column{0.5\textwidth}
 Better:
 \begin{lstlisting}
 result = ''
@@ -245,14 +249,17 @@ return ''.join(line[0] for line
 
 
 \section{Exploratory Data Analysis}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
 
-\begin{frame}{Definition}
+\begin{frame}{Data Science}
+\begin{reference}
+    \url{http://www.datasciencecourse.org/notes/intro/}
+\end{reference}
     \begin{definition}
     \structure{Data science} is the application of
     computational and statistical techniques to
-    address or gain [managerial or scientific]
-    insight into some problem in the real world.
+    address or gain % [managerial or scientific]
+    insight into some problem in the real world. \\
     --- Zico Kolter, Machine Learning Prof, CMU
     \end{definition}
 \end{frame}
@@ -272,12 +279,14 @@ return ''.join(line[0] for line
     \begin{enumerate}
         \item Data collection
         \item Data processing
-        \item \structure{Exploratory analysis \& visualization}
-        \item Analysis, hypothesis testing, \& Machine Learning
+        \item \structure{Exploratory data analysis \& visualization}
+        \item ``Confirmatory data analysis'' \\
+            Hypothesis testing, Machine Learning
         \item Insight \& Policy Decision
     \end{enumerate}
 
-    Today: focus on step 3
+    \vspace{1em}
+    This course focuses on step 3
 \end{frame}
 
 \begin{frame}{Data Collection, Processing}
@@ -308,7 +317,7 @@ In practice, this often takes the most time (up to 80\%!)
             age, length, etc.
         \item[Categorical] predefined set of values\\
             yes/no, True/False, red/blue/green, etc.
-        \item[Text] open-ended \\
+        \item[Text] open-ended, unstructured \\
             comments, tweets, etc.
     \end{description}
 \end{frame}
@@ -318,15 +327,19 @@ In practice, this often takes the most time (up to 80\%!)
 %\begin{itemize}
 %    \item Convey lots of information with extreme simplicity
 %\end{itemize}
+\structure{Descriptive statistics} contrasts with inferential statistics
+    (hypothesis testing)
 
+\vspace{1em}
 Descriptive statistics for one variable:
 \begin{itemize}
     \item Distribution: bar plot, histogram
     \item Measures of location: mean, median
-    \item Measure of dispersion: standard deviation
+    \item Measure of dispersion: range, standard deviation
 \end{itemize}
 
-Measuring correlation of two variables:
+\pause
+Measuring correlation of two variables (next week):
 \begin{itemize}
     \item Scatter plots
     \item Understanding correlation
@@ -335,6 +348,7 @@ Measuring correlation of two variables:
 \end{frame}
 
 \subsection{Exploring one variable}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Plotting a distribution: categorical}
 Collected favorite color of 100 people:
@@ -344,12 +358,16 @@ Collected favorite color of 100 people:
 \vspace{1em}
 How do we visualize this?
 
-\pause
+\pause\vspace{1em}
+\begin{columns}
+\column{0.46\textwidth}
 A bar plot:
 
-\includegraphics[width=0.7\textwidth]{fig/barplot}
+\includegraphics[height=0.55\textheight]{fig/barplot}
 
+\column{0.46\textwidth}
 Don't use a pie chart: \url{https://www.businessinsider.com/pie-charts-are-the-worst-2013-6}
+\end{columns}
 \end{frame}
 
 
@@ -364,7 +382,7 @@ How do we visualize this?
 \pause
 A histogram:
 
-\includegraphics[width=0.8\textwidth]{fig/histogram}
+\includegraphics[height=0.55\textheight]{fig/histogram}
 \end{frame}
 
 
@@ -406,39 +424,40 @@ price = (weight$_1 \times $value$_1$ + weight$_2 \times $value$_2$ + \dots)
 \end{block}
 
 \vspace{1em}
-New average is \$409,234 compared to \$369,687 without weights,
+New average is \$409,234 compared to \$369,687 without weights, \\
 an error of 11\%
 \end{frame}
 
 
 \begin{frame}{Mean and median}
-`Average' can mean different things:
-\begin{description}
-\item[Mean] sum of values, divided by number of values \\
-        Mean[1,2,4,6,8,9,17] = 47 / 7 = 6.71\dots
-
-\item[Median] sort data, take the middle point
-
+    `Average' can mean different things:
     \begin{description}
-    \item[Odd length:]
-        Med[1,2,4,\structure{6},8,9,17] = 6
+        \item[Mean] sum of values, divided by number of values \\
+                Mean[1,2,4,6,8,9,17] = 47 / 7 = 6.71\dots
 
-    \item[Even length:]
-        Midpoint between the two central observations \\
-        Med[1,2,4,\structure{6,8},9,14,17] = (6+8)/2 = 7
+        \item[Median] sort data, take the middle point
+
+            \begin{description}
+            \item[Odd length:]
+                Med[1,2,4,\structure{6},8,9,17] = 6
+
+            \item[Even length:]
+                Midpoint between the two central observations \\
+                Med[1,2,4,\structure{6,8},9,14,17] = (6+8)/2 = 7
+            \end{description}
+        \item[Mode] most common value \\
+            (also works for categorical)
+        \item[Harmonic/geometric mean] (less common)
     \end{description}
-    %\item[Mode] most common value
-    %\item[Harmonic/geometric mean]
-\end{description}
 \end{frame}
 
 \begin{frame}{Skewness}
 Extreme observations distort means but not medians:
 \begin{itemize}
-\item Med [1,2,4,6,8,9,17] = 6
 \item Mean[1,2,4,6,8,9,17] = 6.714
-\item Med [1,2,4,6,8,9,17000] = 6 (still)
 \item Mean[1,2,4,6,8,9,17000] = 2432.8 (!)
+\item Med [1,2,4,6,8,9,17] = 6
+\item Med [1,2,4,6,8,9,17000] = 6 (still)
 \end{itemize}
 Typically occurs when there are outliers,
 such as in cross sections of income or wealth
@@ -446,42 +465,96 @@ and/or when the sample is not very large.
 \end{frame}
 
 \begin{frame}{Measuring dispersion: use range min/max?}
-\includegraphics[width=0.9\textwidth]{fig/disp}
+\includegraphics[width=\textwidth]{fig/disp.pdf}
 
 These two datasets both have 1,000 observations \\
 that range from about 10 to about 180.
 \end{frame}
 
 
-\begin{frame}{Standard deviation}
+\begin{frame}{Standard deviation (SD / STD)}
 A measure of the amount of variation,\\
 in the same unit as the original data
 
 \begin{description}
     \item[Low SD:] values tend to be close to the mean
-    \item[High SD:] values can be much lower and/or higher than the mean
+    \item[High SD:] values can be much lower/higher than mean
 \end{description}
 
-\begin{block}{Example}
-normal distribution with mean 10 and SD 3, then:\\
-68\% of values are within 1 SD of mean (between 7 and 13) \\
-95\% of values are within 2 SDs of mean (between 4 and 16) \\
-99.7\% \dots
-\dots
-\end{block}
+\pause
+    \begin{columns}[T]
+        \column{0.7\textwidth}
+            \includegraphics[width=\textwidth]{fig/disp.pdf}
+        \column{0.3\textwidth}
+            \vspace{3em}
+            SD: 24.8
+
+            \vspace{4em}
+            SD: 12.9
+    \end{columns}
+% \begin{block}{Example}
+% normal distribution with mean 10 and SD 3, then:\\
+% 68\% of values are within 1 SD of mean (between 7 and 13) \\
+% 95\% of values are within 2 SDs of mean (between 4 and 16) \\
+% 99.7\% \dots
+% \dots
+% \end{block}
 \end{frame}
 
-% TODO: boxplot
-%\begin{frame}{Boxplots}
-%\includegraphics[width=0.8\textwidth]{fig/boxplot}
-%\end{frame}
+\begin{frame}{Boxplots}
+    \begin{reference}
+        John W. Tukey (1977). Exploratory Data Analysis. Addison-Wesley.
+    \end{reference}
+        
+    \structure{Boxplot} or box-and-whisker plot:
+    simple graphical representation of \dots
 
+    \begin{itemize}
+        \item Range
+        \item Median, 25\% and 75\% quartiles
+        \item Optionally: outliers
+    \end{itemize}
+
+    Useful to judge dispersion, skewness, and outliers.
+\end{frame}
+
+\begin{frame}{Boxplot example I: your grades}\centering
+\includegraphics[height=0.8\textheight]{fig/boxplot}
+\end{frame}
+
+\begin{frame}{Boxplot example II}\centering
+\includegraphics[height=0.75\textheight]{fig/boxplotcmp}
+
+1a counting chars. 1d shorter code. 1bc: better names. \\
+2 first letters of poem. 3a find trump tweets. \\
+3b count hash tags/usernames. 3c vocabulary richness.
+\end{frame}
+
+\begin{frame}{Visualization guidelines (Tufte)}
+    \begin{reference}
+        Tufte, Edward R (2001/1983), The Visual Display of Quantitative Information.
+    \end{reference}
+%    \begin{itemize}
+%        \item Always provide axis labels
+%        \item No misleading scales
+%    \end{itemize}
+\begin{enumerate}
+    \item Represent numbers in a way that is directly proportional to numeric quantities depicted
+    \item Use clear and thorough labelling to defeat distortion and ambiguity
+    \item Show data variation, not design variation
+    \item [\dots]
+    % \item If representing money, use deflated and standardized units
+    % \item Don't use more information-carrying dimensions than the number of dimensions in the data
+    % \item Don't quote data out of context
+    % \item Take care of use of absolute values: they may be misleading due to hidden variables
+\end{enumerate}
+\end{frame}
 
 \begin{frame}{Summary: inspecting one variable}
-\begin{tabular}{lll}     & categorical & continuous \\
-1. Plot its distribution & bar plot    & histogram, boxplot \\
-2. Central tendency      & -           & mean, median \\
-3. Dispersion            & -           & range, standard deviation \\
+\noindent\begin{tabular}{@{}lll} & categorical & continuous \\
+        1. Plot its distribution & bar plot    & histogram, boxplot \\
+        2. Central tendency      & mode        & mean, median \\
+        3. Dispersion            & -           & range, standard deviation \\
 \end{tabular}
 \end{frame}
 
@@ -489,7 +562,7 @@ normal distribution with mean 10 and SD 3, then:\\
 
 
 \section{Reproducible research with Pandas}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Intermezzo: reproducibility}
     \structure{Austerity policy}.
@@ -508,6 +581,10 @@ normal distribution with mean 10 and SD 3, then:\\
 \end{frame}
 
 \begin{frame}{The dangers of Excel}
+    \begin{reference}
+    \url{https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html}
+    \end{reference}
+
     Problem:
     \begin{itemize}
         \item The claim is wrong.
@@ -516,31 +593,32 @@ normal distribution with mean 10 and SD 3, then:\\
         \item Can we do better with Python?
     \end{itemize}
 
-    \vspace{1em}
-    \url{https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html}
 \end{frame}
 
 \begin{frame}{Reproducibility}
     Research should be reproducible:
 
     \begin{itemize}
-        \item Code and data should be made available (if possible)
-        \item Version control for code and data
+        \item Code and data should be made available \\
+            But: \structure{check permissions}! (copyright, licenses)
+        \item Code: version control (cf.\ \href{http://www.github.com}{GitHub}),\\
+            Data: durable storage in simple formats (text-based)
+        \item Make reproducing results \structure{as simple as possible}
         \item Ensure code still works 20+ years later. \\
-                Hard problem: bit rot.
-        \item Check code/data in peer review \\
+            Hard problem: ``bit rot''
+        \item Audit code/data in peer review \\
             However, this requires lots of time and expertise; realistic?
     \end{itemize}
 
-    Some overlap between open source, open science, open data, open access, etc.
+    %Overlap between open source, open science, open data, open access, etc.
+    Can use Jupyter Notebooks for code, results, and documentation.
+    Only need to store data separately.
 \end{frame}
-
-% Plug notebooks again
-
-
 
 
 \subsection{Analyzing results with Pandas}
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}{Pandas}
     Pandas: versatile data analysis tool \dots
 
@@ -570,36 +648,69 @@ normal distribution with mean 10 and SD 3, then:\\
     \end{description}
 \end{frame}
 
-% TODO: don't show the mechanics of Pandas
+% TODO: don't show too much mechanics of Pandas
 % show examples, point to further docs, practice during lab in notebook
-% think of interesting + simple running examples
 \begin{frame}[fragile]{Creating a Series}
+    \begin{lstlisting}
+    In: import pandas as pd
+    In: data = pd.Series([0, 1, 2, 3, 4])
+    \end{lstlisting}
+
+    \vspace{1em}
+    BTW: "as pd" gives a shorter name to the module, \\
+    saves a few keystrokes \dots
+\end{frame}
+
+\begin{frame}[fragile]{A first plot}
+    \begin{lstlisting}
+    %matplotlib inline
+    data.plot()
+    \end{lstlisting}
+    \includegraphics[height=0.5\textheight]{fig/basicplot}
+    \pause
+
+Saving the plot (e.g., to include in a report):
 \begin{lstlisting}
-In: import pandas as pd
-In: data = pd.Series([0, 1, 2, 3, 4])
+ax = data.plot()
+ax.figure.savefig('plot.pdf')  # PDF
+ax.figure.savefig('plot.png', dpi=150)  # PNG
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Labeled data}
+Two ways:
+\begin{lstlisting}
+In: data = pd.Series([0, 1], index=['a', 'b'])
+In: data = pd.Series({'a': 0, 'b': 1})
+Out: Index(['a', 'b'], dtype='object')
 \end{lstlisting}
 
-\vspace{1em}
-BTW: "as pd" gives a shorter name to the module, \\
-saves a few keystrokes \dots
+\begin{itemize}
+    \item Each datapoint will have a label, \\
+        stored in the \texttt{index}.
+    \item If no labels are supplied, a numeric index is automatically created
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Basic statistics}
+The sentence lengths of the first night of 1001 Nights:
 \begin{columns}
 \column{0.5\textwidth}
 \begin{lstlisting}
+In: lengths = [len(sent) for sent in corpus[0]]
+In: data = pd.Series(lengths)
 In: data.describe()
 Out:
 \end{lstlisting}
 \begin{lstlisting}[style=plain]
-count    5.000000
-mean     2.000000
-std      1.581139
-min      0.000000
-25%      1.000000
-50%      2.000000
-75%      3.000000
-max      4.000000
+count    378.000000
+mean      30.084656
+std       17.915458
+min        1.000000
+25%       17.000000
+50%       28.000000
+75%       40.750000
+max      103.000000
 dtype: float64
 \end{lstlisting}
 \column{0.5\textwidth}
@@ -611,55 +722,71 @@ dtype: float64
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{A first plot}
-\begin{lstlisting}
-%matplotlib inline
-data.plot()
-\end{lstlisting}
-%\includegraphics[width=0.7\textwidth]{fig/basicplot}
-\pause
 
-Saving the plot (e.g., to include in a report):
+\begin{frame}[fragile]{A boxplot}
+The sentence lengths of the first night of 1001 Nights:
 \begin{lstlisting}
-ax = data.plot()
-ax.figure.savefig('plot.pdf')  # or .png
+import seaborn as sns
+data = pd.Series(lengths, name='Sentence length')
+sns.boxplot(data)
 \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Labeled data}
-\begin{lstlisting}
-In: data = pd.Series({'a': 0, 'b': 1})
-In: data.index
-Out: Index(['a', 'b'], dtype='object')
-\end{lstlisting}
-
-Each datapoint will have a label, \\
-stored in the \texttt{index}.
+\includegraphics[height=0.65\textheight]{fig/boxplotsents}
 \end{frame}
 
 \begin{frame}[fragile]{A histogram}
+The sentence lengths of the first night of 1001 Nights:
 \begin{lstlisting}
 data.hist()
 \end{lstlisting}
-%\includegraphics[width=0.7\textwidth]{fig/basichist}
+\includegraphics[height=0.7\textheight]{fig/basichist}
 \end{frame}
 
-\begin{frame}[fragile]{Counting values}
-% TODO: think of a new dataset
+
+\begin{frame}[fragile]{Counting values: value\_counts()}
 \begin{lstlisting}
+import nltk
+with open('data/arabian_nights/1.txt') as infile:
+    tokens = nltk.word_tokenize(infile.read())
+data = pandas.Series(tokens)
 data.value_counts()
+\end{lstlisting}
+\begin{lstlisting}[style=plain]
+and       770
+,         730
+the       582
+of        290
+to        286
+... 
+mer         1
+pocket      1
+dung        1
+Thus        1
+farmer      1
+Length: 2473, dtype: int64
 \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Counting values: bar plot}
 \begin{lstlisting}
 counts = data.value_counts()
-counts.plot.bar()
+top20 = counts.head(20)
+top20.plot.barh();
 \end{lstlisting}
+\includegraphics[width=0.7\textwidth]{fig/barplotwords}
 \end{frame}
 
+% show more?
+% tail
+% sort_values, sort_index
+% ...
 
-
+\begin{frame}{Lab}
+\begin{itemize}
+    \item Explore \& visualize 1001 nights \& Gutenberg corpus
+    \item Make sure you finished Notebook Chapter 3 \\
+        and week 5 exercises!
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 Materials used for these slides:
@@ -673,6 +800,8 @@ Materials used for these slides:
 Documentation:
 \begin{itemize}
     \item \url{http://pandas.pydata.org/pandas-docs/stable/}
+    \item \url{https://pandas.pydata.org/pandas-docs/stable/getting_started/comparison/comparison_with_sql.html}
+    \item \url{https://seaborn.pydata.org/}
 \end{itemize}
 \end{frame}
 
