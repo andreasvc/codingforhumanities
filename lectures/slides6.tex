@@ -235,7 +235,7 @@ return ''.join(line[0] for line
     Pay attention to:
     \begin{itemize}
         \item functions
-        \item indendation
+        \item indentation
         \item types
     \end{itemize}
 \end{frame}
@@ -471,9 +471,15 @@ normal distribution with mean 10 and SD 3, then:\\
 \end{block}
 \end{frame}
 
+% TODO: boxplot
+%\begin{frame}{Boxplots}
+%\includegraphics[width=0.8\textwidth]{fig/boxplot}
+%\end{frame}
+
+
 \begin{frame}{Summary: inspecting one variable}
 \begin{tabular}{lll}     & categorical & continuous \\
-1. Plot its distribution & bar plot    & histogram \\
+1. Plot its distribution & bar plot    & histogram, boxplot \\
 2. Central tendency      & -           & mean, median \\
 3. Dispersion            & -           & range, standard deviation \\
 \end{tabular}
@@ -491,9 +497,11 @@ normal distribution with mean 10 and SD 3, then:\\
     Time line:
     \begin{itemize}
         \item 2008: Economic recession/crisis
-        \item Reinhart \& Rogoff (2010) analyze correlation between debt and economic growth \\
+        \item Reinhart \& Rogoff (2010) analyze correlation between debt and
+            economic growth \\
             \begin{block}{Claim:}
-            debt should be less than 90\% of GDP, otherwise economic growth drops dramatically
+            debt should be less than 90\% of GDP, otherwise economic growth
+                drops dramatically
             \end{block}
         \item Austerity policy in EU, Greece needs to reduce debt etc.
     \end{itemize}
@@ -502,7 +510,8 @@ normal distribution with mean 10 and SD 3, then:\\
 \begin{frame}{The dangers of Excel}
     Problem:
     \begin{itemize}
-        \item The claim is wrong. They made a crucial mistake in their Excel sheet!
+        \item The claim is wrong.
+            They made a crucial mistake in their Excel sheet!
         \item Excel hides formulas, easy to overlook mistakes
         \item Can we do better with Python?
     \end{itemize}
@@ -561,7 +570,7 @@ normal distribution with mean 10 and SD 3, then:\\
     \end{description}
 \end{frame}
 
-% don't show the mechanics of Pandas
+% TODO: don't show the mechanics of Pandas
 % show examples, point to further docs, practice during lab in notebook
 % think of interesting + simple running examples
 \begin{frame}[fragile]{Creating a Series}
@@ -571,7 +580,7 @@ In: data = pd.Series([0, 1, 2, 3, 4])
 \end{lstlisting}
 
 \vspace{1em}
-BTW: "as pd" means we can refer to the module with a shorter name,
+BTW: "as pd" gives a shorter name to the module, \\
 saves a few keystrokes \dots
 \end{frame}
 
@@ -607,7 +616,7 @@ dtype: float64
 %matplotlib inline
 data.plot()
 \end{lstlisting}
-\includegraphics[width=0.7\textwidth]{fig/basicplot}
+%\includegraphics[width=0.7\textwidth]{fig/basicplot}
 \pause
 
 Saving the plot (e.g., to include in a report):
@@ -620,8 +629,12 @@ ax.figure.savefig('plot.pdf')  # or .png
 \begin{frame}[fragile]{Labeled data}
 \begin{lstlisting}
 In: data = pd.Series({'a': 0, 'b': 1})
+In: data.index
+Out: Index(['a', 'b'], dtype='object')
 \end{lstlisting}
-The .index ...
+
+Each datapoint will have a label, \\
+stored in the \texttt{index}.
 \end{frame}
 
 \begin{frame}[fragile]{A histogram}
@@ -632,7 +645,7 @@ data.hist()
 \end{frame}
 
 \begin{frame}[fragile]{Counting values}
-% think of a new dataset
+% TODO: think of a new dataset
 \begin{lstlisting}
 data.value_counts()
 \end{lstlisting}
