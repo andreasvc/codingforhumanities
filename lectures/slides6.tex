@@ -9,7 +9,15 @@
 \maketitle
 
 
+\begin{frame}{Last week}
+    Improving code
 
+    \vspace{1em}
+    Sentiment analysis
+
+    \vspace{1em}
+    Keyword analysis
+\end{frame}
 
 \begin{frame}{Program for today}
 \tableofcontents
@@ -115,16 +123,20 @@ Lesson:
 
 \begin{frame}[fragile]{Function scope}
     \begin{definition}
-        The \structure{scope} of a variable determines
-            which parts of your code can access a variable.
+        The \structure{scope} of a variable determines which parts of your code \\
+            can access a variable.
     \end{definition}
     \begin{description}
-        \item[global scope]
-            variables created outside a function.
-            Everyone can see them!
-        \item[local scope]
-            arguments of and variables created in a function.
-            Other code cannot see it!
+        \item[global scope] variables created outside a function.
+            \begin{itemize}
+                \item Everyone can see them.
+                \item Available all the time.
+            \end{itemize}
+        \item[local scope] arguments and variables created in a function.
+            \begin{itemize}
+                \item Other code cannot see them.
+                \item Created and destroyed for each function call.
+            \end{itemize}
     \end{description}
 \end{frame}
 
@@ -339,11 +351,10 @@ Descriptive statistics for one variable:
 \end{itemize}
 
 \pause
-Measuring correlation of two variables (next week):
+Interaction of two variables (next week):
 \begin{itemize}
-    \item Scatter plots
-    \item Understanding correlation
-    \item Measuring correlation
+    \item Contingency table, multi-panel plot, scatter plot
+    \item Understanding, measuring correlation
 \end{itemize}
 \end{frame}
 
@@ -380,9 +391,25 @@ Collected height of 100 people:
 How do we visualize this?
 
 \pause
+\begin{columns}[T]
+\column{0.5\textwidth}
 A histogram:
 
 \includegraphics[height=0.55\textheight]{fig/histogram}
+\column{0.5\textwidth}
+\begin{itemize}
+    \item Data points are put in bins \\
+        (e.g., 1.70-- 1.76)
+        \vspace{1em}
+
+    \item Y-axis: number of datapoints in each bin
+        (e.g., 26 for 1.70--1.76)
+        \vspace{1em}
+
+    \item Number \& width of bins
+        chosen automatically or manually
+\end{itemize}
+\end{columns}
 \end{frame}
 
 
@@ -392,7 +419,8 @@ A histogram:
 \column{0.5\textwidth}
 \includegraphics[height=0.8\textheight]{fig/housepricesincome}
 \column{0.5\textwidth}
-What is the average price across the whole US?
+What is the average price \\
+across the whole US?
 
 \pause\vspace{1em}
 price = (hawaii + california \\
@@ -432,7 +460,7 @@ an error of 11\%
 \begin{frame}{Mean and median}
     `Average' can mean different things:
     \begin{description}
-        \item[Mean] sum of values, divided by number of values \\
+        \item[(Arithmetic) Mean] sum of values, divided by number of values \\
                 Mean[1,2,4,6,8,9,17] = 47 / 7 = 6.71\dots
 
         \item[Median] sort data, take the middle point
@@ -445,9 +473,12 @@ an error of 11\%
                 Midpoint between the two central observations \\
                 Med[1,2,4,\structure{6,8},9,14,17] = (6+8)/2 = 7
             \end{description}
+    \end{description}
+    Related:
+    \begin{description}
         \item[Mode] most common value \\
             (also works for categorical)
-        \item[Harmonic/geometric mean] (less common)
+        \item[Harmonic/geometric mean] you'll know when you need it
     \end{description}
 \end{frame}
 
@@ -472,7 +503,7 @@ that range from about 10 to about 180.
 \end{frame}
 
 
-\begin{frame}{Standard deviation (SD / STD)}
+\begin{frame}{Standard deviation (SD)}
 A measure of the amount of variation,\\
 in the same unit as the original data
 
@@ -501,26 +532,37 @@ in the same unit as the original data
 % \end{block}
 \end{frame}
 
-\begin{frame}{Boxplots}
+\begin{frame}{Boxplots (box-and-whisker plot)}
     \begin{reference}
         John W. Tukey (1977). Exploratory Data Analysis. Addison-Wesley.
     \end{reference}
-        
-    \structure{Boxplot} or box-and-whisker plot:
-    simple graphical representation of \dots
+    \begin{columns}[T]
+        \column{0.6\textwidth}
+            Simple graphical representation of \dots
 
-    \begin{itemize}
-        \item Range
-        \item Median, 25\% and 75\% quartiles
-        \item Optionally: outliers
-    \end{itemize}
+            \begin{itemize}
+                \item Min/max value (whiskers)
+                \item Median, 25\% and 75\% quartiles (box)
+                \item Optionally: outliers \\
+                    (points, excluded from min/max)
+            \end{itemize}
 
-    Useful to judge dispersion, skewness, and outliers.
+        \column{0.4\textwidth}
+            Why?
+            \begin{itemize}
+                \item Useful to show dispersion, skewness, and outliers.
+
+                \item Useful for comparing several distributions.
+            \end{itemize}
+    \end{columns}
+
+    \pause\centering
+    \includegraphics[height=0.5\textheight]{fig/boxplot}
 \end{frame}
 
-\begin{frame}{Boxplot example I: your grades}\centering
-\includegraphics[height=0.8\textheight]{fig/boxplot}
-\end{frame}
+%\begin{frame}{Boxplot example I: your grades}\centering
+%\includegraphics[height=0.8\textheight]{fig/boxplot}
+%\end{frame}
 
 \begin{frame}{Boxplot example II}\centering
 \includegraphics[height=0.75\textheight]{fig/boxplotcmp}
@@ -551,8 +593,8 @@ in the same unit as the original data
 \end{frame}
 
 \begin{frame}{Summary: inspecting one variable}
-\noindent\begin{tabular}{@{}lll} & categorical & continuous \\
-        1. Plot its distribution & bar plot    & histogram, boxplot \\
+\noindent\begin{tabular}{@{}lll} & categorical & continuous \\ \midrule
+        1. Plot distribution     & bar plot    & histogram, boxplot \\
         2. Central tendency      & mode        & mean, median \\
         3. Dispersion            & -           & range, standard deviation \\
 \end{tabular}
@@ -561,7 +603,7 @@ in the same unit as the original data
 
 
 
-\section{Reproducible research with Pandas}
+\section{Reproducible research}
 \frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Intermezzo: reproducibility}
@@ -611,7 +653,7 @@ in the same unit as the original data
     \end{itemize}
 
     %Overlap between open source, open science, open data, open access, etc.
-    Can use Jupyter Notebooks for code, results, and documentation.
+    Can use Jupyter Notebooks for code, results, and documentation. \\
     Only need to store data separately.
 \end{frame}
 
@@ -688,7 +730,8 @@ Out: Index(['a', 'b'], dtype='object')
 \begin{itemize}
     \item Each datapoint will have a label, \\
         stored in the \texttt{index}.
-    \item If no labels are supplied, a numeric index is automatically created
+    \item If no labels are supplied, \\
+        a numeric index is automatically created
 \end{itemize}
 \end{frame}
 
@@ -782,9 +825,8 @@ top20.plot.barh();
 
 \begin{frame}{Lab}
 \begin{itemize}
+    \item Finish notebook chapter 3 and week 5 exercises!
     \item Explore \& visualize 1001 nights \& Gutenberg corpus
-    \item Make sure you finished Notebook Chapter 3 \\
-        and week 5 exercises!
 \end{itemize}
 \end{frame}
 
