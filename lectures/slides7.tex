@@ -712,8 +712,87 @@ Next steps:
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Where to go from here}
+\subsection{Where to go from here}
+\begin{frame}{Jupyter Notebook}
+    \begin{block}{Jupyter Notebook}
+        A notebook keeps narrative, code, and results together.
+
+        Ideally, everything can be reproduced with the push of a button.
+    \end{block}
+    \begin{itemize}
+        \item Web-based graphical interface
+        \item Mix code, results, and explanation \\
+                (Knuth: Literate Programming)
+        \item Include plots / pictures
+        \item Interactive, rapid prototyping
+    \end{itemize}
+
+    \pause
+    Pros and cons:
+    \begin{itemize}
+        \item Why Jupyter is data scientists' computational notebook of choice,
+            Nature (2018). \url{https://www.nature.com/articles/d41586-018-07196-1}
+        \item Why I don't like notebooks, Joel Grus (2018).
+            \url{https://www.youtube.com/watch?v=7jiPeIFXb6U}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Notebook pitfalls}
+    \begin{columns}
+        \column{0.5\linewidth}
+            \begin{itemize}
+                \item Hidden state and out-of-order execution:\\
+                    Ensure code works by running all cells from start to finish!
+                    (Kernel $\rightarrow$ Restart \& Run All)
+            \end{itemize}
+        \column{0.5\linewidth}
+            \includegraphics[width=0.95\textwidth]{fig/nboutoforder}
+    \end{columns}
+    \pause
+    \begin{itemize}
+        \item Jupyter ``encourages'' throw-away code:\\
+                Put re-usable code in a normal Python module and import.
+                Apply software engineering practices:
+                \begin{itemize}
+                    \item Ensure modular, documented code
+                    \item Check correctness with tests
+                \end{itemize}
+        % \pause
+        % \item Notebooks can be put into version control, \\
+        %         but the differences are hard to read
+    \end{itemize}
+
+    Despite this, notebooks are an excellent tool \\
+    for exploration and sharing results
+\end{frame}
+
+\begin{frame}{``Normal'' programming without Notebooks}
+    \begin{reference}
+        \url{http://www.sublimetext.com/}
+        \url{https://notepad-plus-plus.org/}
+        \url{https://www.vim.org/}
+    \end{reference}
+    \begin{columns}[T]
+        \column{0.5\linewidth}
+            \includegraphics[width=0.9\textwidth]{fig/editor}
+            \begin{itemize}
+                \item Write code in editor (e.g., Sublime Text, Notepad++, Vim)
+                \item Save as plain text in .py files
+                \item import functions from other .py files
+            \end{itemize}
+        \pause
+        \column{0.5\linewidth}
+            \includegraphics[width=0.9\textwidth]{fig/terminal}
+            \begin{itemize}
+                \item Run code in a terminal
+            \end{itemize}
+    \end{columns}
+\end{frame}
+
+
+\begin{frame}{Learn more}
     Recommended further materials:
+    \vspace{1em}
     \begin{itemize}
         \item \url{https://jakevdp.github.io/PythonDataScienceHandbook/}
         \item \url{https://ProgrammingHistorian.org/en/lessons/}
