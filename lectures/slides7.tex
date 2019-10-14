@@ -33,18 +33,45 @@
 \begin{description}
     \item[If both categorical:]
             contingency table, bar plot with multiple colors
-
-            \vspace{1em}
-            \begin{tabular}{lrrr}
-                & Red & Blue & Yellow \\
-            male   & 12  & 34 & 56 \\
-            female & 21  & 43 & 65 \\
-            \end{tabular}
     \item[One categorical, one continuous:] multi-panel plot. \\
             For each categorical value, plot histogram / boxplot
     \item[Both continuous:]
         see next slides
 \end{description}
+\end{frame}
+
+\begin{frame}{Two categorical variables}
+    \begin{columns}
+        \column{0.5\linewidth}
+            Contingency table:
+
+            \begin{tabular}{lrrr}
+                & Red & Blue & Yellow \\ \midrule
+            men   & 12  & 34 & 56 \\
+            women & 21  & 43 & 65 \\
+            \end{tabular}
+
+            \vspace{1em}
+            Table: favorite colors.
+        \column{0.5\linewidth}
+            Bar plot:
+
+            \includegraphics[width=\linewidth]{fig/barcatcont}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{One categorical, one continuous variable}
+    % TODO? show code for multi-panel plots
+    \begin{columns}
+        \column{0.5\linewidth}
+            Box plots:
+
+            \includegraphics[width=\linewidth]{fig/contcontheightbox}
+        \column{0.5\linewidth}
+            Histograms:
+
+            \includegraphics[width=\linewidth]{fig/contcontheighthist}
+    \end{columns}
 \end{frame}
 
 \begin{frame}{Correlations}
@@ -140,7 +167,7 @@ Two \structure{continuous} variables:
 
 
 
-\section{Working with Pandas}
+\section{Exploring tabular datasets with Pandas}
 \frame{\tableofcontents[currentsection]}
 
 % From http://swcarpentry.github.io/python-novice-gapminder/
@@ -232,20 +259,15 @@ Can also specify the name of a column in the file:
 \begin{lstlisting}
 >>> df = pd.read_csv('example.csv', index_col='Name')
 \end{lstlisting}
+
+\pause
+    \begin{definition}
+        A named \structure{keyword} argument may be given \\
+        after required positional arguments.
+    \end{definition}
 \end{frame}
 
-\begin{frame}[fragile]{Reading the telecom data}
-\begin{lstlisting}
->>> df = pd.read_csv('telecom_churn.csv')
->>> df.head()
-\end{lstlisting}
-
-\includegraphics[width=0.9\linewidth]{fig/telecom}
-
-\end{frame}
-
-
-\begin{frame}[fragile]{The index column}
+\begin{frame}[fragile]{Writing data}
 Writing to a csv file.
 
 \begin{lstlisting}
@@ -262,6 +284,30 @@ Or \texttt{df.to\_excel()}
 %(T for transpose)
 %\end{frame}
 
+
+% Start long tutorial on telecom data
+\subsection{Analyzing the Telecom dataset}
+\begin{frame}{The Telecom dataset}
+    Rest of this section:
+    \begin{itemize}
+        \item Telecom dataset: why do we lose customers?
+        \item Step-by-step walk-through of exploratory analysis.
+    \end{itemize}
+
+    \vspace{1em}
+    Example courtesy of \url{https://mlcourse.ai/}
+\end{frame}
+
+\begin{frame}[fragile]{Reading the telecom data}
+\begin{lstlisting}
+>>> df = pd.read_csv('telecom_churn.csv')
+>>> df.head()
+\end{lstlisting}
+
+\includegraphics[width=0.9\linewidth]{fig/telecom}
+
+\end{frame}
+
 \begin{frame}[fragile]{Inspecting the shape and columns}
 \begin{lstlisting}
 >>> df.shape
@@ -277,6 +323,8 @@ Index(['State', 'Account length', 'Area code', 'International plan', ...])
 \end{frame}
 
 \begin{frame}[fragile]{More information}
+\begin{columns}
+\column{0.65\textwidth}
 \begin{lstlisting}
 >>> df.info()
 <class 'pandas.core.frame.DataFrame'>
@@ -295,10 +343,13 @@ Churn                     3333 non-null bool
 dtypes: bool(1), float64(8), int64(8), object(3)
 memory usage: 498.1+ KB
 \end{lstlisting}
-
-Datatypes: boolean, integer, floating point, and object (strings)
-
-No missing values (good)
+\column{0.35\textwidth}
+    \begin{itemize}
+        \item Datatypes:
+        \begin{itemize}\item boolean, \item integer, \item floating point, \item and object (strings)\end{itemize}
+        \item No missing values (good)
+    \end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Summary statistics}
@@ -422,6 +473,7 @@ Name: International plan, Length: 3333, dtype: bool
 \end{frame}
 
 \begin{frame}[fragile]{What are the averages for those clients?}
+\vspace{-0.5em}
 \begin{lstlisting}
 >>> df.loc[df['International plan'] == 'Yes', :].mean()
 Account length            104.071207
@@ -695,7 +747,15 @@ Next steps:
 \end{frame}
 
 \section{Course overview}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
+
+\begin{frame}{The final exam}
+    \begin{itemize}
+        \item Study all the slides, notebooks, and exercises of week 1--7
+        \item Released Tuesday 15 Oct 2019, 18:00 evening
+        \item Due data Monday 28 Oct 2019, 9:00 morning
+    \end{itemize}
+\end{frame}
 
 \begin{frame}{Learning goals}
     \begin{enumerate}
@@ -789,7 +849,6 @@ Next steps:
     \end{columns}
 \end{frame}
 
-
 \begin{frame}{Learn more}
     Recommended further materials:
     \vspace{1em}
@@ -798,6 +857,10 @@ Next steps:
         \item \url{https://ProgrammingHistorian.org/en/lessons/}
         \item \url{https://AutomateTheBoringStuff.com/}
     \end{itemize}
+\end{frame}
+
+\begin{frame}\Huge\centering
+    That's all, folks!
 \end{frame}
 
 \begin{frame}
