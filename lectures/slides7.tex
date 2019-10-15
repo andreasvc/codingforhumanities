@@ -33,17 +33,18 @@
 \begin{description}
     \item[If both categorical:]
             contingency table, bar plot with multiple colors
-    \item[One categorical, one continuous:] multi-panel plot. \\
+    \item[One categorical, one continuous:] multi-panel plot.\\
             For each categorical value, plot histogram / boxplot
     \item[Both continuous:]
-        see next slides
+         scatter plot, look at correlation
 \end{description}
 \end{frame}
 
-\begin{frame}{Two categorical variables}
-    \begin{columns}
+\begin{frame}[fragile]{Two categorical variables}
+    \begin{columns}[T]
         \column{0.5\linewidth}
             Contingency table:
+            \vspace{1em}
 
             \begin{tabular}{lrrr}
                 & Red & Blue & Yellow \\ \midrule
@@ -58,20 +59,42 @@
 
             \includegraphics[width=\linewidth]{fig/barcatcont}
     \end{columns}
+\begin{lstlisting}
+df = pd.DataFrame(
+        {'Red': [12, 21], 'Blue': [34, 43], 'Yellow': [56, 65]},
+        index=['men', 'women'])
+df.plot.barh()
+\end{lstlisting}
 \end{frame}
 
-\begin{frame}{One categorical, one continuous variable}
-    % TODO? show code for multi-panel plots
-    \begin{columns}
-        \column{0.5\linewidth}
-            Box plots:
 
-            \includegraphics[width=\linewidth]{fig/contcontheightbox}
-        \column{0.5\linewidth}
+\begin{frame}[fragile]{One categorical, one continuous variable}
+    \begin{columns}[T]
+        \column{0.45\linewidth}
             Histograms:
 
-            \includegraphics[width=\linewidth]{fig/contcontheighthist}
+            \includegraphics[width=0.9\linewidth]{fig/contcontheighthist}
+
+\begin{lstlisting}
+In: df  # tidy data format!
+    height   gender
+0   1.667763    men
+1   1.709885    men
+...
+\end{lstlisting}
+        \column{0.53\linewidth}
+            Box plots:
+
+            \includegraphics[width=0.9\linewidth]{fig/contcontheightbox}
+
+\begin{lstlisting}
+sns.boxplot(x='height', y='gender', data=df)
+\end{lstlisting}
     \end{columns}
+\begin{lstlisting}
+ax = df.hist(by='gender', sharex=True, sharey=True, figsize=(6, 3));
+ax[0].set_xlabel('height (m)'); ax[1].set_xlabel('height (m)'); 
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Correlations}
