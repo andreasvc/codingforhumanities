@@ -11,6 +11,8 @@ the Anaconda Distribution. Use of the command line is not needed.
 
 PDF versions of the slides: https://github.com/andreasvc/codingforhumanities/releases
 
+This course was developed by Andreas van Cranenburgh and Leonie Bosveld-de Smet.
+
 ## Sources and inspiration
 
 - http://www.karsdorp.io/python-course/ (Notebook ch. 1-3)
