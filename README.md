@@ -9,6 +9,8 @@ of Python as well as the use of common data science libraries (NLTK, Pandas,
 Seaborn). Everything is done in Jupyter Notebooks, easily installed as part of
 the Anaconda Distribution. Use of the command line is not needed.
 
+PDF versions of the slides: https://github.com/andreasvc/codingforhumanities/releases
+
 ## Sources and inspiration
 
 - http://www.karsdorp.io/python-course/ (Notebook ch. 1-3)
