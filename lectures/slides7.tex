@@ -27,7 +27,29 @@
 
 \section{More exploratory data analysis}
 \subsection{Exploring two variables}
+
 \frame{\tableofcontents[currentsubsection]}
+\begin{frame}[fragile]{Keyword arguments}
+    \begin{definition}
+        A named \structure{keyword} argument \texttt{keyword=value} \\
+        may be given after required positional arguments.
+    \end{definition}
+
+Example:
+\begin{lstlisting}
+pd.Series([0, 1, 2], index=['a', 'b', 'c'])
+\end{lstlisting}
+\pause
+
+    \begin{description}
+        \item[Positional arguments:]
+            typically required, order matters, \\
+            must come before keywords.
+        \item[Keyword arguments:]
+                typically optional, order does not matter,\\
+                must come after positional arguments.
+    \end{description}
+\end{frame}
 
 \begin{frame}{Inspecting two variables}
 \begin{description}
@@ -60,9 +82,9 @@
             \includegraphics[width=\linewidth]{fig/barcatcont}
     \end{columns}
 \begin{lstlisting}
-df = pd.DataFrame(
-        {'Red': [12, 21], 'Blue': [34, 43], 'Yellow': [56, 65]},
-        index=['men', 'women'])
+# not in tidy data format...
+df = pd.DataFrame({'Red': [12, 21], 'Blue': [34, 43],
+        'Yellow': [56, 65]}, index=['men', 'women'])
 df.plot.barh()
 \end{lstlisting}
 \end{frame}
@@ -77,9 +99,9 @@ df.plot.barh()
 
 \begin{lstlisting}
 In: df  # tidy data format!
-    height   gender
-0   1.667763    men
-1   1.709885    men
+    height  gender
+0   1.66    men
+1   1.70    men
 ...
 \end{lstlisting}
         \column{0.53\linewidth}
@@ -97,23 +119,15 @@ ax[0].set_xlabel('height (m)'); ax[1].set_xlabel('height (m)');
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Correlations}
-Variables X and Y vary together
-
-\begin{block}{Causality vs.\ correlation:}
-Does movement in X ``cause''
-movement in Y in some metaphysical sense?
-\end{block}
-
-\begin{description}[Correlation]
-    \item[Correlation]
-        \begin{itemize}
-            \item Simultaneous movement through a statistical relationship
-            \item Simultaneous variation ``induced'' by the variation of a
-                common third effect
-        \end{itemize}
-    \end{description}
+\begin{frame}{Two continuous variables}
+    \begin{itemize}
+        \item Take variables X and Y
+        \item If X goes up, does Y tend to go up/down?
+        \item How strong is this relationship?
+        \item Is the relationship meaningful?
+    \end{itemize}
 \end{frame}
+
 
 \begin{frame}{House prices \& per capita income}
 \includegraphics[height=0.85\textheight]{fig/housepricesincome}
@@ -179,10 +193,34 @@ Figure: \url{https://en.wikipedia.org/wiki/Correlation_and_dependence}
 \includegraphics[width=0.99\textwidth]{fig/cheese}
 \end{frame}
 
+\begin{frame}{Correlation vs causation}
+Variables X and Y vary together
+
+\begin{block}{Causality vs correlation:}
+Does movement in X ``cause''
+movement in Y in some metaphysical sense?
+\end{block}
+
+Hard to test with \emph{observation} alone;\\
+\emph{experimental} interventions provide much stronger evidence.
+\pause
+
+\begin{itemize}
+    \item Meaningful relationship: requires causal mechanism \\
+        (\emph{why/how} does X cause Y?)
+    \item Simultaneous variation ``induced'' \\
+        by the variation of a common third effect
+    \item Spurious (accidental) correlation
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Summary: two variables}
+In general: Look at the data! 
+
+\vspace{1em}
 Two \structure{continuous} variables:
 \begin{enumerate}
-    \item Look at the data! Make a scatter plot
+    \item Make a scatter plot
     \item Compute correlation
     \item Think carefully whether the relation is meaningful!
 \end{enumerate}
@@ -282,12 +320,6 @@ Can also specify the name of a column in the file:
 \begin{lstlisting}
 >>> df = pd.read_csv('example.csv', index_col='Name')
 \end{lstlisting}
-
-\pause
-    \begin{definition}
-        A named \structure{keyword} argument may be given \\
-        after required positional arguments.
-    \end{definition}
 \end{frame}
 
 \begin{frame}[fragile]{Writing data}
@@ -327,7 +359,7 @@ Or \texttt{df.to\_excel()}
 >>> df.head()
 \end{lstlisting}
 
-\includegraphics[width=0.9\linewidth]{fig/telecom}
+\includegraphics[width=\linewidth]{fig/telecom}
 
 \end{frame}
 
@@ -586,13 +618,13 @@ Recipe:
 \end{lstlisting}
 
 \begin{enumerate}
-\item First, collect all values in columns specified
-    in \texttt{grouping\_columns}. \\
+\item Create groups based on values in columns specified
+    in the list \texttt{grouping\_columns}.
     These will form the rows in the result.
-\item Then, select columns of interest (\texttt{columns\_to\_show}). \\
+\item Then, select columns of interest (the list \texttt{columns\_to\_show}). \\
     If not given, return all other columns.
 \item Finally, apply a function to aggregate the data for each group;
-    e.g. \texttt{min(), max(), mean()}.
+    e.g. \texttt{max(), mean(), describe()}.
 \end{enumerate}
 \end{frame}
 
@@ -650,14 +682,25 @@ Delete rows / columns:
 \end{frame}
 
 \begin{frame}[fragile]{Predicting churn}
+\begin{block}{Goal}
+    Find variables which predict a large amount of churn;\\
+    i.e., show a higher churn rate than average (not absolute numbers).
+\end{block}
+
 \begin{lstlisting}
->>> pd.crosstab(df['Churn'], df['International plan'], margins=True)
-International plan    No    Yes      All
-Churn
-False               2664    186     2850
-True                 346    137      483
-All                 3010    323     3333
+>>> pd.crosstab(df['International plan'], df['Churn'], margins=True)
+Churn                 No    Yes      All
+International plan
+False               2664    346     3010
+True                 186    137      323
+All                 2850    483     3333
 \end{lstlisting}
+% >>> pd.crosstab(df['Churn'], df['International plan'], margins=True)
+% International plan    No    Yes      All
+% Churn
+% False               2664    186     2850
+% True                 346    137      483
+% All                 3010    323     3333
 \end{frame}
 
 \begin{frame}[fragile]{Plotting I}
@@ -671,7 +714,7 @@ sns.countplot(x='International plan', hue='Churn', data=df);
 \includegraphics[height=0.6\textheight]{fig/telecomplot}
 \column{0.3\textwidth}
 
-With international plan, churn rate is much higher!
+With international plan, churn \emph{rate} is much higher!
 
 \vspace{1em}
 Maybe because of large expenses with international calls?
@@ -719,9 +762,7 @@ With 4 or more calls, churn rate sharply increases!
 
 \begin{frame}[fragile]{Combining two good predictors}
 \begin{lstlisting}
->>> pd.crosstab(df['Many_service_calls']
-        & df['International plan'],
-        df['Churn'])
+>>> pd.crosstab(df['Many_service_calls'] & df['International plan'], df['Churn'])
 Churn  False  True
 row_0
 False   2841    464
@@ -749,13 +790,14 @@ True       9     19
 \end{frame}
 
 \begin{frame}[fragile]{After exploratory data analysis}
-With exploratory data analysis,
-we looked at a handful of variables
-and created a rule:
+Exploratory data analysis produced
+simple rule from handful of variables:
 
 \begin{lstlisting}
-IF many_service_calls and international_plan
-    THEN churn = 1 ELSE churn = 0
+if many_service_calls and international_plan:
+    churn = 1
+else:
+    churn = 0
 \end{lstlisting}
 
 Next steps:
@@ -764,7 +806,7 @@ Next steps:
     \item[Machine Learning] Automatically find more patterns:
         \begin{itemize}
             \item Automatically learn many rules
-            \item Create more complicated models from thousands of variables
+            \item Create better models from thousands of variables
         \end{itemize}
 \end{description}
 \end{frame}
@@ -861,13 +903,15 @@ Next steps:
             \begin{itemize}
                 \item Write code in editor (e.g., Sublime Text, Notepad++, Vim)
                 \item Save as plain text in .py files
-                \item import functions from other .py files
+                \item import functions \\
+                    from other .py files
             \end{itemize}
         \pause
         \column{0.5\linewidth}
             \includegraphics[width=0.9\textwidth]{fig/terminal}
             \begin{itemize}
-                \item Run code in a terminal
+                \item Run code in a terminal\\
+                    (``command prompt'')
             \end{itemize}
     \end{columns}
 \end{frame}
