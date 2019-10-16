@@ -1,12 +1,13 @@
 # Coding for Humanities course materials
 
-These are materials for a 7-week introductory course on Python programming
-for Digital Humanities graduate students without any programming background
-taught at the University of Groningen. The course covers applications of text
-mining and exploratory data analysis. The programming skills involve both the
-fundamentals of Python, as well as the use of common data science libraries
-(NLTK, Pandas, Seaborn). Everything is done in Jupyter Notebooks, easily
-installed as part of the Anaconda Distribution.
+These are materials for the course [Coding for Humanities](https://www.rug.nl/ocasys/let/vak/show?code=LHU002M05)
+taught at the University of Groningen. The 7-week course introduces Digital
+Humanities graduate students to Python programming without assuming any
+technical background. The course covers applications of text mining and
+exploratory data analysis. The programming skills involve both the fundamentals
+of Python as well as the use of common data science libraries (NLTK, Pandas,
+Seaborn). Everything is done in Jupyter Notebooks, easily installed as part of
+the Anaconda Distribution. Use of the command line is not needed.
 
 ## Sources and inspiration
 
