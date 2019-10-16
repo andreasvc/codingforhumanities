@@ -1,5 +1,25 @@
 # Coding for Humanities course materials
 
+These are materials for a 7-week introductory course on Python programming
+for Digital Humanities graduate students without any programming background
+taught at the University of Groningen. The course covers applications of text
+mining and exploratory data analysis. The programming skills involve both the
+fundamentals of Python, as well as the use of common data science libraries
+(NLTK, Pandas, Seaborn). Everything is done in Jupyter Notebooks, easily
+installed as part of the Anaconda Distribution.
+
+## Sources and inspiration
+
+- http://www.karsdorp.io/python-course/ (Notebook ch. 1-3)
+- https://github.com/jivoi/junky/tree/master/python_simple_ex (exercises week 2-4)
+- https://mlcourse.ai/ (topic 1)
+- https://docs.python.org/3/tutorial/
+- https://github.com/vierth/humanitiesTutorial
+- http://swcarpentry.github.io/python-novice-gapminder/
+- https://github.com/mchesterkadwell/intro-to-text-mining-with-python
+
+## Installation instructions
+
 The following instructions are based on
 https://github.com/mchesterkadwell/intro-to-text-mining-with-python
 
@@ -13,7 +33,7 @@ or Python on your own computer before.
 [Install Anaconda (Python 3.7)](https://www.anaconda.com/distribution/#download-section). 
 
 Pick the version appropriate for your operating system (Windows, Mac, Linux). 
-Make sure you choose ‘Python 3.7’ (not ‘Python 2.7’). 
+Make sure you choose 'Python 3.7' (not 'Python 2.7'). 
 
 Once it has installed, [open Anaconda Navigator](http://docs.anaconda.com/anaconda/user-guide/getting-started/#open-navigator).
 
@@ -36,7 +56,7 @@ cover that here.)
 
 In simple terms, an environment is like an isolated box in which to run a 
 notebook safe from interference by other notebooks. Anaconda provides one 
-default environment, called ‘root’, in which to get up and running quickly. 
+default environment, called 'root', in which to get up and running quickly. 
 
 In **Anaconda Navigator > Home** there is a card for Jupyter Notebook (not 
 JupyterLab). Click on the 'Launch' button. 
