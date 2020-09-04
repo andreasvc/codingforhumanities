@@ -9,9 +9,11 @@ of Python as well as the use of common data science libraries (NLTK, Pandas,
 Seaborn). Everything is done in Jupyter Notebooks, easily installed as part of
 the Anaconda Distribution. Use of the command line is not needed.
 
-PDF versions of the slides: https://github.com/andreasvc/codingforhumanities/releases
-
 This course was developed by Andreas van Cranenburgh and Leonie Bosveld-de Smet.
+
+## PDF versions of the slides
+
+https://github.com/andreasvc/codingforhumanities/releases
 
 ## Sources and inspiration
 
@@ -25,37 +27,22 @@ This course was developed by Andreas van Cranenburgh and Leonie Bosveld-de Smet.
 
 ## Installation instructions
 
-The following instructions are based on
-https://github.com/mchesterkadwell/intro-to-text-mining-with-python
-
-## Running Notebooks on Your Own Computer
-
 These instructions are suitable if you have never installed Jupyter Notebooks 
 or Python on your own computer before.
 
 ### Install Jupyter Notebooks and Python with Anaconda 
 
-[Install Anaconda (Python 3.7)](https://www.anaconda.com/distribution/#download-section). 
+[Install Anaconda (Python 3.8)](https://www.anaconda.com/distribution/#download-section). 
 
 Pick the version appropriate for your operating system (Windows, Mac, Linux). 
-Make sure you choose 'Python 3.7' (not 'Python 2.7'). 
+Make sure you choose 'Python 3.8' (not 'Python 2.7'). Choose the "64-bit graphical installer".
 
 Once it has installed, [open Anaconda Navigator](http://docs.anaconda.com/anaconda/user-guide/getting-started/#open-navigator).
 
 ### Download the Notebooks from GitHub 
 
-Go to the [GitHub page](https://github.com/andreasvc/codingforhumanities) 
-where this code repository is kept. For a simple download, click the 'Clone or 
-download' green button, then pick 'Download ZIP'.
-
-![](lectures/fig/readme-pics/download-zip.png)
-
-Open the ZIP file that is downloaded. In most operating systems this will 
-automatically unzip it back into individual files. Move the folder to 
-somewhere you want to keep it, such as 'My Documents'. 
-
-(The more advanced method is to use git to clone the repository, but we won't 
-cover that here.)
+Download one of the notebooks from the course website. Save it to a directory where you
+will keep your work for this course.
 
 ### Quick Start: Run a Notebook Quickly in the Default (root) Environment 
 
@@ -77,4 +64,8 @@ Navigate to where you downloaded the notebooks, and click on one to run it in
 the usual way. 
 
 ![](lectures/fig/readme-pics/jupyter-notebooks.png)
+
+
+Credit: these instructions are based on
+https://github.com/mchesterkadwell/intro-to-text-mining-with-python
 
