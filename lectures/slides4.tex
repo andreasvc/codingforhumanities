@@ -2,6 +2,9 @@
 \usepackage{preamble}
 \title{Coding for Humanities, week 4}
 
+% notes
+% - add list comprehensions? They are in the notebook
+
 \begin{document}
 
 \begin{frame}
@@ -29,98 +32,133 @@
 \subsection{Recap week 1--3}
 \begin{frame}[fragile]{Week 1: Values}
     \begin{description}
-        \item[Special] \texttt{True, False, None}
-        \item[Numbers] \texttt{-1, 2, 3.5}, etc.
-        \item[Strings] \texttt{'a', 'hello', "I'm"}
+        \item[Numbers] \lstinline{-1, 2, 3.5}, etc.
+        \item[Special] \lstinline{True, False, None}
+        \item[Strings] \lstinline{'a', 'hello', "I'm"}
+\begin{lstlisting}
+"""Multi
+line
+strings"""
+\end{lstlisting}
     \end{description}
 \end{frame}
 
 \begin{frame}[fragile]{Week 1: Variables \& arithmetic}
     \begin{description}[Assignment]
-        \item[Assignment] \texttt{name = expression}
-        \item[Increment] \texttt{number += 1}
-        \item[Expressions] \texttt{number = 1 + 2 * other\_number + int('42')}
+        \item[Assignment] \lstinline{name = expression}
+        \item[Increment] \lstinline{number += 1}
+        \item[Expressions] 1 + 2 * number + int('4')
     \end{description}
+    \pause
+    \begin{itemize}
+        \item Can use \structure{variable} instead of constant
+        \item Can use \structure{function} call instead of constant
+        \item Expressions are evaluated \structure{step by step}:
+    \end{itemize}
+\begin{lstlisting}
+old = 3
+new = 1 + 2 * old + int('4')
+# new = 1 + 2 * 3 + int('4')
+# new = 1 + 6 + int('4')
+# new = 1 + 6 + 4
+# new = 7 + 4
+# new = 11
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Week 2: Sequences}
     \begin{description}[Indexing/slicing]
-        \item[Indexing/slicing] \texttt{seq[0], seq[2:4]}
-        \item[Concatenation] \texttt{seq1 + seq2}
-        \item[Length] \texttt{len(seq)}
-    \end{description}
-
-    \pause
-    Lists, strings, tuples
-\end{frame}
-\begin{frame}[fragile]{Week 2: Strings}
-    \begin{description}[Formatting]
-        \item[Splitting] \texttt{tokens = sent.split()}
-        \item[Joining] \texttt{', '.join(seq)}
-        \item[Formatting] \texttt{f'My name is \{last\}, \{first\} \{last\}'}
+        \item[Indexing/slicing] \lstinline{seq[0], seq[2:4]}
+        \item[Concatenation] \lstinline{seq1 + seq2}
+        \item[Length] \lstinline{len(seq)}
+        \item[Types] \lstinline{list, str, tuple}
     \end{description}
 \end{frame}
 \begin{frame}[fragile]{Week 2: Lists}
     \begin{description}[Lists in lists]
-        \item[Creation] \texttt{the\_list = [['a', 0], ['b', 1]]}
+        \item[Creation] \lstinline{mylist = [['a', 0], ['b', 1]]}
         \item[Lists in lists]
-            \texttt{the\_list[0] == ['a', 0]} \\
-            \texttt{the\_list[0][1] == 0}
-        \item[Append] \texttt{the\_list.append(['c', 2])}
+            \lstinline{mylist[0] == ['a', 0]} \\
+            \lstinline{mylist[0][1] == 0}
+        \item[Append] \lstinline{mylist.append(['c', 2])}
     \end{description}
 \end{frame}
-\begin{frame}[fragile]{Week 2: Ifs}
+\begin{frame}[fragile]{Week 2: If-statements}
     \begin{description}[Conditions]
-        \item[Conditions] \texttt{a == b, letter == 'a', number $<$ 2, item in seq}
+        \item[Conditions] \lstinline{a == b, letter == 'a', number < 2, item in seq}
         \item[If]
-            \texttt{if condition: ...}
+            \lstinline{if condition: ...}
 
-            \texttt{elif condition: ...}
+            \lstinline{elif condition: ...}
 
-            \texttt{else: ...}
+            \lstinline{else: ...}
     \end{description}
 \end{frame}
 \begin{frame}[fragile]{Week 2: Loops}
     \begin{description}[Iterables]
-        \item[For] \texttt{for item in iterable:}\\
-            \hspace{1em}\texttt{\# do something with item}
+        \item[For-loop] \lstinline{for item in iterable:}\\
+            \hspace{1em}\lstinline{# do something with item}
         \pause
-        \item[Iterables] lists, strings, tuples, dictionaries, range()
-    \end{description}
+        \item[Iterables] \lstinline|list, str, tuple, dict, range()|
+        \pause
+    \item[For-loop idiom]
+\begin{lstlisting}
+result = 0  # or []
+for item in iterable:
+    if item ...:
+        # do something with item
+        # add to result
+\end{lstlisting}
+\end{description}
 \end{frame}
 
 \begin{frame}[fragile]{Week 3: Dictionaries}
     \begin{description}[creation]
-        \item[creation] \texttt{example = \{'a': 0, 'b': 1\}}
-        \item[lookup] \texttt{example['a']}
+        \item[creation] \lstinline|example = {'a': 0, 'b': 1}|
+        \item[lookup] \lstinline{example['a']}
+        \item[update] \lstinline{example['a'] = 2} (also for new keys)
     \end{description}
 \end{frame}
 
 \begin{frame}[fragile]{Week 3: Functions}
     \begin{description}[Return value]
-        \item[Defining] \texttt{def name(param1, ...): ...}
-        \item[Calling] \texttt{name(arg1, ...)}
-        \item[Return value] \texttt{return ...}
+        \item[Defining] \lstinline{def name(param1, ...): ...}
+        \item[Calling] \lstinline{name(arg1, ...)}
+        \item[Return value] \lstinline{return ...}
     \end{description}
     \pause
 \begin{columns}[T]
 \column{0.5\linewidth}
 \begin{lstlisting}
+# function with effect
 def greeting(name):
     print('Hello', name)
 
 greeting('John')
+# cannot store greeting with:
+x = greeting('John')
 \end{lstlisting}
-\column{0.5\linewidth}
+\column{0.5\linewidth}\pause
 \begin{lstlisting}
-def average(numbers):
+# function with a result
+def mean(numbers):
     if not numbers:
         return None
     return sum(numbers) / len(numbers)
 
-print(average([7, 8]))
+print(mean([7, 8]))
+x = (mean([6, 8]) + mean([7, 8])) / 2
 \end{lstlisting}
 \end{columns}
+\end{frame}
+\begin{frame}[fragile]{Week 3: Strings}
+    \begin{description}[Formatting]
+        \item[Lowercasing] \lstinline{lowered = sent.lower()}
+        \item[Splitting] \lstinline{tokens = sent.split()}
+        \item[Joining] \lstinline{', '.join(seq)}
+        \item[Formatting] \lstinline|f'My name is {last}, {first} {last}'|
+        \item[Escaping] \lstinline|'newline=\n tab=\t quote=\' slash=\\'|
+    \end{description}
 \end{frame}
 
 \begin{frame}{Learning to program is learning a language}
@@ -136,7 +174,7 @@ Similarities:
 	\item Don't be afraid to make mistakes, \\
 		you only improve by trying.
 \end{itemize}
-\column{0.5\linewidth}
+    \column{0.5\linewidth}
 \pause Differences:
 \pause
 \begin{itemize}
@@ -149,6 +187,20 @@ Similarities:
         immediate feedback.
 \end{itemize}
 \end{columns}
+\end{frame}
+
+\begin{frame}{Learning to program is learning a language}
+Demonstrated by research:
+
+\vspace{1em}
+Prat et al 2020.
+Relating Natural Language Aptitude to Individual Differences
+in Learning Programming Languages.
+\url{https://www.nature.com/articles/s41598-020-60661-8}
+%\url{https://doi.org/10.1038/s41598-020-60661-8}
+
+\vspace{1em}
+    \structure{Bottom line}: language aptitude more important than numeracy
 \end{frame}
 
 % list comprehensions!
@@ -165,7 +217,7 @@ A simple set of rules can be given as follows:
 \end{enumerate}
 
 \vspace{1em}
-Hint: Check out the string method \href{https://docs.python.org/3/library/stdtypes.html\#str.endswith}{.endswith()}.
+Hint: Check out the string method \href{https://docs.python.org/3/library/stdtypes.html\#str.endswith}{\lstinline{.endswith()}}.
 \end{frame}
 
 \begin{frame}[fragile]{Make 3rd sg form}
@@ -213,19 +265,77 @@ of Capulet.
 \begin{frame}[fragile]{extract\_dialogue}
     Approach:
     \begin{enumerate}
-        \item Split paragraphs
-        \item Loop over paragraphs
+        \item Split paragraphs (given)
+        \item Loop over paragraphs (for-loop)
         \item Identify paragraphs with dialogue
         \item Split name and line
         \item Store in dictionary
     \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{extract\_dialogue}
+\begin{frame}[fragile]{Identify paragraphs with dialogue?}
+\begin{verbatim}
+Enter Sampson and Gregory (with swords and bucklers) of the house
+of Capulet.
+
+
+  Samp. Gregory, on my word, we'll not carry coals.
+\end{verbatim}
+
+    \vspace{1em}
+    What is the difference between the first and last line?
+
+    \pause
+    Dialogue starts with an abbreviated character name (`Samp.')
+    
+    \vspace{1em}
+    So, do \lstinline{.split()} and check if first word \lstinline{.endswith('.')}
+\end{frame}
+
+\begin{frame}[fragile]{Split name and line?}
+\begin{verbatim}
+  Samp. Gregory, on my word, we'll not carry coals.
+\end{verbatim}
+
+    \vspace{1em}
+    Want to split only \structure{once} on first dot.
+
+    \vspace{1em}
+    Check documentation at \url{https://docs.python.org/3/library/stdtypes.html\#str.split}
+
+    \vspace{1em}
+    \centering
+    \includegraphics[width=0.9\linewidth]{fig/splitdocs}
+\end{frame}
+
+\begin{frame}[fragile]{Clean up extra whitespace?}
+    See \url{https://docs.python.org/3/library/stdtypes.html\#str.strip}
+
+    \vspace{1em}
+    \centering
+    \includegraphics[width=0.9\linewidth]{fig/stripdocs}
+\end{frame}
+
+\begin{frame}[fragile]{Store in dictionary?}
+    Want to store for each character multiple lines of dialogue.
+
+    \vspace{1em}
+    So use a dictionary, keys: character names, values: list of dialogue lines
 \begin{lstlisting}
-def extract_dialogue(filename):
-    with open(filename, encoding='utf8') as infile:
-        text = infile.read()
+paragraphs = ...
+result = {}
+# for para in paragraphs:
+    # name = ...  # a character name
+    # line = ...  # a line of dialogue
+    if name not in result:
+        result[name] = []
+    result[name].append(line)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Putting it all together}
+\begin{lstlisting}
+def extract_dialogue(text):
     paragraphs = text.split('\n\n')
     result = {}
     for para in paragraphs:
@@ -251,7 +361,8 @@ def extract_dialogue(filename):
                 \item Solve separately
                 \item \structure{Merge} parts until problem is solved
             \end{itemize}
-        \item[Top down] start from big picture, \structure{split} into sub-problems and work towards details
+        \item[Top down] start from big picture, \structure{split} into sub-problems \\
+            and work towards details
             \begin{itemize}
                 \item more structured
                 \item requires planning
@@ -279,12 +390,16 @@ def extract_dialogue(filename):
 
 \subsection{Q\&A}
 \begin{frame}{Poll}
-    \Large Go to \textbf{www.menti.com} \\
-    and use the code 54 41 67
-
-    \vspace{2em}\small
-    Results:\\
-    \url{https://www.mentimeter.com/s/4270a90143f5bd4274f178069f19cc77/b40ce5d293dd}
+    \begin{enumerate}
+        \item Q1 How much of the week 3 notebook and exercises did you finish?
+            \begin{enumerate}
+                \item less than 50\%
+                \item 50--70\%
+                \item 70--80\%
+                \item 90--100\%
+            \end{enumerate}
+        \item Q2 write questions in chat
+    \end{enumerate}
 \end{frame}
 
 
@@ -433,8 +548,8 @@ In: sqrt(16)
 
 Matter of preference/convention which you use:
 \begin{itemize}
-	\item math.pi: clear that pi comes from math module
-	\item sqrt: less typing \dots
+    \item \lstinline{math.pi}: clear that pi comes from math module
+    \item \lstinline{sqrt}: less typing \dots
 \end{itemize}
 \end{frame}
 
@@ -457,7 +572,7 @@ Matter of preference/convention which you use:
                 \item \texttt{*} meaning ``match zero or more characters''
                 \item \texttt{?} meaning ``match exactly one character''
             \end{itemize}
-        \item The \texttt{glob} module offers pattern matching of files.
+        %\item The \texttt{glob} module offers pattern matching of files.
         %\item The glob library contains a function also called \texttt{glob}
 		%	to match file patterns
         %\item e.g., \texttt{glob.glob('*.txt')} matches all files in the
@@ -476,74 +591,74 @@ Out: ['austen-emma.txt', 'world-domination.txt', 'evil-plans.txt']
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Counter}
-\begin{itemize}
-\item A Counter is a specialized dictionary for counting
-\item values are (integer) counts; missing values are 0
-\item Mathematical term: \structure{bag}, \structure{multiset}
-\end{itemize}
-
-\begin{lstlisting}
-In: from collections import Counter
-In: cnt = Counter(['the', 'cat', 'is', 'on', 'the', 'mat'])
-In: cnt
-Out: Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Counter: initialization}
-Several ways to initialize a Counter:\\
-
-\begin{lstlisting}
-In: cnt = Counter()
-In: cnt
-Out: Counter()
-In: cnt = Counter(['red', 'blue', 'red', 'blue', 'red'])
-In: cnt
-Out: Counter({'red': 3, 'blue': 2})
-In: cnt = Counter({'red': 3, 'blue': 2})
-In: cnt
-Out: Counter({'red': 3, 'blue': 2})
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Word frequency counting}
-\begin{lstlisting}
-words = [...]       # Some list of words
-counts = {}
-\end{lstlisting}\pause
-\begin{lstlisting}
-for word in words:
-    if word not in counts:
-        counts[word] = 0
-    counts[word] += 1
-...
-\end{lstlisting}
-\pause
-Better:
-\begin{lstlisting}
-from collections import Counter
-counts: = Counter(words)
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Counter: more methods}
-\begin{lstlisting}
-In: cnt = Counter(['red','blue','red','blue','red'])
-In: cnt.most_common(1)
-Out: [('red', 3)]
-In: for item, count in cnt.most_common():
-...     print(count, item)
-3 red
-2 blue
-In: cnt.update(['red', 'blue', 'blue'])
-In: cnt
-Out: Counter({'red': 4, 'blue': 4})
-
-\end{lstlisting}
-%In: Counter('abracadabra').most_common(3)
-%Out: [('a', 5), ('r', 2), ('b', 2)]
-\end{frame}
+% \begin{frame}[fragile]{Counter}
+% \begin{itemize}
+% \item A Counter is a specialized dictionary for counting
+% \item values are (integer) counts; missing values are 0
+% \item Mathematical term: \structure{bag}, \structure{multiset}
+% \end{itemize}
+% 
+% \begin{lstlisting}
+% In: from collections import Counter
+% In: cnt = Counter(['the', 'cat', 'is', 'on', 'the', 'mat'])
+% In: cnt
+% Out: Counter({'the': 2, 'is': 1, 'mat': 1, 'on': 1, 'cat': 1})
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Counter: initialization}
+% Several ways to initialize a Counter:\\
+% 
+% \begin{lstlisting}
+% In: cnt = Counter()
+% In: cnt
+% Out: Counter()
+% In: cnt = Counter(['red', 'blue', 'red', 'blue', 'red'])
+% In: cnt
+% Out: Counter({'red': 3, 'blue': 2})
+% In: cnt = Counter({'red': 3, 'blue': 2})
+% In: cnt
+% Out: Counter({'red': 3, 'blue': 2})
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Word frequency counting}
+% \begin{lstlisting}
+% words = [...]       # Some list of words
+% counts = {}
+% \end{lstlisting}\pause
+% \begin{lstlisting}
+% for word in words:
+%     if word not in counts:
+%         counts[word] = 0
+%     counts[word] += 1
+% ...
+% \end{lstlisting}
+% \pause
+% Better:
+% \begin{lstlisting}
+% from collections import Counter
+% counts: = Counter(words)
+% \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Counter: more methods}
+% \begin{lstlisting}
+% In: cnt = Counter(['red','blue','red','blue','red'])
+% In: cnt.most_common(1)
+% Out: [('red', 3)]
+% In: for item, count in cnt.most_common():
+% ...     print(count, item)
+% 3 red
+% 2 blue
+% In: cnt.update(['red', 'blue', 'blue'])
+% In: cnt
+% Out: Counter({'red': 4, 'blue': 4})
+% 
+% \end{lstlisting}
+% %In: Counter('abracadabra').most_common(3)
+% %Out: [('a', 5), ('r', 2), ('b', 2)]
+% \end{frame}
 
 
 \subsection{The Python data science ecosystem}
@@ -575,6 +690,29 @@ Out: Counter({'red': 4, 'blue': 4})
 
             \url{https://www.puzzlr.org/install-packages-pip-conda-environment/}
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Example: lemmatization with NLTK}
+\begin{lstlisting}
+# import lemmatizer object
+from nltk.stem import WordNetLemmatizer 
+  
+lemmatizer = WordNetLemmatizer() 
+print("rocks :", lemmatizer.lemmatize("rocks")) 
+print("corpora :", lemmatizer.lemmatize("corpora")) 
+print("better :", lemmatizer.lemmatize("better", pos="a")) 
+\end{lstlisting}
+\pause\begin{lstlisting}[style=plain]
+rocks : rock
+corpora : corpus
+better : good
+\end{lstlisting}
+
+{\small
+Example from \url{https://www.geeksforgeeks.org/python-lemmatization-with-nltk/}
+
+Also see \url{https://www.nltk.org/book/ch03.html}
+}
 \end{frame}
 
 

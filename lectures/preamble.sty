@@ -56,7 +56,7 @@
 \setbeamertemplate{subsection in toc}{\leavevmode\leftskip=1.1em\rlap{\hskip-2em}\inserttocsubsection\par}
 
 \lstset{language=python,
-		basicstyle=\small\ttfamily,
+		basicstyle=\normalsize\ttfamily,
         keywordstyle=\bfseries\color{OliveGreen},
         identifierstyle=\color{blue},
         stringstyle=\color{mauve},
@@ -68,12 +68,27 @@
 		upquote=true,  % use ascii quotes; requires textcomp
 }
 \lstdefinestyle{smaller}{language=python,
-		basicstyle=\footnotesize\ttfamily,
+		basicstyle=\small\ttfamily,
 }
 \lstdefinestyle{plain}{language=,
         keywordstyle=\color{black},
         identifierstyle=\color{black},
         stringstyle=\color{black},
+}
+\lstdefinestyle{plainsmaller}{language=,
+		basicstyle=\small\ttfamily,
+        keywordstyle=\color{black},
+        identifierstyle=\color{black},
+        stringstyle=\color{black},
+}
+\lstdefinestyle{plainscript}{language=,
+		basicstyle=\scriptsize\ttfamily,
+        keywordstyle=\color{black},
+        identifierstyle=\color{black},
+        stringstyle=\color{black},
+}
+\lstdefinestyle{script}{language=python,
+		basicstyle=\scriptsize\ttfamily,
 }
 
 \author{Andreas van Cranenburgh}

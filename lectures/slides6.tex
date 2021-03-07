@@ -33,93 +33,219 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Always report requested results!}
-    Read the questions carefully. \\
-    When results are requested, include them!
+% \begin{frame}{Always report requested results!}
+%     Read the questions carefully. \\
+%     When results are requested, include them!
+% 
+%     \vspace{1em}
+%     \begin{itemize}
+%         \item Suppose that we call function \lstinline{a}
+%             as follows: [...]\\
+%             What values will be printed to the screen?
+%         \item Use [your function] to print all tweets addressed to @FLOTUS.
+%         \item Count the \#hashtags and \@usernames in Trump's tweets, and
+%             report the top 10 for both.
+%     \end{itemize}
+% \end{frame}
 
-    \vspace{1em}
-    \begin{itemize}
-        \item Suppose that we call function \textcolor{blue}{\texttt{a}}
-            as follows: [...]\\
-            What values will be printed to the screen?
-        \item Use [your function] to print all tweets addressed to @FLOTUS.
-        \item Count the \#hashtags and \@usernames in Trump's tweets, and
-            report the top 10 for both.
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile]{Functions: return vs print}
-Write a function first\_letters(filename) that reads a poem in a text file
-\structure{and returns a string of first letters} of all of its lines.
-\vspace{1em}
-\begin{columns}
-\column{0.5\textwidth}
-Don't print inside the function:
+\begin{frame}[fragile]{Test your code carefully!}
+    \begin{columns}[T]
+\column{0.6\textwidth}
 \begin{lstlisting}[style=smaller]
-def first_letters(text):
-    punctuation = '...'
-    for char in punctuation:
-        text = text.replace(char, '')
-    for line in text.splitlines():
-        print(line[0])
+def cleantweet(tweet):
+    prefixes = ('https', '@', '#')
+    for prefix in prefixes:
+        tweet = tweet.split(prefix, 1)[0]
+    return tweet.split()
+\end{lstlisting}
+What happens with \lstinline|"This #is a test"|?
+\pause
+\begin{lstlisting}[style=smaller]
+>>> cleantweet('This #is a test')
+['This']
 \end{lstlisting}
 \pause\column{0.5\textwidth}
-Collect and \structure{return} the result: 
+Lesson:
+    \begin{itemize}
+        \item Don't just test your code \\
+            on the particular given examples.
+        \item Tests are typically not exhaustive.
+        \item Reflect whether you really solved the problem.
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Don't modify a list while you iterate over it!}
+\begin{columns}
+\column{0.5\textwidth}
 \begin{lstlisting}[style=smaller]
-def first_letters(text):
-    punctuation = '...'
-    for char in punctuation:
-        text = text.replace(char, '')
-    result = ''
-    for line in text.splitlines():
-        result += line[0]
-    return result
+def cleantweet(text):
+    clean_text = remove_punc(text)
+    tokens = clean_text.split()
+    prefix = ('#', '@', 'https')
+    for token in tokens:
+        if token.startswith(prefix):
+            tokens.remove(token)
+    return tokens
+\end{lstlisting}
+
+What happens?
+\pause\column{0.5\textwidth}
+\includegraphics[width=0.9\textwidth]{fig/branch}
+
+\vspace{1em}
+Python gets confused and skips the next token:
+\begin{lstlisting}[style=smaller]
+>>> cleantweet('This is #a #test')
+['This', 'is', '#test']
 \end{lstlisting}
 \end{columns}
 \end{frame}
 
+\begin{frame}[fragile]{The right way}
+%\pause\column{0.5\textwidth}
+\begin{lstlisting}[style=smaller]
+def cleantweet(message):
+    tokens = message.split()
+    prefix = ('#', '@', 'https')
+    result = []
+    for token in tokens:
+        if not token.startswith(prefix):
+            word = remove_punc(token)
+            if word:  # skip tokens with only punctuation
+                result.append(word)
+    return result
+\end{lstlisting}
+\structure{Takeaway}:
+\begin{itemize}
+    \item Don't change a list or dict when you loop over it.
+    \item Always make a new \lstinline{list} or \lstinline{dict}!
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Functions: return vs print}
+Write a function that takes a twitter message as argument, cleans it with the
+function you wrote, and returns True or False depending on whether it
+contains any complex words
+\begin{columns}
+\column{0.5\textwidth}
+Don't print inside the function:
+\begin{lstlisting}[style=smaller]
+def has_complex_words(tweet):
+    cleaned = cleantweet(tweet)
+    result = True
+    for word in cleaned:
+        if len(word) >= 10:
+            print(True)
+\end{lstlisting}
+\pause\column{0.5\textwidth}
+\structure{return} the result: 
+\begin{lstlisting}[style=smaller]
+def has_complex_words(tweet):
+    cleaned = cleantweet(tweet)
+    for word in cleaned:
+        if len(word) >= 10:
+            return True
+    return False
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Checking if a list has a property}
+Write a function that takes a twitter message as argument, [...]
+and \structure{returns True or False} depending on whether it
+contains any complex words
+
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{lstlisting}[style=smaller]
+def has_complex_words(tweet):
+    cleaned = cleantweet(tweet)
+    result = True
+    for word in cleaned:
+        if len(word) >= 10:
+            result = True
+        else:
+            result = False
+    return result
+\end{lstlisting}
+What happens?
+\pause
+\begin{lstlisting}[style=smaller]
+>>> has_complex_words('This tweet is sophisticated.')
+True
+>>> has_complex_words('A sophisticated word')
+False
+\end{lstlisting}
+\pause\column{0.5\textwidth}
+The right way:
+\begin{lstlisting}[style=smaller]
+def has_complex_words(tweet):
+    for word in cleantweet(tweet)
+        if len(word) > 10:
+            # immediately return True
+            # if we see one complex word
+            return True
+    # only return True
+    # if we have seen all words!
+    return False
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+
 \begin{frame}[fragile]{Functions: making re-usable functions}
 \begin{lstlisting}[style=smaller]
-prefix = '@'
-
-def filter_ats(tokens, prefix):
-    newlist = [k for k in tokens if prefix in k]
-    return newlist
-
-usernames = filter_ats(tokens, prefix)
-
-prefix2 = '#'
-
-def filter_hashtags(tokens, prefix2):
-    newlist = [k for k in tokens if prefix2 in k]
-    return newlist
-
-hashtags = filter_hashtags(tokens, prefix2)
+def proportion_complex_tweets(tweet):
+    trumptext = trump.split('\n')
+    bidentext = biden.split('\n') 
+    trump_complex_word = 0
+    biden_complex_words = 0
+    all_tweets = 0
+    for words in trumptext: 
+        if has_complex_words(words) == True: 
+            trump_complex_tweets =+ 1
+        all_tweets=+ 1  
+    for words in bidentext: 
+        if has_complex_words(words) ==True: 
+            biden_complex_tweets =+ 1
+        all_tweets += 1   
+    return (biden_complex_tweets + trump_complex_tweets)/(all_tweets)*100
 \end{lstlisting}
-
-(BTW: great use of list comprehensions)
 \end{frame}
 
 \begin{frame}[fragile]{Functions: making re-usable functions}
+\begin{columns}[T]
+\column{0.5\textwidth}
 One re-usable function: 
 \begin{lstlisting}[style=smaller]
-def filter_tokens(tokens, prefix):
-    newlist = [token for token in tokens
-            if token[0] == prefix]
-    return newlist
+def proportion_complex_tweets(tweets):
+    tweets = tweets.split('\n')
+    complex_tweets = 0
+    all_tweets = 0
+    for tweet in tweets: 
+        if has_complex_words(tweet) == True: 
+            complex_tweets =+ 1
+        all_tweets=+ 1  
+    return complex_tweets / all_tweets * 100
 
-usernames = filter_tokens(tokens, '@')
-hashtags = filter_tokens(tokens, '#')
+print('Trump', proportion_complex_tweets(trump))
+print('Biden', proportion_complex_tweets(biden))
 \end{lstlisting}
 
+\pause\column{0.5\textwidth}
 Lesson:
     \begin{itemize}
         \item Don't Repeat Yourself (DRY)
-        \item one function can do multiple jobs,
+        \item Use the functions you defined before
+        \item one function can be used for multiple purposes,
             based on its arguments
     \end{itemize}
+\end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Function scope}
     \begin{definition}
@@ -138,110 +264,125 @@ Lesson:
                 \item Created and destroyed for each function call.
             \end{itemize}
     \end{description}
+
+    \pause
+    \structure{Takeaway}: for functions, think carefully about what variables
+        it needs (arguments), and what result it produces (\lstinline{return}).
 \end{frame}
 
-
-\begin{frame}[fragile]{What if there are more than 2 punctuation marks?}
-    \begin{columns}[T]
-\column{0.6\textwidth}
-Skipping only the first punctuation mark is not enough!
-\begin{lstlisting}[style=plain]
-- ``Shall I compare thee ...''
-- ``Please don't!'' she replied
-\end{lstlisting} % SPAM
-\pause\column{0.4\textwidth}
-Solution: remove all punctuation
-\begin{lstlisting}[style=plain]
-Shall I compare thee
-Please dont
-\end{lstlisting}
-\end{columns}
-Lesson:
+\begin{frame}[fragile]{Read the instructions carefully!}
     \begin{itemize}
-        \item Don't just test your code \\
-            on the particular given examples.
-        \item Tests are typically not exhaustive.
-        \item Reflect whether you really solved the problem.
+        \item 2c: Write a function that reports, for a given set of tweets, the
+                percentage of tweets with complex words
+
+
+                \vspace{1em}
+                \structure{Not} the same as the percentage of complex words!
+
+                    \lstinline|complex_tweets / total_tweets|
+
+                    vs
+
+                    \lstinline|complex_words / total_words|
+
+        \pause
+        \item 3: Write a function that goes through the table and computes the
+            mean of the numbers in the specified column. 
+            
+            There were a lot of hints:
+            \begin{itemize}
+            \item Go through the table line by line. Split it into lines with
+                the method \lstinline|splitlines()| which returns a list.
+            \item The table is in a tab-separated format. Given a line of the
+                table, split the line into a list with
+                \lstinline|line.split('\t')|.
+            \item \lstinline|analyze(data, 3)| should return the means for
+                column 3 (starting from 0), i.e., \lstinline|flipper_length_mm|
+                in this dataset.
+            \item The code should return a dictionary of the form
+                \lstinline|{'male': 181.2, 'female': 177.4}|
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{For loops: premature return}
-\begin{columns}
-\column{0.5\textwidth}
-Pay attention to what is part of a for loop!
-\begin{lstlisting}
-result = []
-for line in text.splitlines():
-    result += line[0]
-    return result
-\end{lstlisting}
-Why does this not work?
-\pause\column{0.5\textwidth}
-\texttt{return} immediately aborts the function!
-\begin{lstlisting}
-result = []
-for line in text.splitlines():
-    result += line[0]
-return result
-\end{lstlisting}
-\end{columns}
-\end{frame}
 
-\begin{frame}[fragile]{For loops: inefficiency}
-\begin{columns}[T]
-\column{0.5\textwidth}
-Pay attention to what is part of a for loop!
-\begin{lstlisting}
-chars = []
-for line in text.splitlines():
-    chars.append(line[0])
-    result = ''.join(chars)
-return result
-\end{lstlisting}
-\pause
-This repeats the join at every iteration, completely unnecessary!
-\column{0.5\textwidth}
-Solution: Take the join out of the for loop:
-\begin{lstlisting}
-chars = []
-for line in text.splitlines():
-    chars.append(line[0])
-result = ''.join(chars)
-return result
-\end{lstlisting}
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Only concatenate same types!}
-\begin{columns}[T]
-\column{0.5\textwidth}
-Don't do this:
-\begin{lstlisting}
-result = []
-for line in text.splitlines():
-    result += line[0]
-\end{lstlisting}
-Why not? \pause
-Type mismatch:
-    \begin{itemize}
-        \item \texttt{result} is a list
-        \item \texttt{line[0]} is a string \\
-            (of one character).
-    \end{itemize}
-\column{0.5\textwidth}
-Better:
-\begin{lstlisting}
-result = ''
-for line in text.splitlines():
-    result += line[0]
-\end{lstlisting}
-Best:
-\begin{lstlisting}
-return ''.join(line[0] for line
-        in text.splitlines())
-\end{lstlisting}
-\end{columns}
-\end{frame}
+% \begin{frame}[fragile]{For loops: premature return}
+% \begin{columns}
+% \column{0.5\textwidth}
+% Pay attention to what is part of a for loop!
+% \begin{lstlisting}
+% result = []
+% for line in text.splitlines():
+%     result += line[0]
+%     return result
+% \end{lstlisting}
+% Why does this not work?
+% \pause\column{0.5\textwidth}
+% \texttt{return} immediately aborts the function!
+% \begin{lstlisting}
+% result = []
+% for line in text.splitlines():
+%     result += line[0]
+% return result
+% \end{lstlisting}
+% \end{columns}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{For loops: inefficiency}
+% \begin{columns}[T]
+% \column{0.5\textwidth}
+% Pay attention to what is part of a for loop!
+% \begin{lstlisting}
+% chars = []
+% for line in text.splitlines():
+%     chars.append(line[0])
+%     result = ''.join(chars)
+% return result
+% \end{lstlisting}
+% \pause
+% This repeats the join at every iteration, completely unnecessary!
+% \column{0.5\textwidth}
+% Solution: Take the join out of the for loop:
+% \begin{lstlisting}
+% chars = []
+% for line in text.splitlines():
+%     chars.append(line[0])
+% result = ''.join(chars)
+% return result
+% \end{lstlisting}
+% \end{columns}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Only concatenate same types!}
+% \begin{columns}[T]
+% \column{0.5\textwidth}
+% Don't do this:
+% \begin{lstlisting}
+% result = []
+% for line in text.splitlines():
+%     result += line[0]
+% \end{lstlisting}
+% Why not? \pause
+% Type mismatch:
+%     \begin{itemize}
+%         \item \texttt{result} is a list
+%         \item \texttt{line[0]} is a string \\
+%             (of one character).
+%     \end{itemize}
+% \column{0.5\textwidth}
+% Better:
+% \begin{lstlisting}
+% result = ''
+% for line in text.splitlines():
+%     result += line[0]
+% \end{lstlisting}
+% Best:
+% \begin{lstlisting}
+% return ''.join(line[0] for line
+%         in text.splitlines())
+% \end{lstlisting}
+% \end{columns}
+% \end{frame}
 
 
 \begin{frame}{Summary}
@@ -255,6 +396,330 @@ return ''.join(line[0] for line
         \item types
     \end{itemize}
 \end{frame}
+
+
+\section{Exploratory Data Analysis}
+\frame{\tableofcontents[currentsection]}
+
+\begin{frame}{The Data Lifecycle}
+    \begin{enumerate}
+        \item Data collection
+        \item Data processing
+        \item \structure{Exploratory data analysis \& visualization}
+        \item ``Confirmatory data analysis'' \\
+            Hypothesis testing, Machine Learning
+        \item Insight \& Policy Decision
+    \end{enumerate}
+
+    \vspace{1em}
+    Today we focus on step 3
+\end{frame}
+
+\begin{frame}{Data Collection, Processing}
+In practice, this often takes the most time (up to 80\%!)
+
+\begin{itemize}
+    \item Acquiring data
+        \begin{itemize}
+            \item Scrape from web, PDFs
+            \item Database dump
+            \item etc.
+        \end{itemize}
+    \item Messy data: date formats, order of first/last names, etc.
+    \item Missing data (often not at random!)
+    \item Converting data
+        \begin{description}
+            \item[Tidy format] one observation per row, \\
+                    each variable is a column
+            \item[Non-tidy data] not a table, observations spread over multiple
+                rows/tables, etc.
+        \end{description}
+\end{itemize}
+\end{frame}
+
+
+
+
+\subsection{Reproducibilty}
+\frame{\tableofcontents[currentsubsection]}
+
+\begin{frame}{Intermezzo: reproducibility}
+    \structure{Austerity policy}.
+
+    Time line:
+    \begin{itemize}
+        \item 2008: Economic recession/crisis
+        \item Reinhart \& Rogoff (2010) analyze correlation between debt and
+            economic growth \\
+            \begin{block}{Claim:}
+            debt should be less than 90\% of GDP, otherwise economic growth
+                drops dramatically
+            \end{block}
+        \item Austerity policy in EU, Greece needs to reduce debt etc.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The dangers of Excel}
+    \begin{reference}
+    \url{https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html}
+    \end{reference}
+
+    Problem:
+    \begin{itemize}
+        \item The claim is wrong.
+            They made a crucial mistake in their Excel sheet!
+        \item Excel hides formulas, easy to overlook mistakes
+        \item Can we do better with Python?
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Reproducibility}
+    Research should be reproducible:
+
+    \begin{itemize}
+        \item Code and data should be made available \\
+            But: \structure{check permissions}! (copyright, licenses)
+        \item Code: version control (cf.\ \href{http://www.github.com}{GitHub}),\\
+            Data: durable storage in simple formats (text-based)
+        \item Make reproducing results \structure{as simple as possible}
+        \item Ensure code still works 20+ years later. \\
+            Hard problem: ``bit rot''
+        \item Audit code/data in peer review \\
+            However, this requires lots of time and expertise; realistic?
+    \end{itemize}
+
+    %Overlap between open source, open science, open data, open access, etc.
+    Can use Jupyter Notebooks for code, results, and documentation. \\
+    Only need to store data separately.
+\end{frame}
+
+
+\subsection{Working with Pandas}
+\frame{\tableofcontents[currentsubsection]}
+
+\begin{frame}{Pandas}
+    Pandas: versatile data analysis tool \dots
+
+    \begin{itemize}
+        \item Load/write tabular data (csv, excel)
+        \item Manipulate/process data
+        \item Analyze: e.g., basic statistics
+        \item Plot: look at data, interactions, etc.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{The main datastructures}
+    \begin{description}
+        \item[Series:] one-dimensional, indexed array of numbers or strings
+            \begin{itemize}
+                \item ordered (like list)
+                \item indexed: lookup items by key (like dict)
+                \item mutable
+            \end{itemize}
+        \item[DataFrame:] two-dimensional table with Series as columns.
+            \begin{itemize}
+                \item Rows are instances (observations, individuals, etc.)
+                \item Columns are features (e.g., age, length, etc.)
+            \end{itemize}
+            %Each column is a series with a single type (homogeneous), \\
+            %but a data frame can contain columns of different types (heterogeneous).
+    \end{description}
+\end{frame}
+
+% TODO: don't show too much mechanics of Pandas
+% show examples, point to further docs, practice during lab in notebook
+\begin{frame}[fragile]{Creating a Series}
+    \begin{lstlisting}
+    In: import pandas as pd
+    In: data = pd.Series([0, 1, 2, 3, 4])
+    \end{lstlisting}
+
+    \vspace{1em}
+    BTW: "as pd" gives a shorter name to the module, \\
+    saves a few keystrokes \dots
+\end{frame}
+
+\begin{frame}[fragile]{A first plot}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{lstlisting}
+%matplotlib inline
+data.plot()
+\end{lstlisting}
+\includegraphics[height=0.5\textheight]{fig/basicplot}
+\pause\column{0.5\textwidth}
+Saving the plot (e.g., to include in a report):
+\begin{lstlisting}
+ax = data.plot()
+ax.figure.savefig('plot.pdf')
+ax.figure.savefig('plot.png', dpi=150)
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Labeled data}
+Two ways:
+\begin{lstlisting}
+In: data = pd.Series([0, 1], index=['a', 'b'])
+In: data = pd.Series({'a': 0, 'b': 1})
+In: data
+Out:
+a    0
+b    1
+dtype: int64
+\end{lstlisting}
+
+\begin{itemize}
+    \item Each datapoint will have a label, \\
+        stored in \texttt{data.index}.
+    \item If no labels are supplied, \\
+        a numeric index is automatically created
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Arithmetic with Series}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{lstlisting}
+In: data = pd.Series({'a': 0, 'b': 1})
+In: data
+Out:
+a    0
+b    1
+dtype: int64
+
+In: data + 1
+Out:
+a    1
+b    2
+\end{lstlisting}
+
+\pause\column{0.5\textwidth}
+\begin{lstlisting}
+dtype: int64
+In: data + pd.Series({'a': 2, 'b': 4})
+Out:
+a    3
+b    5
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Basic statistics}
+The sentence lengths of the first night of 1001 Nights:
+\begin{columns}
+\column{0.5\textwidth}
+\begin{lstlisting}
+In: lengths = [len(sent) for sent in corpus[0]]
+In: data = pd.Series(lengths)
+In: data.describe()
+Out:
+\end{lstlisting}
+\begin{lstlisting}[style=plain]
+count    378.000000
+mean      30.084656
+std       17.915458
+min        1.000000
+25%       17.000000
+50%       28.000000
+75%       40.750000
+max      103.000000
+dtype: float64
+\end{lstlisting}
+\column{0.5\textwidth}
+    NB:
+    \begin{itemize}
+        \item std is the standard deviation.
+        \item 50\% is the median.
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{A boxplot}
+The sentence lengths of the first night of 1001 Nights:
+\begin{lstlisting}
+import seaborn as sns
+data = pd.Series(lengths, name='Sentence length')
+sns.boxplot(data)
+\end{lstlisting}
+\includegraphics[height=0.65\textheight]{fig/boxplotsents}
+\end{frame}
+
+\begin{frame}[fragile]{A histogram}
+The sentence lengths of the first night of 1001 Nights:
+\begin{lstlisting}
+data.hist()
+\end{lstlisting}
+\includegraphics[height=0.7\textheight]{fig/basichist}
+\end{frame}
+
+
+\begin{frame}[fragile]{Counting values: value\_counts()}
+\begin{lstlisting}
+import nltk
+with open('data/arabian_nights/1.txt', encoding='utf8') as infile:
+    tokens = nltk.word_tokenize(infile.read())
+data = pandas.Series(tokens)
+data.value_counts()
+\end{lstlisting}
+\begin{lstlisting}[style=plain]
+and       770
+,         730
+the       582
+of        290
+to        286
+... 
+dung        1
+Thus        1
+farmer      1
+Length: 2473, dtype: int64
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Counting values: bar plot}
+\begin{lstlisting}
+counts = data.value_counts()
+top20 = counts.head(20)
+top20.plot.barh();
+\end{lstlisting}
+\includegraphics[width=0.6\textwidth]{fig/barplotwords}
+\end{frame}
+
+% show more?
+% tail
+% sort_values, sort_index
+% ...
+
+\begin{frame}{Lab}
+\begin{itemize}
+    \item Finish notebook chapter 4 and week 5 exercises!
+    \item Explore \& visualize 1001 nights \& Gutenberg corpus
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Materials used for these slides:
+\begin{itemize}
+\item \url{https://www.cs.umd.edu/class/fall2018/cmsc320/}
+    specifically lecture 11
+    % https://www.cs.umd.edu/class/fall2018/cmsc320/lecs/cmsc320_f2018_lec11.pdf
+\end{itemize}
+
+\vspace{1em}
+Documentation:
+\begin{itemize}
+    \item \url{http://pandas.pydata.org/pandas-docs/stable/}
+    \item \url{https://seaborn.pydata.org/}
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+
 
 
 
@@ -298,7 +763,7 @@ return ''.join(line[0] for line
     \end{enumerate}
 
     \vspace{1em}
-    This course focuses on step 3
+    Today we focus on step 3
 \end{frame}
 
 \begin{frame}{Data Collection, Processing}
@@ -311,12 +776,14 @@ In practice, this often takes the most time (up to 80\%!)
             \item Database dump
             \item etc.
         \end{itemize}
-    \item Messy data: encoding issues, date formats, order of first/last names, etc.
-    \item Missing data
+    \item Messy data: date formats, order of first/last names, etc.
+    \item Missing data (often not at random!)
     \item Converting data
         \begin{description}
             \item[Tidy format] one observation per row, \\
                     each variable is a column
+            \item[Non-tidy data] not a table, observations spread over multiple
+                rows/tables, etc.
         \end{description}
 \end{itemize}
 \end{frame}
@@ -377,7 +844,8 @@ A bar plot:
 \includegraphics[height=0.55\textheight]{fig/barplot}
 
 \column{0.46\textwidth}
-Don't use a pie chart: \url{https://www.businessinsider.com/pie-charts-are-the-worst-2013-6}
+Don't use a pie chart:
+\url{https://www.businessinsider.com/pie-charts-are-the-worst-2013-6}
 \end{columns}
 \end{frame}
 
@@ -599,251 +1067,3 @@ in the same unit as the original data
         3. Dispersion            & -           & range, standard deviation \\
 \end{tabular}
 \end{frame}
-
-
-
-
-\section{Reproducible research}
-\frame{\tableofcontents[currentsubsection]}
-
-\begin{frame}{Intermezzo: reproducibility}
-    \structure{Austerity policy}.
-
-    Time line:
-    \begin{itemize}
-        \item 2008: Economic recession/crisis
-        \item Reinhart \& Rogoff (2010) analyze correlation between debt and
-            economic growth \\
-            \begin{block}{Claim:}
-            debt should be less than 90\% of GDP, otherwise economic growth
-                drops dramatically
-            \end{block}
-        \item Austerity policy in EU, Greece needs to reduce debt etc.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{The dangers of Excel}
-    \begin{reference}
-    \url{https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html}
-    \end{reference}
-
-    Problem:
-    \begin{itemize}
-        \item The claim is wrong.
-            They made a crucial mistake in their Excel sheet!
-        \item Excel hides formulas, easy to overlook mistakes
-        \item Can we do better with Python?
-    \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Reproducibility}
-    Research should be reproducible:
-
-    \begin{itemize}
-        \item Code and data should be made available \\
-            But: \structure{check permissions}! (copyright, licenses)
-        \item Code: version control (cf.\ \href{http://www.github.com}{GitHub}),\\
-            Data: durable storage in simple formats (text-based)
-        \item Make reproducing results \structure{as simple as possible}
-        \item Ensure code still works 20+ years later. \\
-            Hard problem: ``bit rot''
-        \item Audit code/data in peer review \\
-            However, this requires lots of time and expertise; realistic?
-    \end{itemize}
-
-    %Overlap between open source, open science, open data, open access, etc.
-    Can use Jupyter Notebooks for code, results, and documentation. \\
-    Only need to store data separately.
-\end{frame}
-
-
-\subsection{Analyzing results with Pandas}
-\frame{\tableofcontents[currentsubsection]}
-
-\begin{frame}{Pandas}
-    Pandas: versatile data analysis tool \dots
-
-    \begin{itemize}
-        \item Load/write tabular data (csv, excel)
-        \item Manipulate/process data
-        \item Analyze: e.g., basic statistics
-        \item Plot: look at data, interactions, etc.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{The main datastructures}
-    \begin{description}
-        \item[Series:] one-dimensional, indexed array of numbers or strings
-            \begin{itemize}
-                \item ordered (like list)
-                \item indexed: lookup items by key (like dict)
-                \item mutable
-            \end{itemize}
-        \item[DataFrame:] two-dimensional table with Series as columns.
-            \begin{itemize}
-                \item Rows are instances (observations, individuals, etc.)
-                \item Columns are features (e.g., age, length, etc.)
-            \end{itemize}
-            %Each column is a series with a single type (homogeneous), \\
-            %but a data frame can contain columns of different types (heterogeneous).
-    \end{description}
-\end{frame}
-
-% TODO: don't show too much mechanics of Pandas
-% show examples, point to further docs, practice during lab in notebook
-\begin{frame}[fragile]{Creating a Series}
-    \begin{lstlisting}
-    In: import pandas as pd
-    In: data = pd.Series([0, 1, 2, 3, 4])
-    \end{lstlisting}
-
-    \vspace{1em}
-    BTW: "as pd" gives a shorter name to the module, \\
-    saves a few keystrokes \dots
-\end{frame}
-
-\begin{frame}[fragile]{A first plot}
-    \begin{lstlisting}
-    %matplotlib inline
-    data.plot()
-    \end{lstlisting}
-    \includegraphics[height=0.5\textheight]{fig/basicplot}
-    \pause
-
-Saving the plot (e.g., to include in a report):
-\begin{lstlisting}
-ax = data.plot()
-ax.figure.savefig('plot.pdf')  # PDF
-ax.figure.savefig('plot.png', dpi=150)  # PNG
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Labeled data}
-Two ways:
-\begin{lstlisting}
-In: data = pd.Series([0, 1], index=['a', 'b'])
-In: data = pd.Series({'a': 0, 'b': 1})
-Out: Index(['a', 'b'], dtype='object')
-\end{lstlisting}
-
-\begin{itemize}
-    \item Each datapoint will have a label, \\
-        stored in the \texttt{index}.
-    \item If no labels are supplied, \\
-        a numeric index is automatically created
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Basic statistics}
-The sentence lengths of the first night of 1001 Nights:
-\begin{columns}
-\column{0.5\textwidth}
-\begin{lstlisting}
-In: lengths = [len(sent) for sent in corpus[0]]
-In: data = pd.Series(lengths)
-In: data.describe()
-Out:
-\end{lstlisting}
-\begin{lstlisting}[style=plain]
-count    378.000000
-mean      30.084656
-std       17.915458
-min        1.000000
-25%       17.000000
-50%       28.000000
-75%       40.750000
-max      103.000000
-dtype: float64
-\end{lstlisting}
-\column{0.5\textwidth}
-    NB:
-    \begin{itemize}
-        \item std is the standard deviation.
-        \item 50\% is the median.
-    \end{itemize}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[fragile]{A boxplot}
-The sentence lengths of the first night of 1001 Nights:
-\begin{lstlisting}
-import seaborn as sns
-data = pd.Series(lengths, name='Sentence length')
-sns.boxplot(data)
-\end{lstlisting}
-\includegraphics[height=0.65\textheight]{fig/boxplotsents}
-\end{frame}
-
-\begin{frame}[fragile]{A histogram}
-The sentence lengths of the first night of 1001 Nights:
-\begin{lstlisting}
-data.hist()
-\end{lstlisting}
-\includegraphics[height=0.7\textheight]{fig/basichist}
-\end{frame}
-
-
-\begin{frame}[fragile]{Counting values: value\_counts()}
-\begin{lstlisting}
-import nltk
-with open('data/arabian_nights/1.txt', encoding='utf8') as infile:
-    tokens = nltk.word_tokenize(infile.read())
-data = pandas.Series(tokens)
-data.value_counts()
-\end{lstlisting}
-\begin{lstlisting}[style=plain]
-and       770
-,         730
-the       582
-of        290
-to        286
-... 
-mer         1
-pocket      1
-dung        1
-Thus        1
-farmer      1
-Length: 2473, dtype: int64
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Counting values: bar plot}
-\begin{lstlisting}
-counts = data.value_counts()
-top20 = counts.head(20)
-top20.plot.barh();
-\end{lstlisting}
-\includegraphics[width=0.7\textwidth]{fig/barplotwords}
-\end{frame}
-
-% show more?
-% tail
-% sort_values, sort_index
-% ...
-
-\begin{frame}{Lab}
-\begin{itemize}
-    \item Finish notebook chapter 3 and week 5 exercises!
-    \item Explore \& visualize 1001 nights \& Gutenberg corpus
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-Materials used for these slides:
-\begin{itemize}
-\item \url{https://www.cs.umd.edu/class/fall2018/cmsc320/}
-    specifically lecture 11
-    % https://www.cs.umd.edu/class/fall2018/cmsc320/lecs/cmsc320_f2018_lec11.pdf
-\end{itemize}
-
-\vspace{1em}
-Documentation:
-\begin{itemize}
-    \item \url{http://pandas.pydata.org/pandas-docs/stable/}
-    \item \url{https://seaborn.pydata.org/}
-\end{itemize}
-\end{frame}
-
-\end{document}

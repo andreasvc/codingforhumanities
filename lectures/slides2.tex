@@ -26,15 +26,15 @@
     Today:
     \begin{itemize}
         % \item Indexing and slicing strings/lists
-        \item Complex values (\texttt{list})
-        \item Making decisions (\texttt{if})
-        \item Repetition (\texttt{for})
+        \item Complex values (\lstinline{list})
+        \item Making decisions (\lstinline{if})
+        \item Repetition (\lstinline{for})
     \end{itemize}
 \end{frame}
 
 \section{Sequence types}
 \subsection{Strings}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Strings}
     \begin{definition}
@@ -44,61 +44,62 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{Operations on strings}
-\begin{lstlisting}
-In: first = 'John'
-In: last = 'Doe'
-\end{lstlisting}
-\begin{description}
-    \item[first + last] \texttt{'JohnDoe'}
-    \item[first - last] TypeError
-    \item[first * last] TypeError
-    \item[first / last] TypeError
-\end{description}
-
-\begin{itemize}
-\item + can be used to concatenate two strings
-\item The other operations require numbers, not text
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Mixing strings and numbers}
-\begin{lstlisting}
-In: first = 'John'
-In: num = 3
-\end{lstlisting}
-\begin{description}
-    \item[first + num] TypeError
-    \item[first - num] TypeError
-    \item[first * num] 'JohnJohnJohn'
-    \item[first / num] TypeError
-\end{description}
-
-\begin{itemize}
-\item * can be used to repeat a string several times
-\item For the other operations, Python refuses to mix up types
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Special characters in strings: `escape sequences'}
-\begin{lstlisting}[language=]
-In: print("John's bike")
-John's bike
-In: print('John\'s bike')  # single quote
-John's bike
-In: print('John\tMary')    # tab
-John    Mary
-In: print('John\nMary')    # new line
-John
-Mary
-In: print('Backslash: \\')
-Backslash: \
-In: print('up\down')       # \d is not defined, so backslash is kept
-up\down
-In: print("\U0001F923", "\N{grinning face}") 
-[rolling on the floor laughing and grinning emojis ...]
-\end{lstlisting}
-\end{frame}
+% \begin{frame}[fragile]{Operations on strings}
+% \begin{lstlisting}
+% In: first = 'John'
+% In: last = 'Doe'
+% \end{lstlisting}
+% \begin{description}
+%     \item[first + last] \lstinline{'JohnDoe'}
+%     \item[first - last] TypeError
+%     \item[first * last] TypeError
+%     \item[first / last] TypeError
+% \end{description}
+% 
+% \begin{itemize}
+% \item + can be used to concatenate two strings
+% \item The other operations require numbers, not text
+% \end{itemize}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Mixing strings and numbers}
+% \begin{lstlisting}
+% In: first = 'John'
+% In: num = 3
+% \end{lstlisting}
+% \begin{description}
+%     \item[first + num] TypeError
+%     \item[first - num] TypeError
+%     \item[first * num] 'JohnJohnJohn'
+%     \item[first / num] TypeError
+% \end{description}
+% 
+% \begin{itemize}
+% \item * can be used to repeat a string several times
+% \item For the other operations, Python refuses to mix up types
+% \end{itemize}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Special characters in strings: `escape sequences'}
+% % syntax highlighting is incorrect so disable it
+% \begin{lstlisting}[language=]
+% In: print("John's bike")
+% John's bike
+% In: print('John\'s bike')  # single quote
+% John's bike
+% In: print('John\tMary')    # tab
+% John    Mary
+% In: print('John\nMary')    # new line
+% John
+% Mary
+% In: print('Backslash: \\')
+% Backslash: \
+% In: print('up\down')       # \d is not defined, so backslash is kept
+% up\down
+% In: print("\U0001F923", "\N{grinning face}") 
+% [rolling on the floor laughing and grinning emojis ...]
+% \end{lstlisting}
+% \end{frame}
 
 \begin{frame}[fragile]{Indexing: extracting one element}
 \begin{columns}
@@ -111,7 +112,7 @@ In: name[-1]
 Out: 'n'
 \end{lstlisting}
     \begin{itemize}
-        \item \texttt{a[n]} gets the n'th character of a
+        \item \lstinline{a[n]} gets the n'th character of a
         \item Counting starts at 0
         \item negative indices start from the end:\\
             -1 for last character, \\
@@ -133,7 +134,7 @@ In: name[1:]
 Out: 'ohn'
 \end{lstlisting}
     \begin{itemize}
-        \item \texttt{a[n:m]} extracts characters n to m
+        \item \lstinline{a[n:m]} extracts characters n to m
         \item Counting starts at 0
         \item Result is up to but not including character m \\
                 (half-open interval)
@@ -142,7 +143,7 @@ Out: 'ohn'
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Indexing and slicing}
     \includegraphics[width=0.8\textwidth]{fig/slices}
 \end{frame}
 
@@ -155,24 +156,51 @@ Out: 4
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}{Refresher: Functions}
+    We have seen builtin \structure{functions}:
+    \begin{itemize}
+        \item \lstinline{int()}
+        \item \lstinline{print()}
+        \item \lstinline{len()}
+    \end{itemize}
+    \pause
+    \begin{definition}
+        A \structure{function} is a piece of code
+        that can be invoked by name.
+
+    \begin{itemize}
+        \item It may take input (arguments): \lstinline{len(name)}
+        
+        \item It may produce a result: \lstinline{len(name)} \\
+            or an effect: \lstinline{print('hello', name)}
+
+        \item The notation \lstinline{f(x)} means that the function \lstinline{f}
+            is \structure{applied} to the value \lstinline{x}. \\ 
+            Or simply: \lstinline{f} is \structure{called}.
+    \end{itemize}
+    \end{definition}
+    \pause
+    More about functions next week (including how to make your own)
+\end{frame}
+
 \begin{frame}[fragile]{Format strings}
-How to combine text and variables in a message?
 \begin{lstlisting}
 In: x = 1
 In: y = 2
 In: z = x +  y
-In: print("The sum of " + str(x) + " and " + str(y) + " is " + str(z) + ".")
+\end{lstlisting}
+How to combine text and variables in a message?
+\begin{lstlisting}
+In: print('The sum of ' + str(x) + ' and ' + str(y) + ' is ' + str(z) + '.')
 The sum of 1 and 2 is 3.
-In: print("The sum of", x, "and", y, "is", z, ".")
+In: print('The sum of', x, 'and', y, 'is', z, '.')
 The sum of 1 and 2 is 3 .
 \end{lstlisting}
 
 \pause
 Better:
 \begin{lstlisting}
-In: print("The sum of {0} and {1} is {2}.".format(x, y, z))
-The sum of 1 and 2 is 3.
-In: print(f"The sum of {x} and {y} is {z}.")
+In: print(f'The sum of {x} and {y} is {z}.')
 The sum of 1 and 2 is 3.
 \end{lstlisting}
 
@@ -189,16 +217,18 @@ Simple is better, last method is best.
     \vspace{1em}
     Basic operations on sequences:
     \begin{description}[concatenation:]
-        \item[getting length:]     \texttt{len(seq)}
-        \item[indexing:]           \texttt{seq[expression]}
-        \item[slicing:]            \texttt{seq[start:end]}
-        \item[concatenation:]      \texttt{seq1 + seq2}
-        \item[repetition:]         \texttt{seq * num}
+        \item[getting length:]     \lstinline{len(seq)}
+        \item[indexing:]           \lstinline{seq[expression]}
+        \item[slicing:]            \lstinline{seq[start:end]}
+        \item[concatenation:]      \lstinline{seq1 + seq2}
+        \item[repetition:]         \lstinline{seq * num}
     \end{description}
 \end{frame}
 
 
 \subsection{Lists}
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}[fragile]{Lists}
     \begin{definition}
     Lists are sequences that may contain any kind of value as items
@@ -265,8 +295,8 @@ An \structure{immutable} object cannot be changed after it is created.
     \end{definition}
    
     \begin{description}
-        \item[Regular function:] \texttt{func(a, ...)}
-        \item[Method:] \texttt{obj.func(a, ...)}
+        \item[Regular function:] \lstinline{func(a, ...)}
+        \item[Method of object:] \lstinline{obj.func(a, ...)}
     \end{description}
 \end{frame}
 
@@ -275,6 +305,7 @@ We can add an item to the end of an existing list:
 \begin{lstlisting} 
 In: names = ['John', 'Mary']
 In: names.append('Alice')
+In: names
 Out: ['John', 'Mary', 'Alice']
 \end{lstlisting}
 
@@ -286,57 +317,60 @@ In: enemies = ['Alice', 'Bob']
 In: friends + enemies
 Out: ['John', 'Mary', 'Alice', 'Bob']
 \end{lstlisting}
+
+\vspace{1em}
+NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
 \end{frame}
 
 
-\begin{frame}[fragile]{Removing items}
-We can remove an item anywhere in a list:
-\begin{lstlisting} 
-In: names = ['John', 'Mary']
-In: names.remove('John')
-Out: ['Mary']
-\end{lstlisting}
-
-\texttt{remove(elem)} \structure{searches} for the first occurrence of
-\texttt{elem} and removes it.
-
-\pause
-\vspace{1em}
-Can also remove items at particular positions:
-\begin{lstlisting} 
-In: acquaintances = ['John', 'Mary', 'Alice', 'Bob', 'Max']
-In: acquaintances.pop(3)  # removes 4th item
-In: acquaintances.pop()   # removes last item
-In: friends = acquaintances[:2]  # new list from slice
-In: friends
-Out: ['John', 'Mary']
-\end{lstlisting}
-
-% We can also use slicing to keep a part of a list
+% \begin{frame}[fragile]{Removing items}
+% We can remove an item anywhere in a list:
 % \begin{lstlisting} 
-% In: acquaintances = ['John', 'Mary', 'Alice', 'Bob']
-% In: friends = acquaintances[:2]
+% In: names = ['John', 'Mary']
+% In: names.remove('John')
+% Out: ['Mary']
+% \end{lstlisting}
+% 
+% \lstinline{remove(elem)} \structure{searches} for the first occurrence of
+% \lstinline{elem} and removes it.
+% 
+% \pause
+% \vspace{1em}
+% Can also remove items at particular positions:
+% \begin{lstlisting} 
+% In: acquaintances = ['John', 'Mary', 'Alice', 'Bob', 'Max']
+% In: acquaintances.pop(3)  # removes 4th item
+% In: acquaintances.pop()   # removes last item
+% In: friends = acquaintances[:2]  # new list from slice
 % In: friends
 % Out: ['John', 'Mary']
 % \end{lstlisting}
-%This is faster if you know where the items are that you want to keep.
-\end{frame}
+% 
+% % We can also use slicing to keep a part of a list
+% % \begin{lstlisting} 
+% % In: acquaintances = ['John', 'Mary', 'Alice', 'Bob']
+% % In: friends = acquaintances[:2]
+% % In: friends
+% % Out: ['John', 'Mary']
+% % \end{lstlisting}
+% %This is faster if you know where the items are that you want to keep.
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Sorting}
+% \begin{lstlisting} 
+% In: letters = list('ocd')
+% In: letters
+% Out: ['o', 'c', 'd']
+% In: sorted(letters)
+% Out: ['c', 'd', 'o']
+% \end{lstlisting}
+% 
+% NB: sorted leaves the original list unchanged,
+% assign it to keep the result.
+% \end{frame}
 
-\begin{frame}[fragile]{Sorting}
-\begin{lstlisting} 
-In: letters = list('ocd')
-In: letters
-Out: ['o', 'c', 'd']
-In: sorted(letters)
-Out: ['c', 'd', 'o']
-\end{lstlisting}
 
-NB: sorted leaves the original list unchanged,
-assign it to keep the result.
-\end{frame}
-
-
-\begin{frame}[fragile]{Nested lists}
+\begin{frame}[fragile]{Nested lists: lists inside of lists \dots}
     \begin{columns}
         \column{0.3\linewidth}
             \includegraphics[width=0.95\textwidth]{fig/russiandolls}
@@ -344,7 +378,6 @@ assign it to keep the result.
             {\scriptsize
             (from \href{https://en.wikipedia.org/wiki/Matryoshka_doll#/media/File:Matryoshka_transparent.png}{Wikipedia})}
         \column{0.7\linewidth}
-            Can put lists inside of lists \dots
 \begin{lstlisting}
 In: ranking = [['John', 1], ['Mary', 3], ['Max', 2]]
 \end{lstlisting}
@@ -353,11 +386,22 @@ In: ranking = [['John', 1], ['Mary', 3], ['Max', 2]]
 How to access elements:
 \begin{lstlisting}
 In: name_and_rank = ranking[0]
+In: name_and_rank
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
 Out: ['John', 1]
-In: name_and_rank[1]  # extract rank
+
+In: name_and_rank[1]
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
 Out: 1
-In: ranking[0][1]  # can also get rank directly
+
+In: ranking[0][1]
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
 Out: 1
+\end{lstlisting}
+\pause
+If we know there will be a fixed sequence of items,
+can assign them directly:
+\begin{lstlisting}
 In: name, rank = name_and_rank
 \end{lstlisting}
     \end{columns}
@@ -381,8 +425,8 @@ Two important differences:
     \item Lists are mutable and strings are immutable
 \end{enumerate}
 
-    Convert between strings and lists:
-        \texttt{list(), .split(), .join()}
+%    Convert between strings and lists:
+%        \lstinline{list(), .split(), .join()}
 \end{frame}
 
 
@@ -393,7 +437,7 @@ Two important differences:
 
 \section{Making decisions}
 \subsection{Conditional expressions}
-\frame{\tableofcontents[currentsection]}
+\frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}{Making decisions: flow charts}
     \includegraphics[height=0.8\textheight]{fig/flowchart}
@@ -403,18 +447,20 @@ Two important differences:
 \begin{frame}{Simple conditions}
     \begin{definition}
         A \structure{conditional expression} is
-        an expression that is \texttt{True} or \texttt{False}
+        an expression that is \lstinline{True} or \lstinline{False}
     \end{definition}
     Conditional operators:
-    \begin{description}
-        \item[a == b] are the values equal?
-        \item[a != b] inequality
-        \item[a $<$ b] test whether a is strictly smaller than b
-        \item[a $>$ b]
-        \item[a in b] does element a occur in the sequence b?
-    \end{description}
+    \begin{itemize}
+        \item \lstinline{a == b}: are the values equal?
+        \item \lstinline{a != b}: inequality
+        \item \lstinline{a < b}: test whether \lstinline{a}
+                is strictly smaller than \lstinline{b}
+        \item \lstinline{a > b}: \dots larger \dots
+        \item \lstinline{a in b}: does element \lstinline{a} occur
+                in the sequence \lstinline{b}?
+    \end{itemize}
 
-    Values and conditions that are \texttt{True} or \texttt{False}
+    Values and conditions that are \lstinline{True} or \lstinline{False} \\
     are called \structure{Boolean} (George Boole, 1815--1864)
 \end{frame}
 
@@ -422,6 +468,7 @@ Two important differences:
     NB: == tests equality, \\
            = is an assignment statement!
 
+    \vspace{1em}
     \begin{description}
         \item[Statement:] must occur on a new line. \structure{does} something.
         \item[Expression:] may occur in many places, e.g., inside another expression.
@@ -445,6 +492,8 @@ to test whether code is doing what it should.
 
 
 \subsection{Conditional execution: if-statement}
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}[fragile]{The if-statement}
 \begin{lstlisting}
 if books > 5:
@@ -452,8 +501,8 @@ if books > 5:
 \end{lstlisting}
 
     \begin{itemize}
-        \item The code under an if-statement is only executed
-            if the condition is True.
+        \item The code under an \lstinline{if}-statement is only executed
+            if the condition is \lstinline{True}.
         \item The indentation determines which code is covered
             by the condition
     \end{itemize}
@@ -466,6 +515,32 @@ if books > 5:
         The start and end of the block are defined by the amount of indentation
         (i.e., leading spaces) of the lines.
     \end{definition}
+\end{frame}
+
+\begin{frame}[fragile]{if-statement examples}
+\begin{lstlisting}
+In: books = 6
+In: if books > 5:
+In:     print('you are an avid reader')
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+Out: you are an avid reader
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+In: books = 3
+In: if books > 5:
+In:     print('you are an avid reader')
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+(nothing)
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+In: books = 'many'
+In: if books > 5:
+In:     print('you are an avid reader')
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+TypeError: '>' not supported between instances of 'str' and 'int'
+\end{lstlisting}
 \end{frame}
 
 
@@ -505,14 +580,17 @@ else:
 \begin{frame}[fragile]{Complex conditions}
     Can create complex conditions from other conditions:
     
-    \begin{description}[cond1 and cond2]
-        \item[cond1 \textcolor{blue}{and} cond2]
-            result is True if both are True
-        \item[cond1 \textcolor{blue}{or} cond2]
-            result is True if either or both are True
-        \item[\textcolor{blue}{not} cond]
-            result is True if cond is False, and vice versa
-    \end{description}
+    \begin{itemize}
+        % NB \lstinline does not work inside \item[...]
+        % so we don't use a description environment
+        \item \lstinline{cond1 and cond2}:
+            result is \lstinline{True} if both are \lstinline{True}
+        \item \lstinline{cond1 or cond2}:
+            result is \lstinline{True} if either or both are \lstinline{True}
+        \item \lstinline{not cond}:
+            result is \lstinline{True} if \lstinline{cond}
+            is \lstinline{False}, and vice versa
+    \end{itemize}
 
     \pause
     For example:
@@ -525,8 +603,8 @@ if books > 5 and books < 15:
 
 \begin{frame}[fragile]{Truthy and Falsy things}
 \begin{itemize}
-    \item The number zero and empty sequences are treated as \texttt{False}.
-    \item Nonzero numbers and nonempty sequences are treated as \texttt{True}.
+    \item The number zero and empty sequences are treated as \lstinline{False}.
+    \item Nonzero numbers and nonempty sequences are treated as \lstinline{True}.
 \end{itemize}
 
 These are equivalent:
@@ -549,11 +627,13 @@ if booklist:
 
             \includegraphics[width=0.8\textwidth]{fig/flowchart2}
 
-        \pause
         \column{0.5\linewidth}
 \begin{lstlisting}
 awkward = False
 free_food = True
+\end{lstlisting}
+\pause
+\begin{lstlisting}
 if awkward:
     if free_food:
         print('Stay')
@@ -568,10 +648,10 @@ else:
 
 \begin{frame}{Summary: conditions and if}
     \begin{description}[if-statements]
-        \item[Conditions] An expression that is \texttt{True} or \texttt{False}.
+        \item[Conditions] An expression that is \lstinline{True} or \lstinline{False}.
             \begin{description}
-                \item[Comparisons, equality tests:] \texttt{<, >, ==, !=}
-                \item[Complex conditions:]          \texttt{and, or, not}
+                \item[Comparisons, equality tests:] \lstinline{<, >, ==, !=}
+                \item[Complex conditions:]          \lstinline{and, or, not}
             \end{description}
         \item[if-statements]
             \begin{itemize}
@@ -586,7 +666,9 @@ else:
 \subsection{The for-loop}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}[fragile]{Repeating statements: loops}
+\begin{frame}[fragile]{Repeating statements: for-loops}
+\begin{columns}
+    \column{0.5\linewidth}
 \begin{lstlisting}
 booklist = ['a', 'b', 'c']
 for book in booklist:
@@ -599,28 +681,80 @@ b
 c
 \end{lstlisting}
 
+    \column{0.5\linewidth}\pause
+The loop is equivalent to:
+\begin{lstlisting}
+book = booklist[0]
+print(book)
+book = booklist[1]
+print(book)
+book = booklist[2]
+print(book)
+\end{lstlisting}
+\end{columns}
+
 \begin{itemize}
 \item The statements under the for-loop are repeated \\
     for every element in the sequence.
-\item At every iteration, \textcolor{blue}{\texttt{book}} is assigned
-    an element of \textcolor{blue}{\texttt{booklist}}
+\item At every iteration, \lstinline{book} is assigned
+    an element of \lstinline{booklist}
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Looping over sequences}
 For loops can be used for anything with multiple items (\structure{iterable}):
+\begin{columns}
+\column{0.5\linewidth}
 \begin{lstlisting}
 for letter in 'word':
     print(letter)
+\end{lstlisting}
+Result:
+\begin{lstlisting}
+w
+o
+r
+d
+\end{lstlisting}
+        \column{0.5\linewidth}
+\begin{lstlisting}
 for number in [0, 1, 2]:
     print(number)
+\end{lstlisting}
+Result:
+\begin{lstlisting}
+0
+1
+2
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Nesting loops inside loops!}
+    For loops can contain other for loops (nesting):
+\begin{lstlisting}
+for number in [1, 2]:
+    for letter in 'abc':
+        print(number, letter)
+\end{lstlisting}
+What does the result look like?
+
+\pause
+Result:
+\begin{lstlisting}
+1 a
+1 b
+1 c
+2 a
+2 b
+2 c
 \end{lstlisting}
 \end{frame}
 
 
 
 \begin{frame}[fragile]{Looping without a list}
-Can use the \textcolor{OliveGreen}{\texttt{range}} function
+Can use the \lstinline{range} function
 if we don't have a list:
 \begin{lstlisting}
 for number in range(4):
@@ -642,14 +776,16 @@ Repeats 4 times. Last item is 3 because counting starts at 0.
 \begin{frame}{Summary}
     \begin{description}
         \item[for-loop] repeat code for each element
-        \item[iterables] strings, lists, range
+        \item[iterables] \lstinline{str, list, range}
     \end{description}
 \end{frame}
 
 \section{Example problems and solutions}
 \subsection{Counting letters}
+\frame{\tableofcontents[currentsection]}
+
 \begin{frame}[fragile]{Example}
-How to count the number of 'a's in a string?
+How to count the number of `a's in a string?
 \begin{lstlisting}
 word = 'banana'
 count = 0
@@ -665,14 +801,12 @@ print(count)
 
 
 \subsection{Reversing text}
-\begin{frame}[fragile]{Examples from Lager exercises}
-7. Define a function \texttt{reverse()} that computes the reversal of a string.
+\begin{frame}[fragile]{Reversing text}
+Write code that computes the reversal of a string.
 
    \vspace{1em}
-   For example, \texttt{reverse("I am testing")} should return the string
-   \texttt{"gnitset ma I"}.
-
-[NB: we will solve the exercises without functions for now]
+   For example, \lstinline{reverse('I am testing')} should print the string
+   \lstinline{'gnitset ma I'}.
 
 \begin{lstlisting}
 string = 'I am testing'
@@ -692,13 +826,14 @@ print(string[::-1])
 \end{lstlisting}
 \end{frame}
 
+
 \subsection{Palindromes}
 \begin{frame}[fragile]
-8. Define a function \texttt{is\_palindrome()} that recognizes palindromes
+Write code that recognizes palindromes
    (i.e. words that look the same written backwards).
 
    \vspace{1em}
-   For example, \texttt{is\_palindrome("radar")} should return \texttt{True}.
+    For example, \lstinline{'radar'} is a palindrome, but \lstinline{'radio'} is not.
 
 \begin{lstlisting}
 string = 'radar'
@@ -712,12 +847,11 @@ print(backwards == string)
  
 \subsection{Overlapping lists?}
 \begin{frame}[fragile]
-10. Define a function \texttt{overlapping()} that takes two lists and returns
-    \texttt{True} if they have at least one member in common, \texttt{False}
-    otherwise.
+    Write code that takes two lists and checks if they have at least one
+    member in common.
 
     \vspace{1em}
-    You may use [\dots] the \texttt{in} operator, but for the sake of the
+    You may use the \lstinline{in} operator, but for the sake of the
     exercise, you should (also) write it using two nested for-loops.
 \begin{lstlisting}
 list1 = [1, 2, 3]
@@ -725,6 +859,8 @@ list2 = [1, 4, 6]
 overlapping = False
 \end{lstlisting}
 \pause
+\begin{columns}[T]
+\column{0.47\linewidth}
 \begin{lstlisting}
 for elem1 in list1:
     for elem2 in list2:
@@ -733,6 +869,7 @@ for elem1 in list1:
 print(overlapping)
 \end{lstlisting}
 \pause
+\column{0.47\linewidth}
 Shorter:
 \begin{lstlisting}
 for elem1 in list1:
@@ -740,23 +877,29 @@ for elem1 in list1:
         overlapping = True
 print(overlapping)
 \end{lstlisting}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Summary of today}
-    \begin{description}
+    \begin{description}[Sequence types]
         \item[Sequence types] strings and lists
         \item[Conditions] if-statement
         \item[Repetition] for-loop
+        \item[Nesting]
+            \begin{itemize}
+                \item lists inside lists
+                \item if-statements inside if-statements
+                \item for-loops inside for-loops
+            \end{itemize}
     \end{description}
 \end{frame}
 
 
-\begin{frame}{Background reading}
+\begin{frame}{Readings and lab}
     \begin{itemize}
-        \item Downey sec.\ 5.1--5.7, ch.\ 8, 10
-        \item and/or Zelle sec.\ 5.1-5.8, ch.\ 7, 8.
-        \item Watch youtube tutorials of "Hacking the Humanities" episode 6--8:
-            {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
+        \item Severance ch.\ 3, 5, 8
+        \item Notebook ch.\ 2
+        \item 10 exercises
     \end{itemize}
 \end{frame}
 \end{document}

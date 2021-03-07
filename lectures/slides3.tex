@@ -1,5 +1,6 @@
 \documentclass[aspectratio=169,usenames,dvipsnames]{beamer}
 \usepackage{preamble}
+\usepackage{tikz-qtree}
 \title{Coding for Humanities, week 3}
 
 \begin{document}
@@ -9,14 +10,42 @@
 \end{frame}
 
 \begin{frame}{Last week}
+\begin{columns}[T]
+\column{0.5\linewidth}
     \Large
-    Sequences
+    (nested) lists
 
     \vspace{1em}
-    Conditions
+    (nested) if-statements 
 
     \vspace{1em}
-    Loops
+    (nested) for-loops
+\column{0.5\linewidth}
+    \only<2>{
+        \Tree [.Object
+            [.Number ??? \phantom{.}???\phantom{.} ] 
+            [.Iterable [.Sequence
+                [.Immutable ??? ]
+                [.Mutable ??? ]
+                ] ] ]
+    }
+    \only<3>{
+        \Tree [.Object
+            [.Number \lstinline{int} \lstinline{float} ] 
+            [.Iterable [.Sequence
+                [.Immutable ??? ]
+                [.Mutable ??? ]
+                ] ] ]
+    }
+    \only<4>{
+        \Tree [.Object
+            [.Number \lstinline{int} \lstinline{float} ] 
+            [.Iterable [.Sequence
+                [.Immutable \lstinline{str} ]
+                [.Mutable \lstinline{list} ]
+                ] ] ]
+    }
+\end{columns}
 \end{frame}
 
 \begin{frame}{Plan for today}
@@ -25,14 +54,13 @@
 
 \section{Last week's exercises}
 \begin{frame}[fragile]{The Final Quiz}
-\dots write code that counts the number of word tokens in
-which the letter 'a' is present in a small corpus. You need to do this on the
-basis of a frequency distribution of words that is represented by a list of
-\texttt{[word, frequency]} pairs.
-
-For example, the word \emph{happening} has an \emph{a} and it occurs
-4 times, therefore this word contributes 4 to the total result.
-Assign your value to the variable \texttt{number\_of\_words\_with\_a}.
+\dots You are given a frequency distribution of words that is represented by a
+list of \lstinline{[word, frequency]} pairs. Your task is to calculate the sum
+of frequencies of words that contain the letter \lstinline{'a'}.
+    
+For example, the word \emph{happening} has an \lstinline{'a'} and it occurs
+4 times, therefore this word contributes 4 to the total result. Assign your
+value to the variable \lstinline{result}.
 
 \begin{lstlisting}
 frequency_distribution = [['Beg', 1], ["Goddard's", 1], ...]
@@ -61,6 +89,8 @@ for word, frequency in frequency_distribution:
 
 
 \subsection{Intermezzo: how to solve problems}
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}{How to solve problems}
     \begin{columns}
         \column{0.5\linewidth}
@@ -124,7 +154,7 @@ for word, frequency in frequency_distribution:
         \item pangram or not?
         \item 99 bottles of beer
     \end{enumerate}
-    \url{https://gist.github.com/andreasvc/60ae38960c1d4c1e1941bf8e96bb2d5f}
+    % do poll: how many exercises did you solve? 10, 9, 8, 7, 6, less
 \end{frame}
 
 \begin{frame}{How to get better at solving problems?}
@@ -179,7 +209,7 @@ for word, frequency in frequency_distribution:
 \begin{frame}[fragile]{dictionaries}
     \begin{definition}
         A dictionary stores (key, value) pairs, \\
-        such that we can quickly find a value given a key.
+        such that given a key, we can quickly find a value
     \end{definition}
 Example, a phone book:
 \begin{lstlisting}
@@ -192,7 +222,7 @@ Example, a phone book:
 \vspace{1em}
 \structure{Aside}: why are dictionaries so fast?\\
 Answer: the `magic' of hash tables!
-\url{https://dev.to/a_sandrina_p/learning-hash-tables-with-drawings-99o}
+    cf.~\url{https://stackoverflow.com/a/730813}
 \end{frame}
 
 \begin{frame}{Properties of dictionaries}
@@ -270,6 +300,28 @@ print(books['Tolstoy'])
 Can easily select works by a particular author!
 \end{frame}
 
+\begin{frame}{Algorithms + Data structures}
+    \begin{columns}
+        \column{0.5\linewidth}
+            \begin{definition}
+                An \structure{algorithm} is a clear and precise,
+                abstract method of solving a problem.
+            \end{definition}
+            Contrast with \structure{code}, a concrete
+            implementation in a particular language and manner. 
+
+            \pause
+            \begin{definition}
+                A \structure{data structure} is a kind of algorithm
+                to organize and access data efficiently.
+
+            \end{definition}
+            Examples: list, dictionary
+        \column{0.5\linewidth}
+            \includegraphics[height=0.6\textheight]{fig/wirth}
+    \end{columns}
+\end{frame}
+
 \begin{frame}{Algorithms + Data structures = Programs}
     \begin{columns}
         \column{0.5\linewidth}
@@ -286,21 +338,30 @@ Can easily select works by a particular author!
     \end{columns}
 \end{frame}
 
-
-
+\begin{frame}{Summary}
+        \Tree [.Object
+            [.Number \lstinline{int} \lstinline{float} ] 
+            [.Iterable
+                [.Mapping \lstinline{dict} ]
+                [.Sequence
+                    [.Immutable \lstinline{str} \lstinline{tuple} ]
+                    [.Mutable \lstinline{list} ]
+                    ] ] ]
+\end{frame}
 
 \section{Defining functions}
 \frame{\tableofcontents[currentsection]}
 
 \begin{frame}{Motivation}
     \begin{itemize}
-        \item We've used builtin functions (\texttt{print, len, sorted})
+        \item We've used builtin functions (\lstinline{print, len, sorted})
         \item Let's see how to make our own functions
         \item Why? Modularity:
             \pause
             % ; i.e., break down programs into smaller components
             \begin{itemize}
-                \item Create re-usable components:
+                \item Create re-usable components: \\
+                    can develop and test separately \\
                     write once, use many times
                 \item Create larger, more complex programs \\
                     from readily understandable building blocks
@@ -313,7 +374,7 @@ Can easily select works by a particular author!
 \begin{frame}[fragile]{Defining functions}
 Basic syntax:
 \begin{lstlisting}
-def function(param1, param2, ...):
+def name(param1, param2, ...):
     # do something with parameters
 \end{lstlisting}
 
@@ -327,7 +388,7 @@ def function(param1, param2, ...):
 
 \begin{frame}[fragile]{Defining versus calling a function}
     \begin{itemize}
-        \item Executing a \texttt{\textbf{\textcolor{OliveGreen}{def}}}
+        \item Executing a \lstinline{def}
             statement does not run the code!
         \item The function is stored along with its name
         \item Function must be called to run it
@@ -353,8 +414,8 @@ greeting()
 
     \begin{itemize}
         \item Can pass data to functions using arguments
-        \item Below, the argument \textcolor{mauve}{\texttt{'John'}} is assigned \\
-            to the parameter \textcolor{blue}{\texttt{name}} when the function is called
+        \item Below, the argument \lstinline{'John'} is assigned \\
+            to the parameter \lstinline{name} when the function is called
         \item Arguments have a specific order
         \item When calling a function, must use correct number of arguments
     \end{itemize}
@@ -374,10 +435,10 @@ greeting('John')
             \begin{itemize}
                 \item The function is used for its \emph{effect};\\
                     it does something (e.g., print text on screen).
-                \item (The value \texttt{None} is implicitly returned,
+                \item (The value \lstinline{None} is implicitly returned,
                         and usually ignored).
             \end{itemize}
-        \item Use \texttt{\textbf{\textcolor{OliveGreen}{return}} ...}
+        \item Use \lstinline{return ...}
             to give a result back to the caller.
         \item May occur anywhere in the function,\\
                 immediately stops execution of the function.
@@ -392,18 +453,41 @@ def average(values):
 \end{lstlisting}
 \end{frame}
 
+% more examples of functions calling other functions
+\begin{frame}[fragile]{Breaking programs down into functions}
+\begin{lstlisting}
+celtemp = input('Input temperature in Celsius:\n')
+fahtemp = float(celtemp) * 9 / 5 + 32
+print('Temperature in Fahrenheit: ', fahtemp)
+\end{lstlisting}
+
+\pause\vspace{1em}
+\begin{lstlisting}
+def input_number(message):
+    result = input(message)
+    return float(result)
+
+def celsius_to_fahrenheit(celtemp):
+    return celtemp * 9 / 5 + 32
+
+celtemp = input_number('Input temperature in Celsius:')
+fahtemp = celsius_to_fahrenheit(celtemp)
+print('Temperature in Fahrenheit: ', round(fahtemp, 1))
+\end{lstlisting}
+\end{frame}
+
 % missing: scope
 
 \begin{frame}{Summary}
     \begin{itemize}
         \item Break programs down into functions \\
-            to make them easier to understand.
-        \item Define a function using \texttt{\textbf{\textcolor{OliveGreen}{def}}}
-            with a name, parameters,\\ and a block of code.
+            to make them easier to reusable.
+        \item Define a function using \lstinline{def} with a name, parameters,\\
+            and a block of code.
         \item Defining a function does not run it.
         \item Arguments in a call are matched to parameters in definition.
         \item Functions may return a result to their caller using
-            \texttt{\textbf{\textcolor{OliveGreen}{return}}}.
+            \lstinline{return}.
     \end{itemize}
 \end{frame}
 
@@ -412,7 +496,7 @@ def average(values):
 
 % Talk about reading files?
 
-\section{Text processing}
+\section{Text (pre)processing}
 \subsection{Motivation}
 \frame{\tableofcontents[currentsection]}
 
@@ -542,6 +626,8 @@ Moretti (2005) Graphs, maps, and trees}
 
 
 \subsection{Cleaning and preprocessing text}
+\frame{\tableofcontents[currentsubsection]}
+
 \begin{frame}{Goal: text $\rightarrow$ word counts}
     For basic text analysis,
 
@@ -688,7 +774,9 @@ https://en.wikipedia.org/wiki/Bicycle
             (highly frequent words that do not carry meaning)
         \item Names
     \end{itemize}
+    %Approach: collect word lists, remove them from your results.
 
+    \vspace{1em}
     But in other applications, these are the most interesting words!
 \end{frame}
 
@@ -707,10 +795,10 @@ Learn \structure{regular expressions}:\\
 % \url{https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial}
 
 \vspace{1em}
-Takes time to learn, but extremely powerful!
+Takes some effort learn, but extremely powerful!
 \end{frame}
 
-\begin{frame}[fragile]{Regular expression example}
+\begin{frame}[fragile]{Regular expressions: real world example}
 \begin{lstlisting}
 def pagenumbers(text, threshold=50):
     """Strip lines that contain only a number.
@@ -767,10 +855,11 @@ def pagenumbers(text, threshold=50):
 
 \begin{frame}{Background reading}
     \begin{itemize}
-        \item Downey ch.\ 3, 6, 11, 14
-        \item and/or Zelle sec.\ 5.9, ch.\ 6
-        \item Watch youtube tutorials of "Hacking the Humanities" episode 10--12:
-            {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
+        \item Severance ch.\ 4, 6, 9.
+        % \item Downey ch.\ 3, 6, 11, 14
+        % \item and/or Zelle sec.\ 5.9, ch.\ 6
+        % \item Watch youtube tutorials of "Hacking the Humanities" episode 10--12:
+        %     {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}
 \end{document}

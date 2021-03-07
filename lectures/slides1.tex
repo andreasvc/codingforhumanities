@@ -11,6 +11,13 @@
  \tableofcontents
 \end{frame}
 
+% Notes:
+% - print not introduced as function; type also mentioned without introduction
+% - explain difference between int('42') and int(a)
+% - stress difference between evaluating an expression, and storing the result in
+%   a variable; e.g., "int(a)" has no side-effect.
+% - the course summary slide does not really have a summary of the course,
+%   introduces new information
 
 
 
@@ -24,6 +31,14 @@
         ``\structure{Programming} is telling your computer
         how to do something'' (Pine 2009, xii)
     \end{definition}
+
+    \pause\vspace{1em}
+    more specifically,
+
+    \vspace{1em}
+    The goal of programming is to devise \\
+    a sequence of unambiguous executable instructions \\
+    to perform a task.
 \end{frame}
 
 \begin{frame}{Why use computers in research?}
@@ -133,7 +148,7 @@
 
 
 \begin{frame}{Intermezzo: female computer pioneers}
-	\begin{columns}
+    \begin{columns}[T]
 		\column{0.3\linewidth}
 		Ada Lovelace %, mathematician
 
@@ -220,12 +235,12 @@ public class HelloWorld {
 
 \begin{frame}[fragile]{Using Python as a calculator}
 Operators:
-    \begin{description}
-        \item[Addition] 1 + 2
-        \item[Subtraction] 2 - 1
-        \item[Multiplication] 2 * 3
-        \item[Division] 6 / 2
-        \item[Exponentation] 3 ** 2
+    \begin{description}[Exponentation]
+        \item[Addition] \lstinline{1 + 2}
+        \item[Subtraction] \lstinline{2 - 1}
+        \item[Multiplication] \lstinline{2 * 3}
+        \item[Division] \lstinline{6 / 2}
+        \item[Exponentation] \lstinline{3 ** 2}
         % \item[Parentheses] (1 + 2) * 3
     \end{description}
 \end{frame}
@@ -249,9 +264,9 @@ Note:
 \end{frame}
 
 \begin{frame}[fragile]{Numeric data types}
-    \begin{description}
-        \item[Integers] (whole numbers): 1, 2, 3, \dots -1, -2, -3
-        \item[Floating point] numbers: 2.5, 1.3333, \dots
+    \begin{description}[Floating point]
+        \item[Integers] (whole numbers): \lstinline{1, 2, 3,} \dots, \lstinline{ -1, -2, -3}
+        \item[Floating point] numbers: \lstinline{2.5, 1.3333,} \dots
     \end{description}
 
 \pause
@@ -274,9 +289,9 @@ Out: <class 'int'>
 A variable is created/updated using `='
 
 \begin{definition}
-\structure{Assignment}: \texttt{name = expression}
+\structure{Assignment}: \lstinline{name = expression}
 
-\texttt{name} consists of one or more letters or underscores (case-sensitive).
+\lstinline{name} consists of one or more letters or underscores (case-sensitive).
 \end{definition}
 
 \begin{lstlisting}[language=python]
@@ -291,17 +306,17 @@ Out: 2.5
 \begin{frame}{Terminology}
     \begin{description}
         \item[Constant]
-            e.g., 2, 5, 1.5, \dots
+            e.g., \lstinline{2, 5, 1.5,} \dots
         \item[Expression]
             A constant, operator, and optionally another expression
             \begin{itemize}
-                \item 2 + 5
-                \item 1 + 2 + 3
+                \item \lstinline{2 + 5}
+                \item \lstinline{1 + 2 + 3}
                 \item etc.
             \end{itemize}
         \item[Variable] a container that holds a value,
             can be used in place of constants;
-            e.g., a, b, books, \dots
+            e.g., \lstinline{a, b, books,} \dots
     \end{description}
 \end{frame}
 
@@ -341,7 +356,7 @@ In: a += 1
 Out: 3
 \end{lstlisting}
 
-Also -=, *=, etc.
+Also \lstinline{-=, *=,} etc.
 \end{frame}
 
 
@@ -380,7 +395,7 @@ movie = "2001: A Space Odyssey"
 \end{frame}
 
 \begin{frame}{Types}
-    We have seen numbers (integer, float) and text (string).
+    We have seen numbers (\lstinline{int, float}) and text (\lstinline{str}).
 
     These are examples of types:
 
@@ -438,7 +453,7 @@ In: int(text)
 Out: 42
 \end{lstlisting}
 
-    \texttt{int(text)} is an example of using a function:
+    \lstinline{int(text)} is an example of using a function:
 
     \begin{definition}
         A \structure{function} is a piece of code
@@ -448,8 +463,8 @@ Out: 42
         
         It may produce output (return value) or an effect.
 
-        The notation f(x) means that the function f
-        is \structure{applied} to the value x.
+        The notation \lstinline{f(x)} means that the function \lstinline{f}
+        is \structure{applied} to the value \lstinline{x}.
     \end{definition}
 
 \end{frame}
@@ -459,12 +474,12 @@ Out: 42
     \begin{itemize}
         \item Values and types:
             \begin{description}
-                \item[Numbers:] int, float
-                \item[Text:] str
+                \item[Numbers:] \lstinline{int, float}
+                \item[Text:] \lstinline{str}
             \end{description}
-        \item Expressions: 1 + 2 * 3 - (4 + 5)
-        \item Variables: a = 2
-        \item Functions: str(2), int('2')
+        \item Expressions: \lstinline{1 + 2 * 3 - (4 + 5)}
+        \item Variables: \lstinline{a = 2}
+        \item Functions: \lstinline{str(2), int('2')}
     \end{itemize}
 \end{frame}
 
@@ -492,7 +507,7 @@ Out: 42
     \vspace{1em}
     \begin{itemize}
         \item multiplication is implicit in this notation: $ x(\dots) = $ x * (\dots)
-        \item mistake in paper! s is both sentences and strokes!
+        \item mistake in paper! $s$ is both sentences and strokes!
     \end{itemize}
 \end{frame}
 
@@ -573,18 +588,6 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \end{frame}
 
 
-% \begin{frame}{Course materials}
-%     \begin{itemize}
-%         \item Lectures with our material
-%         \item Lab: Notebooks from the course Python for the Humanities
-%         \item Preparation for lab:
-%             \begin{itemize}
-%                 \item Video lectures from the course Hacking the Humanities
-%                 \item Textbook: Think Python
-%             \end{itemize}
-%     \end{itemize}
-% \end{frame}
-
 \begin{frame}{Course summary}
     \begin{itemize}
         \item \structure{Programming} is the creative and challenging process
@@ -601,12 +604,12 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
         \item This course gives a lot of (new) information
         \item Information is provided in a \structure{cumulative} way:
             each new piece of information builds on previous information
-        \item Watch tutorials, read, and practice
+        \item Study book \& slides, \structure{practice}
         \item \structure{Ask questions} as soon as you think you are lost!
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Code of conduct}
+\begin{frame}{Administrative matters}
     \begin{itemize}
         \item Read the course manual (syllabus); available on Nestor
         \item On Nestor, under Course Documents, each week has:
@@ -618,16 +621,15 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Code of conduct}
+\begin{frame}{Administrative matters}
     \begin{itemize}
-        \item \structure{Don't email} us on course content,
+        \item \structure{Don't email} about course content,
             programming issues, grading, etc.!
-        \item For questions and remarks, address us face to face in class
-            or make an appointment:
+        \item For questions and remarks:
             \begin{itemize}
-                \item Van Cranenburgh: office hours, room H1311, 411
-                \item Bosveld: office hours, room H1311, 430
-                \item Meijerhof; after lab hours, or make appointment
+                \item Van Cranenburgh: during lab hours
+                \item TA: Blanca Calvo Figueras; during lab hours
+                \item or post on the Nestor discussion board
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -635,11 +637,9 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 
 \begin{frame}{Background reading}
     \begin{itemize}
-        \item Downey ch.\ 1 and 2
-        \item and/or Zelle sec.\ 2.1--2.5 \\
-            (make sure it is the latest edition for Python version 3).
-        \item Watch youtube tutorials of "Hacking the Humanities" episode 1--5:
-            {\small\url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
+        \item Severance ch.\ 1 and 2
+        % \item Watch youtube tutorials of "Hacking the Humanities" episode 1--5:
+        %     {\small\url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
     \end{itemize}
 \end{frame}
 

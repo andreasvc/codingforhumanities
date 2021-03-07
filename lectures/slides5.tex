@@ -9,13 +9,13 @@
 \end{frame}
 
 \begin{frame}{Last week}
-    Midterm
-    
-    \vspace{1em}
     Files \& directories
 
     \vspace{1em}
     Libraries
+
+    \vspace{1em}
+    Midterm
 \end{frame}
 
 \begin{frame}{Plan for today}
@@ -46,7 +46,8 @@
         %        \item \dots
         %        \item \dots
         %    \end{itemize}
-        \item Questions? Tomorrow in lab.
+		\item Grading will include feedback
+        \item Questions? Ask during the lab
     \end{itemize}
 \end{frame}
 
@@ -76,37 +77,88 @@
 \end{frame}
 
 
-\begin{frame}
-    % On two occasions I have been asked, --- "Pray, Mr. Babbage, if you put
-    % into the machine wrong figures, will the right answers come out?" In one
-    % case a member of the Upper, and in the other a member of the Lower House
-    % put this question. I am not able rightly to apprehend the kind of
-    % confusion of ideas that could provoke such a question.
+\begin{frame}{More quotes}
+    \begin{columns}
+        \column{0.8\linewidth}
+    \begin{quote}\normalfont
+    On two occasions I have been asked, ---"Pray, Mr. Babbage, if you put
+    into the machine wrong figures, will the right answers come out?"
 
-    % Charles Babbage, Passages from the Life of a Philosopher (1864), ch. 5:
-    % "Difference Engine No. 1"
+	In one case a member of the Upper, and in the other a member of the Lower
+	House put this question. I am not able rightly to apprehend the kind of
+	confusion of ideas that could provoke such a question.
+	
+    \end{quote}
+        \column{0.2\linewidth}
+    \end{columns}
+	\vspace{1em}
+    Charles Babbage, Passages from the Life of a Philosopher (1864), ch. 5:
+    "Difference Engine No. 1"
+\end{frame}
 
-    % \pause\vspace{1em}
-    % The programmer, like the poet, works only slightly removed from pure
-    % thought-stuff. He builds his castles in the air, from air, creating by
-    % exertion of the imagination. Few media of creation are so flexible, so
-    % easy to polish and rework, so readily capable of realizing grand
-    % conceptual structures....
-    % Yet the program construct, unlike the poet's words, is real in the sense
-    % that it moves and works, producing visible outputs separate from the
-    % construct itself. [...] The magic of myth and legend has come true in our
-    % time. One types the correct incantation on a keyboard, and a display
-    % screen comes to life, showing things that never were nor could be.
-    % Fred Brooks (1975) The Mythical Man-Month: Essays on Software Engineering
-    % p. 7
+\begin{frame}{More quotes}
+    \begin{quote}\normalfont
+    And programming computers was so fascinating.
 
-    % \pause\vspace{1em}
-    % And programming computers was so fascinating. You create your own little
-    % universe, and then it does what you tell it to do.
-    % Vint Cerf, a "father of the internet," quoted in "Your Life: Vinton Cerf"
-    % interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
-    % 10, p. 28.)
+	You create your own little universe,
 
+	and then it does what you tell it to do.
+    \end{quote}
+
+	\vspace{1em}
+    Vint Cerf, a "father of the internet," quoted in "Your Life: Vinton Cerf"
+    interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
+    10, p. 28.)
+\end{frame}
+
+\begin{frame}{More quotes}
+    \begin{quote}\normalfont
+    The programmer, like the poet, works only slightly removed from pure
+    thought-stuff. He builds his castles in the air, from air, creating by
+    exertion of the imagination. Few media of creation are so flexible, so
+    easy to polish and rework, so readily capable of realizing grand
+    conceptual structures....
+    Yet the program construct, unlike the poet's words, is real in the sense
+    that it moves and works, producing visible outputs separate from the
+    construct itself. [...] The magic of myth and legend has come true in our
+    time. One types the correct incantation on a keyboard, and a display
+    screen comes to life, showing things that never were nor could be.
+
+	\vspace{1em}
+    Fred Brooks (1975) The Mythical Man-Month: Essays on Software Engineering
+    p.\ 7
+    \end{quote}
+\end{frame}
+
+\begin{frame}{More quotes}
+    \begin{columns}
+        \column{0.7\linewidth}
+``There are two ways of constructing a software design:
+
+One way is to make it so simple that there are obviously no deficiencies,
+
+and the other way is to make it so complicated that there are no obvious deficiencies.
+
+The first method is far more difficult.''
+
+--- C. A. R. Hoare 
+        \column{0.3\linewidth}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{More quotes}
+    \begin{columns}
+        \column{0.7\linewidth}
+    ``Everyone knows that debugging is twice as hard as writing a program in
+    the first place.
+
+	So if you're as clever as you can be when you write it,
+    how will you ever debug it?'' (Brian Kernighan)
+        \column{0.3\linewidth}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{More quotes}
     \begin{columns}
         \column{0.7\linewidth}
     Maurice Wilkes discovers debugging in 1949:
@@ -121,46 +173,67 @@
     \end{quote}
         \column{0.3\linewidth}
     \end{columns}
-    % \pause\vspace{1em}
-    % ``Everyone knows that debugging is twice as hard as writing a program in
-    % the first place. So if you're as clever as you can be when you write it,
-    % how will you ever debug it?'' (Brian Kernighan)
 \end{frame}
 
+\begin{frame}{How to find bugs?}
+	\begin{enumerate}
+		\item Code doesn't work \dots error message
+		\item Code doesn't do what it should \dots
+		\item Tests (sprinkle if-statements!)
+		\item Automated tools (e.g., pylint)
+	\end{enumerate}
+\end{frame}
 
 \begin{frame}{Common errors}
     \begin{description}[AttributeError]
-        \item[SyntaxError] unclosed parenthesis, missing comma, colon etc.
-        \item[NameError] typo in variable/function
+        \item[SyntaxError] missing comma, colon, parenthesis etc.
+        \item[NameError] variable/function name typo
         \item[IndexError] \texttt{seq[n] with n >= len(seq)}
-        \item[KeyError] using key not in dict
+        \item[KeyError] key not in dict
         \item[AttributeError] \texttt{obj.att}, but obj does not have att
-        \item[TypeError] mixing str/int/etc.
+        \item[TypeError] mixing up str/int/etc.
         \item[ValueError] generic error: right type, wrong value
+        \item[FileNotFoundError] check filename / path
         \item[\dots] \dots
     \end{description}
 \end{frame}
 
-\begin{frame}[fragile]{Understanding tracebacks}
+\begin{frame}[fragile]{Understanding tracebacks; example 1}
 \begin{definition}
     \structure{Traceback}: the chain of function calls that led to an error.
 \end{definition}
 \begin{lstlisting}
->>> from collections import Counter
->>> c = Counter('abcdef')
->>> c.most_common('a')
+>>> sent = "The quick brown fox jumped."
+>>> words = sent.split()
+>>> print(words.lower())
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/usr/lib/python3.7/collections/__init__.py", line 584, in most_common
-    return _heapq.nlargest(n, self.items(), key=_itemgetter(1))
-  File "/usr/lib/python3.7/heapq.py", line 546, in nlargest
-    if n >= size:
-TypeError: '>=' not supported between instances of 'str' and 'int'
+AttributeError: 'list' object has no attribute 'lower'
+>>>
+\end{lstlisting}
+\pause
+First step: \structure{locate} the root cause.
+\end{frame}
+
+\begin{frame}[fragile]{Understanding tracebacks; example 2}
+\begin{definition}
+    \structure{Traceback}: the chain of function calls that led to an error.
+\end{definition}
+\begin{lstlisting}
+>>> from os.path import splitext
+>>> splitext(['not', 'a', 'filename'])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python3.7/posixpath.py", line 122, in splitext
+    p = os.fspath(p)
+TypeError: expected str, bytes or os.PathLike object, not list
+>>>
 \end{lstlisting}
 \pause
 First step: \structure{locate} the root cause.
 Typically somewhere in your own code \dots
 \end{frame}
+
 
 \begin{frame}{General strategy}
     The most effective debugging tool is still careful thought, coupled with
@@ -176,7 +249,7 @@ Typically somewhere in your own code \dots
             Confirm: print values
         \item Does the problem only occur with particular values? \\
             What is special about them?
-        \item For difficult problems, repeat several times.
+        \item For difficult problems: rinse \& repeat \dots
     \end{itemize}
 \end{frame}
 
@@ -195,8 +268,9 @@ Typically somewhere in your own code \dots
     % FIXME: already mentioned in previous lectures
     % concrete examples, or leave out.
     \begin{itemize}
-        \item Clear variable names
+        \item Clear variable/function names
         \item Separate steps/functions
+        \item No repetition
         \item Use idioms
     \end{itemize}
 \end{frame}
@@ -208,9 +282,9 @@ def clean_tweets(filename):
         text = infile.read()
         cleaned_text = ''
         lower_text = text.lower()
-        for character in lower_text:
-            if character not in '!$%^&*()-+={}[]:;"\'|<>,.?/~`':
-                cleaned_text += character
+        for char in lower_text:
+            if char not in '!$%^&*()-+={}[]:;"\'|<>,.?/~`':
+                cleaned_text += char
         cleaned_list = cleaned_text.split()
         return cleaned_list
 \end{lstlisting}
@@ -219,11 +293,11 @@ def clean_tweets(filename):
 \begin{frame}[fragile]{Example: re-factored}
 \begin{columns}
 \column{0.6\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 def remove_punc(text):
     punctuation = '!$%^&*()-+={}[]:;"\'|<>,.?/~`'
-    return ''.join(character for character in text
-            if character not in punctuation)
+    return ''.join(char for char in text
+            if char not in punctuation)
 
 def clean_tweets(filename):
     with open(filename, encoding='utf8') as infile:
@@ -236,9 +310,9 @@ def clean_tweets(filename):
 \begin{itemize}
 \item Separate function for punctuation
 \item More efficient punctuation elimination
-\item Limit scope of \textcolor{blue}{\texttt{with}}
-\item Renamed \textcolor{blue}{\texttt{cleaned\_list}} \\
-    to \textcolor{blue}{\texttt{tokens}}
+\item Limit scope of \lstinline{with}
+\item Renamed \lstinline{cleaned_list} \\
+    to \lstinline{tokens}
 \end{itemize}
 \end{columns}
 \end{frame}
@@ -248,17 +322,19 @@ def clean_tweets(filename):
         PEP-0008: coding conventions for Python code.
         \url{https://www.python.org/dev/peps/pep-0008/}
     \end{reference}
-    Follow a style guide, e.g.,
+
+    For larger projects, follow a style guide; e.g.,
     \begin{itemize}
-        \item Max. 1000 lines per file
-        \item Descriptive variable names
-        \item Avoid spaghetti \& ravioli code
+        \item Max.\ 1000 lines per file
+        \item Max.\ 25 lines per function
+        \item Avoid spaghetti \& lasagna code
         \item etc.
     \end{itemize}
     % FIXME: not really applicable to notebook code
-    
+   
+    \vspace{1em}
     \structure{But}:
-        ``A Foolish Consistency is the Hobgoblin of Little Minds''
+        ``A Foolish Consistency is the Hobgoblin of Little Minds'' \\
         (Ralph Waldo Emerson, Self-Reliance)
 \end{frame}
 
@@ -268,7 +344,7 @@ def clean_tweets(filename):
 \begin{frame}[fragile]{Fast code: Example}
     \begin{columns}[T]
 \column{0.4\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 def counter(words):
     counts = {}
     for word in words:
@@ -281,7 +357,7 @@ def counter(words):
 % from collections import Counter
 % return Counter(words)
 \column{0.6\linewidth}
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 def count_in_list(word_to_count, words):
     number_of_hits = 0
     for word in words:
@@ -303,9 +379,12 @@ def counter2(words):
 \begin{frame}{Levels to optimize}
     \begin{description}
         \item[Hardware] get faster machine, more memory, etc.
-        \item[Code] improve `constant' factors \\ (caching, compact representations etc.)
-        \item[Algorithm] e.g., sorting by shuffling will never be fast \\ (algorithmic complexity)
-        \item[Problem] e.g., sorting is harder than searching \\ (computational complexity)
+        \item[Code] improve `constant' factors \\
+			(caching, compact representations etc.)
+        \item[Algorithm] e.g., sorting by random shuffling will never be fast \dots \\
+			(algorithmic complexity)
+        \item[Problem] e.g., sorting is harder than searching \\
+			(computational complexity)
     \end{description}
 
     \pause
@@ -344,17 +423,19 @@ def counter2(words):
     Do not waste your time on 1; therefore: measure!
 \end{frame}
 
-\begin{frame}{Is it worth the time?}
-    \begin{reference}\scriptsize\vspace{1em}
-        \url{https://www.xkcd.com/1205/}
-    \end{reference}
-    \hfill\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
-\end{frame}
+% \begin{frame}{Is it worth the time?}
+%     \begin{reference}\scriptsize\vspace{1em}
+%         \url{https://www.xkcd.com/1205/}
+%     \end{reference}
+%     \hfill\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
+% \end{frame}
 
 \begin{frame}{Takeaway}
     ``We should forget about small efficiencies, say about 97\% of the time:
-    premature optimization is the root of all evil. Yet we should not pass up
-    our opportunities in the critical 3\%'' -- Donald Knuth
+    premature optimization is the root of all evil.
+	\pause
+	Yet we should not pass up our opportunities in the critical 3\%''
+    -- Donald Knuth
 
     \vspace{1em}
     \begin{itemize}
@@ -416,6 +497,7 @@ def counter2(words):
         \item etc. etc.
     \end{itemize}
 
+	\vspace{1em}
     Still, the `stupid' model works surprisingly well.
 
     Many tricks for minor improvements.
@@ -434,22 +516,20 @@ def counter2(words):
         %\url{http://www.nltk.org/howto/sentiment.html}
         % issues: NLTK classifiers, no explanation
     \end{reference}
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 import nltk
-from collections import Counter
 with open('data/sentiment/positive.txt', encoding='utf8') as inp:
     positive_words = set(inp.read().splitlines())
 with open('data/sentiment/negative.txt', encoding='utf8') as inp:
     negative_words = set(inp.read().splitlines())
 with open('VERNE Journey to Center of Earth.txt', encoding='utf8') as inp:
-    tokens = nltk.word_tokenize(inp.read().lower())
-counts = Counter(tokens)
+    words = nltk.word_tokenize(inp.read().lower())
 sentiment = 0
-for word, count in counts.items():
+for word in words:
     if word in positive_words:
-        sentiment += count
+        sentiment += 1
     elif word in negative_words:
-        sentiment -= count
+        sentiment -= 1
 \end{lstlisting}
 \end{frame}
 
@@ -556,7 +636,7 @@ In: with open('AUSTEN Sense and Sensibility.txt', encoding='utf8') as inp:
 \begin{lstlisting}
 In: moby_dick.concordance('monstrous')
 \end{lstlisting}
-\begin{lstlisting}[style=plain]
+\begin{lstlisting}[style=plainsmaller]
 Ho ' s Story . CHAPTER 55 . Of the Monstrous Pictures of Whales . CHAPTER 56 .
 ong the former , one was of a most monstrous size ... . This came towards us ,
 n of the Psalms_ . " Touching that monstrous bulk of the whale or ork we have r
@@ -573,6 +653,9 @@ e of Whale-Bones ; for Whales of a monstrous size are oftentimes cast up dead u
 \end{frame}
 
 \begin{frame}[fragile]{Similar words}
+\begin{reference}
+Phillips (1969). Jane Austen's English. \url{https://www.jstor.org/stable/43342482}
+\end{reference}
 \begin{lstlisting}
 In: moby_dick.similar("monstrous")
 \end{lstlisting}
@@ -589,25 +672,26 @@ very heartily so exceedingly remarkably as vast a great amazingly
 extremely good sweet
 \end{lstlisting}
 
-\structure{Insight}: monstrous is positive for Austen!
+\structure{Insight}: monstrous is positive for Austen! \\
+Austen uses monstrous as an adverb of degree (Phillips 1969, p.\ 329)
 \end{frame}
 
 \begin{frame}[fragile]{Common contexts}
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 In [6]: austen_sense.common_contexts(['monstrous', 'very'])
 \end{lstlisting}
-\begin{lstlisting}[style=plain]
+\begin{lstlisting}[style=plainsmaller]
 a_pretty am_glad a_lucky is_pretty, be_glad
 \end{lstlisting}
 
-\pause
+\pause\vspace{1em}
 i.e., Sense \& Sensibility contains both ``a very pretty" \\
     and ``a monstrous pretty" etc.
 
 \begin{lstlisting}
 In: austen_sense.concordance('monstrous')
 \end{lstlisting}
-\begin{lstlisting}[style=plain]
+\begin{lstlisting}[style=plainsmaller]
 Displaying 11 of 11 matches:
  `` Now , Palmer , you shall see a monstrous pretty girl . '' He immediately we
 your sister is to marry him . I am monstrous glad of it , for then I shall have
@@ -624,7 +708,7 @@ your sister is to marry him . I am monstrous glad of it , for then I shall have
 \begin{lstlisting}
 In: moby_dick.collocations()
 \end{lstlisting}
-\begin{lstlisting}[style=plain]
+\begin{lstlisting}[style=plainsmaller]
 Sperm Whale; Moby Dick; White Whale; old man; Right Whale; Captain
 Ahab; sperm whale; New Bedford; Captain Peleg; Mr. Starbuck; Cape
 Horn; cried Ahab; Mrs. Hussey; years ago; chief mate; lower jaw;
@@ -633,7 +717,7 @@ Father Mapple; white whale; ivory leg; cried Stubb
 \begin{lstlisting}
 In: austen_sense.collocations()
 \end{lstlisting}
-\begin{lstlisting}[style=plain]
+\begin{lstlisting}[style=plainsmaller]
 Mrs. Jennings; Colonel Brandon; Sir John; Lady Middleton; Mrs.
 Dashwood; Miss Dashwood; Mrs. Ferrars; every thing; thousand pounds;
 dare say; Mr. Palmer; Miss Steeles; said Elinor; Mrs. Palmer; Miss
@@ -697,7 +781,7 @@ Out: FreqDist({'to': 4010, 'the': 3847, 'of': 3535, 'and': 3191, 'her': 2135,
         \url{https://liferay.de.dariah.eu/tatom/feature_selection.html}
     \end{reference}
 % issues: uses numpy, pandas, scikit-learn
-\begin{lstlisting}
+\begin{lstlisting}[style=smaller]
 import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_selection import chi2
