@@ -37,7 +37,7 @@
 
     \vspace{1em}
     The goal of programming is to devise \\
-    a sequence of unambiguous executable instructions \\
+    a sequence of \structure{unambiguous executable instructions} \\
     to perform a task.
 \end{frame}
 
@@ -92,7 +92,8 @@
                 \item Paying attention to detail
             \end{itemize}
         \item Not everyone has the talent to become
-            a \structure{good} programmer
+            a \structure{good} programmer \\
+            {\footnotesize (but a good programmer can come from anywhere)}
     \end{itemize}
 \end{frame}
 
@@ -140,10 +141,26 @@
     \end{columns}
 \end{frame}
 
-\begin{frame}{Gender in Game of Thrones}\centering
-    \includegraphics[width=0.6\textwidth]{fig/got}
+%\begin{frame}{Gender in Game of Thrones}\centering
+%    \includegraphics[width=0.6\textwidth]{fig/got}
+%
+%    Words spoken for each gender across seasons
+%\end{frame}
+\begin{frame}{Recipe ingredients}\centering
+    \begin{columns}[T]
+		\column{0.7\linewidth}
+            \includegraphics[width=0.9\textwidth]{fig/recipes}
 
-    Words spoken for each gender across seasons
+		\column{0.3\linewidth}
+            Correlation matrix of spices from 91,000 recipes on allrecipes.com
+
+            \vspace{1em}
+            {\footnotesize
+            Source: \url{https://reddit.com/r/dataisbeautiful/comments/wv3ttu/}
+
+            }
+
+    \end{columns}
 \end{frame}
 
 
@@ -230,7 +247,7 @@ public class HelloWorld {
 
 
 \section{Programming fundamentals}
-\subsection{Numbers, text, and variables}
+\subsection{Numbers, text, variables}
 \frame{\tableofcontents[currentsubsection]}
 
 \begin{frame}[fragile]{Using Python as a calculator}
@@ -282,12 +299,13 @@ Out: <class 'int'>
 
 \begin{frame}[fragile]{Variables}
     \begin{definition}
-        A \structure{variable} stores the result of an expression
+        A \structure{variable} holds the result of an expression
         so that it can be re-used.
     \end{definition}
 
 A variable is created/updated using `='
 
+\pause
 \begin{definition}
 \structure{Assignment}: \lstinline{name = expression}
 
@@ -345,6 +363,7 @@ A common operation is to increase the value of a variable:
 \begin{lstlisting}[language=python]
 In: a = 2
 In: a = a + 1
+In: a
 Out: 3
 \end{lstlisting}
 
@@ -353,6 +372,7 @@ There is a shorthand for this operation:
 \begin{lstlisting}[language=python]
 In: a = 2
 In: a += 1
+In: a
 Out: 3
 \end{lstlisting}
 
@@ -572,7 +592,8 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \begin{frame}{Course overview}
     \begin{itemize}
        \item 7 lectures \& labs
-       \item 2 graded assignments \\
+       \item 2 exams, in week 4 (24/9) \\
+            and the exam week (22/10) \\
            (100\% of final grade)
     \end{itemize}
 \end{frame}
@@ -588,16 +609,16 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 \end{frame}
 
 
-\begin{frame}{Course summary}
-    \begin{itemize}
-        \item \structure{Programming} is the creative and challenging process
-            of writing a program
-        \item A program is a sequence of unambiguous executable
-            instructions to perform a task
-        \item The code of a program is in some programming language
-        \item Python is a high-level programming language
-    \end{itemize}
-\end{frame}
+%\begin{frame}{Summary}
+%    \begin{itemize}
+%        \item \structure{Programming} is the creative and challenging process
+%            of writing a program
+%        \item A program is a sequence of unambiguous executable
+%            instructions to perform a task
+%        \item The code of a program is in some programming language
+%        \item Python is a high-level programming language
+%    \end{itemize}
+%\end{frame}
 
 \begin{frame}{Some advice}
     \begin{itemize}
@@ -611,13 +632,13 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 
 \begin{frame}{Administrative matters}
     \begin{itemize}
-        \item Read the course manual (syllabus); available on Nestor
-        \item On Nestor, under Course Documents, each week has:
+        \item Read the course manual (syllabus); available on Brightspace
+        \item On Brightspace, under Content, each week has:
             \begin{itemize}
                 \item Lecture slides
                 \item Lab exercises and assignments
             \end{itemize}
-        \item Grades will be on Nestor under My Gradebook
+        \item Grades will be on Brightspace %under My Gradebook
     \end{itemize}
 \end{frame}
 
@@ -628,8 +649,8 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
         \item For questions and remarks:
             \begin{itemize}
                 \item Van Cranenburgh: during lab hours
-                \item TA: Blanca Calvo Figueras; during lab hours
-                \item or post on the Nestor discussion board
+                \item TA: Mihit; during lab hours
+                \item or post on the Brightspace discussion board
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -637,9 +658,9 @@ result = 0.5 * words_per_sent + 4.71 * chars_per_word - 21.43
 
 \begin{frame}{Background reading}
     \begin{itemize}
-        \item Severance ch.\ 1 and 2
-        % \item Watch youtube tutorials of "Hacking the Humanities" episode 1--5:
-        %     {\small\url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
+        \item Introduction to Cultural Analytics,\\
+            Ch. 2 (up to and including "Python Data Types") \\
+            \url{https://melaniewalsh.github.io/Intro-Cultural-Analytics/}
     \end{itemize}
 \end{frame}
 

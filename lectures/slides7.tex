@@ -35,9 +35,9 @@
         \item[variable] an object with a name that holds a value
         \item[function] code that can be called with arguments and returns a value;
                 e.g., \lstinline|number = int('42')|
-        \item[object] a combination of data and code; e.g., \lstinline|lst = [0, 1,  2]|
+        \item[object] a combination of data and code; e.g., \lstinline|lst = [0, 1,  2]| \\
             or \lstinline|Text(tokens)|
-        \item[attribute] a variable belonging to an object; e.g., \lstinline|lst.append|
+        \item[attribute] a variable belonging to an object; e.g., \lstinline|series.index|
         \item[method] an attribute which is a function; e.g., \lstinline|lst.append()|
         \item[module] a library of functions; e.g., \lstinline|import pandas as pd|
     \end{description}
@@ -66,7 +66,7 @@ pd.Series([0, 1, 2], index=['a', 'b', 'c'])
 \end{frame}
 
 \begin{frame}[fragile]{From Series to DataFrames}
-A series:
+A Series:
 \begin{lstlisting}
 pd.Series([0, 1, 2], index=['a', 'b', 'c'])
 \end{lstlisting}
@@ -91,18 +91,19 @@ pd.DataFrame({'A': A, 'B': B})
 \end{frame}
 
 
-\begin{frame}[fragile]{From DataFrames to Series}
-Given a DateFrame, column can be extracted as Series:
-\begin{lstlisting}
-In: df = pd.DataFrame({'A': [0, 1, 2], 'B': [2, 3, 4]},
-                      index=['a', 'b', 'c'])
-In: df['A']
-a    0
-b    1
-c    2
-Name: A, dtype: int64
-\end{lstlisting}
-\end{frame}
+% Already shown later with penguins
+% \begin{frame}[fragile]{From DataFrames to Series}
+% Given a DateFrame, column can be extracted as Series:
+% \begin{lstlisting}
+% In: df = pd.DataFrame({'A': [0, 1, 2], 'B': [2, 3, 4]},
+%                       index=['a', 'b', 'c'])
+% In: df['A']
+% a    0
+% b    1
+% c    2
+% Name: A, dtype: int64
+% \end{lstlisting}
+% \end{frame}
 
 
 
@@ -206,6 +207,7 @@ In: df.shape  # NB: shape is an attribute, not a function
 \end{lstlisting}
 
 Our data has 344 rows, 17 columns
+\pause
 
 \begin{lstlisting}
 In: df.columns
@@ -307,7 +309,7 @@ Selecting a column returns a Series object
 
 \begin{frame}[fragile]{Meet the penguins}
 \begin{reference}
-Image credit: \url{https://github.com/allisonhorst/palmerpenguins}
+\footnotesize Image credit: \url{https://github.com/allisonhorst/palmerpenguins}
 \end{reference}
 \includegraphics[height=0.4\textheight]{fig/lter_penguins}
 
@@ -344,7 +346,7 @@ Name: Species, dtype: float64
 In: df.sort_values(by='Body Mass (g)', ascending=False).head()
 \end{lstlisting}
 
-\vspace{-1em}
+\vspace{-0.5em}
 \includegraphics[height=0.7\textheight]{fig/penguinsort}
 
 \lstinline|ascending=False| to sort from high to low
@@ -355,11 +357,13 @@ In: df.sort_values(by='Body Mass (g)', ascending=False).head()
     \begin{itemize}
         \item Selecting rows, columns by label:
 \begin{lstlisting}
-In: df.loc[0:5, 'Species':'Stage']
+In: df.loc[0:5, 'Species':'Island']
+In: df.loc[0:5, ['Species', 'Region', 'Island']]
 \end{lstlisting}
 
             NB: last element of slice is included!
 
+        \pause
         \item Selecting rows, columns by integer location:
 \begin{lstlisting}
 In: df.iloc[0:5, 2:5]
@@ -368,7 +372,7 @@ In: df.iloc[0:5, 2:5]
 \vspace{-1em}
 \includegraphics[height=0.4\textheight]{fig/penguinslice}
 
-			NB: last element of slice excluded as usual with Python
+         NB: last element of slice excluded as usual with Python
     \end{itemize}
 
 \end{frame}
@@ -394,14 +398,44 @@ Name: Sex, Length: 344, dtype: bool
 \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]{Boolean operations on strings}
+\begin{lstlisting}
+In: df['Species'].str.contains('Chinstrap')
+\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
+0      False
+1      False
+2      False
+       ...  
+341     True
+342     True
+343     True
+Name: Species, Length: 344, dtype: bool
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Boolean Series: counting True values}
+\begin{lstlisting}
+In: df['Species'].str.contains('Chinstrap').sum()
+\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
+68
+\end{lstlisting}
+
+\pause
+Explanation:
+False is treated as 0,\\
+True is treated as 1.
+
+Thus, the sum of a Boolean Series gives the number of True values.
+\end{frame}
+
 \begin{frame}[fragile]{Selecting particular rows with a boolean mask}
 \vspace{-0.5em}
 \begin{lstlisting}
 In: df.loc[df['Sex'] == 'MALE', :].head()
 \end{lstlisting}
 
-\vspace{-1em}
-\includegraphics[height=0.8\textheight]{fig/penguinsmale}
+\vspace{-0.5em}
+\includegraphics[height=0.75\textheight]{fig/penguinsmale}
 \end{frame}
 
 \begin{frame}[fragile]{What are the averages for those penguins?}
@@ -428,12 +462,12 @@ In: df.loc[df['Sex'] == 'MALE', 'Body Mass (g)'].mean()
 \end{lstlisting}
 
 \pause
-What is the mean weight of male penguins from Tolgersen island?
+What is the mean weight of male penguins from Tolgersen island? \\
 More complex selections:
 \begin{lstlisting}
 In: df.loc[
-	(df['Sex'] == 'MALE') & (df['Island'] == 'Torgersen'),
-	'Body Mass (g)'].mean()
+    (df['Sex'] == 'MALE') & (df['Island'] == 'Torgersen'),
+    'Body Mass (g)'].mean()
 4034.782608695652
 \end{lstlisting}
 (note the required parentheses)
@@ -466,7 +500,7 @@ In: df.loc[
  
 \begin{frame}[fragile]{Renaming column / index labels}
 \begin{reference}
-Image credit: \url{https://github.com/allisonhorst/palmerpenguins}
+\footnotesize Image credit: \url{https://github.com/allisonhorst/palmerpenguins}
 \end{reference}
 \includegraphics[height=0.5\textheight]{fig/culmen_depth}
 
@@ -485,8 +519,73 @@ Replace values in the \texttt{Species} column with abbreviated species names:
 repl = {'Adelie Penguin (Pygoscelis adeliae)': 'Adelie',
         'Gentoo penguin (Pygoscelis papua)': 'Gentoo',
         'Chinstrap penguin (Pygoscelis antarctica)': 'Chinstrap'}
+
 # apply replacements to all values in the 'Species' column
 df = df.replace({'Species': repl})
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Replacing values in the table}
+Replace values in the \texttt{Species} column with abbreviated species names:
+\begin{lstlisting}
+# for each (key, value) in repl,
+# each occurrence of key is replaced with value
+repl = {'Adelie Penguin (Pygoscelis adeliae)': 'Adelie',
+        'Gentoo penguin (Pygoscelis papua)': 'Gentoo',
+        'Chinstrap penguin (Pygoscelis antarctica)': 'Chinstrap'}
+# apply replacements to all values in the 'Species' column
+df = df.replace({'Species': repl})
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Adding a new column}
+\begin{lstlisting}
+In: df['Species'].value_counts()
+Out:
+Adelie Penguin (Pygoscelis adeliae)          152
+Gentoo penguin (Pygoscelis papua)            124
+Chinstrap penguin (Pygoscelis antarctica)     68
+Name: Species, dtype: int64
+
+In: df['SimpleSpecies'] = [a.split(' (')[0] for a in df['Species']]
+In: df['SimpleSpecies']
+Out:
+Adelie Penguin       152
+Gentoo penguin       124
+Chinstrap penguin     68
+Name: SimpleSpecies, dtype: int64
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Adding a new column II}
+\begin{lstlisting}
+# NB: this is just an example! Not a proper application of BMI ...
+In: df['BMI'] = df['Body Mass (g)'] / df['Flipper Length (mm)'] ** 2
+In: df['BMI']
+\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
+0      0.114465
+1      0.109839
+2      0.085470
+3           NaN
+4      0.092620
+         ...   
+339    0.093351
+340    0.083325
+341    0.101345
+342    0.092971
+343    0.096291
+Name: BMI, Length: 344, dtype: float64
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Delete rows / columns}
+\begin{lstlisting}
+# get rid of just created column
+df = df.drop(['BMI'], axis=1)
+
+# delete the first two rows
+df = df.drop([0, 1])
 \end{lstlisting}
 \end{frame}
 
@@ -516,42 +615,14 @@ In: columns_to_show = ['bill_length', 'bill_depth',
 In: df.groupby(['Sex'])[columns_to_show].mean()
 \end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
         bill_length  bill_depth  Flipper Length (mm)  Body Mass (g)
-Sex                                                                
+Sex
 FEMALE    42.096970   16.425455           197.363636    3862.272727
 MALE      45.854762   17.891071           204.505952    4545.684524
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Adding a new column}
-\begin{lstlisting}
-# NB: this is just an example! Not a proper application of BMI ...
-In: df['BMI'] = df['Body Mass (g)'] / df['Flipper Length (mm)'] ** 2
-In: df['BMI']
-\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
-0      0.114465
-1      0.109839
-2      0.085470
-3           NaN
-4      0.092620
-         ...   
-339    0.093351
-340    0.083325
-341    0.101345
-342    0.092971
-343    0.096291
-Name: BMI, Length: 344, dtype: float64
-\end{lstlisting}
-\end{frame}
 
-\begin{frame}[fragile]{Delete rows / columns}
-\begin{lstlisting}
-# get rid of just created column
-df = df.drop(['BMI'], axis=1)
 
-# delete the first two rows
-df = df.drop([0, 1])
-\end{lstlisting}
-\end{frame}
 
 
 \subsection{Exploring and visualizing two or more variables}
@@ -593,23 +664,25 @@ Sex
 FEMALE  0.240240  0.183183   0.072072
 MALE    0.249249  0.186186   0.069069
 \end{lstlisting}
+
+    \lstinline{margins=True} adds row and column with totals
 \end{frame}
 
-\begin{frame}[fragile]{Contingency table with proportions and totals}
-\begin{lstlisting}
-In: pd.crosstab(df['Sex'], df['Island'], normalize=True, margins=True)
-\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
-Island    Biscoe     Dream  Torgersen       All
-Sex                                            
-FEMALE  0.240240  0.183183   0.072072  0.495495
-MALE    0.249249  0.186186   0.069069  0.504505
-All     0.489489  0.369369   0.141141  1.000000
-\end{lstlisting}
-\end{frame}
+%\begin{frame}[fragile]{Contingency table with proportions and totals}
+%\begin{lstlisting}
+%In: pd.crosstab(df['Sex'], df['Island'], normalize=True, margins=True)
+%\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
+%Island    Biscoe     Dream  Torgersen       All
+%Sex                                            
+%FEMALE  0.240240  0.183183   0.072072  0.495495
+%MALE    0.249249  0.186186   0.069069  0.504505
+%All     0.489489  0.369369   0.141141  1.000000
+%\end{lstlisting}
+%\end{frame}
 
 \begin{frame}[fragile]{Visualizing two categorical variables: bar plot}
 \begin{lstlisting}
-ax = pd.crosstab(df['Sex'], df['Island']).plot.barh()
+ax = pd.crosstab(df['Island'], df['Sex']).plot.barh()
 ax.figure.savefig('fig/barplotpenguins.pdf')
 \end{lstlisting}
 
@@ -706,6 +779,16 @@ sns.lmplot(x='Flipper Length (mm)', y='bill_length',
 \includegraphics[height=0.7\textheight]{fig/scatterpenguins2}
 \end{frame}
 
+\begin{frame}{Summary: exploratory data analysis}
+    \begin{itemize}
+        \item \structure{Look} at your data! (summarize, visualize)
+            \begin{itemize}
+                \item You may discover issues
+                \item or discover outliers, trends, and patterns
+            \end{itemize}
+        \item \structure{Goal}: discover hypotheses for further study
+    \end{itemize}
+\end{frame}
 
 %\section{Exploring tabular datasets with Pandas}
 %\frame{\tableofcontents[currentsection]}
@@ -778,109 +861,127 @@ sns.lmplot(x='Flipper Length (mm)', y='bill_length',
 \section{Course overview}
 \frame{\tableofcontents[currentsubsection]}
 
+\begin{frame}{Learning goals}
+    \begin{enumerate}
+        \item Write simple programs to perform basic tasks such as searching and
+            cleaning text corpora
+        \item Employ Jupyter Notebooks and other common Python data science
+            tools to report on simple exploratory experiments: load a tabular
+            dataset, compute summary statistics, and create plots
+        \item Solve common errors during programming
+        \item Evaluate documentation on available software to determine its
+            applicability to a problem
+        \item Use proper terminology when collaborating with programmers
+    \end{enumerate}
+\end{frame}
+
 \begin{frame}{The final exam}
     \begin{itemize}
         \item Study all the slides, notebooks, and exercises of week 1--7
-        \item Released Thursday 29 Oct 2020, 9:00 morning
-        \item Due date Friday 30 Oct 2020, 18:00 evening
+        \item Written exam; several types of questions:
+            \begin{itemize}
+                \item multiple choice, \item find the bug, \item fill in the missing code
+            \end{itemize}
+        \item Tuesday 22 October, 11:00–13:00, 1313.0309
+        \item (resit: end of next block)
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Learning goals}
-    \begin{enumerate}
-        \item Write simple programs to perform basic tasks such as searching
-            and cleaning text corpora
-        \item Work with Jupyter Notebooks and other common Python data science
-            tools to report on simple exploratory experiments:
-            load a tabular dataset, compute summary statistics,
-            and create plots
-        \item Understand and solve common errors during programming
-        \item Read documentation on available software to evaluate its
-            applicability to a problem
-        \item Collaborate effectively with programmers using proper terminology
-    \end{enumerate}
+\begin{frame}[fragile]{The final exam: example question}
+\begin{lstlisting}
+# Function that counts how many times a character appears in a string.
+def count_char(s, char):
+    count = 0
+    for c in s:
+        if ____________:
+            count += 1
+    return count
+\end{lstlisting}
+
+What is the missing code?
+    \pause \lstinline{c == char}
 \end{frame}
 
 \subsection{Where to go from here}
 \frame{\tableofcontents[currentsection]}
 
-\begin{frame}{``Normal'' programming without Notebooks}
-    \begin{reference}
-        \url{http://www.sublimetext.com/}
-        \url{https://notepad-plus-plus.org/}
-        \url{https://www.vim.org/}
-    \end{reference}
-    \begin{columns}[T]
-        \column{0.5\linewidth}
-            \includegraphics[width=0.9\textwidth]{fig/editor}
-            \begin{itemize}
-                \item Write code in editor (e.g., Sublime Text, Notepad++, Vim)
-                \item Save as plain text in .py files
-                \item import functions \\
-                    from other .py files
-            \end{itemize}
-        \pause
-        \column{0.5\linewidth}
-            \includegraphics[width=0.9\textwidth]{fig/terminal}
-            \begin{itemize}
-                \item Run code in a terminal\\
-                    (``command prompt'')
-            \end{itemize}
-    \end{columns}
-\end{frame}
+%\begin{frame}{``Normal'' programming without Notebooks}
+%    \begin{reference}
+%        \url{http://www.sublimetext.com/}
+%        \url{https://notepad-plus-plus.org/}
+%        \url{https://www.vim.org/}
+%    \end{reference}
+%    \begin{columns}[T]
+%        \column{0.5\linewidth}
+%            \includegraphics[width=0.9\textwidth]{fig/editor}
+%            \begin{itemize}
+%                \item Write code in editor (e.g., Sublime Text, Notepad++, Vim)
+%                \item Save as plain text in .py files
+%                \item import functions \\
+%                    from other .py files
+%            \end{itemize}
+%        \pause
+%        \column{0.5\linewidth}
+%            \includegraphics[width=0.9\textwidth]{fig/terminal}
+%            \begin{itemize}
+%                \item Run code in a terminal\\
+%                    (``command prompt'')
+%            \end{itemize}
+%    \end{columns}
+%\end{frame}
 
-\begin{frame}{Jupyter Notebook}
-    \begin{block}{Jupyter Notebook}
-        A notebook keeps narrative, code, and results together.
-
-        Ideally, everything can be reproduced with the push of a button.
-    \end{block}
-    \begin{itemize}
-        \item Web-based graphical interface
-        \item Mix code, results, and explanation \\
-                (Knuth: Literate Programming)
-        \item Include plots / pictures
-        \item Interactive, rapid prototyping
-    \end{itemize}
-
-    \pause
-    Pros and cons:
-    \begin{itemize}
-        \item Why Jupyter is data scientists' computational notebook of choice,
-            Nature (2018). \url{https://www.nature.com/articles/d41586-018-07196-1}
-        \item Why I don't like notebooks, Joel Grus (2018).
-            \url{https://www.youtube.com/watch?v=7jiPeIFXb6U}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Notebook pitfalls}
-    \begin{columns}
-        \column{0.5\linewidth}
-            \begin{itemize}
-                \item Hidden state and out-of-order execution:\\
-                    Ensure code works by running all cells from start to finish!
-                    (Kernel $\rightarrow$ Restart \& Run All)
-            \end{itemize}
-        \column{0.5\linewidth}
-            \includegraphics[width=0.95\textwidth]{fig/nboutoforder}
-    \end{columns}
-    \pause
-    \begin{itemize}
-        \item Jupyter ``encourages'' throw-away code:\\
-                Put re-usable code in a normal Python module and import.
-                Apply software engineering practices:
-                \begin{itemize}
-                    \item Ensure modular, documented code
-                    \item Check correctness with tests
-                \end{itemize}
-        % \pause
-        % \item Notebooks can be put into version control, \\
-        %         but the differences are hard to read
-    \end{itemize}
-
-    Despite this, notebooks are an excellent tool \\
-    for exploration and sharing results
-\end{frame}
+%\begin{frame}{Jupyter Notebook}
+%    \begin{block}{Jupyter Notebook}
+%        A notebook keeps narrative, code, and results together.
+%
+%        Ideally, everything can be reproduced with the push of a button.
+%    \end{block}
+%    \begin{itemize}
+%        \item Web-based graphical interface
+%        \item Mix code, results, and explanation \\
+%                (Knuth: Literate Programming)
+%        \item Include plots / pictures
+%        \item Interactive, rapid prototyping
+%    \end{itemize}
+%
+%    \pause
+%    Pros and cons:
+%    \begin{itemize}
+%        \item Why Jupyter is data scientists' computational notebook of choice,
+%            Nature (2018). \url{https://www.nature.com/articles/d41586-018-07196-1}
+%        \item Why I don't like notebooks, Joel Grus (2018).
+%            \url{https://www.youtube.com/watch?v=7jiPeIFXb6U}
+%    \end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Notebook pitfalls}
+%    \begin{columns}
+%        \column{0.5\linewidth}
+%            \begin{itemize}
+%                \item Hidden state and out-of-order execution:\\
+%                    Ensure code works by running all cells from start to finish!
+%                    (Kernel $\rightarrow$ Restart \& Run All)
+%            \end{itemize}
+%        \column{0.5\linewidth}
+%            \includegraphics[width=0.95\textwidth]{fig/nboutoforder}
+%    \end{columns}
+%    \pause
+%    \begin{itemize}
+%        \item Jupyter ``encourages'' throw-away code:\\
+%                Put re-usable code in a normal Python module and import.
+%                Apply software engineering practices:
+%                \begin{itemize}
+%                    \item Ensure modular, documented code
+%                    \item Check correctness with tests
+%                \end{itemize}
+%        % \pause
+%        % \item Notebooks can be put into version control, \\
+%        %         but the differences are hard to read
+%    \end{itemize}
+%
+%    Despite this, notebooks are an excellent tool \\
+%    for exploration and sharing results
+%\end{frame}
 
 
 
@@ -888,19 +989,16 @@ sns.lmplot(x='Flipper Length (mm)', y='bill_length',
     Recommended further materials:
     \vspace{1em}
     \begin{itemize}
-        \item \url{https://jakevdp.github.io/PythonDataScienceHandbook/}
+        \item \url{https://www.youtube.com/pythontutorialsfordigitalhumanities}
         \item \url{https://ProgrammingHistorian.org/en/lessons/}
+        \item \url{https://github.com/kavgan/nlp-in-practice}
+        \item \url{https://jakevdp.github.io/PythonDataScienceHandbook/}
         \item \url{https://AutomateTheBoringStuff.com/}
     \end{itemize}
 \end{frame}
 
 
-\begin{frame}\Huge\centering
-    That's all, folks!
-\end{frame}
-
-
-\begin{frame}
+\begin{frame}{References}
 Inspiration for these slides:
 \begin{itemize}
 \item \url{https://www.cs.umd.edu/class/fall2018/cmsc320/}
@@ -919,6 +1017,13 @@ Documentation:
     \item \url{https://seaborn.pydata.org/tutorial.html}
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}\Huge\centering
+    That's all, folks!
+\end{frame}
+
+
 
 \end{document}
 

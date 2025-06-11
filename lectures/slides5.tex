@@ -40,15 +40,38 @@
 
 \begin{frame}{The Midterm}
     \begin{itemize}
-        \item Solutions on Nestor.
-        %\item Common mistakes:
-        %    \begin{itemize}
-        %        \item \dots
-        %        \item \dots
-        %    \end{itemize}
-		\item Grading will include feedback
+        \item Solutions on Brightspace.
+        \item Grades include \structure{feedback}
         \item Questions? Ask during the lab
     \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Common mistakes}
+    \begin{itemize}
+        \item Learn how to create functions
+        \item Use \lstinline{return}, not \lstinline{print} at the end of a function
+        \item All code should be inside the function; e.g., \lstinline{words = text.split()}
+        \item In a for loop, results should accumulate; repeating a normal assignment \lstinline{a = ...} is not helpful
+        \item Logic errors: If a character is not a vowel, it's not necessarily a consonant (could be punctuation)
+        \item Know the methods of objects; e.g., cannot \lstinline{append()} to a dictionary
+
+        \item Instead of repeating code, assign it to a variable \\
+            e.g., \lstinline{words = text.split()}
+        %\item Remember that you can use a function defined before \\
+        %    to make your code simpler
+        %\item Do not use the same variable name twice\\
+        %    e.g., \lstinline{freq} parameter, and \lstinline{freq} dictionary
+        %\item Split text into lines and words when needed
+        %\item \lstinline{return} usually goes after a \lstinline{for} loop (not inside)
+        %\item No \lstinline{return} at end of function
+        %\item Returning a string of digits instead of list of numbers \\
+        %    \lstinline{'123456...'} vs \lstinline{[123, 456, ...]}
+        %\item Forgetting to \structure{call} a method:
+        %    \lstinline{message = message.upper} \\
+        %    \lstinline{for a, b in table.items}
+    \end{itemize}
+
+    \vspace{1em} Read the instructions carefully!
 \end{frame}
 
 \section{Improving code}
@@ -76,6 +99,13 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}{Intermezzo: actual bugs \dots}
+    \includegraphics[height=0.8\textheight]{fig/bug}
+
+    Source: U.S. Naval Historical Center Online Library Photograph NH 96566-KN
+\end{frame}
+
+
 
 \begin{frame}{More quotes}
     \begin{columns}
@@ -84,8 +114,11 @@
     On two occasions I have been asked, ---"Pray, Mr. Babbage, if you put
     into the machine wrong figures, will the right answers come out?"
 
-	In one case a member of the Upper, and in the other a member of the Lower
-	House put this question. I am not able rightly to apprehend the kind of
+	%In one case a member of the Upper, and in the other a member of the Lower
+	% House put this question.
+    [\dots]
+
+    I am not able rightly to apprehend the kind of
 	confusion of ideas that could provoke such a question.
 	
     \end{quote}
@@ -96,20 +129,20 @@
     "Difference Engine No. 1"
 \end{frame}
 
-\begin{frame}{More quotes}
-    \begin{quote}\normalfont
-    And programming computers was so fascinating.
-
-	You create your own little universe,
-
-	and then it does what you tell it to do.
-    \end{quote}
-
-	\vspace{1em}
-    Vint Cerf, a "father of the internet," quoted in "Your Life: Vinton Cerf"
-    interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
-    10, p. 28.)
-\end{frame}
+%\begin{frame}{More quotes}
+%    \begin{quote}\normalfont
+%    And programming computers was so fascinating.
+%
+%	You create your own little universe,
+%
+%	and then it does what you tell it to do.
+%    \end{quote}
+%
+%	\vspace{1em}
+%    Vint Cerf, a "father of the internet," quoted in "Your Life: Vinton Cerf"
+%    interview with David Frank in AARP Bulletin (December 2016, Vol. 57, No.
+%    10, p. 28.)
+%\end{frame}
 
 \begin{frame}{More quotes}
     \begin{quote}\normalfont
@@ -130,33 +163,33 @@
     \end{quote}
 \end{frame}
 
-\begin{frame}{More quotes}
-    \begin{columns}
-        \column{0.7\linewidth}
-``There are two ways of constructing a software design:
+%\begin{frame}{More quotes}
+%    \begin{columns}
+%        \column{0.7\linewidth}
+%``There are two ways of constructing a software design:
+%
+%One way is to make it so simple that there are obviously no deficiencies,
+%
+%and the other way is to make it so complicated that there are no obvious deficiencies.
+%
+%The first method is far more difficult.''
+%
+%--- C. A. R. Hoare 
+%        \column{0.3\linewidth}
+%    \end{columns}
+%\end{frame}
 
-One way is to make it so simple that there are obviously no deficiencies,
-
-and the other way is to make it so complicated that there are no obvious deficiencies.
-
-The first method is far more difficult.''
-
---- C. A. R. Hoare 
-        \column{0.3\linewidth}
-    \end{columns}
-\end{frame}
-
-\begin{frame}{More quotes}
-    \begin{columns}
-        \column{0.7\linewidth}
-    ``Everyone knows that debugging is twice as hard as writing a program in
-    the first place.
-
-	So if you're as clever as you can be when you write it,
-    how will you ever debug it?'' (Brian Kernighan)
-        \column{0.3\linewidth}
-    \end{columns}
-\end{frame}
+%\begin{frame}{More quotes}
+%    \begin{columns}
+%        \column{0.7\linewidth}
+%    ``Everyone knows that debugging is twice as hard as writing a program in
+%    the first place.
+%
+%	So if you're as clever as you can be when you write it,
+%    how will you ever debug it?'' (Brian Kernighan)
+%        \column{0.3\linewidth}
+%    \end{columns}
+%\end{frame}
 
 \begin{frame}{More quotes}
     \begin{columns}
@@ -178,7 +211,7 @@ The first method is far more difficult.''
 \begin{frame}{How to find bugs?}
 	\begin{enumerate}
 		\item Code doesn't work \dots error message
-		\item Code doesn't do what it should \dots
+        \item Code doesn't do what it should \dots (print variables)
 		\item Tests (sprinkle if-statements!)
 		\item Automated tools (e.g., pylint)
 	\end{enumerate}
@@ -211,7 +244,7 @@ Traceback (most recent call last):
 AttributeError: 'list' object has no attribute 'lower'
 >>>
 \end{lstlisting}
-\pause
+
 First step: \structure{locate} the root cause.
 \end{frame}
 
@@ -229,7 +262,7 @@ Traceback (most recent call last):
 TypeError: expected str, bytes or os.PathLike object, not list
 >>>
 \end{lstlisting}
-\pause
+
 First step: \structure{locate} the root cause.
 Typically somewhere in your own code \dots
 \end{frame}
@@ -270,6 +303,7 @@ Typically somewhere in your own code \dots
     \begin{itemize}
         \item Clear variable/function names
         \item Separate steps/functions
+        \item No unnecessary steps
         \item No repetition
         \item Use idioms
     \end{itemize}
@@ -403,46 +437,46 @@ def counter2(words):
 \end{frame}
 
 
-\begin{frame}{Profiling}
-    \begin{definition}
-        \structure{Profiling}: identify performance bottlenecks by measuring
-    \end{definition}
-    
-    Two important measurements:
-    \begin{itemize}
-        \item How often is each function called
-        \item How long does it take?
-    \end{itemize}
-
-    \pause\vspace{1em}
-    Consider two scenarios:
-    \begin{enumerate}
-        \item A 100x speedup of a component responsible for 1\% of total runtime.
-        \item A 1.1x speedup of a component responsible for 90\% of total runtime.
-    \end{enumerate}
-    Do not waste your time on 1; therefore: measure!
-\end{frame}
-
-% \begin{frame}{Is it worth the time?}
-%     \begin{reference}\scriptsize\vspace{1em}
-%         \url{https://www.xkcd.com/1205/}
-%     \end{reference}
-%     \hfill\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
+% \begin{frame}{Profiling}
+%     \begin{definition}
+%         \structure{Profiling}: identify performance bottlenecks by measuring
+%     \end{definition}
+%     
+%     Two important measurements:
+%     \begin{itemize}
+%         \item How often is each function called
+%         \item How long does it take?
+%     \end{itemize}
+% 
+%     \pause\vspace{1em}
+%     Consider two scenarios:
+%     \begin{enumerate}
+%         \item A 100x speedup of a component responsible for 1\% of total runtime.
+%         \item A 1.1x speedup of a component responsible for 90\% of total runtime.
+%     \end{enumerate}
+%     Do not waste your time on 1; therefore: measure!
 % \end{frame}
-
-\begin{frame}{Takeaway}
-    ``We should forget about small efficiencies, say about 97\% of the time:
-    premature optimization is the root of all evil.
-	\pause
-	Yet we should not pass up our opportunities in the critical 3\%''
-    -- Donald Knuth
-
-    \vspace{1em}
-    \begin{itemize}
-        \item Consider expected return on investment
-        \item Optimization risks overcomplicating \& over-engineering
-    \end{itemize}
-\end{frame}
+% 
+% % \begin{frame}{Is it worth the time?}
+% %     \begin{reference}\scriptsize\vspace{1em}
+% %         \url{https://www.xkcd.com/1205/}
+% %     \end{reference}
+% %     \hfill\includegraphics[height=0.9\textheight]{fig/xkcdworththetime}
+% % \end{frame}
+% 
+% \begin{frame}{Takeaway}
+%     ``We should forget about small efficiencies, say about 97\% of the time:
+%     premature optimization is the root of all evil.
+% 	\pause
+% 	Yet we should not pass up our opportunities in the critical 3\%''
+%     -- Donald Knuth
+% 
+%     \vspace{1em}
+%     \begin{itemize}
+%         \item Consider expected return on investment
+%         \item Optimization risks overcomplicating \& over-engineering
+%     \end{itemize}
+% \end{frame}
 
 \begin{frame}{Summary}
     Improving code involves
@@ -524,6 +558,9 @@ with open('data/sentiment/negative.txt', encoding='utf8') as inp:
     negative_words = set(inp.read().splitlines())
 with open('VERNE Journey to Center of Earth.txt', encoding='utf8') as inp:
     words = nltk.word_tokenize(inp.read().lower())
+\end{lstlisting}
+\pause\vspace{-1em}
+\begin{lstlisting}[style=smaller]
 sentiment = 0
 for word in words:
     if word in positive_words:
@@ -593,7 +630,7 @@ for word in words:
     \begin{itemize}
         \item Yes, if you insist, you can reduce anything to 6 story shapes \\
             (or 3, 10, 100, etc.)
-        \item No, this does not appear to be enlightening.
+        \item No, these shapes are probably not fundamental or universal
     \end{itemize}
 \end{frame}
 
@@ -775,10 +812,11 @@ Out: FreqDist({'to': 4010, 'the': 3847, 'of': 3535, 'and': 3191, 'her': 2135,
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Chi-square: Most distinctive words in two sets of texts}
+\begin{frame}[fragile]{Chi-square: Most distinctive words across two texts}
     \begin{reference}
-        \url{http://www.thegrammarlab.com/?nor-portfolio=understanding-keyness} \\
-        \url{https://liferay.de.dariah.eu/tatom/feature_selection.html}
+        %\url{http://www.thegrammarlab.com/?nor-portfolio=understanding-keyness} \\
+        %\url{https://liferay.de.dariah.eu/tatom/feature_selection.html}
+        \url{https://github.com/ariddell/tatom/blob/develop/source/feature_selection.rst}
     \end{reference}
 % issues: uses numpy, pandas, scikit-learn
 \begin{lstlisting}[style=smaller]
@@ -789,41 +827,87 @@ filenames = ['MELVILLE, Herman - Moby Dick.txt',
         'AUSTEN, Jane - Sense and Sensibility.txt']
 vectorizer = CountVectorizer(input='filename')
 document_term_matrix = vectorizer.fit_transform(filenames)
-vocab = np.array(vectorizer.get_feature_names())
-labels = filenames  # use to distinguish the sets
-keyness, pvalues = chi2(document_term_matrix, labels)
+vocab = np.array(vectorizer.get_feature_names_out())
+keyness, pvalues = chi2(document_term_matrix, filenames)
 ranking = np.argsort(keyness)[::-1]
-vocab[ranking][0:10]
+print(vocab[ranking][:10])
 \end{lstlisting}
 Result:
 \begin{lstlisting}
 ['the', 'her', 'she', 'whale', 'of', 'and', 'in', 'elinor', 'his', 'that']
 \end{lstlisting}
+% the keyness scores express to what extent the assumption that the two texts have the same word frequencies is violated.
+% the keyness scores do not distinguish words that are more characteristic of text A vs B.
 \end{frame}
 
 \begin{frame}[fragile]{tf-idf}
 \begin{reference}\scriptsize
-    \url{https://suzil.ai/2019/01/15/extract-keywords-from-text-snippets-using-tfidf-and-sklearn/}
+    %\url{https://suzil.ai/2019/01/15/extract-keywords-from-text-snippets-using-tfidf-and-sklearn/}
+    \url{https://kavita-ganesan.com/python-keyword-extraction/}
     % issues: uses numpy, pandas, scikit-learn
     \url{https://programminghistorian.org/en/lessons/analyzing-documents-with-tfidf}
 \end{reference}
 tf-idf = term frequency / document frequency
 
     \begin{itemize}
-        \item Intuition: compare frequencies against background corpus.\\
-            Look for words with the largest contrast in frequency.
+        \item Intuition: words that frequently occur in few documents \\
+            are most interesting.
         \item Finds good topical words: what is unique about this document?
         \item Only works if you have a large number of documents! \\
             (i.e., large corpus, say 100+ texts)
-        \item Example application: automatically adding ``tags'' \\
-            to social media posts
+        \item Example application: automatically categorizing
+            social media posts
     \end{itemize}
+\end{frame}
+
+\subsection{Named Entity Recognition}
+\begin{frame}[fragile]{Named Entity Recognition (NER)}
+\begin{definition}
+    \structure{Named Entity Recognition} identifies names of persons,
+    organizations, and locations in a text.
+    An entity consists of one or more words and has a label.
+\end{definition}
+    Applications:
+    \begin{itemize}
+        \item Identify frequently mentioned characters in a text
+        \item Map locations mentioned in text
+        \item Explore related characters (mentioned in same paragraph)
+    \end{itemize}
+\pause
+
+Install Spacy:
+\begin{lstlisting}
+!conda install -c conda-forge spacy
+!python -m spacy download en_core_web_sm
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Applying NER to a text}
+\begin{lstlisting}
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = """The identity of the Facebook whistleblower who ...
+and that the company has tried to hide that evidence."""
+
+doc = nlp(text)
+for ent in doc.ents:
+    print(ent.label_, ent.start, ent.end, ent.text)
+\end{lstlisting}
+\begin{verbatim}
+CARDINAL 8 11 tens of thousands
+DATE 29 31 recent weeks
+WORK_OF_ART 36 39 60 Minutes"
+TIME 39 41 Sunday night
+PERSON 42 44 Frances Haugen
+DATE 47 52 37-year-old
+\end{verbatim}
 \end{frame}
 
 \begin{frame}{Summary}
     \begin{itemize}
         \item Searching keywords
         \item Discovering keywords
+        \item Named Entity Recognition
     \end{itemize}
 \end{frame}
 
@@ -842,7 +926,10 @@ tf-idf = term frequency / document frequency
 % \end{frame}
 
 \begin{frame}{Background reading}
-    See all the links on the slides \dots (clickable)
+    \begin{itemize}
+        \item See all the links on the slides \dots (clickable)
+        \item Chapter 5 Text Analysis of \url{https://melaniewalsh.github.io/Intro-Cultural-Analytics/}
+    \end{itemize}
 \end{frame}
 
 \end{document}

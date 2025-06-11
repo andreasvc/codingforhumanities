@@ -24,379 +24,6 @@
 \end{frame}
 
 
-\section{Midterm feedback}
-
-\begin{frame}{Midterm feedback}
-    \begin{itemize}
-        \item Most of your code was pretty good!
-        \item We'll review some things to pay attention to.
-    \end{itemize}
-\end{frame}
-
-% \begin{frame}{Always report requested results!}
-%     Read the questions carefully. \\
-%     When results are requested, include them!
-% 
-%     \vspace{1em}
-%     \begin{itemize}
-%         \item Suppose that we call function \lstinline{a}
-%             as follows: [...]\\
-%             What values will be printed to the screen?
-%         \item Use [your function] to print all tweets addressed to @FLOTUS.
-%         \item Count the \#hashtags and \@usernames in Trump's tweets, and
-%             report the top 10 for both.
-%     \end{itemize}
-% \end{frame}
-
-\begin{frame}[fragile]{Test your code carefully!}
-    \begin{columns}[T]
-\column{0.6\textwidth}
-\begin{lstlisting}[style=smaller]
-def cleantweet(tweet):
-    prefixes = ('https', '@', '#')
-    for prefix in prefixes:
-        tweet = tweet.split(prefix, 1)[0]
-    return tweet.split()
-\end{lstlisting}
-What happens with \lstinline|"This #is a test"|?
-\pause
-\begin{lstlisting}[style=smaller]
->>> cleantweet('This #is a test')
-['This']
-\end{lstlisting}
-\pause\column{0.5\textwidth}
-Lesson:
-    \begin{itemize}
-        \item Don't just test your code \\
-            on the particular given examples.
-        \item Tests are typically not exhaustive.
-        \item Reflect whether you really solved the problem.
-    \end{itemize}
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Don't modify a list while you iterate over it!}
-\begin{columns}
-\column{0.5\textwidth}
-\begin{lstlisting}[style=smaller]
-def cleantweet(text):
-    clean_text = remove_punc(text)
-    tokens = clean_text.split()
-    prefix = ('#', '@', 'https')
-    for token in tokens:
-        if token.startswith(prefix):
-            tokens.remove(token)
-    return tokens
-\end{lstlisting}
-
-What happens?
-\pause\column{0.5\textwidth}
-\includegraphics[width=0.9\textwidth]{fig/branch}
-
-\vspace{1em}
-Python gets confused and skips the next token:
-\begin{lstlisting}[style=smaller]
->>> cleantweet('This is #a #test')
-['This', 'is', '#test']
-\end{lstlisting}
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{The right way}
-%\pause\column{0.5\textwidth}
-\begin{lstlisting}[style=smaller]
-def cleantweet(message):
-    tokens = message.split()
-    prefix = ('#', '@', 'https')
-    result = []
-    for token in tokens:
-        if not token.startswith(prefix):
-            word = remove_punc(token)
-            if word:  # skip tokens with only punctuation
-                result.append(word)
-    return result
-\end{lstlisting}
-\structure{Takeaway}:
-\begin{itemize}
-    \item Don't change a list or dict when you loop over it.
-    \item Always make a new \lstinline{list} or \lstinline{dict}!
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile]{Functions: return vs print}
-Write a function that takes a twitter message as argument, cleans it with the
-function you wrote, and returns True or False depending on whether it
-contains any complex words
-\begin{columns}
-\column{0.5\textwidth}
-Don't print inside the function:
-\begin{lstlisting}[style=smaller]
-def has_complex_words(tweet):
-    cleaned = cleantweet(tweet)
-    result = True
-    for word in cleaned:
-        if len(word) >= 10:
-            print(True)
-\end{lstlisting}
-\pause\column{0.5\textwidth}
-\structure{return} the result: 
-\begin{lstlisting}[style=smaller]
-def has_complex_words(tweet):
-    cleaned = cleantweet(tweet)
-    for word in cleaned:
-        if len(word) >= 10:
-            return True
-    return False
-\end{lstlisting}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[fragile]{Checking if a list has a property}
-Write a function that takes a twitter message as argument, [...]
-and \structure{returns True or False} depending on whether it
-contains any complex words
-
-\begin{columns}[T]
-\column{0.5\textwidth}
-\begin{lstlisting}[style=smaller]
-def has_complex_words(tweet):
-    cleaned = cleantweet(tweet)
-    result = True
-    for word in cleaned:
-        if len(word) >= 10:
-            result = True
-        else:
-            result = False
-    return result
-\end{lstlisting}
-What happens?
-\pause
-\begin{lstlisting}[style=smaller]
->>> has_complex_words('This tweet is sophisticated.')
-True
->>> has_complex_words('A sophisticated word')
-False
-\end{lstlisting}
-\pause\column{0.5\textwidth}
-The right way:
-\begin{lstlisting}[style=smaller]
-def has_complex_words(tweet):
-    for word in cleantweet(tweet)
-        if len(word) > 10:
-            # immediately return True
-            # if we see one complex word
-            return True
-    # only return True
-    # if we have seen all words!
-    return False
-\end{lstlisting}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[fragile]{Functions: making re-usable functions}
-\begin{lstlisting}[style=smaller]
-def proportion_complex_tweets(tweet):
-    trumptext = trump.split('\n')
-    bidentext = biden.split('\n') 
-    trump_complex_word = 0
-    biden_complex_words = 0
-    all_tweets = 0
-    for words in trumptext: 
-        if has_complex_words(words) == True: 
-            trump_complex_tweets =+ 1
-        all_tweets=+ 1  
-    for words in bidentext: 
-        if has_complex_words(words) ==True: 
-            biden_complex_tweets =+ 1
-        all_tweets += 1   
-    return (biden_complex_tweets + trump_complex_tweets)/(all_tweets)*100
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Functions: making re-usable functions}
-\begin{columns}[T]
-\column{0.5\textwidth}
-One re-usable function: 
-\begin{lstlisting}[style=smaller]
-def proportion_complex_tweets(tweets):
-    tweets = tweets.split('\n')
-    complex_tweets = 0
-    all_tweets = 0
-    for tweet in tweets: 
-        if has_complex_words(tweet) == True: 
-            complex_tweets =+ 1
-        all_tweets=+ 1  
-    return complex_tweets / all_tweets * 100
-
-print('Trump', proportion_complex_tweets(trump))
-print('Biden', proportion_complex_tweets(biden))
-\end{lstlisting}
-
-\pause\column{0.5\textwidth}
-Lesson:
-    \begin{itemize}
-        \item Don't Repeat Yourself (DRY)
-        \item Use the functions you defined before
-        \item one function can be used for multiple purposes,
-            based on its arguments
-    \end{itemize}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[fragile]{Function scope}
-    \begin{definition}
-        The \structure{scope} of a variable determines which parts of your code \\
-            can access a variable.
-    \end{definition}
-    \begin{description}
-        \item[global scope] variables created outside a function.
-            \begin{itemize}
-                \item Everyone can see them.
-                \item Available all the time.
-            \end{itemize}
-        \item[local scope] arguments and variables created in a function.
-            \begin{itemize}
-                \item Other code cannot see them.
-                \item Created and destroyed for each function call.
-            \end{itemize}
-    \end{description}
-
-    \pause
-    \structure{Takeaway}: for functions, think carefully about what variables
-        it needs (arguments), and what result it produces (\lstinline{return}).
-\end{frame}
-
-\begin{frame}[fragile]{Read the instructions carefully!}
-    \begin{itemize}
-        \item 2c: Write a function that reports, for a given set of tweets, the
-                percentage of tweets with complex words
-
-
-                \vspace{1em}
-                \structure{Not} the same as the percentage of complex words!
-
-                    \lstinline|complex_tweets / total_tweets|
-
-                    vs
-
-                    \lstinline|complex_words / total_words|
-
-        \pause
-        \item 3: Write a function that goes through the table and computes the
-            mean of the numbers in the specified column. 
-            
-            There were a lot of hints:
-            \begin{itemize}
-            \item Go through the table line by line. Split it into lines with
-                the method \lstinline|splitlines()| which returns a list.
-            \item The table is in a tab-separated format. Given a line of the
-                table, split the line into a list with
-                \lstinline|line.split('\t')|.
-            \item \lstinline|analyze(data, 3)| should return the means for
-                column 3 (starting from 0), i.e., \lstinline|flipper_length_mm|
-                in this dataset.
-            \item The code should return a dictionary of the form
-                \lstinline|{'male': 181.2, 'female': 177.4}|
-            \end{itemize}
-    \end{itemize}
-\end{frame}
-
-
-% \begin{frame}[fragile]{For loops: premature return}
-% \begin{columns}
-% \column{0.5\textwidth}
-% Pay attention to what is part of a for loop!
-% \begin{lstlisting}
-% result = []
-% for line in text.splitlines():
-%     result += line[0]
-%     return result
-% \end{lstlisting}
-% Why does this not work?
-% \pause\column{0.5\textwidth}
-% \texttt{return} immediately aborts the function!
-% \begin{lstlisting}
-% result = []
-% for line in text.splitlines():
-%     result += line[0]
-% return result
-% \end{lstlisting}
-% \end{columns}
-% \end{frame}
-% 
-% \begin{frame}[fragile]{For loops: inefficiency}
-% \begin{columns}[T]
-% \column{0.5\textwidth}
-% Pay attention to what is part of a for loop!
-% \begin{lstlisting}
-% chars = []
-% for line in text.splitlines():
-%     chars.append(line[0])
-%     result = ''.join(chars)
-% return result
-% \end{lstlisting}
-% \pause
-% This repeats the join at every iteration, completely unnecessary!
-% \column{0.5\textwidth}
-% Solution: Take the join out of the for loop:
-% \begin{lstlisting}
-% chars = []
-% for line in text.splitlines():
-%     chars.append(line[0])
-% result = ''.join(chars)
-% return result
-% \end{lstlisting}
-% \end{columns}
-% \end{frame}
-% 
-% \begin{frame}[fragile]{Only concatenate same types!}
-% \begin{columns}[T]
-% \column{0.5\textwidth}
-% Don't do this:
-% \begin{lstlisting}
-% result = []
-% for line in text.splitlines():
-%     result += line[0]
-% \end{lstlisting}
-% Why not? \pause
-% Type mismatch:
-%     \begin{itemize}
-%         \item \texttt{result} is a list
-%         \item \texttt{line[0]} is a string \\
-%             (of one character).
-%     \end{itemize}
-% \column{0.5\textwidth}
-% Better:
-% \begin{lstlisting}
-% result = ''
-% for line in text.splitlines():
-%     result += line[0]
-% \end{lstlisting}
-% Best:
-% \begin{lstlisting}
-% return ''.join(line[0] for line
-%         in text.splitlines())
-% \end{lstlisting}
-% \end{columns}
-% \end{frame}
-
-
-\begin{frame}{Summary}
-    Most of your code was pretty good!
-    
-    \vspace{1em}
-    Pay attention to:
-    \begin{itemize}
-        \item functions
-        \item indentation
-        \item types
-    \end{itemize}
-\end{frame}
-
 
 \section{Exploratory Data Analysis}
 \frame{\tableofcontents[currentsection]}
@@ -412,7 +39,7 @@ Lesson:
     \end{enumerate}
 
     \vspace{1em}
-    Today we focus on step 3
+    This course is about step 3
 \end{frame}
 
 \begin{frame}{Data Collection, Processing}
@@ -425,8 +52,10 @@ In practice, this often takes the most time (up to 80\%!)
             \item Database dump
             \item etc.
         \end{itemize}
+    \pause
     \item Messy data: date formats, order of first/last names, etc.
     \item Missing data (often not at random!)
+    \pause
     \item Converting data
         \begin{description}
             \item[Tidy format] one observation per row, \\
@@ -449,11 +78,11 @@ In practice, this often takes the most time (up to 80\%!)
     Time line:
     \begin{itemize}
         \item 2008: Economic recession/crisis
-        \item Reinhart \& Rogoff (2010) analyze correlation between debt and
-            economic growth \\
+        \item Reinhart \& Rogoff (2010) analyze correlation \\
+            between debt and economic growth \\
             \begin{block}{Claim:}
-            debt should be less than 90\% of GDP, otherwise economic growth
-                drops dramatically
+            debt should be less than 90\% of GDP, \\
+                otherwise economic growth drops dramatically
             \end{block}
         \item Austerity policy in EU, Greece needs to reduce debt etc.
     \end{itemize}
@@ -471,6 +100,27 @@ In practice, this often takes the most time (up to 80\%!)
         \item Excel hides formulas, easy to overlook mistakes
         \item Can we do better with Python?
     \end{itemize}
+
+\end{frame}
+
+\begin{frame}{The dangers of Excel: part 2}
+    \begin{reference}
+    \url{https://www.bbc.com/news/technology-54423988}   
+    \end{reference}
+
+    ``nearly 16,000 coronavirus cases went unreported in England''
+
+    \begin{itemize}
+        \item External company supplies data files
+        \item Automatic process combines these files with Excel
+        \item Problem: old .xls format only supports 65k rows! \\
+            other rows are \structure{silently} discarded
+    \end{itemize}
+
+    \pause\vspace{1em}
+    ``Excel was always meant for people mucking around with a bunch of data for
+    their small company to see what it looked like,''
+    commented Prof Jon Crowcroft from the University of Cambridge.
 
 \end{frame}
 
@@ -494,6 +144,15 @@ In practice, this often takes the most time (up to 80\%!)
     Only need to store data separately.
 \end{frame}
 
+\begin{frame}{Example}
+    \begin{reference}
+    Andreas van Cranenburgh, Erik Ketzan (2021).
+    Stylometric Literariness Classification: the Case of Stephen King.
+    \url{https://aclanthology.org/2021.latechclfl-1.21}
+    \end{reference}
+    \url{https://github.com/andreasvc/kinglit/}
+
+\end{frame}
 
 \subsection{Working with Pandas}
 \frame{\tableofcontents[currentsubsection]}
@@ -546,7 +205,7 @@ In practice, this often takes the most time (up to 80\%!)
 \begin{lstlisting}
 %matplotlib inline
 data.plot()
-\end{lstlisting}
+\end{lstlisting}  % FIXME: multiple line plots
 \includegraphics[height=0.5\textheight]{fig/basicplot}
 \pause\column{0.5\textwidth}
 Saving the plot (e.g., to include in a report):
@@ -572,7 +231,7 @@ dtype: int64
 
 \begin{itemize}
     \item Each datapoint will have a label, \\
-        stored in \texttt{data.index}.
+        stored in \texttt{data.index}
     \item If no labels are supplied, \\
         a numeric index is automatically created
 \end{itemize}
@@ -580,8 +239,6 @@ dtype: int64
 
 
 \begin{frame}[fragile]{Arithmetic with Series}
-\begin{columns}
-\column{0.5\textwidth}
 \begin{lstlisting}
 In: data = pd.Series({'a': 0, 'b': 1})
 In: data
@@ -589,20 +246,25 @@ Out:
 a    0
 b    1
 dtype: int64
+\end{lstlisting}
 
+\begin{columns}
+\column{0.4\textwidth}
+\begin{lstlisting}
 In: data + 1
 Out:
 a    1
 b    2
+dtype: int64
 \end{lstlisting}
 
-\pause\column{0.5\textwidth}
+\pause\column{0.6\textwidth}
 \begin{lstlisting}
-dtype: int64
 In: data + pd.Series({'a': 2, 'b': 4})
 Out:
-a    3
+a    2
 b    5
+dtype: int64
 \end{lstlisting}
 \end{columns}
 \end{frame}
@@ -610,7 +272,7 @@ b    5
 \begin{frame}[fragile]{Basic statistics}
 The sentence lengths of the first night of 1001 Nights:
 \begin{columns}
-\column{0.5\textwidth}
+\column{0.4\textwidth}
 \begin{lstlisting}
 In: lengths = [len(sent) for sent in corpus[0]]
 In: data = pd.Series(lengths)
@@ -628,7 +290,7 @@ min        1.000000
 max      103.000000
 dtype: float64
 \end{lstlisting}
-\column{0.5\textwidth}
+\column{0.6\textwidth}
     NB:
     \begin{itemize}
         \item std is the standard deviation.
@@ -662,7 +324,7 @@ data.hist()
 import nltk
 with open('data/arabian_nights/1.txt', encoding='utf8') as infile:
     tokens = nltk.word_tokenize(infile.read())
-data = pandas.Series(tokens)
+data = pd.Series(tokens)
 data.value_counts()
 \end{lstlisting}
 \begin{lstlisting}[style=plain]
@@ -693,12 +355,47 @@ top20.plot.barh();
 % sort_values, sort_index
 % ...
 
-\begin{frame}{Lab}
+\begin{frame}[fragile]{Words with count 1 (hapax legomena)}
+\begin{lstlisting}
+counts = data.value_counts()
+counts[counts == 1]
+\end{lstlisting}
+\begin{lstlisting}[style=plain]
+lingo       1
+wear        1
+pretext     1
+mere        1
+liest       1
+           ..
+ruling      1
+window      1
+bevy        1
+honoured    1
+Second      1
+Length: 1455, dtype: int64
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}
+Lab:
 \begin{itemize}
-    \item Finish notebook chapter 4 and week 5 exercises!
+    \item Finish notebook chapter 4 and week 5 exercises
     \item Explore \& visualize 1001 nights \& Gutenberg corpus
 \end{itemize}
+
+Exam:
+    \begin{itemize}
+        \item Midterm re-sit: 24 October 13:00--15:00, Multimedia Room 1
+        \item Final exam: 22 October 11:00--13:00, 1313.0309
+    \end{itemize}
 \end{frame}
+
+
+\end{document}
+
+
 
 \begin{frame}
 Materials used for these slides:
@@ -715,11 +412,6 @@ Documentation:
     \item \url{https://seaborn.pydata.org/}
 \end{itemize}
 \end{frame}
-
-\end{document}
-
-
-
 
 
 

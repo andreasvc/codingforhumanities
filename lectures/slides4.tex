@@ -47,12 +47,12 @@ strings"""
     \begin{description}[Assignment]
         \item[Assignment] \lstinline{name = expression}
         \item[Increment] \lstinline{number += 1}
-        \item[Expressions] 1 + 2 * number + int('4')
+        \item[Expressions] \lstinline{1 + 2 * number + int('4')}
     \end{description}
     \pause
     \begin{itemize}
         \item Can use \structure{variable} instead of constant
-        \item Can use \structure{function} call instead of constant
+        \item Can use \structure{function call} instead of constant
         \item Expressions are evaluated \structure{step by step}:
     \end{itemize}
 \begin{lstlisting}
@@ -85,8 +85,15 @@ new = 1 + 2 * old + int('4')
 \end{frame}
 \begin{frame}[fragile]{Week 2: If-statements}
     \begin{description}[Conditions]
-        \item[Conditions] \lstinline{a == b, letter == 'a', number < 2, item in seq}
-        \item[If]
+        \item[Conditions]
+            \lstinline{a == b}
+
+            \lstinline{letter == 'a'}
+
+            \lstinline{number < 2}
+
+            \lstinline{item in seq}
+        \item[If statement]
             \lstinline{if condition: ...}
 
             \lstinline{elif condition: ...}
@@ -101,7 +108,7 @@ new = 1 + 2 * old + int('4')
         \pause
         \item[Iterables] \lstinline|list, str, tuple, dict, range()|
         \pause
-    \item[For-loop idiom]
+    \item[For-loop idiom]:
 \begin{lstlisting}
 result = 0  # or []
 for item in iterable:
@@ -116,8 +123,18 @@ for item in iterable:
     \begin{description}[creation]
         \item[creation] \lstinline|example = {'a': 0, 'b': 1}|
         \item[lookup] \lstinline{example['a']}
-        \item[update] \lstinline{example['a'] = 2} (also for new keys)
+
+            (KeyError if 'a' not present)
+        \item[update] \lstinline{example['a'] = 2}
+
+            (also for new keys)
+        \item[Dictionary idiom:]
     \end{description}
+\begin{lstlisting}
+if key not in example:
+    example[key] = 0
+example[key] += 1
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Week 3: Functions}
@@ -130,7 +147,7 @@ for item in iterable:
 \begin{columns}[T]
 \column{0.5\linewidth}
 \begin{lstlisting}
-# function with effect
+# function without return
 def greeting(name):
     print('Hello', name)
 
@@ -151,6 +168,13 @@ x = (mean([6, 8]) + mean([7, 8])) / 2
 \end{lstlisting}
 \end{columns}
 \end{frame}
+\begin{frame}{Using functions}
+    \includegraphics[height=0.5\textheight]{fig/func}
+
+\vspace{1em}
+Take-away: after defining your function, can use it \structure{anywhere} in notebook
+\end{frame}
+
 \begin{frame}[fragile]{Week 3: Strings}
     \begin{description}[Formatting]
         \item[Lowercasing] \lstinline{lowered = sent.lower()}
@@ -300,7 +324,7 @@ of Capulet.
     \vspace{1em}
     Want to split only \structure{once} on first dot.
 
-    \vspace{1em}
+    \pause\vspace{1em}
     Check documentation at \url{https://docs.python.org/3/library/stdtypes.html\#str.split}
 
     \vspace{1em}
@@ -320,7 +344,7 @@ of Capulet.
     Want to store for each character multiple lines of dialogue.
 
     \vspace{1em}
-    So use a dictionary, keys: character names, values: list of dialogue lines
+    So use a dictionary; key: character name, value: list of dialogue lines
 \begin{lstlisting}
 paragraphs = ...
 result = {}
@@ -388,19 +412,19 @@ def extract_dialogue(text):
     Implicit learning is crucial for programming!
 \end{frame}
 
-\subsection{Q\&A}
-\begin{frame}{Poll}
-    \begin{enumerate}
-        \item Q1 How much of the week 3 notebook and exercises did you finish?
-            \begin{enumerate}
-                \item less than 50\%
-                \item 50--70\%
-                \item 70--80\%
-                \item 90--100\%
-            \end{enumerate}
-        \item Q2 write questions in chat
-    \end{enumerate}
-\end{frame}
+%\subsection{Q\&A}
+%\begin{frame}{Poll}
+%    \begin{enumerate}
+%        \item Q1 How much of the week 3 notebook and exercises did you finish?
+%            \begin{enumerate}
+%                \item less than 50\%
+%                \item 50--70\%
+%                \item 70--80\%
+%                \item 90--100\%
+%            \end{enumerate}
+%        \item Q2 write questions in chat
+%    \end{enumerate}
+%\end{frame}
 
 
 
@@ -413,6 +437,7 @@ def extract_dialogue(text):
     programs need to work with \structure{arbitrary data}
 
     \pause
+    \vspace{1em}
     Therefore, need to learn how to:
 
 	\begin{itemize}
@@ -423,17 +448,40 @@ def extract_dialogue(text):
 \end{frame}
 
 
-\begin{frame}{Files and directories}
+\begin{frame}[fragile]{Files and directories}
+\begin{columns}
+\column{0.5\linewidth}
     \begin{itemize}
         \item Data is stored in \structure{files} as a sequence of bytes
         \item Files are part of \structure{directories} (folders)
-        \item Directories may contain files and other directories.\\
+        \item Directories may contain files \\
+            and other directories.\\
             Ergo:
             \begin{itemize}
                 \item The file system is a tree structure.
-                \item The location of a file is a path through this tree.
+                \item The location of a file is a \structure{path}
+                    through this tree.
             \end{itemize}
     \end{itemize}
+\pause
+\column{0.5\linewidth}
+\begin{verbatim}
+code/ ...
+data/ ...
+research/ ...
+teaching/ ...
+└── codingforhumanities/
+    ├── lectures/
+    │   ├── slides1.pdf
+    │   ├── slides2.pdf
+    │   └── fig/ ...
+    ├── notebooks/
+    │   ├── ...
+    │   └── data/ ...
+    └── syllabus/
+        └── syllabus.pdf
+\end{verbatim}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Why directories}
@@ -456,7 +504,7 @@ def extract_dialogue(text):
 
 \begin{frame}[fragile]{Messy and organized files}
 \begin{columns}
-\column{0.5\linewidth}
+\column{0.51\linewidth}
 \begin{verbatim}
 Untitled 1.pdf
 Untitled 1(1).pdf
@@ -469,7 +517,7 @@ Untitled 1(2)_FINAL_make_it_stop.pdf
 Untitled 1(2)_lAST-mInUtE-ChAnGES.pdf
 \end{verbatim}
 \pause
-\column{0.5\linewidth}
+\column{0.49\linewidth}
 \begin{verbatim}
 code/ ...
 data/ ...
@@ -505,7 +553,7 @@ teaching/ ...
 		\item Use .. to refer to the parent directory
 		\end{itemize}
     \end{itemize}
-    \structure{NB}: Windows uses \textbackslash instead of \texttt{/}. \\
+    \structure{NB}: Windows uses \textbackslash{} instead of \texttt{/}. \\
         However, this causes problems, use \texttt{/} in Python!
 \end{frame}
 
@@ -671,7 +719,7 @@ Out: ['austen-emma.txt', 'world-domination.txt', 'evil-plans.txt']
         \item[Seaborn] statistical data visualization
         \item[Pandas] tabular data analysis
         \item[Scikit-learn] Machine learning: classification, clustering
-        \item[gensim] Topic modeling (LDA).
+        %\item[gensim] Topic modeling (LDA).
     \end{description}
 \end{frame}
 
@@ -679,7 +727,7 @@ Out: ['austen-emma.txt', 'world-domination.txt', 'evil-plans.txt']
     \begin{itemize}
         \item Most of these are part of Anaconda distribution; already installed!
 
-			(Exceptions: Spacy, gensim)
+            (Exception: Spacy) % , gensim)
         \item Install conda packages with Anaconda Navigator \\
 			(a kind of curated ``app store'')
 

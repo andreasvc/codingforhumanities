@@ -55,13 +55,13 @@
 %     \item[first * last] TypeError
 %     \item[first / last] TypeError
 % \end{description}
-% 
+%
 % \begin{itemize}
 % \item + can be used to concatenate two strings
 % \item The other operations require numbers, not text
 % \end{itemize}
 % \end{frame}
-% 
+%
 % \begin{frame}[fragile]{Mixing strings and numbers}
 % \begin{lstlisting}
 % In: first = 'John'
@@ -73,13 +73,13 @@
 %     \item[first * num] 'JohnJohnJohn'
 %     \item[first / num] TypeError
 % \end{description}
-% 
+%
 % \begin{itemize}
 % \item * can be used to repeat a string several times
 % \item For the other operations, Python refuses to mix up types
 % \end{itemize}
 % \end{frame}
-% 
+%
 % \begin{frame}[fragile]{Special characters in strings: `escape sequences'}
 % % syntax highlighting is incorrect so disable it
 % \begin{lstlisting}[language=]
@@ -112,7 +112,7 @@ In: name[-1]
 Out: 'n'
 \end{lstlisting}
     \begin{itemize}
-        \item \lstinline{a[n]} gets the n'th character of a
+        \item \lstinline{a[n]} gets the n'th character
         \item Counting starts at 0
         \item negative indices start from the end:\\
             -1 for last character, \\
@@ -156,32 +156,32 @@ Out: 4
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Refresher: Functions}
-    We have seen builtin \structure{functions}:
-    \begin{itemize}
-        \item \lstinline{int()}
-        \item \lstinline{print()}
-        \item \lstinline{len()}
-    \end{itemize}
-    \pause
-    \begin{definition}
-        A \structure{function} is a piece of code
-        that can be invoked by name.
-
-    \begin{itemize}
-        \item It may take input (arguments): \lstinline{len(name)}
-        
-        \item It may produce a result: \lstinline{len(name)} \\
-            or an effect: \lstinline{print('hello', name)}
-
-        \item The notation \lstinline{f(x)} means that the function \lstinline{f}
-            is \structure{applied} to the value \lstinline{x}. \\ 
-            Or simply: \lstinline{f} is \structure{called}.
-    \end{itemize}
-    \end{definition}
-    \pause
-    More about functions next week (including how to make your own)
-\end{frame}
+% \begin{frame}{Refresher: Functions}
+%     We have seen builtin \structure{functions}:
+%     \begin{itemize}
+%         \item \lstinline{int()}
+%         \item \lstinline{print()}
+%         \item \lstinline{len()}
+%     \end{itemize}
+%     \pause
+%     \begin{definition}
+%         A \structure{function} is a piece of code
+%         that can be invoked by name.
+%
+%     \begin{itemize}
+%         \item It may take input (arguments): \lstinline{len(name)}
+%
+%         \item It may produce a result: \lstinline{len(name)} \\
+%             or an effect: \lstinline{print('hello', name)}
+%
+%         \item The notation \lstinline{f(x)} means that the function \lstinline{f}
+%             is \structure{applied} to the value \lstinline{x}. \\ 
+%             Or simply: \lstinline{f} is \structure{called}.
+%     \end{itemize}
+%     \end{definition}
+%     \pause
+%     More about functions next week (including how to make your own)
+% \end{frame}
 
 \begin{frame}[fragile]{Format strings}
 \begin{lstlisting}
@@ -192,8 +192,14 @@ In: z = x +  y
 How to combine text and variables in a message?
 \begin{lstlisting}
 In: print('The sum of ' + str(x) + ' and ' + str(y) + ' is ' + str(z) + '.')
+\end{lstlisting}\vspace{-1em}
+\begin{lstlisting}[style=plain]
 The sum of 1 and 2 is 3.
+\end{lstlisting}\vspace{-1em}
+\begin{lstlisting}
 In: print('The sum of', x, 'and', y, 'is', z, '.')
+\end{lstlisting}\vspace{-1em}
+\begin{lstlisting}[style=plain]
 The sum of 1 and 2 is 3 .
 \end{lstlisting}
 
@@ -201,6 +207,8 @@ The sum of 1 and 2 is 3 .
 Better:
 \begin{lstlisting}
 In: print(f'The sum of {x} and {y} is {z}.')
+\end{lstlisting}\vspace{-1em}
+\begin{lstlisting}[style=plain]
 The sum of 1 and 2 is 3.
 \end{lstlisting}
 
@@ -215,13 +223,13 @@ Simple is better, last method is best.
     A sequence contains elements in a particular order
 
     \vspace{1em}
-    Basic operations on sequences:
+    Operations on sequences:
     \begin{description}[concatenation:]
         \item[getting length:]     \lstinline{len(seq)}
-        \item[indexing:]           \lstinline{seq[expression]}
+        \item[indexing:]           \lstinline{seq[index]}
         \item[slicing:]            \lstinline{seq[start:end]}
         \item[concatenation:]      \lstinline{seq1 + seq2}
-        \item[repetition:]         \lstinline{seq * num}
+        %\item[repetition:]         \lstinline{seq * num}
     \end{description}
 \end{frame}
 
@@ -256,6 +264,7 @@ NB: cannot change characters in a string (must make new string)
 \begin{lstlisting} 
 In: name = 'Maria'
 In: name[0] = 'D'
+\end{lstlisting}\vspace{-1em}\begin{lstlisting}[style=plain]
 TypeError: 'str' object does not support item assignment
 \end{lstlisting}
 
@@ -319,7 +328,7 @@ Out: ['John', 'Mary', 'Alice', 'Bob']
 \end{lstlisting}
 
 \vspace{1em}
-NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
+NB: \lstinline{append} mutates the list, \lstinline{+} creates a \structure{new} list
 \end{frame}
 
 
@@ -330,10 +339,10 @@ NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
 % In: names.remove('John')
 % Out: ['Mary']
 % \end{lstlisting}
-% 
+%
 % \lstinline{remove(elem)} \structure{searches} for the first occurrence of
 % \lstinline{elem} and removes it.
-% 
+%
 % \pause
 % \vspace{1em}
 % Can also remove items at particular positions:
@@ -345,7 +354,7 @@ NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
 % In: friends
 % Out: ['John', 'Mary']
 % \end{lstlisting}
-% 
+%
 % % We can also use slicing to keep a part of a list
 % % \begin{lstlisting} 
 % % In: acquaintances = ['John', 'Mary', 'Alice', 'Bob']
@@ -355,7 +364,7 @@ NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
 % % \end{lstlisting}
 % %This is faster if you know where the items are that you want to keep.
 % \end{frame}
-% 
+%
 % \begin{frame}[fragile]{Sorting}
 % \begin{lstlisting} 
 % In: letters = list('ocd')
@@ -364,7 +373,7 @@ NB: \lstinline{append} mutates the list, \lstinline{+} only creates a new list
 % In: sorted(letters)
 % Out: ['c', 'd', 'o']
 % \end{lstlisting}
-% 
+%
 % NB: sorted leaves the original list unchanged,
 % assign it to keep the result.
 % \end{frame}
@@ -385,14 +394,14 @@ In: ranking = [['John', 1], ['Mary', 3], ['Max', 2]]
 \pause
 How to access elements:
 \begin{lstlisting}
-In: name_and_rank = ranking[0]
+In: name_and_rank = ranking[1]
 In: name_and_rank
 \end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
-Out: ['John', 1]
+Out: ['Mary', 3]
 
 In: name_and_rank[1]
 \end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
-Out: 1
+Out: 3
 
 In: ranking[0][1]
 \end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
@@ -419,8 +428,8 @@ Two important differences:
 \begin{enumerate}
     \item lists are more general than strings
         \begin{itemize}
-            \item Strings always consist of characters
             \item Lists can consist of any data types / objects
+            \item Strings always consist of characters
         \end{itemize}
     \item Lists are mutable and strings are immutable
 \end{enumerate}
@@ -452,9 +461,9 @@ Two important differences:
     Conditional operators:
     \begin{itemize}
         \item \lstinline{a == b}: are the values equal?
-        \item \lstinline{a != b}: inequality
-        \item \lstinline{a < b}: test whether \lstinline{a}
-                is strictly smaller than \lstinline{b}
+        \item \lstinline{a != b}: \dots not equal?
+        \item \lstinline{a < b}: is \lstinline{a}
+                strictly smaller than \lstinline{b}?
         \item \lstinline{a > b}: \dots larger \dots
         \item \lstinline{a in b}: does element \lstinline{a} occur
                 in the sequence \lstinline{b}?
@@ -486,7 +495,7 @@ True
 
 \begin{block}{Useful debugging strategy:}
 Sprinkle checks throughout code \\
-to test whether code is doing what it should.
+to confirm whether results match expectations.
 \end{block}
 \end{frame}
 
@@ -501,8 +510,8 @@ if books > 5:
 \end{lstlisting}
 
     \begin{itemize}
-        \item The code under an \lstinline{if}-statement is only executed
-            if the condition is \lstinline{True}.
+        \item Code under \lstinline{if}-statement is only executed
+            if its condition is \lstinline{True}.
         \item The indentation determines which code is covered
             by the condition
     \end{itemize}
@@ -510,7 +519,7 @@ if books > 5:
     \pause
     \begin{definition}
         A \structure{code block} is a sequence of lines after
-        a statement ending in `:'.
+        a statement ending in `:'
 
         The start and end of the block are defined by the amount of indentation
         (i.e., leading spaces) of the lines.
@@ -522,7 +531,7 @@ if books > 5:
 In: books = 6
 In: if books > 5:
 In:     print('you are an avid reader')
-\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}[style=plain]
 Out: you are an avid reader
 \end{lstlisting}
 \pause
@@ -530,7 +539,7 @@ Out: you are an avid reader
 In: books = 3
 In: if books > 5:
 In:     print('you are an avid reader')
-\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}[style=plain]
 (nothing)
 \end{lstlisting}
 \pause
@@ -538,7 +547,7 @@ In:     print('you are an avid reader')
 In: books = 'many'
 In: if books > 5:
 In:     print('you are an avid reader')
-\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}
+\end{lstlisting}\vspace{-1em}\pause\begin{lstlisting}[style=plain]
 TypeError: '>' not supported between instances of 'str' and 'int'
 \end{lstlisting}
 \end{frame}
@@ -553,7 +562,7 @@ else:
 \end{lstlisting}
 
 \begin{itemize}
-    \item The code under 'else' is executed if the condition does NOT match.
+    \item The code under \lstinline{else} is executed if the condition does NOT match.
     \item Forced choice: necessarily, one of the two options will be executed.
 \end{itemize}
 \end{frame}
@@ -805,7 +814,7 @@ print(count)
 Write code that computes the reversal of a string.
 
    \vspace{1em}
-   For example, \lstinline{reverse('I am testing')} should print the string
+   For example, the string \lstinline{'I am testing'} should result in
    \lstinline{'gnitset ma I'}.
 
 \begin{lstlisting}
@@ -847,7 +856,7 @@ print(backwards == string)
  
 \subsection{Overlapping lists?}
 \begin{frame}[fragile]
-    Write code that takes two lists and checks if they have at least one
+    Write code that takes two lists and checks if they have \emph{at least} one
     member in common.
 
     \vspace{1em}
@@ -897,9 +906,10 @@ print(overlapping)
 
 \begin{frame}{Readings and lab}
     \begin{itemize}
-        \item Severance ch.\ 3, 5, 8
+        \item Finish ch.~2 of Introduction to Cultural Analytics,\\
+            \url{https://melaniewalsh.github.io/Intro-Cultural-Analytics/}
         \item Notebook ch.\ 2
-        \item 10 exercises
+        \item Exercises
     \end{itemize}
 \end{frame}
 \end{document}

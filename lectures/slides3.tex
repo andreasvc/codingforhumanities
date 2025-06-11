@@ -64,7 +64,7 @@ value to the variable \lstinline{result}.
 
 \begin{lstlisting}
 frequency_distribution = [['Beg', 1], ["Goddard's", 1], ...]
-number_of_words_with_a = 0
+result = 0
 # insert your code here
 \end{lstlisting}
 \end{frame}
@@ -72,18 +72,18 @@ number_of_words_with_a = 0
 \begin{frame}[fragile]{The Final Quiz}
 \begin{lstlisting}
 frequency_distribution = [['Beg', 1], ["Goddard's", 1], ...]
-number_of_words_with_a = 0
-for word_and_frequency in frequency_distribution:
-    if 'a' in word_and_frequency[0]:
-        number_of_words_with_a += word_and_frequency[1]
+result = 0
+for word_and_freq in frequency_distribution:
+    if 'a' in word_and_freq[0]:
+        result += word_and_freq[1]
 \end{lstlisting}
 
 \pause
 Better:
 \begin{lstlisting}
-for word, frequency in frequency_distribution:
+for word, freq in frequency_distribution:
     if 'a' in word:
-        number_of_words_with_a += frequency
+        result += freq
 \end{lstlisting}
 \end{frame}
 
@@ -140,7 +140,7 @@ for word, frequency in frequency_distribution:
 
 
 
-\begin{frame}{The 10 exercises}
+\begin{frame}{The 9 exercises}
     \begin{enumerate}
         \item max
         \item max\_of\_three
@@ -149,7 +149,6 @@ for word, frequency in frequency_distribution:
         \item robber's language \\
             (double every consonant and place an occurrence of ``o'' in between)
         \item sum / multiply
-        \item histogram
         \item list of words $\rightarrow$ list of lengths
         \item pangram or not?
         \item 99 bottles of beer
@@ -211,6 +210,7 @@ for word, frequency in frequency_distribution:
         A dictionary stores (key, value) pairs, \\
         such that given a key, we can quickly find a value
     \end{definition}
+\pause
 Example, a phone book:
 \begin{lstlisting}
 >>> coworkers = {'John': 123, 'Mary': 456, 'Alice': 789}
@@ -338,6 +338,11 @@ Can easily select works by a particular author!
     \end{columns}
 \end{frame}
 
+% give example:
+% a social network
+% can store as list of pairs,
+% but dictionary much faster
+
 \begin{frame}{Summary}
         \Tree [.Object
             [.Number \lstinline{int} \lstinline{float} ] 
@@ -360,12 +365,12 @@ Can easily select works by a particular author!
             \pause
             % ; i.e., break down programs into smaller components
             \begin{itemize}
-                \item Create re-usable components: \\
+                \item Create \structure{re-usable components}: \\
                     can develop and test separately \\
                     write once, use many times
                 \item Create larger, more complex programs \\
-                    from readily understandable building blocks
-                \item Functions encapsulate complexity; \\
+                    from readily understandable \structure{building blocks}
+                \item Functions \structure{encapsulate complexity}; \\
                     don't need to understand how a function works to use it
             \end{itemize}
     \end{itemize}
@@ -456,32 +461,94 @@ def average(values):
 % more examples of functions calling other functions
 \begin{frame}[fragile]{Breaking programs down into functions}
 \begin{lstlisting}
-celtemp = input('Input temperature in Celsius:\n')
-fahtemp = float(celtemp) * 9 / 5 + 32
-print('Temperature in Fahrenheit: ', fahtemp)
+def max(a, b):
+    if a > b:
+        return a
+    else:
+        return b
 \end{lstlisting}
 
 \pause\vspace{1em}
 \begin{lstlisting}
-def input_number(message):
-    result = input(message)
-    return float(result)
+def max_of_three(a, b, c):
+    return max(a, max(b, c))
 
-def celsius_to_fahrenheit(celtemp):
-    return celtemp * 9 / 5 + 32
-
-celtemp = input_number('Input temperature in Celsius:')
-fahtemp = celsius_to_fahrenheit(celtemp)
-print('Temperature in Fahrenheit: ', round(fahtemp, 1))
+print(max_of_three(4, 9, 7))
+9
 \end{lstlisting}
 \end{frame}
 
-% missing: scope
+% \begin{frame}[fragile]{Breaking programs down into functions}
+% \begin{lstlisting}
+% integers = [4, 9, 7]
+% 
+% for integer in integers:
+%     print(integer * '*')
+% \end{lstlisting}
+% 
+% \pause\vspace{1em}
+% \begin{lstlisting}
+% def histogram_line(num, char):
+%     print(num * char)
+% 
+% def histogram(integers, char):
+%     for num in integers:
+%         histogram_line(num, char)
+% 
+% histogram([4, 9, 7], '#')
+% \end{lstlisting}
+% \end{frame}
+
+
+% \begin{frame}[fragile]{Breaking programs down into functions}
+% \begin{lstlisting}
+% celtemp = input('Input temperature in Celsius:\n')
+% fahtemp = float(celtemp) * 9 / 5 + 32
+% print('Temperature in Fahrenheit: ', fahtemp)
+% \end{lstlisting}
+% 
+% \pause\vspace{1em}
+% \begin{lstlisting}
+% def input_number(message):
+%     result = input(message)
+%     return float(result)
+% 
+% def celsius_to_fahrenheit(celtemp):
+%     return celtemp * 9 / 5 + 32
+% 
+% celtemp = input_number('Input temperature in Celsius:')
+% fahtemp = celsius_to_fahrenheit(celtemp)
+% print('Temperature in Fahrenheit: ', round(fahtemp, 1))
+% \end{lstlisting}
+% \end{frame}
+
+\begin{frame}[fragile]{Function scope}
+    \begin{definition}
+        The \structure{scope} of a variable determines which parts of your code \\
+            can access a variable.
+    \end{definition}
+    \begin{description}
+        \item[global scope] variables created outside a function.
+            \begin{itemize}
+                \item Everyone can see them.
+                \item Available all the time.
+            \end{itemize}
+        \item[local scope] arguments and variables created in a function.
+            \begin{itemize}
+                \item Other code cannot see them.
+                \item Created and destroyed for each function call.
+            \end{itemize}
+    \end{description}
+
+    \pause
+    \structure{Takeaway}: for functions, think carefully about what variables
+        it needs (arguments), and what result it produces (\lstinline{return}).
+\end{frame}
 
 \begin{frame}{Summary}
     \begin{itemize}
         \item Break programs down into functions \\
-            to make them easier to reusable.
+            to increase modularity.
         \item Define a function using \lstinline{def} with a name, parameters,\\
             and a block of code.
         \item Defining a function does not run it.
@@ -493,8 +560,6 @@ print('Temperature in Fahrenheit: ', round(fahtemp, 1))
 
 
 
-
-% Talk about reading files?
 
 \section{Text (pre)processing}
 \subsection{Motivation}
@@ -564,13 +629,19 @@ Moretti (2005) Graphs, maps, and trees}
     \column{0.6\textwidth}
 	Example:
 	
-	\begin{tabular}{lrrrrr}
-	Author      & \em Shall & \em~I & \em compare & \em thee & \dots \\ \midrule
-	Shakespeare &     1 & 1 &       1 &    1 & \dots \\
-	Me          &     0 & 9 &       0 &    0 & \dots \\
-	\pause
-	??          &     0 & 7 &       0 &    0 & \dots \\
-	\end{tabular}
+	% \begin{tabular}{lrrrrr}
+	% Author      & \em compare & \em~I & \em shall & \em thee & \dots \\ \midrule
+	% Shakespeare &     1 & 1 &       1 &    1 & \dots \\
+	% Me          &     0 & 9 &       0 &    0 & \dots \\
+	% \pause
+	% ??          &     0 & 7 &       0 &    0 & \dots \\
+	% \end{tabular}
+    \begin{tabular}{lrrrrr}
+    Document      &\em the&\em cat&\em dog&\em purrs& \dots \\ \midrule
+    the cat purrs &     1 &     1 &     0 &       1 & \dots \\
+    the dog barks &     1 &     0 &     1 &       0 & \dots \\
+    cat bites dog &     0 &     1 &     1 &       0 & \dots \\
+    \end{tabular}
 	
 	\vspace{1em}
     (usually, relative frequency is used)
@@ -609,17 +680,17 @@ Moretti (2005) Graphs, maps, and trees}
     \end{reference}
     Stylistic analysis
     \begin{itemize}
-    \item Collaborative authorship of a novel:\\
+    \item Collaborative authorship of a novel: \\
         who wrote what?
             % Classification
-    \item Six narrators in Woolf's \emph{The Waves}:\\
+    \item Six narrators in Woolf's \emph{The Waves}: \\
         differentiation of characters by gender and age
             % Clustering
-    \item Vocabulary of 366 student essays wrt.\ grades:\\
+    \item Vocabulary of 366 student essays wrt.\ grades: \\
         which words are characteristic of good and bad essays?
             % Keywords
-    \item Diachronic analysis of 1000 novels\\
-        (diachronic: change over time)
+    \item Diachronic analysis of 1000 novels \\
+        (i.e., stylistic change over time)
             % Network analysis
     \end{itemize}
 \end{frame}
@@ -643,142 +714,167 @@ Moretti (2005) Graphs, maps, and trees}
 \end{frame}
 
 
-% \begin{frame}[fragile]{Upper and lower case}
-%     \begin{itemize}
-%         \item To the computer, these
-%             are three completely different words!
-% 
-%             \texttt{'The', 'the', 'THE'}
-%         \item Often, we don't want to make this distinction when counting
-%         \item Solution: case folding
-%     \end{itemize}
-%     \pause
-% \begin{lstlisting}
-% In: text = 'HeLlO WoRlD'
-% In: cleaned = text.lower()
-% In: cleaned
-% Out: 'hello world'
-% \end{lstlisting}
-% \end{frame}
-% 
-% \begin{frame}[fragile]{Punctuation}
-%     \begin{itemize}
-%         \item Similarly, punctuation should be separated from words
-%         \item \dots or eliminated completely
-%         \item Can use functionality similar to "find \& replace" for this
-%     \end{itemize}
-%     \pause
-% \begin{lstlisting}
-% In: text = "Forsooth, 'tis true!"
-% In: cleaned = text.lower()
-% In: cleaned = cleaned.replace('!', '')
-% In: cleaned = cleaned.replace(',', '')
-% In: cleaned
-% Out: 'forsooth tis true'
-% \end{lstlisting}
-% \end{frame}
-%
-% \begin{frame}[fragile]{The split method}
-% We can turn a string into a list of strings
-% by splitting on a `separator':
-% \begin{lstlisting}
-% In: quote = "Frankly, my dear, I don't give a damn."
-% In: quote.split(",")
-% Out: ['Frankly', ' my dear', " I don't give a damn."]
-% \end{lstlisting}
-% 
-% \pause
-% If we don't give a character, splits on whitespace:
-% \begin{lstlisting}
-% In: quote.split()
-% Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
-% \end{lstlisting}
-% \end{frame}
-% 
-% 
-% \begin{frame}[fragile]{Putting a list of strings back together as one string}
-% \begin{lstlisting}
-% In: ''.join(sorted(letters))
-% 'cdo'
-% \end{lstlisting}
-% Equivalent of:
-% \begin{lstlisting}
-% In: 'c' + '' + 'd' + '' + 'o'
-% \end{lstlisting}
-% 
-% \texttt{sep.join(seq)} is the opposite of \texttt{str.split(sep)}
-% \end{frame}
+\begin{frame}[fragile]{Upper and lower case}
+    \begin{itemize}
+        \item To the computer, these
+            are three completely different words!
 
-
-
-\begin{frame}[fragile]{Tokenization}
- \begin{itemize}
-  \item task: splitting a string up into tokens
-  \item \structure{tokens} are (1) words, (2) punctuation marks, (3) various other things
-  \item first and most basic step in text analysis,
-        should be done automatically
-  \item various algorithms and tools exist, none is perfect
-  \item Where to split text? Most important cues: whitespace, punctuation
- \end{itemize}
- \begin{lstlisting}
->>> tokenize('"Hark! A vagrant," he said.')
-['"', 'Hark', '!', 'A', 'vagrant', ',', '"', 'he', 'said', '.']
- \end{lstlisting}
+            \texttt{'The', 'the', 'THE'}
+        \item Often, we don't want to make this distinction when counting
+        \item Solution: case folding
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+In: text = 'HeLlO WoRlD'
+In: cleaned = text.lower()
+In: cleaned
+Out: 'hello world'
+\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Tricky tokenization cases}
-One or two tokens?
- \begin{itemize}
-  \item \structure{prime minister}
-  \item \structure{New York}
-  \item \structure{I'm}
- \end{itemize}
+\begin{frame}[fragile]{Punctuation}
+    \begin{itemize}
+        \item Similarly, punctuation should be separated from words
+        \item \dots or eliminated completely
+        \item Can use functionality similar to "find \& replace" for this
+    \end{itemize}
+    \pause
+\begin{lstlisting}
+In: text = "Forsooth, 'tis true!"
+In: cleaned = text.lower()
+In: cleaned = cleaned.replace('!', '')
+In: cleaned = cleaned.replace(',', '')
+In: cleaned
+Out: "forsooth 'tis true"
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{The split method}
+We can turn a string into a list of strings
+by splitting on a \emph{separator}:
+\begin{lstlisting}
+In: quote = "Frankly, my dear, I don't give a damn."
+In: quote.split(",")
+Out: ['Frankly', ' my dear', " I don't give a damn."]
+\end{lstlisting}
 
 \pause
-\vspace{1em}
-More tricky cases:
-\begin{verbatim}
-John's bike
-New York-based
-nineteenth- and twentieth-century writers
-(SAM)-missile launchers
-i.e.  Ph.D. &c.
-;-) :))) #yolo#lit#hashtag
-https://en.wikipedia.org/wiki/Bicycle
-8-Cyclopentyl-1,3-dimethylxanthine
-\end{verbatim}
+If we don't give a character, splits on whitespace:
+\begin{lstlisting}
+In: quote.split()
+Out: ['Frankly,', 'my', 'dear,', 'I', "don't", 'give', 'a', 'damn.']
+\end{lstlisting}
 \end{frame}
 
-\begin{frame}{Word forms}
-    Should we count these separately:
 
-    \vspace{1em}
-    \texttt{walk, walks, walked, walking, \dots}
+\begin{frame}[fragile]{Putting a list of strings back together as one string}
+\begin{lstlisting}
+In: letters = 'ocd'
+In: ''.join(sorted(letters))
+'cdo'
+\end{lstlisting}
+Equivalent of:
+\begin{lstlisting}
+In: 'c' + '' + 'd' + '' + 'o'
+\end{lstlisting}
 
-    \vspace{1em}
-    \begin{itemize}
-    \item Recognizing that these are instances of the same word \\
-    is called \structure{lemmatization}.
-
-    \item Requires language-specific tools.
-
-    \item Most work does not apply this step for simplicity,\\
-        and forms may contain useful distinctions.
-    \end{itemize}
+\lstinline{sep.join(seq)} is the opposite of \lstinline{str.split(sep)}
 \end{frame}
 
-\begin{frame}{Eliminating classes of words}
-    For some applications, want to ignore certain words:
-    \begin{itemize}
-        \item Function words / stop words \\
-            (highly frequent words that do not carry meaning)
-        \item Names
-    \end{itemize}
-    %Approach: collect word lists, remove them from your results.
-
-    \vspace{1em}
-    But in other applications, these are the most interesting words!
+\begin{frame}[fragile]{Extracting information}
+\begin{lstlisting}
+books = """War and Peace - Leo Tolstoy
+Anna Karenina - Leo Tolstoy
+Crime and Punishment - Fyodor Dostoevsky
+Brothers Karamazov - Fyodor Dostoevsky"""
+\end{lstlisting}
+Goal: Turn into author - title list sorted by author last name
+\pause
+\begin{lstlisting}
+def rearrange(line):
+    title, author = line.split(' - ')
+    first, last = author.split()
+    return f'{last}, {first} - {title}'
+\end{lstlisting}
+\pause
+\begin{lstlisting}
+result = []
+for line in books.splitlines():
+    result.append(rearrange(line))
+result = '\n'.join(sorted(result))
+\end{lstlisting}
 \end{frame}
+
+
+
+% \begin{frame}[fragile]{Tokenization}
+%  \begin{itemize}
+%   \item task: splitting a string up into tokens
+%   \item \structure{tokens} are (1) words, (2) punctuation marks, (3) various other things
+%   \item first and most basic step in text analysis,
+%         should be done automatically
+%   \item various algorithms and tools exist, none is perfect
+%   \item Where to split text? Most important cues: whitespace, punctuation
+%  \end{itemize}
+%  \begin{lstlisting}
+% >>> tokenize('"Hark! A vagrant," he said.')
+% ['"', 'Hark', '!', 'A', 'vagrant', ',', '"', 'he', 'said', '.']
+%  \end{lstlisting}
+% \end{frame}
+% 
+% \begin{frame}[fragile]{Tricky tokenization cases}
+% One or two tokens?
+%  \begin{itemize}
+%   \item \structure{prime minister}
+%   \item \structure{New York}
+%   \item \structure{I'm}
+%  \end{itemize}
+% 
+% \pause
+% \vspace{1em}
+% More tricky cases:
+% \begin{verbatim}
+% John's bike
+% New York-based
+% nineteenth- and twentieth-century writers
+% (SAM)-missile launchers
+% i.e.  Ph.D. &c.
+% ;-) :))) #yolo#lit#hashtag
+% https://en.wikipedia.org/wiki/Bicycle
+% 8-Cyclopentyl-1,3-dimethylxanthine
+% \end{verbatim}
+% \end{frame}
+% 
+% \begin{frame}{Word forms}
+%     Should we count these separately:
+% 
+%     \vspace{1em}
+%     \texttt{walk, walks, walked, walking, \dots}
+% 
+%     \vspace{1em}
+%     \begin{itemize}
+%     \item Recognizing that these are instances of the same word \\
+%     is called \structure{lemmatization}.
+% 
+%     \item Requires language-specific tools.
+% 
+%     \item Most work does not apply this step for simplicity,\\
+%         and forms may contain useful distinctions.
+%     \end{itemize}
+% \end{frame}
+% 
+% \begin{frame}{Eliminating classes of words}
+%     For some applications, want to ignore certain words:
+%     \begin{itemize}
+%         \item Function words / stop words \\
+%             (highly frequent words that do not carry meaning)
+%         \item Names
+%     \end{itemize}
+%     %Approach: collect word lists, remove them from your results.
+% 
+%     \vspace{1em}
+%     But in other applications, these are the most interesting words!
+% \end{frame}
 
 \begin{frame}{More complicated searches and substitutions}
 What if we want to find or replace \dots
@@ -807,8 +903,8 @@ def pagenumbers(text, threshold=50):
     to avoid removing chapter numbers."""
     # remove page numbers of the form <23> or |23| in running text;
     text = re.sub(r'<[0-9]+>|\|[0-9]+\|', '', text)
-    # Remove other page numbers only when on their own line.
-    pagenumber = re.compile(r'\n+[\t ]*-*[\t ]*[0-9]+[\t ]*-*[\t ]*\n+[\f\v]*')
+    # Lines with only digits and whitespace are also page numbers.
+    pagenumber = re.compile(r'\n+[\t ]*[0-9]+[\t ]*\n+[\f\v]*')
     if len(pagenumber.findall(text)) >= threshold:
         return pagenumber.sub('\n', text)
     return text
@@ -848,18 +944,32 @@ def pagenumbers(text, threshold=50):
     \begin{itemize}
         \item Text is often messy
         \item Cleaning: handle punctuation, case, removing words
-        \item Tokenization: split text in list of tokens
+        \item replacing, splitting, joining
+        % \item Tokenization: split text in list of tokens
         \item Count words, analyze
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Background reading}
+\begin{frame}{Reading \& Exam}
+    Reading:
     \begin{itemize}
-        \item Severance ch.\ 4, 6, 9.
+        \item Ch.~2 of \url{https://melaniewalsh.github.io/Intro-Cultural-Analytics/}
+        % \item Severance ch.\ 4, 6, 9.
         % \item Downey ch.\ 3, 6, 11, 14
         % \item and/or Zelle sec.\ 5.9, ch.\ 6
         % \item Watch youtube tutorials of "Hacking the Humanities" episode 10--12:
         %     {\small \url{https://www.youtube.com/playlist?list=PL6kqrM2i6BPIpEF5yHPNkYhjHm-FYWh17}}
+    \end{itemize}
+
+    \vspace{1em}
+    Exam dates: 
+    \begin{itemize}
+        \item Lab exam, \\
+            During lab hours \\
+            Covers week 1--3
+        \item Written exam, \\
+            22 Oct, 11:00--13:00 \\
+            Covers week 1--7
     \end{itemize}
 \end{frame}
 \end{document}
